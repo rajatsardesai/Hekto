@@ -1,0 +1,45 @@
+/* Utitlies */
+:root {
+    --primary-bg: #131921;
+    --secondary-bg: #232F3E;
+}
+
+/* Colors */
+
+.bg-primary {
+    background-color: var(--primary-bg);
+}
+
+.bg-secondary {
+    background-color: var(--secondary-bg);
+}
+
+/* Fonts */
+
+.font-16 {
+    font-size: 16px;
+}
+
+.font-14 {
+    font-size: 14px;
+}
+
+/* -------------- LAYOUT CSS -------------- */
+
+/* Home page */
+
+.carousel-indicators {
+    display: none !important;
+}
+
+.carousel-item>img {
+    object-fit: cover;
+    object-position: top;
+    height: 317px;
+}
+
+.card-image {
+    width: 262px;
+    height: 246px;
+    object-fit: contain;
+}
