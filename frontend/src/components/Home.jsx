@@ -1,18 +1,27 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Carousel from 'react-bootstrap/Carousel';
 import banner1 from '../images/banner1.jpg';
 import banner2 from '../images/banner2.jpg';
 import banner3 from '../images/banner3.jpg';
 import Products from './Products/Products';
 import Container from 'react-bootstrap/esm/Container';
+import { getProduct } from '../store/actions/productActions';
+import { useSelector, useDispatch } from "react-redux";
+
+const product = {
+    name: "Raymond",
+    images: [{ url: "https://picsum.photos/seed/picsum/200/300" }],
+    price: "300",
+    _id: "random"
+};
 
 const Home = () => {
-    const product = {
-        name: "Raymond",
-        images: [{ url: "https://picsum.photos/seed/picsum/200/300" }],
-        price: "300",
-        _id: "random"
-    }
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(getProduct());
+    }, [dispatch]);
+    
     return (
         <>
             {/* Carousel Banners */}
