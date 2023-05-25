@@ -5,15 +5,10 @@ import banner2 from '../images/banner2.jpg';
 import banner3 from '../images/banner3.jpg';
 import Products from './Products/Products';
 import Container from 'react-bootstrap/esm/Container';
-import { getProduct } from '../store/actions/productActions';
+import MetaData from './MetaData';
+import Row from 'react-bootstrap/Row';
+import { getProduct } from '../store/actions/productAction';
 import { useSelector, useDispatch } from "react-redux";
-
-const product = {
-    name: "Raymond",
-    images: [{ url: "https://picsum.photos/seed/picsum/200/300" }],
-    price: "300",
-    _id: "random"
-};
 
 const Home = () => {
     const dispatch = useDispatch();
@@ -21,9 +16,16 @@ const Home = () => {
     useEffect(() => {
         dispatch(getProduct());
     }, [dispatch]);
-    
+
+    const { products, productsCount } = useSelector(
+        (state) => state.products
+    )
+
     return (
         <>
+            {/* Title tag */}
+            <MetaData title={"Mc-shopee"} />
+
             {/* Carousel Banners */}
             <Carousel>
                 <Carousel.Item className="carousel-item">
@@ -52,7 +54,9 @@ const Home = () => {
             {/* Products */}
             <Container className="my-5">
                 <h2 className="text-center mb-5">Featured Products</h2>
-                <Products product={product} />
+                <Row xs={1} md={2} xl={4} className="g-4">
+                    {products && products.map((product, index) => <Products key={index} product={product} />)}
+                </Row>
             </Container>
         </>
     )
