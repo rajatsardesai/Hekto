@@ -32,14 +32,25 @@
     display: none !important;
 }
 
-.carousel-item>img {
+.home-carousel>.carousel-item>img {
     object-fit: cover;
     object-position: top;
     height: 317px;
 }
 
-.card-image {
+.home-carousel>.carousel-item>.card-image {
     width: 262px;
     height: 246px;
     object-fit: contain;
+}
+
+/* product-details-carousel */
+
+.product-details-carousel>.carousel-indicators {
+    display: block !important;
+    text-align: center;
+}
+
+.product-details-carousel>.carousel-indicators>button {
+    background-color: #131921;
 }
