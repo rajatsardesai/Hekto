@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Card from 'react-bootstrap/Card';
 import Col from 'react-bootstrap/Col';
+import Stack from 'react-bootstrap/Stack';
 import ReactStars from "react-rating-stars-component";
 
 const Products = ({ product }) => {
@@ -12,23 +13,25 @@ const Products = ({ product }) => {
         size: window.innerWidth < 600 ? 20 : 25,
         value: product.ratings,
         isHalf: true
-    }
+    };
+
     return (
-        <Link className="product-card text-decoration-none" to={product._id}>
-                <Col>
-                    <Card>
-                        <Card.Img variant="top" src={product.images[0].url} alt={product.name} className="card-image m-auto" />
-                        <Card.Body className="text-dark">
-                            <Card.Title>{product.name}</Card.Title>
-                            <div className="d-flex align-items-center">
-                                <ReactStars {...options} /><span className="ms-2">({product.numberOfReviews} Reviews)</span>
-                            </div>
-                            <Card.Text>
-                                $<span className="fs-4">{product.price}</span>
-                            </Card.Text>
-                        </Card.Body>
-                    </Card>
-                </Col>
+        <Link className="product-card text-decoration-none" to={`/product/${product._id}`}>
+            <Col>
+                <Card>
+                    <Card.Img variant="top" src={product.images[0].url} alt={product.name} className="card-image m-auto" />
+                    <Card.Body className="text-dark">
+                        <Card.Title>{product.name}</Card.Title>
+                        <Stack direction="horizontal" gap={3}>
+                            <ReactStars {...options} />
+                            <span className="text-primary">{product.numberOfReviews} Reviews</span>
+                        </Stack>
+                        <Card.Text>
+                            $<span className="fs-4">{product.price}</span>
+                        </Card.Text>
+                    </Card.Body>
+                </Card>
+            </Col>
         </Link>
     )
 }

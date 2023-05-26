@@ -13,13 +13,13 @@ import { useSelector, useDispatch } from "react-redux";
 const Home = () => {
     const dispatch = useDispatch();
 
+    const { products, productsCount } = useSelector(
+        (state) => state.products
+    );
+
     useEffect(() => {
         dispatch(getProduct());
     }, [dispatch]);
-
-    const { products, productsCount } = useSelector(
-        (state) => state.products
-    )
 
     return (
         <>
@@ -27,7 +27,7 @@ const Home = () => {
             <MetaData title={"Mc-shopee"} />
 
             {/* Carousel Banners */}
-            <Carousel>
+            <Carousel className="home-carousel">
                 <Carousel.Item className="carousel-item">
                     <img
                         className="d-block w-100"
