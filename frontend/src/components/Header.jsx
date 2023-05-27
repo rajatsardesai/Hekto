@@ -13,17 +13,17 @@ const Header = () => {
     const [progress, setProgress] = useState(0);
     const [showAlert, setShowAlert] = useState(true);
 
-    const { loading, error } = useSelector(
+    const { pageLoading, error } = useSelector(
         (state) => state.products
     );
 
     useEffect(() => {
-        setProgress(loading);
+        setProgress(pageLoading);
 
         setTimeout(() => {
             setShowAlert(false);
         }, 5000);
-    }, [loading]);
+    }, [pageLoading]);
 
     return (
         <>
@@ -34,7 +34,7 @@ const Header = () => {
                 onLoaderFinished={() => setProgress(0)} />
 
             {/* Error alert */}
-            {showAlert && <Alert variant="danger" dismissible>
+            {(error && showAlert) && <Alert variant="danger" dismissible>
                 {error}
             </Alert>}
 

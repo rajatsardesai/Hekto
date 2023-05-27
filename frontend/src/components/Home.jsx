@@ -3,7 +3,7 @@ import Carousel from 'react-bootstrap/Carousel';
 import banner1 from '../images/banner1.jpg';
 import banner2 from '../images/banner2.jpg';
 import banner3 from '../images/banner3.jpg';
-import Products from './Products/Products';
+import Products from './Products/ProductsCard';
 import Container from 'react-bootstrap/esm/Container';
 import MetaData from './MetaData';
 import Row from 'react-bootstrap/Row';
@@ -13,13 +13,13 @@ import { useSelector, useDispatch } from "react-redux";
 const Home = () => {
     const dispatch = useDispatch();
 
+    const { products, productsCount } = useSelector(
+        (state) => state.products
+    );
+
     useEffect(() => {
         dispatch(getProduct());
     }, [dispatch]);
-
-    const { products, productsCount } = useSelector(
-        (state) => state.products
-    )
 
     return (
         <>
@@ -27,7 +27,7 @@ const Home = () => {
             <MetaData title={"Mc-shopee"} />
 
             {/* Carousel Banners */}
-            <Carousel>
+            <Carousel className="home-carousel">
                 <Carousel.Item className="carousel-item">
                     <img
                         className="d-block w-100"
