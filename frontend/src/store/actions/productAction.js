@@ -8,12 +8,12 @@ export const getProduct = () => async (dispatch) => {
 
         dispatch({
             type: SET_LOADER_PROGRESS,
-            pageLoading: 0
+            productLoading: 0
         });
         const { data } = await axios.get("http://localhost:3500/api/v1/products");
         dispatch({
             type: SET_LOADER_PROGRESS,
-            pageLoading: 50
+            productLoading: 50
         });
         dispatch({
             type: ALL_PRODUCT_SUCCESS,
@@ -21,7 +21,7 @@ export const getProduct = () => async (dispatch) => {
         });
         dispatch({
             type: SET_LOADER_PROGRESS,
-            pageLoading: 100
+            productLoading: 100
         });
     } catch (error) {
         dispatch({
@@ -38,12 +38,12 @@ export const getProductDetails = (id) => async (dispatch) => {
 
         dispatch({
             type: SET_LOADER_PROGRESS,
-            loading: 0
+            productDetailsLoading: 0
         });
         const { data } = await axios.get(`http://localhost:3500/api/v1/product/${id}`);
         dispatch({
             type: SET_LOADER_PROGRESS,
-            loading: 50
+            productDetailsLoading: 50
         });
         dispatch({
             type: PRODUCT_DETAILS_SUCCESS,
@@ -51,7 +51,7 @@ export const getProductDetails = (id) => async (dispatch) => {
         });
         dispatch({
             type: SET_LOADER_PROGRESS,
-            loading: 100
+            productDetailsLoading: 100
         });
     } catch (error) {
         dispatch({
