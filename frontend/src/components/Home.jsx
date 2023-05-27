@@ -3,7 +3,7 @@ import Carousel from 'react-bootstrap/Carousel';
 import banner1 from '../images/banner1.jpg';
 import banner2 from '../images/banner2.jpg';
 import banner3 from '../images/banner3.jpg';
-import Products from './Products/ProductsCard';
+import ProductsCard from './Products/ProductsCard';
 import Container from 'react-bootstrap/esm/Container';
 import MetaData from './MetaData';
 import Row from 'react-bootstrap/Row';
@@ -55,7 +55,7 @@ const Home = () => {
             <Container className="my-5">
                 <h2 className="text-center mb-5">Featured Products</h2>
                 <Row xs={1} md={2} xl={4} className="g-4">
-                    {products && products.map((product, index) => <Products key={index} product={product} />)}
+                    {products && products.map(product => <ProductsCard key={product._id} product={product} />)}
                 </Row>
             </Container>
         </>
