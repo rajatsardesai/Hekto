@@ -6,7 +6,7 @@ export const productReducer = (state = { products: [] }, action) => {
             return {
                 loading: true,
                 ...state,
-                pageLoading: action.pageLoading
+                productLoading: action.productLoading
             }
         case ALL_PRODUCT_REQUEST:
             return {
@@ -22,7 +22,7 @@ export const productReducer = (state = { products: [] }, action) => {
         case ALL_PRODUCT_FAIL:
             return {
                 loading: false,
-                error: action.payload
+                productError: action.payload
             }
         case CLEAR_ERRORS:
             return {
@@ -41,7 +41,7 @@ export const productDetailsReducer = (state = { product: {} }, action) => {
             return {
                 loading: true,
                 ...state,
-                pageLoading: action.pageLoading
+                productDetailsLoading: action.productDetailsLoading
             }
         case PRODUCT_DETAILS_REQUEST:
             return {
@@ -56,7 +56,7 @@ export const productDetailsReducer = (state = { product: {} }, action) => {
         case PRODUCT_DETAILS_FAIL:
             return {
                 loading: false,
-                error: action.payload
+                productDetailsError: action.payload
             }
         case CLEAR_ERRORS:
             return {

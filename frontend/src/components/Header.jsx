@@ -13,17 +13,25 @@ const Header = () => {
     const [progress, setProgress] = useState(0);
     const [showAlert, setShowAlert] = useState(true);
 
-    const { pageLoading, error } = useSelector(
+    // For home loading page
+    const { productLoading, productError } = useSelector(
         (state) => state.products
     );
 
+    // For product details loading page
+    const { productDetailsLoading, productDetailsError } = useSelector(
+        (state) => state.productDetails
+    );
+
     useEffect(() => {
-        setProgress(pageLoading);
+        productLoading ?
+            setProgress(productLoading) :
+            setProgress(productDetailsLoading);
 
         setTimeout(() => {
             setShowAlert(false);
         }, 5000);
-    }, [pageLoading]);
+    }, [productLoading, productDetailsLoading]);
 
     return (
         <>
@@ -34,8 +42,8 @@ const Header = () => {
                 onLoaderFinished={() => setProgress(0)} />
 
             {/* Error alert */}
-            {(error && showAlert) && <Alert variant="danger" dismissible>
-                {error}
+            {((productError || productDetailsError) && showAlert) && <Alert variant="danger" dismissible>
+                {productError || productDetailsError}
             </Alert>}
 
             {/* Navbar */}
