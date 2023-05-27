@@ -7,6 +7,7 @@ import Stack from 'react-bootstrap/Stack';
 import Dropdown from 'react-bootstrap/Dropdown';
 import Button from 'react-bootstrap/Button';
 import { getProductDetails } from '../../store/actions/productAction';
+import ReviewCard from './ReviewCard';
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from 'react-router-dom';
 import ReactStars from "react-rating-stars-component";
@@ -16,7 +17,7 @@ const ProductDetails = () => {
 
     const dispatch = useDispatch();
 
-    const { product, error } = useSelector(
+    const { product, loading, error } = useSelector(
         (state) => state.productDetails
     );
 
@@ -34,7 +35,7 @@ const ProductDetails = () => {
     }, [dispatch, id]);
 
     return (
-        <>
+        !loading && <>
             <Container>
                 <Row className="my-5">
                     <Col sm={12} md={6}>
@@ -64,10 +65,10 @@ const ProductDetails = () => {
                         $<span className="fs-2">{product.price}</span>
                         {
                             product.stock < 1 ?
-                                <span className="fs-2 text-danger">Out of stock</span> :
+                                <span className="d-block fs-2 text-danger">Out of stock</span> :
                                 <>
                                     <Stack direction="horizontal" gap={3} className="my-2">
-                                        <label for="quantity-dropdown">
+                                        <label htmlFor="quantity-dropdown">
                                             Quantity:
                                         </label>
                                         <Dropdown>
@@ -83,11 +84,25 @@ const ProductDetails = () => {
                                     <Button variant="warning" className="my-2">Add to Cart</Button>
                                 </>
                         }
-                        <hr/>
+                        <hr />
                         <span className="fs-5 fw-bold">About this item</span>
                         <p>{product.description}</p>
                     </Col>
                 </Row>
+
+                <div className="mt-4 mb-5">
+                    <h4>Customer reviews</h4>
+                    {
+                        product.reviews && product.reviews[0] ?
+                            <div className="reviews">
+                                {
+                                    product.reviews &&
+                                    product.reviews.map((review, index) => <ReviewCard key={index} review={review} />)
+                                }
+                            </div> :
+                            <span className="fw-bold">No customer reviews</span>
+                    }
+                </div>
             </Container>
         </>
     )
