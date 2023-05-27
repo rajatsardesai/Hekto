@@ -5,7 +5,7 @@ import Col from 'react-bootstrap/Col';
 import Stack from 'react-bootstrap/Stack';
 import ReactStars from "react-rating-stars-component";
 
-const Products = ({ product }) => {
+const ProductsCard = ({ product }) => {
     const options = {
         edit: false,
         color: "rgb(20,20,20,0.1)",
@@ -17,8 +17,8 @@ const Products = ({ product }) => {
 
     return (
         <Link className="product-card text-decoration-none" to={`/product/${product._id}`}>
-            <Col>
-                <Card>
+            <Col className="h-100">
+                <Card className="h-100">
                     <Card.Img variant="top" src={product.images[0].url} alt={product.name} className="card-image m-auto" />
                     <Card.Body className="text-dark">
                         <Card.Title>{product.name}</Card.Title>
@@ -36,4 +36,4 @@ const Products = ({ product }) => {
     )
 }
 
-export default Products
+export default ProductsCard

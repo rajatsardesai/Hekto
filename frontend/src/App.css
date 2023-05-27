@@ -32,6 +32,14 @@
     display: none !important;
 }
 
+.carousel-control-prev>span {
+    filter: invert(1);
+}
+
+.carousel-control-next>span {
+    filter: invert(1);
+}
+
 .home-carousel>.carousel-item>img {
     object-fit: cover;
     object-position: top;
@@ -45,6 +53,10 @@
 }
 
 /* product-details-carousel */
+
+.product-details-carousel {
+    height: 594px;
+}
 
 .product-details-carousel>.carousel-indicators {
     display: block !important;
