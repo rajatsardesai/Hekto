@@ -6,11 +6,11 @@
 
 /* Colors */
 
-.bg-primary {
+.bg-blue-100 {
     background-color: var(--primary-bg);
 }
 
-.bg-secondary {
+.bg-blue-200 {
     background-color: var(--secondary-bg);
 }
 
@@ -25,6 +25,12 @@
 }
 
 /* -------------- LAYOUT CSS -------------- */
+
+/* Header */
+.nav-main{
+    height: 39px;
+    font-size: 14px;
+}
 
 /* Home page */
 

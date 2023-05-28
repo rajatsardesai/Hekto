@@ -24,7 +24,7 @@ const Home = () => {
     return (
         <>
             {/* Title tag */}
-            <MetaData title={"Mc-shopee"} />
+            <MetaData title={"Ebuy"} />
 
             {/* Carousel Banners */}
             <Carousel className="home-carousel">

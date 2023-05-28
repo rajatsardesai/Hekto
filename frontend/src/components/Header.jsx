@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import logo from "../images/logo.png";
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
@@ -8,14 +9,26 @@ import Alert from 'react-bootstrap/Alert';
 import { useSelector } from 'react-redux';
 import LoadingBar from 'react-top-loading-bar';
 import { Link } from 'react-router-dom';
+import { IconContext } from "react-icons";
+import { MdSearch } from "react-icons/md";
 
-const Header = () => {
+const Header = ({ history }) => {
     const [progress, setProgress] = useState(0);
     const [showAlert, setShowAlert] = useState(true);
+    const [keyword, setKeyword] = useState("");
 
     const { pageLoading, error } = useSelector(
         (state) => state.products
     );
+
+    const searchSubmitHandler = (e) => {
+        e.preventDefault();
+        if (keyword.trim()) {
+            history.push(`products/${keyword}`)
+        } else {
+            history.push("/products");
+        }
+    }
 
     useEffect(() => {
         setProgress(pageLoading);
@@ -39,9 +52,32 @@ const Header = () => {
             </Alert>}
 
             {/* Navbar */}
-            <Navbar bg="light" expand="lg">
+            <Navbar className="nav-belt bg-blue-100" expand="lg">
                 <Container fluid>
-                    <Navbar.Brand href="#">Mc-shopee</Navbar.Brand>
+                    <Navbar.Brand><Link className="text-decoration-none text-light" to={'/'}><img src={logo}></img></Link></Navbar.Brand>
+                    <Navbar.Toggle aria-controls="navbarScroll" />
+                    <Navbar.Collapse id="navbarScroll">
+                        <Form className="d-flex w-100" onSubmit={searchSubmitHandler}>
+                            <Form.Control
+                                type="search"
+                                placeholder="Search Ebuy"
+                                className="m-0 rounded-start rounded-0"
+                                aria-label="Search"
+                                onChange={(e) => setKeyword(e.target.value)}
+                            />
+                            <Button className="btn-warning rounded-end rounded-0">
+                                <IconContext.Provider value={{ size: "30px" }}>
+                                    <div>
+                                        <MdSearch />
+                                    </div>
+                                </IconContext.Provider>
+                            </Button>
+                        </Form>
+                    </Navbar.Collapse>
+                </Container>
+            </Navbar>
+            <Navbar className="nav-main bg-blue-200" expand="lg">
+                <Container fluid>
                     <Navbar.Toggle aria-controls="navbarScroll" />
                     <Navbar.Collapse id="navbarScroll">
                         <Nav
@@ -49,18 +85,9 @@ const Header = () => {
                             style={{ maxHeight: '100px' }}
                             navbarScroll
                         >
-                            <Nav.Link><Link className="text-decoration-none text-secondary" to={'/'}>Home</Link></Nav.Link>
-                            <Nav.Link><Link className="text-decoration-none text-secondary" to={'/products'}>Products</Link></Nav.Link>
+                            <Link className="text-decoration-none text-light p-2" to={'/'}>All</Link>
+                            <Link className="text-decoration-none text-light p-2" to={'/products'}>Products</Link>
                         </Nav>
-                        <Form className="d-flex">
-                            <Form.Control
-                                type="search"
-                                placeholder="Search"
-                                className="me-2"
-                                aria-label="Search"
-                            />
-                            <Button variant="outline-success">Search</Button>
-                        </Form>
                     </Navbar.Collapse>
                 </Container>
             </Navbar>

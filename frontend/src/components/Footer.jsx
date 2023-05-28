@@ -6,7 +6,7 @@ import ListGroup from 'react-bootstrap/ListGroup';
 
 const Footer = () => {
     return (
-        <section className="bg-secondary">
+        <section className="bg-blue-200">
             <Container className="py-5">
                 <Row>
                     <Col sm={12} md={3} className="text-center text-md-start mb-5 mb-md-0">
@@ -19,7 +19,7 @@ const Footer = () => {
                             <ListGroup.Item as="li" className="border-0 bg-transparent p-0 mb-2 font-14">
                                 <a href="/" className="d-block text-decoration-none text-light">Press Releases</a>
                             </ListGroup.Item>
-                            <ListGroup.Item as="li" className="border-0 bg-transparent p-0 mb-2 font-14"><a href="/" className="d-block text-decoration-none text-light">Mc-shopee Science</a></ListGroup.Item>
+                            <ListGroup.Item as="li" className="border-0 bg-transparent p-0 mb-2 font-14"><a href="/" className="d-block text-decoration-none text-light">Ebuy Science</a></ListGroup.Item>
                         </ListGroup>
                     </Col>
                     <Col sm={12} md={3} className="text-center text-md-start mb-5 mb-md-0">
@@ -38,9 +38,9 @@ const Footer = () => {
                         <h6 className="text-light">Make Money with Us</h6>
                         <ListGroup as="ul">
                             <ListGroup.Item as="li" className="border-0 bg-transparent p-0 mb-2 font-14">
-                                <a href="/" className="d-block text-decoration-none text-light">Sell on Mc-shopee</a>
+                                <a href="/" className="d-block text-decoration-none text-light">Sell on Ebuy</a>
                             </ListGroup.Item>
-                            <ListGroup.Item as="li" className="border-0 bg-transparent p-0 mb-2 font-14"> <a href="/" className="d-block text-decoration-none text-light">Sell under Mc-shopee Accelerator</a></ListGroup.Item>
+                            <ListGroup.Item as="li" className="border-0 bg-transparent p-0 mb-2 font-14"> <a href="/" className="d-block text-decoration-none text-light">Sell under Ebuy Accelerator</a></ListGroup.Item>
                             <ListGroup.Item as="li" className="border-0 bg-transparent p-0 mb-2 font-14">
                                 <a href="/" className="d-block text-decoration-none text-light">Protect and Build Your Brand</a>
                             </ListGroup.Item>
@@ -56,7 +56,7 @@ const Footer = () => {
                         <h6 className="text-light">Let Us Help You</h6>
                         <ListGroup as="ul">
                             <ListGroup.Item as="li" className="border-0 bg-transparent p-0 mb-2 font-14">
-                                <a href="/" className="d-block text-decoration-none text-light">COVID-19 and Mc-shopee</a>
+                                <a href="/" className="d-block text-decoration-none text-light">COVID-19 and Ebuy</a>
                             </ListGroup.Item>
                             <ListGroup.Item as="li" className="border-0 bg-transparent p-0 mb-2 font-14"> <a href="/" className="d-block text-decoration-none text-light">Your Account</a></ListGroup.Item>
                             <ListGroup.Item as="li" className="border-0 bg-transparent p-0 mb-2 font-14">
