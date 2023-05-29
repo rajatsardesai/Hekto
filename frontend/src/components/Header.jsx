@@ -8,14 +8,16 @@ import Navbar from 'react-bootstrap/Navbar';
 import Alert from 'react-bootstrap/Alert';
 import { useSelector } from 'react-redux';
 import LoadingBar from 'react-top-loading-bar';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { IconContext } from "react-icons";
 import { MdSearch } from "react-icons/md";
 
-const Header = ({ history }) => {
+const Header = () => {
     const [progress, setProgress] = useState(0);
     const [showAlert, setShowAlert] = useState(true);
     const [keyword, setKeyword] = useState("");
+
+    const navigate = useNavigate();
 
     const { pageLoading, error } = useSelector(
         (state) => state.products
@@ -24,9 +26,9 @@ const Header = ({ history }) => {
     const searchSubmitHandler = (e) => {
         e.preventDefault();
         if (keyword.trim()) {
-            history.push(`products/${keyword}`)
+            navigate(`/products/${keyword}`)
         } else {
-            history.push("/products");
+            navigate("/products");
         }
     }
 

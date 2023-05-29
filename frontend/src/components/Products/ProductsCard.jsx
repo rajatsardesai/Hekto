@@ -27,7 +27,7 @@ const ProductsCard = ({ product }) => {
                             <span className="text-primary">{product.numberOfReviews} Reviews</span>
                         </Stack>
                         <Card.Text>
-                            $<span className="fs-4">{product.price}</span>
+                            ₹<span className="fs-4">{product.price}</span>
                         </Card.Text>
                     </Card.Body>
                 </Card>

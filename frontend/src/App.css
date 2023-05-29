@@ -1,7 +1,8 @@
 /* Utitlies */
 :root {
     --primary-bg: #131921;
-    --secondary-bg: #232F3E;
+    --secondary-bg: #232f3e;
+    --button-bg: #ffc107;
 }
 
 /* Colors */
@@ -27,9 +28,15 @@
 /* -------------- LAYOUT CSS -------------- */
 
 /* Header */
-.nav-main{
+.nav-main {
     height: 39px;
     font-size: 14px;
+}
+
+/* Pagination */
+.pagination>.page-item.active>.page-link {
+    background-color: var(--button-bg);
+    border: 0;
 }
 
 /* Home page */
