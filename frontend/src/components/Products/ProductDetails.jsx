@@ -62,7 +62,7 @@ const ProductDetails = () => {
                             <span className="text-primary">{product.numberOfReviews} Reviews</span>
                         </Stack>
                         <hr className="my-1" />
-                        $<span className="fs-2">{product.price}</span>
+                        <sup className="fs-5">₹</sup><span className="fs-2">{product.price}</span>
                         {
                             product.stock < 1 ?
                                 <span className="d-block fs-2 text-danger">Out of stock</span> :

@@ -19,8 +19,11 @@ const Header = () => {
 
     const navigate = useNavigate();
 
-    const { pageLoading, error } = useSelector(
+    const { pageLoading, allProductsError } = useSelector(
         (state) => state.products
+    );
+    const { productDetailsError } = useSelector(
+        (state) => state.productDetails
     );
 
     const searchSubmitHandler = (e) => {
@@ -49,8 +52,8 @@ const Header = () => {
                 onLoaderFinished={() => setProgress(0)} />
 
             {/* Error alert */}
-            {(error && showAlert) && <Alert variant="danger" dismissible>
-                {error}
+            {((allProductsError || productDetailsError) && showAlert) && <Alert variant="danger" className="fixed-top w-100 z-3 rounded-0" dismissible>
+                {allProductsError ? allProductsError : productDetailsError}
             </Alert>}
 
             {/* Navbar */}
@@ -59,6 +62,14 @@ const Header = () => {
                     <Navbar.Brand><Link className="text-decoration-none text-light" to={'/'}><img src={logo}></img></Link></Navbar.Brand>
                     <Navbar.Toggle aria-controls="navbarScroll" />
                     <Navbar.Collapse id="navbarScroll">
+                        <Nav
+                            className="me-auto my-2 my-lg-0 d-block d-lg-none"
+                            style={{ maxHeight: '100px' }}
+                            navbarScroll
+                        >
+                            <Link className="text-decoration-none text-light p-2" to={'/'}>All</Link>
+                            <Link className="text-decoration-none text-light p-2" to={'/products'}>Products</Link>
+                        </Nav>
                         <Form className="d-flex w-100" onSubmit={searchSubmitHandler}>
                             <Form.Control
                                 type="search"
@@ -78,7 +89,7 @@ const Header = () => {
                     </Navbar.Collapse>
                 </Container>
             </Navbar>
-            <Navbar className="nav-main bg-blue-200" expand="lg">
+            <Navbar className="nav-main bg-blue-200 d-none d-lg-block p-0" expand="lg">
                 <Container fluid>
                     <Navbar.Toggle aria-controls="navbarScroll" />
                     <Navbar.Collapse id="navbarScroll">
@@ -87,8 +98,8 @@ const Header = () => {
                             style={{ maxHeight: '100px' }}
                             navbarScroll
                         >
-                            <Link className="text-decoration-none text-light p-2" to={'/'}>All</Link>
-                            <Link className="text-decoration-none text-light p-2" to={'/products'}>Products</Link>
+                            <Link className="text-decoration-none text-light p-2 font-14" to={'/'}>All</Link>
+                            <Link className="text-decoration-none text-light p-2 font-14" to={'/products'}>Products</Link>
                         </Nav>
                     </Navbar.Collapse>
                 </Container>

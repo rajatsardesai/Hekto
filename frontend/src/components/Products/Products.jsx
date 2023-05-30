@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import ProductsCard from './ProductsCard';
+import ProductFilters from './ProductFilters';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { getProduct } from '../../store/actions/productAction';
@@ -7,8 +8,6 @@ import Container from 'react-bootstrap/esm/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Pagination from 'react-bootstrap/Pagination';
-import Form from 'react-bootstrap/Form';
-import Stack from 'react-bootstrap/esm/Stack';
 
 const Products = () => {
     const dispatch = useDispatch();
@@ -37,13 +36,16 @@ const Products = () => {
 
     // For price filter
     const [price, setPrice] = useState(50000);
-    const priceHandler = (event) => {
-        setPrice(event.target.value);
-    }
+
+    // For category filter
+    const [category, setCategory] = useState("");
+
+    // For ratings filter
+    const [ratings, setRatings] = useState(0);
 
     useEffect(() => {
-        dispatch(getProduct(keyword, currentPage, price));
-    }, [dispatch, keyword, currentPage, price]);
+        dispatch(getProduct(keyword, currentPage, price, category, ratings));
+    }, [dispatch, keyword, currentPage, price, category, ratings]);
 
     // let count = filteredProductsCount;
 
@@ -51,14 +53,9 @@ const Products = () => {
         !loading &&
         <>
             <Container fluid className="products-page">
-                <Row>
-                    <Col md={3} className="mt-5 pt-5">
-                        <Form.Label className="mt-5 fs-6 fw-bold">Price</Form.Label>
-                        <Form.Range min={0} max={50000} value={price} onChange={priceHandler} />
-                        <Stack direction="horizontal" className="justify-content-between">
-                            <Form.Label className="fs-6">₹0</Form.Label>
-                            <Form.Label className="fs-6">₹{price}</Form.Label>
-                        </Stack>
+                <Row className="mb-5">
+                    <Col md={3} className="mt-5 mt-lg-5">
+                        <ProductFilters price={price} setPrice={setPrice} setCategory={setCategory} setRatings={setRatings} />
                     </Col>
                     <Col md={9}>
                         {/* Products */}

@@ -43,6 +43,7 @@ exports.getProductDetails = catchAsyncError(async (req, res) => {
         success: true,
         product
     });
+    // throw new Error("THis is new error");
 });
 
 // Update products -- Admin

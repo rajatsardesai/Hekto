@@ -25,13 +25,24 @@
     font-size: 14px;
 }
 
-/* -------------- LAYOUT CSS -------------- */
-
-/* Header */
-.nav-main {
-    height: 39px;
-    font-size: 14px;
+/* Actions and other styles */
+.cursor-pointer {
+    cursor: pointer;
 }
+
+.text-overflow {
+    width: 100%;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+.object-fit {
+    object-fit: contain;
+}
+
+/* -------------- LAYOUT CSS -------------- */
 
 /* Pagination */
 .pagination>.page-item.active>.page-link {
@@ -53,7 +64,7 @@
     filter: invert(1);
 }
 
-.home-carousel>.carousel-item>img {
+.home-carousel .carousel-item>img {
     object-fit: cover;
     object-position: top;
     height: 317px;
@@ -63,6 +74,11 @@
     width: 262px;
     height: 246px;
     object-fit: contain;
+}
+
+/* product-details-carousel */
+.product-cards .cards {
+    height: 339px !important;
 }
 
 /* product-details-carousel */
