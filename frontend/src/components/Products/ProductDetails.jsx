@@ -17,7 +17,7 @@ const ProductDetails = () => {
 
     const dispatch = useDispatch();
 
-    const { product, loading, error } = useSelector(
+    const { product, loading } = useSelector(
         (state) => state.productDetails
     );
 
@@ -36,76 +36,78 @@ const ProductDetails = () => {
 
     return (
         !loading && <>
-            <Container>
-                <Row className="my-5">
-                    <Col sm={12} md={6}>
-                        <Carousel className="product-details-carousel">
-                            {
-                                product.images && product.images.map((productImage, index) => {
-                                    return (
-                                        <Carousel.Item key={index}>
-                                            <img
-                                                className="d-block w-100"
-                                                src={productImage.url}
-                                                alt="First slide"
-                                            />
-                                        </Carousel.Item>
-                                    )
-                                })
-                            }
-                        </Carousel>
-                    </Col>
-                    <Col sm={12} md={6}>
-                        <h3>{product.name}</h3>
-                        <Stack direction="horizontal" gap={3}>
-                            <ReactStars {...options} />
-                            <span className="text-primary">{product.numberOfReviews} Reviews</span>
-                        </Stack>
-                        <hr className="my-1" />
-                        <sup className="fs-5">₹</sup><span className="fs-2">{product.price}</span>
-                        {
-                            product.stock < 1 ?
-                                <span className="d-block fs-2 text-danger">Out of stock</span> :
-                                <>
-                                    <Stack direction="horizontal" gap={3} className="my-2">
-                                        <label htmlFor="quantity-dropdown">
-                                            Quantity:
-                                        </label>
-                                        <Dropdown>
-                                            <Dropdown.Toggle className="border" variant="transparent" id="quantity-dropdown">
-                                                1
-                                            </Dropdown.Toggle>
-
-                                            <Dropdown.Menu>
-                                                <Dropdown.Item>1</Dropdown.Item>
-                                            </Dropdown.Menu>
-                                        </Dropdown>
-                                    </Stack>
-                                    <Button variant="warning" className="my-2">Add to Cart</Button>
-                                </>
-                        }
-                        <hr />
-                        <span className="fs-5 fw-bold">About this item</span>
-                        <p>{product.description}</p>
-                    </Col>
-                </Row>
-
-                <div className="mt-4 mb-5">
-                    <h4>Customer reviews</h4>
-                    {
-                        product.reviews && product.reviews[0] ?
-                            <div className="reviews">
+            <div className="bg-white">
+                <Container className="py-5 product-detail-page">
+                    <Row>
+                        <Col sm={12} md={6}>
+                            <Carousel className="product-details-carousel">
                                 {
-                                    product.reviews &&
-                                    product.reviews.map((review, index) => <ReviewCard key={index} review={review} />)
+                                    product.images && product.images.map((productImage, index) => {
+                                        return (
+                                            <Carousel.Item key={index}>
+                                                <img
+                                                    className="d-block w-100"
+                                                    src={productImage.url}
+                                                    alt="First slide"
+                                                />
+                                            </Carousel.Item>
+                                        )
+                                    })
                                 }
-                            </div> :
-                            <span className="fw-bold">No customer reviews</span>
-                    }
-                </div>
-            </Container>
+                            </Carousel>
+                        </Col>
+                        <Col sm={12} md={6}>
+                            <h3>{product.name}</h3>
+                            <Stack direction="horizontal" gap={3}>
+                                <ReactStars {...options} />
+                                <span className="text-primary">{product.numberOfReviews} Reviews</span>
+                            </Stack>
+                            <hr className="my-1" />
+                            <sup className="fs-5">₹</sup><span className="fs-2">{product.price}</span>
+                            {
+                                product.stock < 1 ?
+                                    <span className="d-block fs-2 text-danger">Out of stock</span> :
+                                    <>
+                                        <Stack direction="horizontal" gap={3} className="my-2">
+                                            <label htmlFor="quantity-dropdown">
+                                                Quantity:
+                                            </label>
+                                            <Dropdown>
+                                                <Dropdown.Toggle className="border" variant="transparent" id="quantity-dropdown">
+                                                    1
+                                                </Dropdown.Toggle>
+
+                                                <Dropdown.Menu>
+                                                    <Dropdown.Item>1</Dropdown.Item>
+                                                </Dropdown.Menu>
+                                            </Dropdown>
+                                        </Stack>
+                                        <Button variant="warning" className="my-2">Add to Cart</Button>
+                                    </>
+                            }
+                            <hr />
+                            <span className="fs-5 fw-bold">About this item</span>
+                            <p>{product.description}</p>
+                        </Col>
+                    </Row>
+
+                    <div className="mt-4 mb-5">
+                        <h4>Customer reviews</h4>
+                        {
+                            product.reviews && product.reviews[0] ?
+                                <div className="reviews">
+                                    {
+                                        product.reviews &&
+                                        product.reviews.map((review, index) => <ReviewCard key={index} review={review} />)
+                                    }
+                                </div> :
+                                <span className="fw-bold">No customer reviews</span>
+                        }
+                    </div>
+                </Container>
+            </div>
         </>
     )
 }
 
-export default ProductDetails
+export default ProductDetails;

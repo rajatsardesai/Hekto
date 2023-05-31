@@ -59,10 +59,10 @@ const Products = () => {
                     </Col>
                     <Col md={9}>
                         {/* Products */}
-                        <Container className="my-5">
-                            <h2 className="mb-1">{keyword ? "Searched Products" : "Featured Products"}</h2>
+                        <Container className="my-5 bg-white p-4">
+                            <h2 className="mb-1">{keyword ? "Searched Products" : "All Products"}</h2>
                             <span className="text-secondary">Price and other details may vary based on product size and colour.</span>
-                            <Row xs={1} md={3} xxl={4} className="g-4 mt-1">
+                            <Row xs={1} md={2} xl={3} xxl={4} className="g-4 mt-1">
                                 {products && products.map(product => <ProductsCard key={product._id} product={product} />)}
                             </Row>
                             {

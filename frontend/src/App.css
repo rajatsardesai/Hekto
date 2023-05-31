@@ -1,8 +1,14 @@
 /* Utitlies */
 :root {
+    --page-bg: #e3e6e6;
     --primary-bg: #131921;
     --secondary-bg: #232f3e;
     --button-bg: #ffc107;
+    --white: #ffffff;
+}
+
+#root {
+    background-color: var(--page-bg);
 }
 
 /* Colors */
@@ -15,6 +21,10 @@
     background-color: var(--secondary-bg);
 }
 
+.bg-blue-300 {
+    background-color: var(--page-bg);
+}
+
 /* Fonts */
 
 .font-16 {
@@ -22,12 +32,16 @@
 }
 
 .font-14 {
-    font-size: 14px;
+    font-size: 14px !important;
 }
 
 /* Actions and other styles */
 .cursor-pointer {
     cursor: pointer;
+}
+
+.navbar-toggler {
+    filter: invert(1);
 }
 
 .text-overflow {
@@ -76,7 +90,7 @@
     object-fit: contain;
 }
 
-/* product-details-carousel */
+/* products */
 .product-cards .cards {
     height: 339px !important;
 }
@@ -85,6 +99,12 @@
 
 .product-details-carousel {
     height: 594px;
+}
+
+.product-details-carousel .carousel-item img{
+    width: 546px;
+    height: 546px;
+    object-fit: contain;
 }
 
 .product-details-carousel>.carousel-indicators {

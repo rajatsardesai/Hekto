@@ -14,7 +14,7 @@ export const getProduct = (keyword = "", currentPage = 1, price = 50000, categor
         let link = `http://localhost:3500/api/v1/products?keyword=${keyword}&page=${currentPage}&price[lte]=${price}&ratings[gte]=${ratings}`;
 
         if (category) {
-            link = `http://localhost:3500/api/v1/products?keyword=${keyword}&category=${category}&page=${currentPage}&price[lte]=${price}&ratings[gte]=${ratings}`;
+            link = `http://localhost:3500/api/v1/products?category=${category}&keyword=${keyword}&page=${currentPage}&price[lte]=${price}&ratings[gte]=${ratings}`;
         }
         const { data } = await axios.get(link);
 

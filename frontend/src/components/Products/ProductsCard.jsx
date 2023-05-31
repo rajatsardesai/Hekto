@@ -17,8 +17,8 @@ const ProductsCard = ({ product }) => {
 
     return (
         <Link className="product-cards text-decoration-none" to={`/product/${product._id}`}>
-            <Col className="">
-                <Card className="cards">
+            <Col>
+                <Card className="cards border-0">
                     <Card.Img variant="top" src={product.images[0].url} alt={product.name} className="card-image m-auto h-50 object-fit" />
                     <Card.Body className="text-dark">
                         <Card.Title className="text-overflow fw-normal fs-6">{product.name}</Card.Title>

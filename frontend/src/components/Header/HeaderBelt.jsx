@@ -1,24 +1,28 @@
 import React, { useEffect, useState } from 'react';
-import logo from "../images/logo.png";
+import HeaderMain from './HeaderMain';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import Alert from 'react-bootstrap/Alert';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import LoadingBar from 'react-top-loading-bar';
 import { Link, useNavigate } from 'react-router-dom';
 import { IconContext } from "react-icons";
 import { MdSearch } from "react-icons/md";
+import { getProduct } from '../../store/actions/productAction';
 
-const Header = () => {
+const HeaderBelt = () => {
+    const dispatch = useDispatch();
+
     const [progress, setProgress] = useState(0);
     const [showAlert, setShowAlert] = useState(true);
     const [keyword, setKeyword] = useState("");
 
     const navigate = useNavigate();
 
+    // To show alert when error occurs
     const { pageLoading, allProductsError } = useSelector(
         (state) => state.products
     );
@@ -26,6 +30,7 @@ const Header = () => {
         (state) => state.productDetails
     );
 
+    // Handling search results
     const searchSubmitHandler = (e) => {
         e.preventDefault();
         if (keyword.trim()) {
@@ -33,7 +38,19 @@ const Header = () => {
         } else {
             navigate("/products");
         }
-    }
+    };
+
+    // Handling category navigation
+    const categorySubmitHandler = (category) => {
+        if (category.trim()) {
+            navigate(`/products?${category}`);
+            setTimeout(() => {
+                dispatch(getProduct("", 1, 50000, category, 0));
+            });
+        } else {
+            navigate("/products");
+        }
+    };
 
     useEffect(() => {
         setProgress(pageLoading);
@@ -57,18 +74,23 @@ const Header = () => {
             </Alert>}
 
             {/* Navbar */}
-            <Navbar className="nav-belt bg-blue-100" expand="lg">
+            <Navbar className="header-belt bg-blue-100" expand="lg">
                 <Container fluid>
-                    <Navbar.Brand><Link className="text-decoration-none text-light" to={'/'}><img src={logo}></img></Link></Navbar.Brand>
+                    <Navbar.Brand><Link className="text-decoration-none text-light" to={'/'}><img src={process.env.PUBLIC_URL + "assets/images/logo.png"} alt="logo"></img></Link></Navbar.Brand>
                     <Navbar.Toggle aria-controls="navbarScroll" />
                     <Navbar.Collapse id="navbarScroll">
                         <Nav
                             className="me-auto my-2 my-lg-0 d-block d-lg-none"
-                            style={{ maxHeight: '100px' }}
-                            navbarScroll
                         >
-                            <Link className="text-decoration-none text-light p-2" to={'/'}>All</Link>
-                            <Link className="text-decoration-none text-light p-2" to={'/products'}>Products</Link>
+                            <Link className="d-block text-decoration-none text-light p-2 font-16" to={'/'}>All</Link>
+                            <Link className="d-block text-decoration-none text-light p-2 font-16" to={'/products'}>Products</Link>
+                            <Nav.Link className="text-decoration-none text-light p-2 font-16" onClick={() => categorySubmitHandler("Laptops")}>Laptops</Nav.Link>
+                            <Nav.Link className="text-decoration-none text-light p-2 font-16" onClick={() => categorySubmitHandler("accessories")}>Accessories</Nav.Link>
+                            <Nav.Link className="text-decoration-none text-light p-2 font-16" onClick={() => categorySubmitHandler("fashion")}>Fashion</Nav.Link>
+                            <Nav.Link className="text-decoration-none text-light p-2 font-16" onClick={() => categorySubmitHandler("electronics")}>Electronics</Nav.Link>
+                            <Nav.Link className="text-decoration-none text-light p-2 font-16" onClick={() => categorySubmitHandler("cameras")}>Cameras</Nav.Link>
+                            <Nav.Link className="text-decoration-none text-light p-2 font-16" onClick={() => categorySubmitHandler("smartphones")}>Smartphones</Nav.Link>
+                            <Nav.Link className="text-decoration-none text-light p-2 font-16" onClick={() => categorySubmitHandler("smartwatches")}>Smartwatches</Nav.Link>
                         </Nav>
                         <Form className="d-flex w-100" onSubmit={searchSubmitHandler}>
                             <Form.Control
@@ -89,23 +111,9 @@ const Header = () => {
                     </Navbar.Collapse>
                 </Container>
             </Navbar>
-            <Navbar className="nav-main bg-blue-200 d-none d-lg-block p-0" expand="lg">
-                <Container fluid>
-                    <Navbar.Toggle aria-controls="navbarScroll" />
-                    <Navbar.Collapse id="navbarScroll">
-                        <Nav
-                            className="me-auto my-2 my-lg-0"
-                            style={{ maxHeight: '100px' }}
-                            navbarScroll
-                        >
-                            <Link className="text-decoration-none text-light p-2 font-14" to={'/'}>All</Link>
-                            <Link className="text-decoration-none text-light p-2 font-14" to={'/products'}>Products</Link>
-                        </Nav>
-                    </Navbar.Collapse>
-                </Container>
-            </Navbar>
+            <HeaderMain categorySubmitHandler={categorySubmitHandler} />
         </>
     )
 }
 
-export default Header
+export default HeaderBelt;
