@@ -16,15 +16,15 @@ const HeaderMain = ({ categorySubmitHandler }) => {
                             style={{ maxHeight: '100px' }}
                             navbarScroll
                         >
-                            <Link className="text-decoration-none text-light p-2 font-14" to={'/'}>All</Link>
-                            <Link className="text-decoration-none text-light p-2 font-14" to={'/products'}>Products</Link>
-                            <Nav.Link className="text-decoration-none text-light p-2 font-14" onClick={() => categorySubmitHandler("laptops")}>Laptops</Nav.Link>
-                            <Nav.Link className="text-decoration-none text-light p-2 font-14" onClick={() => categorySubmitHandler("accessories")}>Accessories</Nav.Link>
-                            <Nav.Link className="text-decoration-none text-light p-2 font-14" onClick={() => categorySubmitHandler("fashion")}>Fashion</Nav.Link>
-                            <Nav.Link className="text-decoration-none text-light p-2 font-14" onClick={() => categorySubmitHandler("electronics")}>Electronics</Nav.Link>
-                            <Nav.Link className="text-decoration-none text-light p-2 font-14" onClick={() => categorySubmitHandler("cameras")}>Cameras</Nav.Link>
-                            <Nav.Link className="text-decoration-none text-light p-2 font-14" onClick={() => categorySubmitHandler("smartphones")}>Smartphones</Nav.Link>
-                            <Nav.Link className="text-decoration-none text-light p-2 font-14" onClick={() => categorySubmitHandler("smartwatches")}>Smartwatches</Nav.Link>
+                            <Link className="text-decoration-none text-light py-2 px-3 font-14" to={'/'}>All</Link>
+                            <Link className="text-decoration-none text-light py-2 px-3 font-14" to={'/products'}>Products</Link>
+                            <Nav.Link className="text-decoration-none text-light py-2 px-3 font-14" onClick={() => categorySubmitHandler("laptops")}>Laptops</Nav.Link>
+                            <Nav.Link className="text-decoration-none text-light py-2 px-3 font-14" onClick={() => categorySubmitHandler("accessories")}>Accessories</Nav.Link>
+                            <Nav.Link className="text-decoration-none text-light py-2 px-3 font-14" onClick={() => categorySubmitHandler("fashion")}>Fashion</Nav.Link>
+                            <Nav.Link className="text-decoration-none text-light py-2 px-3 font-14" onClick={() => categorySubmitHandler("electronics")}>Electronics</Nav.Link>
+                            <Nav.Link className="text-decoration-none text-light py-2 px-3 font-14" onClick={() => categorySubmitHandler("cameras")}>Cameras</Nav.Link>
+                            <Nav.Link className="text-decoration-none text-light py-2 px-3 font-14" onClick={() => categorySubmitHandler("smartphones")}>Smartphones</Nav.Link>
+                            <Nav.Link className="text-decoration-none text-light py-2 px-3 font-14" onClick={() => categorySubmitHandler("smartwatches")}>Smartwatches</Nav.Link>
                         </Nav>
                     </Navbar.Collapse>
                 </Container>

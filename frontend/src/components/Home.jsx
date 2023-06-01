@@ -26,7 +26,7 @@ const Home = () => {
     return (
         <>
             {/* Title tag */}
-            <MetaData title={"Ebuy"} />
+            <MetaData title={"Online Shopping site in India: Shop Online for Mobiles, Books, Watches, Shoes and More - eBuy"} />
 
             {/* Carousel Banners */}
             <Carousels />

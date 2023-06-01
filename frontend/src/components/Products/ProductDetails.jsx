@@ -11,6 +11,7 @@ import ReviewCard from './ReviewCard';
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from 'react-router-dom';
 import ReactStars from "react-rating-stars-component";
+import MetaData from '../MetaData';
 
 const ProductDetails = () => {
     const { id } = useParams();
@@ -36,6 +37,10 @@ const ProductDetails = () => {
 
     return (
         !loading && <>
+            {/* Title tag */}
+            <MetaData title={`${product.name} -eBuy`} />
+
+            {/* Product Details */}
             <div className="bg-white">
                 <Container className="py-5 product-detail-page">
                     <Row>

@@ -76,21 +76,21 @@ const HeaderBelt = () => {
             {/* Navbar */}
             <Navbar className="header-belt bg-blue-100" expand="lg">
                 <Container fluid>
-                    <Navbar.Brand><Link className="text-decoration-none text-light" to={'/'}><img src={process.env.PUBLIC_URL + "assets/images/logo.png"} alt="logo"></img></Link></Navbar.Brand>
+                    <Navbar.Brand><Link className="text-decoration-none text-light" to={'/'}><img src={process.env.PUBLIC_URL + "/assets/images/logo.png"} alt="logo"></img></Link></Navbar.Brand>
                     <Navbar.Toggle aria-controls="navbarScroll" />
                     <Navbar.Collapse id="navbarScroll">
                         <Nav
                             className="me-auto my-2 my-lg-0 d-block d-lg-none"
                         >
-                            <Link className="d-block text-decoration-none text-light p-2 font-16" to={'/'}>All</Link>
-                            <Link className="d-block text-decoration-none text-light p-2 font-16" to={'/products'}>Products</Link>
-                            <Nav.Link className="text-decoration-none text-light p-2 font-16" onClick={() => categorySubmitHandler("Laptops")}>Laptops</Nav.Link>
-                            <Nav.Link className="text-decoration-none text-light p-2 font-16" onClick={() => categorySubmitHandler("accessories")}>Accessories</Nav.Link>
-                            <Nav.Link className="text-decoration-none text-light p-2 font-16" onClick={() => categorySubmitHandler("fashion")}>Fashion</Nav.Link>
-                            <Nav.Link className="text-decoration-none text-light p-2 font-16" onClick={() => categorySubmitHandler("electronics")}>Electronics</Nav.Link>
-                            <Nav.Link className="text-decoration-none text-light p-2 font-16" onClick={() => categorySubmitHandler("cameras")}>Cameras</Nav.Link>
-                            <Nav.Link className="text-decoration-none text-light p-2 font-16" onClick={() => categorySubmitHandler("smartphones")}>Smartphones</Nav.Link>
-                            <Nav.Link className="text-decoration-none text-light p-2 font-16" onClick={() => categorySubmitHandler("smartwatches")}>Smartwatches</Nav.Link>
+                            <Link className="d-block text-decoration-none text-light py-2 font-16" to={'/'}>All</Link>
+                            <Link className="d-block text-decoration-none text-light py-2 font-16" to={'/products'}>Products</Link>
+                            <Nav.Link className="text-decoration-none text-light py-2 font-16" onClick={() => categorySubmitHandler("Laptops")}>Laptops</Nav.Link>
+                            <Nav.Link className="text-decoration-none text-light py-2 font-16" onClick={() => categorySubmitHandler("accessories")}>Accessories</Nav.Link>
+                            <Nav.Link className="text-decoration-none text-light py-2 font-16" onClick={() => categorySubmitHandler("fashion")}>Fashion</Nav.Link>
+                            <Nav.Link className="text-decoration-none text-light py-2 font-16" onClick={() => categorySubmitHandler("electronics")}>Electronics</Nav.Link>
+                            <Nav.Link className="text-decoration-none text-light py-2 font-16" onClick={() => categorySubmitHandler("cameras")}>Cameras</Nav.Link>
+                            <Nav.Link className="text-decoration-none text-light py-2 font-16" onClick={() => categorySubmitHandler("smartphones")}>Smartphones</Nav.Link>
+                            <Nav.Link className="text-decoration-none text-light py-2 font-16" onClick={() => categorySubmitHandler("smartwatches")}>Smartwatches</Nav.Link>
                         </Nav>
                         <Form className="d-flex w-100" onSubmit={searchSubmitHandler}>
                             <Form.Control

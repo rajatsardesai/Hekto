@@ -8,6 +8,7 @@ import Container from 'react-bootstrap/esm/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Pagination from 'react-bootstrap/Pagination';
+import MetaData from '../MetaData';
 
 const Products = () => {
     const dispatch = useDispatch();
@@ -52,6 +53,10 @@ const Products = () => {
     return (
         !loading &&
         <>
+            {/* Title tag */}
+            <MetaData title={"All Products: Buy Latest Products Online at Best Prices in India | Buy New Products Online - eBuy"} />
+
+            {/* Products */}
             <Container fluid className="products-page">
                 <Row className="mb-5">
                     <Col md={3} className="mt-5 mt-lg-5">
@@ -65,6 +70,7 @@ const Products = () => {
                             <Row xs={1} md={2} xl={3} xxl={4} className="g-4 mt-1">
                                 {products && products.map(product => <ProductsCard key={product._id} product={product} />)}
                             </Row>
+                            <p className="my-3 text-end">Results per page: {resultPerPage}</p>
                             {
                                 resultPerPage < productsCount &&
                                 <div className="my-4">
