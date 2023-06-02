@@ -1,62 +1,48 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Container from 'react-bootstrap/esm/Container';
 import Card from 'react-bootstrap/Card';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Image from 'react-bootstrap/Image';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Stack from 'react-bootstrap/esm/Stack';
-import Signup from './Signup';
 import MetaData from '../MetaData';
+import { useDispatch, useSelector } from "react-redux";
+import { login } from '../../store/actions/userAction';
 
 const Login = () => {
+
+    const navigate = useNavigate();
+
     const [loginEmail, setLoginEmail] = useState("");
     const [loginPassword, setLoginPassword] = useState("");
 
+    const { loginError, isAuthenticated } = useSelector(
+        (state) => state.user
+    );
+
+    // Handle form validation (errors)
+    const errorRef = useRef(null);
+    const [validated, setValidated] = useState(false);
+
     // Handle login submit
-    const loginSubmit = () => {
-        console.log("LoginForm submitted");
-    };
-
-    // Handle register submit
-    const [user, setUser] = useState({
-        registerName: "",
-        registerEmail: "",
-        registerPassword: "",
-    });
-
-    const { registerName, registerEmail, registerPassword } = user;
-
-    const [registerAvatar, setRegisterAvatar] = useState();
-    const [registeravatarPreview, setRegisterAvatarPreview] = useState();
-
-    const registerSubmit = (e) => {
+    const dispatch = useDispatch();
+    const loginSubmit = (e) => {
         e.preventDefault();
-
-        const registerForm = new FormData();
-
-        registerForm.set("registerName", registerName);
-        registerForm.set("registerEmail", registerEmail);
-        registerForm.set("registerPassword", registerPassword);
-        registerForm.set("registerAvatar", registerAvatar);
-
-        console.log("Signup Form submitted");
+        const form = e.currentTarget;
+        if (form.checkValidity() === false) {
+            e.stopPropagation();
+        }
+        errorRef.current.textContent = loginError;
+        dispatch(login(loginEmail, loginPassword));
+        setValidated(true);
     };
 
-    const registerDataChange = (e) => {
-        if (e.target.name === "registerAvatar") {
-            const reader = new FileReader();
-            reader.onload = () => {
-                if (reader.readyState === 2) {
-                    setRegisterAvatarPreview(reader.result);
-                    setRegisterAvatar(reader.result);
-                }
-            }
-            reader.readAsDataURL(e.target.files[0]);
-        } else {
-            setUser({ ...user, [e.target.name]: e.target.value });
-        }
-    }
+    // useEffect(()=>{
+    //     if(isAuthenticated){
+    //         navigate("/account");
+    //     }
+    // },[isAuthenticated]);
 
     return (
         <>
@@ -70,27 +56,26 @@ const Login = () => {
                         <Image src={process.env.PUBLIC_URL + "/assets/images/logo.png"} alt="logo" className="my-3" />
                     </div>
                     <div className="login-signup-forms m-auto">
-                        <Card className="p-3">
-                            <Card.Body>
-                                <Card.Title className="fs-3 fw-normal mb-3">Sign in</Card.Title>
-                                <Card.Text>
-                                    <Form onSubmit={loginSubmit}>
-                                        <Form.Group className="mb-3" controlId="loginEmail">
-                                            <Form.Label className="fs-6 fw-bold mb-1">Email address</Form.Label>
-                                            <Form.Control type="email" required value={loginEmail} onChange={(e) => setLoginEmail(e.target.value)} />
-                                        </Form.Group>
-                                        <Form.Group className="mb-3" controlId="loginPassword">
-                                            <Form.Label className="fs-6 fw-bold mb-1">Password</Form.Label>
-                                            <Form.Label className="float-end"><Link to={"/password/forgot"} className="text-decoration-none">Forgot Password</Link></Form.Label>
-                                            <Form.Control type="password" required value={loginPassword} onChange={(e) => setLoginPassword(e.target.value)} />
-                                        </Form.Group>
-                                        <Button variant="warning" type="submit" className="w-100 my-2">
-                                            Sign in
-                                        </Button>
-                                        <p>By continuing, you agree to eBuy's Conditions of Use and Privacy Notice.</p>
-                                    </Form>
-                                </Card.Text>
-                            </Card.Body>
+                        <Card className="p-4">
+                            <Card.Title className="fs-3 fw-normal mb-3">Sign in</Card.Title>
+                            <Form noValidate validated={validated} onSubmit={loginSubmit}>
+                                <Form.Group className="mb-3" controlId="loginEmail">
+                                    <Form.Label className="fs-6 fw-bold mb-1">Email address</Form.Label>
+                                    <Form.Control type="email" required value={loginEmail} onChange={(e) => setLoginEmail(e.target.value)} />
+                                </Form.Group>
+                                <Form.Group className="mb-3" controlId="loginPassword">
+                                    <Form.Label className="fs-6 fw-bold mb-1">Password</Form.Label>
+                                    <Form.Label className="float-end"><Link to={"/password/forgot"} className="text-decoration-none">Forgot Password</Link></Form.Label>
+                                    <Form.Control type="password" required value={loginPassword} onChange={(e) => setLoginPassword(e.target.value)} />
+                                    <Form.Control.Feedback type="invalid" ref={errorRef}>
+
+                                    </Form.Control.Feedback>
+                                </Form.Group>
+                                <Button variant="warning" type="submit" className="w-100 my-2">
+                                    Sign in
+                                </Button>
+                                <p>By continuing, you agree to eBuy's Conditions of Use and Privacy Notice.</p>
+                            </Form>
                         </Card>
                         <Stack direction="horizontal" className="justify-content-center mt-4">
                             <hr className="new-signup" />

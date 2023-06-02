@@ -121,7 +121,7 @@
     height: 100vh;
 }
 
-.login-signup-page .login-signup-forms{
+.login-signup-page .login-signup-forms {
     width: 100%;
 
     @media screen and (min-width:768px) {
@@ -135,4 +135,8 @@
     @media screen and (min-width:768px) {
         width: 110px;
     }
+}
+
+.register-image>input::file-selector-button {
+    width: 206px;
 }
