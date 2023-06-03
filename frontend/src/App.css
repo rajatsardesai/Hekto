@@ -35,6 +35,10 @@
     font-size: 14px !important;
 }
 
+.font-12 {
+    font-size: 12px;
+}
+
 /* Actions and other styles */
 .cursor-pointer {
     cursor: pointer;
@@ -57,6 +61,20 @@
 }
 
 /* -------------- LAYOUT CSS -------------- */
+
+/* Header */
+.header-modal .modal-dialog {
+    border-radius: 0;
+    @media screen and (min-width:992px) {
+        margin-right: 0;
+        top: 31px;
+        right: -205px;
+    }
+}
+.header-modal .modal-content {
+    width: 255px;
+    border-radius: 0;
+}
 
 /* Pagination */
 .pagination>.page-item.active>.page-link {

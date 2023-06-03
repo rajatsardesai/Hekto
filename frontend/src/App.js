@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
@@ -7,8 +8,14 @@ import ProductDetails from './components/Products/ProductDetails';
 import Login from './components/User/Login';
 import Signup from './components/User/Signup';
 import PageLayout from './components/PageLayout';
+import { loadUser } from './store/actions/userAction';
+import store from "./store/store";
 
 function App() {
+  useEffect(() => {
+    store.dispatch(loadUser())
+  }, []);
+
   return (
     <>
       <Router>

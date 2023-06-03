@@ -5,12 +5,16 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 const fileUpload = require("express-fileupload");
 
-const errorMiddleware = require("./middleware/error")
+const errorMiddleware = require("./middleware/error");
 
+const corsOptions = {
+    origin: true, //included origin as true
+    credentials: true, //included credentials as true
+};
+
+app.use(cookieParser());
 app.use(express.json());
-app.use(cookieParser());
-app.use(cookieParser());
-app.use(cors());
+app.use(cors(corsOptions));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(fileUpload());
 
