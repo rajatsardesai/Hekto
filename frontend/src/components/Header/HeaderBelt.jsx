@@ -70,7 +70,8 @@ const HeaderBelt = () => {
 
             {/* Error alert */}
             {((allProductsError || productDetailsError) && showAlert) && <Alert variant="danger" className="fixed-top w-100 z-3 rounded-0" dismissible>
-                {allProductsError ? allProductsError : productDetailsError}
+                {allProductsError && allProductsError}
+                {productDetailsError && productDetailsError}
             </Alert>}
 
             {/* Navbar */}
