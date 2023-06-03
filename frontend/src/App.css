@@ -101,7 +101,7 @@
     height: 594px;
 }
 
-.product-details-carousel .carousel-item img{
+.product-details-carousel .carousel-item img {
     width: 546px;
     height: 546px;
     object-fit: contain;
@@ -114,4 +114,29 @@
 
 .product-details-carousel>.carousel-indicators>button {
     background-color: #131921;
+}
+
+/* Login Signup */
+.login-signup-page {
+    height: 100vh;
+}
+
+.login-signup-page .login-signup-forms {
+    width: 100%;
+
+    @media screen and (min-width:768px) {
+        width: 22rem;
+    }
+}
+
+.new-signup {
+    width: 100%;
+
+    @media screen and (min-width:768px) {
+        width: 110px;
+    }
+}
+
+.register-image>input::file-selector-button {
+    width: 206px;
 }
