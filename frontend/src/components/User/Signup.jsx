@@ -12,7 +12,6 @@ import { register } from '../../store/actions/userAction';
 
 const Signup = () => {
     // Handle register submit
-
     const dispatch = useDispatch();
 
     const [user, setUser] = useState({
@@ -23,18 +22,19 @@ const Signup = () => {
 
     const { registerName, registerEmail, registerPassword } = user;
 
-    const [registerAvatar, setRegisterAvatar] = useState();
+    
+    const [registerAvatar, setRegisterAvatar] = useState(process.env.PUBLIC_URL + "/assets/images/profile.png");
     const [registerAvatarPreview, setRegisterAvatarPreview] = useState(process.env.PUBLIC_URL + "/assets/images/profile.png");
-
+    
     const registerSubmit = (e) => {
         e.preventDefault();
-
+        
         const registerForm = new FormData();
-
-        registerForm.set("registerName", registerName);
-        registerForm.set("registerEmail", registerEmail);
-        registerForm.set("registerPassword", registerPassword);
-        registerForm.set("registerAvatar", registerAvatar);
+        
+        registerForm.set("name", registerName);
+        registerForm.set("email", registerEmail);
+        registerForm.set("password", registerPassword);
+        registerForm.set("avatar", registerAvatar);
 
         dispatch(register(registerForm));
     };
@@ -86,7 +86,7 @@ const Signup = () => {
                                     <Form.Group className="mb-3" controlId="registerAvatar">
                                         <Form.Label className="fs-6 fw-bold mb-1">Upload your Avatar</Form.Label>
                                         <Stack direction="horizontal" className="register-image">
-                                            <img src={registerAvatarPreview} alt="Avatar Preview" className="w-25 me-2" />
+                                            <img src={registerAvatarPreview} alt="Avatar Preview" className="w-25 me-2 rounded-circle" />
                                             <Form.Control type="file" name="registerAvatar" required accept="image/*" onChange={registerDataChange} />
                                         </Stack>
                                     </Form.Group>
