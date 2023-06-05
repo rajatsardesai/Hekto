@@ -17,7 +17,7 @@ const Login = () => {
     const [loginEmail, setLoginEmail] = useState("");
     const [loginPassword, setLoginPassword] = useState("");
 
-    const { error, isAuthenticated } = useSelector(
+    const { userError, isAuthenticated } = useSelector(
         (state) => state.user
     );
 
@@ -33,18 +33,18 @@ const Login = () => {
         if (form.checkValidity() === false) {
             e.stopPropagation();
         }
-        errorRef.current.textContent = error;
+        errorRef.current.textContent = userError;
         dispatch(login(loginEmail, loginPassword));
         setValidated(true);
     };
 
-    useEffect(()=>{
-        // if(isAuthenticated){
-        //     navigate("/account");
-        // }else{
-        //     navigate("/login");
-        // }
-    },[isAuthenticated]);
+    useEffect(() => {
+        if (isAuthenticated) {
+            navigate("/");
+        } else {
+            navigate("/login");
+        }
+    }, [isAuthenticated, navigate]);
 
     return (
         <>

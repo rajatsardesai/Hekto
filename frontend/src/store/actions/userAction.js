@@ -1,5 +1,5 @@
 import axios from "axios";
-import { LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAIL, REGISTER_REQUEST, REGISTER_SUCCESS, REGISTER_FAIL, LOAD_USER_REQUEST, LOAD_USER_SUCCESS, LOAD_USER_FAIL } from "../constants/userConstants";
+import { LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAIL, REGISTER_REQUEST, REGISTER_SUCCESS, REGISTER_FAIL, LOAD_USER_REQUEST, LOAD_USER_SUCCESS, LOAD_USER_FAIL, LOGOUT_SUCCESS, LOGOUT_FAIL } from "../constants/userConstants";
 
 axios.defaults.withCredentials = true;
 
@@ -12,12 +12,12 @@ export const login = (email, password) => async (dispatch) => {
         const config = { headers: { "Content-Type": "application/json" } };
 
         const { data } = await axios.post(
-            `http://localhost:3500/api/v1/login`,
+            `/api/v1/login`,
             { email, password },
             config,
         );
 
-        dispatch({ type: LOGIN_SUCCESS, payload: data.user });
+        dispatch({ type: LOGIN_SUCCESS, payload: data.user, login: true });
     } catch (error) {
         dispatch({ type: LOGIN_FAIL, payload: error.response.data.message });
     }
@@ -31,12 +31,12 @@ export const register = (userData) => async (dispatch) => {
         const config = { headers: { "Content-Type": "multipart/form-data" } };
 
         const { data } = await axios.post(
-            `http://localhost:3500/api/v1/register`,
+            `/api/v1/register`,
             userData,
             config
         );
 
-        dispatch({ type: REGISTER_SUCCESS, payload: data.user });
+        dispatch({ type: REGISTER_SUCCESS, payload: data.user, register: true });
     } catch (error) {
         dispatch({ type: REGISTER_FAIL, payload: error.response.data.message });
     }
@@ -47,12 +47,21 @@ export const loadUser = () => async (dispatch) => {
     try {
         dispatch({ type: LOAD_USER_REQUEST });
 
-        const { data } = await axios.get(
-            `http://localhost:3500/api/v1/me`,
-        );
+        const { data } = await axios.get(`/api/v1/me`);
 
         dispatch({ type: LOAD_USER_SUCCESS, payload: data.user });
     } catch (error) {
         dispatch({ type: LOAD_USER_FAIL, payload: error.response.data.message });
+    }
+};
+
+// Logout user
+export const logoutUser = () => async (dispatch) => {
+    try {
+        await axios.get(`/api/v1/logout`);
+
+        dispatch({ type: LOGOUT_SUCCESS, login: false });
+    } catch (error) {
+        dispatch({ type: LOGOUT_FAIL, payload: error.response.data.message });
     }
 };
