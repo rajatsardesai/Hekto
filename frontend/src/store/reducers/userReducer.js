@@ -1,4 +1,4 @@
-import { LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAIL, REGISTER_REQUEST, REGISTER_SUCCESS, REGISTER_FAIL, LOAD_USER_REQUEST, LOAD_USER_SUCCESS, LOAD_USER_FAIL, LOGOUT_SUCCESS, LOGOUT_FAIL } from "../constants/userConstants";
+import { LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAIL, REGISTER_REQUEST, REGISTER_SUCCESS, REGISTER_FAIL, LOAD_USER_REQUEST, LOAD_USER_SUCCESS, LOAD_USER_FAIL, LOGOUT_SUCCESS, LOGOUT_FAIL, UPDATE_PROFILE_REQUEST, UPDATE_PROFILE_SUCCESS, UPDATE_PROFILE_FAIL } from "../constants/userConstants";
 
 export const userReducer = (state = { user: {} }, action) => {
     switch (action.type) {
@@ -24,8 +24,7 @@ export const userReducer = (state = { user: {} }, action) => {
             return {
                 loading: false,
                 isAuthenticated: false,
-                user: null,
-                login: action.login
+                user: null
             }
         case LOGIN_FAIL:
         case REGISTER_FAIL:
@@ -50,6 +49,31 @@ export const userReducer = (state = { user: {} }, action) => {
                 ...state,
                 loading: false,
                 userError: action.payload
+            }
+        default:
+            return state;
+    }
+};
+
+export const profileReducer = (state = {}, action) => {
+    switch (action.type) {
+        case UPDATE_PROFILE_REQUEST:
+            return {
+                ...state,
+                loading: true
+            };
+        case UPDATE_PROFILE_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                isUpdated: action.payload,
+            }
+        case UPDATE_PROFILE_FAIL:
+            return {
+                ...state,
+                loading: false,
+                user: null,
+                updateError: action.payload
             }
         default:
             return state;

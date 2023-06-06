@@ -65,12 +65,14 @@
 /* Header */
 .header-modal .modal-dialog {
     border-radius: 0;
+
     @media screen and (min-width:992px) {
         margin-right: 0;
         top: 31px;
         right: -205px;
     }
 }
+
 .header-modal .modal-content {
     width: 255px;
     border-radius: 0;
@@ -157,4 +159,10 @@
 
 .register-image>input::file-selector-button {
     width: 206px;
+}
+
+/* Your account */
+.profile-container {
+    max-width: 598px !important;
+    height: 60vh;
 }

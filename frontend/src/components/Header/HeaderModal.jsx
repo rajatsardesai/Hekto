@@ -23,6 +23,9 @@ const HeaderModal = ({ user, show, handleClose }) => {
             navigate(`/${link}`);
         } else if (user && link === "logout") {
             dispatch(logoutUser());
+            setTimeout(() => {
+                navigate("/login");
+            })
         } else {
             navigate("/login");
         }

@@ -1,5 +1,5 @@
 import axios from "axios";
-import { LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAIL, REGISTER_REQUEST, REGISTER_SUCCESS, REGISTER_FAIL, LOAD_USER_REQUEST, LOAD_USER_SUCCESS, LOAD_USER_FAIL, LOGOUT_SUCCESS, LOGOUT_FAIL } from "../constants/userConstants";
+import { LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAIL, REGISTER_REQUEST, REGISTER_SUCCESS, REGISTER_FAIL, LOAD_USER_REQUEST, LOAD_USER_SUCCESS, LOAD_USER_FAIL, LOGOUT_SUCCESS, LOGOUT_FAIL, UPDATE_PROFILE_REQUEST, UPDATE_PROFILE_SUCCESS, UPDATE_PROFILE_FAIL } from "../constants/userConstants";
 
 axios.defaults.withCredentials = true;
 
@@ -60,8 +60,27 @@ export const logoutUser = () => async (dispatch) => {
     try {
         await axios.get(`/api/v1/logout`);
 
-        dispatch({ type: LOGOUT_SUCCESS, login: false });
+        dispatch({ type: LOGOUT_SUCCESS });
     } catch (error) {
         dispatch({ type: LOGOUT_FAIL, payload: error.response.data.message });
+    }
+};
+
+// Update profile
+export const updateProfile = (userData) => async (dispatch) => {
+    try {
+        dispatch({ type: UPDATE_PROFILE_REQUEST });
+
+        const config = { headers: { "Content-Type": "multipart/form-data" } };
+
+        const { data } = await axios.put(
+            `/me/update`,
+            userData,
+            config
+        );
+
+        dispatch({ type: UPDATE_PROFILE_SUCCESS, payload: data.user, register: true });
+    } catch (error) {
+        dispatch({ type: UPDATE_PROFILE_FAIL, payload: error.response.data.message });
     }
 };

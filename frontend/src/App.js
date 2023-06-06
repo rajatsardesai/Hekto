@@ -8,10 +8,13 @@ import ProductDetails from './components/Products/ProductDetails';
 import Login from './components/User/Login';
 import Signup from './components/User/Signup';
 import PageLayout from './components/PageLayout';
+import Profile from './components/User/Profile';
+import ProtectedRoute from './components/Route/ProtectedRoute';
 import { loadUser } from './store/actions/userAction';
 import store from "./store/store";
 
 function App() {
+
   useEffect(() => {
     store.dispatch(loadUser())
   }, []);
@@ -21,13 +24,19 @@ function App() {
       <Router>
         <Routes>
           <Route element={<PageLayout />}>
-            <Route exact path="/" Component={Home}></Route>
-            <Route exact path="/products" Component={Products}></Route>
-            <Route exact path="/product/:id" Component={ProductDetails}></Route>
-            <Route path="/products/:keyword" Component={Products}></Route>
+            <Route exact path="/" Component={Home} />
+            <Route exact path="/products" Component={Products} />
+            <Route exact path="/product/:id" Component={ProductDetails} />
+            <Route path="/products/:keyword" Component={Products} />
+            <Route exact path='/account' Component={ProtectedRoute}>
+              <Route exact path='/account' Component={Profile} />
+            </Route>
+            <Route exact path='/me/update' Component={ProtectedRoute}>
+              <Route exact path='/me/update' Component={Profile} />
+            </Route>
           </Route>
-          <Route path="/login" Component={Login}></Route>
-          <Route path="/register" Component={Signup}></Route>
+          <Route path="/login" Component={Login} />
+          <Route path="/register" Component={Signup} />
         </Routes>
       </Router>
     </>
