@@ -56,8 +56,16 @@
     -webkit-box-orient: vertical;
 }
 
+.line-clamp-1 {
+    -webkit-line-clamp: 1;
+}
+
 .object-fit {
     object-fit: contain;
+}
+
+.list-style-position {
+    list-style-position: inside;
 }
 
 /* -------------- LAYOUT CSS -------------- */

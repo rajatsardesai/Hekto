@@ -119,7 +119,7 @@ const HeaderBelt = () => {
                             </Button>
                         </Form>
                         <Stack className="cursor-pointer text-white mx-3 my-1" onMouseEnter={handleShow}>
-                            <span className="font-12">Hello, {user ? user.name : "guest"}</span>
+                            <span className="font-12 text-overflow line-clamp-1">Hello, {user ? user.name : "guest"}</span>
                             <span className="font-14 fw-bold text-nowrap">Account & Lists <MdKeyboardArrowDown /></span>
                         </Stack>
                         <HeaderModal user={user} show={show} handleClose={handleClose} />

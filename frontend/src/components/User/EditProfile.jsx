@@ -9,7 +9,7 @@ const EditProfile = (props) => {
         <>
             {!isEditing ?
                 <>
-                    <div className="ms-2 me-auto">
+                    <div className="ms-md-2 me-md-auto mx-2">
                         <div className="fw-bold">{label}:</div>
                         {updateValue}
                     </div>
@@ -17,7 +17,7 @@ const EditProfile = (props) => {
                 </>
                 :
                 <>
-                    <div className="ms-2 me-auto">
+                    <div className="ms-md-2 me-md-auto mx-2">
                         <Form.Control
                             type="text"
                             value={updateValue}
