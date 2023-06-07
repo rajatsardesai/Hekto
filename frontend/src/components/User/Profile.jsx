@@ -5,6 +5,7 @@ import Button from 'react-bootstrap/Button';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { updateProfile } from '../../store/actions/userAction';
+import EditProfile from './EditProfile';
 
 const Profile = () => {
 
@@ -17,27 +18,24 @@ const Profile = () => {
 
     const [updateName, setUpdateName] = useState("");
     const [updateEmail, setUpdateEmail] = useState("");
-    const [updateAvatar, setUpdateAvatar] = useState();
-    const [updateAvatarPreview, setUpdateAvatarPreview] = useState();
+    const [isEditingName, setIsEditingName] = useState(false);
+    const [isEditingEmail, setIsEditingEmail] = useState(false);
 
-    const updateNameSubmit = () => {
+    //handle click to edit or save the form
+    const handleEditClick = (value, updateValue) => {
+        updateValue === updateName ?
+            setIsEditingName(value) :
+            setIsEditingEmail(value)
+    }
+
+    // Handle update submit form
+    const updatedSubmit = (e) => {
+        e.preventDefault();
         const registerForm = new FormData();
 
-        registerForm.set("name", updateName);
+        registerForm.set(`${e.target.name}`, e.target.value);
 
         dispatch(updateProfile(registerForm));
-    };
-
-    // Handle register data change
-    const updateDataChange = (e) => {
-        const reader = new FileReader();
-        reader.onload = () => {
-            if (reader.readyState === 2) {
-                setUpdateAvatarPreview(reader.result);
-                setUpdateAvatar(reader.result);
-            }
-        }
-        reader.readAsDataURL(e.target.files[0]);
     };
 
     useEffect(() => {
@@ -47,7 +45,6 @@ const Profile = () => {
         if (user) {
             setUpdateName(user.name);
             setUpdateEmail(user.email);
-            setUpdateAvatar(user.avatar.url);
         }
     }, [isAuthenticated, navigate, user]);
 
@@ -60,19 +57,13 @@ const Profile = () => {
                         as="li"
                         className="d-flex justify-content-between align-items-start"
                     >
-                        <div className="ms-2 me-auto">
-                            <div className="fw-bold">Name:</div>
-                            {user.name}
-                        </div>
+                        <EditProfile label="Name" name="name" isEditing={isEditingName} updateValue={updateName} setUpdateValue={setUpdateName} handleEditClick={handleEditClick} updatedSubmit={updatedSubmit} />
                     </ListGroup.Item>
                     <ListGroup.Item
                         as="li"
                         className="d-flex justify-content-between align-items-start"
                     >
-                        <div className="ms-2 me-auto">
-                            <div className="fw-bold">Email:</div>
-                            {user.email}
-                        </div>
+                        <EditProfile label="Email" name="email" isEditing={isEditingEmail} updateValue={updateEmail} setUpdateValue={setUpdateEmail} handleEditClick={handleEditClick} updatedSubmit={updatedSubmit} />
                     </ListGroup.Item>
                     <ListGroup.Item
                         as="li"
@@ -94,7 +85,7 @@ const Profile = () => {
                         <Button variant="secondary"><Link to={"/password/update"} className="text-decoration-none text-white">Change Password</Link></Button>
                     </ListGroup.Item>
                 </ListGroup>
-            </Container>
+            </Container >
         </>
     )
 }
