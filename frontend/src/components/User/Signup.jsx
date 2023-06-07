@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { useLocation } from 'react-router-dom';
 import Container from 'react-bootstrap/esm/Container';
 import Card from 'react-bootstrap/Card';
 import Form from 'react-bootstrap/Form';
@@ -22,7 +21,6 @@ const Signup = () => {
 
     const { registerName, registerEmail, registerPassword } = user;
 
-    
     const [registerAvatar, setRegisterAvatar] = useState(process.env.PUBLIC_URL + "/assets/images/profile.png");
     const [registerAvatarPreview, setRegisterAvatarPreview] = useState(process.env.PUBLIC_URL + "/assets/images/profile.png");
     
