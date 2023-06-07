@@ -1,5 +1,5 @@
 import { combineReducers } from "@reduxjs/toolkit";
 import { productReducer, productDetailsReducer } from "./reducers/productReducer";
-import { userReducer } from "./reducers/userReducer";
+import { profileReducer, userReducer } from "./reducers/userReducer";
 
-export default combineReducers({ products: productReducer, productDetails: productDetailsReducer, user: userReducer });
+export default combineReducers({ products: productReducer, productDetails: productDetailsReducer, user: userReducer, profile: profileReducer });

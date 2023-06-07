@@ -130,8 +130,11 @@ exports.resetPassword = catchAsyncError(async (req, res, next) => {
 
 // Get user details
 exports.getUserDetails = catchAsyncError(async (req, res, next) => {
-    const user = await User.findById(req.user.id).select("-password");
-    sendToken(user, 200, res);
+    const user = await User.findById(req.user.id);
+    res.status(200).json({
+        success: true,
+        user
+    });
 });
 
 // Update user password
