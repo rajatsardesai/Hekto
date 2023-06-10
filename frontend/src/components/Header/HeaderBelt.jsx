@@ -7,30 +7,21 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import Stack from 'react-bootstrap/esm/Stack';
 import { useDispatch, useSelector } from 'react-redux';
-import LoadingBar from 'react-top-loading-bar';
 import { Link, useNavigate } from 'react-router-dom';
 import { IconContext } from "react-icons";
 import { MdSearch, MdKeyboardArrowDown } from "react-icons/md";
 import { getProduct } from '../../store/actions/productAction';
 import HeaderModal from './HeaderModal';
 import HeaderAlert from './HeaderAlert';
+import HeaderLoading from './HeaderLoading';
 
 const HeaderBelt = () => {
     const dispatch = useDispatch();
 
-    const [progress, setProgress] = useState(0);
     const [showAlert, setShowAlert] = useState(true);
     const [keyword, setKeyword] = useState("");
 
     const navigate = useNavigate();
-
-    // To show alert when error occurs
-    const { pageLoading, allProductsError } = useSelector(
-        (state) => state.products
-    );
-    const { productDetailsError } = useSelector(
-        (state) => state.productDetails
-    );
 
     // To show logout button
     const [show, setShow] = useState(false);
@@ -40,6 +31,14 @@ const HeaderBelt = () => {
 
     const { user, login, register } = useSelector(
         (state) => state.user
+    );
+
+    // To show alert when error occurs
+    const { allProductsError } = useSelector(
+        (state) => state.products
+    );
+    const { productDetailsError } = useSelector(
+        (state) => state.productDetails
     );
 
     // Handling search results
@@ -65,20 +64,15 @@ const HeaderBelt = () => {
     };
 
     useEffect(() => {
-        setProgress(pageLoading);
-
         setTimeout(() => {
             setShowAlert(false);
         }, 5000);
-    }, [pageLoading]);
+    }, []);
 
     return (
         <>
             {/* React top loading bar */}
-            <LoadingBar
-                color='#f11946'
-                progress={progress}
-                onLoaderFinished={() => setProgress(0)} />
+            <HeaderLoading />
 
             {/* Alert */}
             <HeaderAlert allProductsError={allProductsError} productDetailsError={productDetailsError} showAlert={showAlert} login={login} register={register} />

@@ -1,8 +1,17 @@
-import { LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAIL, REGISTER_REQUEST, REGISTER_SUCCESS, REGISTER_FAIL, LOAD_USER_REQUEST, LOAD_USER_SUCCESS, LOAD_USER_FAIL, LOGOUT_SUCCESS, LOGOUT_FAIL, UPDATE_PROFILE_REQUEST, UPDATE_PROFILE_SUCCESS, UPDATE_PROFILE_FAIL, UPDATE_PASSWORD_REQUEST, UPDATE_PASSWORD_SUCCESS, UPDATE_PASSWORD_FAIL, FORGOT_PASSWORD_REQUEST, FORGOT_PASSWORD_SUCCESS, FORGOT_PASSWORD_FAIL, RESET_PASSWORD_REQUEST, RESET_PASSWORD_SUCCESS, RESET_PASSWORD_FAIL } from "../constants/userConstants";
+import { SET_LOADER_PROGRESS, LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAIL, REGISTER_REQUEST, REGISTER_SUCCESS, REGISTER_FAIL, LOAD_USER_REQUEST, LOAD_USER_SUCCESS, LOAD_USER_FAIL, LOGOUT_SUCCESS, LOGOUT_FAIL, UPDATE_PROFILE_REQUEST, UPDATE_PROFILE_SUCCESS, UPDATE_PROFILE_FAIL, UPDATE_PASSWORD_REQUEST, UPDATE_PASSWORD_SUCCESS, UPDATE_PASSWORD_FAIL, FORGOT_PASSWORD_REQUEST, FORGOT_PASSWORD_SUCCESS, FORGOT_PASSWORD_FAIL, RESET_PASSWORD_REQUEST, RESET_PASSWORD_SUCCESS, RESET_PASSWORD_FAIL } from "../constants/userConstants";
 
 // Login, register and load user reducer
 export const userReducer = (state = { user: {} }, action) => {
     switch (action.type) {
+        case SET_LOADER_PROGRESS:
+            return {
+                loading: true,
+                ...state,
+                loginLoading: action.loginLoading,
+                registerLoading: action.registerLoading,
+                loadUserLoading: action.loadUserLoading,
+                logoutLoading: action.logoutLoading
+            };
         case LOGIN_REQUEST:
         case REGISTER_REQUEST:
         case LOAD_USER_REQUEST:
@@ -59,6 +68,13 @@ export const userReducer = (state = { user: {} }, action) => {
 // Update profile and request reducer
 export const profileReducer = (state = {}, action) => {
     switch (action.type) {
+        case SET_LOADER_PROGRESS:
+            return {
+                loading: true,
+                ...state,
+                updateProfileLoading: action.updateProfileLoading,
+                updatePasswordLoading: action.updatePasswordLoading
+            };
         case UPDATE_PROFILE_REQUEST:
         case UPDATE_PASSWORD_REQUEST:
             return {
@@ -88,6 +104,13 @@ export const profileReducer = (state = {}, action) => {
 // Forgot and reset password reducer
 export const forgotPasswordReducer = (state = {}, action) => {
     switch (action.type) {
+        case SET_LOADER_PROGRESS:
+            return {
+                loading: true,
+                ...state,
+                forgotPasswordLoading: action.forgotPasswordLoading,
+                resetPasswordLoading: action.resetPasswordLoading
+            };
         case FORGOT_PASSWORD_REQUEST:
         case RESET_PASSWORD_REQUEST:
             return {
