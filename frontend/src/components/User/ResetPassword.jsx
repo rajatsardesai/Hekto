@@ -24,11 +24,11 @@ const ResetPassword = () => {
         const resetPasswordForm = new FormData();
 
         resetPasswordForm.set("password", password);
-        resetPasswordForm.set("confirmpassword", confirmPassword);
+        resetPasswordForm.set("confirmPassword", confirmPassword);
 
         dispatch(resetPassword(token, resetPasswordForm));
 
-        // navigate("/login");
+        navigate("/login");
     };
 
     return (
