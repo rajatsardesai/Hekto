@@ -75,14 +75,14 @@ exports.forgotPassword = catchAsyncError(async (req, res, next) => {
     const resetToken = user.getResetPasswordToken();
     await user.save({ validateBeforeSave: false });
 
-    const resetURL = `${req.protocol}://${req.get("host")}/api/v1/auth/reset-password/${resetToken}`;
+    const resetURL = `${process.env.FRONTEND_URL}/password/reset/${resetToken}`;
 
-    const message = `Your password request token is :- \n\n ${resetURL} \n\nIf you have not requested this email, Please ignore it`;
+    const message = `Your password request token is :- \n\n ${resetURL} \n\nIf you have not requested this email, Please ignore it.`;
 
     try {
         await sendEmail({
             email: user.email,
-            subject: "Mc-shopee Password Recovery",
+            subject: "eBuy Password Recovery",
             message
         });
 
@@ -125,7 +125,10 @@ exports.resetPassword = catchAsyncError(async (req, res, next) => {
     user.resetPasswordToken = undefined;
     user.resetPasswordExpire = undefined;
     await user.save();
-    sendToken(user, 200, "Password Changed Successfully");
+    res.status(200).json({
+        success: true,
+        message: "Password Changed Successfully"
+    });
 });
 
 // Get user details

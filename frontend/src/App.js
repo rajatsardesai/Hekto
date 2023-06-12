@@ -10,6 +10,8 @@ import Signup from './components/User/Signup';
 import PageLayout from './components/PageLayout';
 import Profile from './components/User/Profile';
 import ProtectedRoute from './components/Route/ProtectedRoute';
+import ForgotPassword from './components/User/ForgotPassword';
+import ResetPassword from './components/User/ResetPassword';
 import { loadUser } from './store/actions/userAction';
 import store from "./store/store";
 
@@ -34,9 +36,14 @@ function App() {
             <Route exact path='/me/update' Component={ProtectedRoute}>
               <Route exact path='/me/update' Component={Profile} />
             </Route>
+            <Route exact path='/password/update' Component={ProtectedRoute}>
+              <Route exact path='/password/update' Component={Profile} />
+            </Route>
           </Route>
-          <Route path="/login" Component={Login} />
-          <Route path="/register" Component={Signup} />
+          <Route exact path="/login" Component={Login} />
+          <Route exact path='/password/forgot' Component={ForgotPassword} />
+          <Route exact path='/password/reset/:token' Component={ResetPassword} />
+          <Route exact path="/register" Component={Signup} />
         </Routes>
       </Router>
     </>
