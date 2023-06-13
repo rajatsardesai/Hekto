@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Carousel from 'react-bootstrap/Carousel';
 import Col from 'react-bootstrap/esm/Col';
 import Container from 'react-bootstrap/esm/Container';
@@ -7,6 +7,7 @@ import Stack from 'react-bootstrap/Stack';
 import Dropdown from 'react-bootstrap/Dropdown';
 import Button from 'react-bootstrap/Button';
 import { getProductDetails } from '../../store/actions/productAction';
+import { addToCart } from '../../store/actions/cartAction';
 import ReviewCard from './ReviewCard';
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from 'react-router-dom';
@@ -18,9 +19,22 @@ const ProductDetails = () => {
 
     const dispatch = useDispatch();
 
+    const [selectedStockValue, setSelectedStockValue] = useState(1);
+
     const { product, loading } = useSelector(
         (state) => state.productDetails
     );
+
+    // For product stock
+    const productStock = Array.from({ length: product.stock }, (_, index) => index + 1);
+
+    const handleStockSelect = (eventKey) => {
+        setSelectedStockValue(eventKey);
+    }
+
+    const addProductToCart = () => {
+        dispatch(addToCart(id, selectedStockValue));
+    }
 
     const options = {
         edit: false,
@@ -77,17 +91,23 @@ const ProductDetails = () => {
                                             <label htmlFor="quantity-dropdown">
                                                 Quantity:
                                             </label>
-                                            <Dropdown>
+                                            <Dropdown onSelect={handleStockSelect}>
                                                 <Dropdown.Toggle className="border" variant="transparent" id="quantity-dropdown">
-                                                    1
+                                                    {selectedStockValue && selectedStockValue}
                                                 </Dropdown.Toggle>
 
-                                                <Dropdown.Menu>
-                                                    <Dropdown.Item>1</Dropdown.Item>
+                                                <Dropdown.Menu className="product-details-dropdown">
+                                                    {
+                                                        productStock.map((stock, index) => {
+                                                            return (
+                                                                <Dropdown.Item key={index} eventKey={stock}>{stock}</Dropdown.Item>
+                                                            )
+                                                        })
+                                                    }
                                                 </Dropdown.Menu>
                                             </Dropdown>
                                         </Stack>
-                                        <Button variant="warning" className="my-2">Add to Cart</Button>
+                                        <Button variant="warning" className="my-2" onClick={addProductToCart}>Add to Cart</Button>
                                     </>
                             }
                             <hr />

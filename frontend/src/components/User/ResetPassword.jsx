@@ -13,8 +13,6 @@ const ResetPassword = () => {
     const dispatch = useDispatch();
     const { token } = useParams();
 
-    const { success } = useSelector((state) => state.forgotPassword);
-
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
 
