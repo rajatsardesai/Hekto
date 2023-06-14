@@ -1,31 +1,102 @@
 /* Utitlies */
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap');
+
 :root {
-    --page-bg: #e3e6e6;
-    --primary-bg: #131921;
-    --secondary-bg: #232f3e;
-    --button-bg: #ffc107;
+    --page-color: #e3e6e6;
+    --primary-color: #151875;
+    --secondary-color: #fb2e86;
+    --red-color: #fb2448;
+    --button-color: #ffc107;
+    --blue-100-color: #2f1ac4;
+    --blue-200-color: #3f509e;
+    --blue-300-color: #151875;
+    --blue-400-color: #15245e;
+    --blue-500-color: #1d3178;
+    --purple-100-color: #f3f9ff;
+    --purple-200-color: #e0d3f5;
+    --purple-300-color: #7e33e0;
+    --purple-400-color: #9f63b5;
+    --gray-100-color: #8a91ab;
+    --gray-200-color: #f4f4fc;
+    --green-100-color: #19d16f;
     --white: #ffffff;
+    --black: #000000;
 }
 
 #root {
-    background-color: var(--page-bg);
+    font-family: 'Josefin Sans', sans-serif;
 }
 
-/* Colors */
+.container {
+    max-width: 1166px !important;
+}
+
+/* Background Colors */
+
+.bg-secondary-color {
+    background-color: var(--secondary-color) !important;
+}
 
 .bg-blue-100 {
-    background-color: var(--primary-bg);
+    background-color: var(--primary-color);
 }
 
 .bg-blue-200 {
-    background-color: var(--secondary-bg);
+    background-color: var(--secondary-color);
 }
 
 .bg-blue-300 {
-    background-color: var(--page-bg);
+    background-color: var(--page-color);
+}
+
+.bg-purple-300-color {
+    background-color: var(--purple-300-color);
+}
+
+.bg-gray-200-color {
+    background-color: var(--gray-200-color);
+}
+
+.bg-green-100-color {
+    background-color: var(--green-100-color) !important;
+}
+
+/* Text Colors */
+
+.text-blue-400-color {
+    color: var(--blue-400-color);
+}
+
+.text-blue-500-color {
+    color: var(--blue-500-color);
+}
+
+.text-gray-100-color {
+    color: var(--gray-100-color);
 }
 
 /* Fonts */
+
+.font-lato {
+    font-family: 'Lato', sans-serif;
+}
+
+.font-24 {
+    font-size: 24px;
+}
+
+.font-22 {
+    font-size: 22px;
+}
+
+.font-20 {
+    font-size: 20px;
+}
+
+.font-18 {
+    font-size: 18px;
+}
 
 .font-16 {
     font-size: 16px;
@@ -86,9 +157,13 @@
     border-radius: 0;
 }
 
+.header-main{
+    /* height: 44px; */
+}
+
 /* Pagination */
 .pagination>.page-item.active>.page-link {
-    background-color: var(--button-bg);
+    background-color: var(--button-color);
     border: 0;
 }
 
@@ -142,6 +217,10 @@
 
 .product-details-carousel>.carousel-indicators>button {
     background-color: #131921;
+}
+
+.product-details-dropdown {
+    min-width: 47px !important;
 }
 
 /* Login Signup */

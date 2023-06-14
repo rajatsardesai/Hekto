@@ -1,0 +1,19 @@
+.product-cart-items--image {
+    width: 87px;
+    height: 87px;
+
+    @media screen and (min-width:992px) {
+        width: 148px;
+        height: 148px;
+    }
+}
+
+.product-cart-items--name {
+    @media screen and (min-width:992px) {
+        width: 70%;
+    }
+}
+
+.addtocart-dropdown {
+    min-width: 82px !important;
+}
