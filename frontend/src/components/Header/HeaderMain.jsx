@@ -2,29 +2,34 @@ import React from 'react';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
+import Stack from 'react-bootstrap/Stack';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 const HeaderMain = ({ categorySubmitHandler }) => {
+    const { cartItems } = useSelector(state => state.cart);
+
     return (
         <>
-            <Navbar className="header-main bg-blue-200 d-none d-lg-block p-0" expand="lg">
-                <Container fluid>
+            <Navbar className="header-main bg-purple-300-color d-none d-lg-block p-0" expand="lg">
+                <Container>
                     <Navbar.Toggle aria-controls="navbarScroll" />
                     <Navbar.Collapse id="navbarScroll">
                         <Nav
-                            className="me-auto my-2 my-lg-0"
-                            style={{ maxHeight: '100px' }}
+                            className="w-100 my-2 my-lg-0 align-items-center justify-content-between"
+                            style={{ height: '44px' }}
                             navbarScroll
                         >
                             <Link className="text-decoration-none text-light py-2 px-3 font-14" to={'/'}>All</Link>
-                            <Link className="text-decoration-none text-light py-2 px-3 font-14" to={'/products'}>Products</Link>
-                            <Nav.Link className="text-decoration-none text-light py-2 px-3 font-14" onClick={() => categorySubmitHandler("laptops")}>Laptops</Nav.Link>
-                            <Nav.Link className="text-decoration-none text-light py-2 px-3 font-14" onClick={() => categorySubmitHandler("accessories")}>Accessories</Nav.Link>
-                            <Nav.Link className="text-decoration-none text-light py-2 px-3 font-14" onClick={() => categorySubmitHandler("fashion")}>Fashion</Nav.Link>
-                            <Nav.Link className="text-decoration-none text-light py-2 px-3 font-14" onClick={() => categorySubmitHandler("electronics")}>Electronics</Nav.Link>
-                            <Nav.Link className="text-decoration-none text-light py-2 px-3 font-14" onClick={() => categorySubmitHandler("cameras")}>Cameras</Nav.Link>
-                            <Nav.Link className="text-decoration-none text-light py-2 px-3 font-14" onClick={() => categorySubmitHandler("smartphones")}>Smartphones</Nav.Link>
-                            <Nav.Link className="text-decoration-none text-light py-2 px-3 font-14" onClick={() => categorySubmitHandler("smartwatches")}>Smartwatches</Nav.Link>
+                            <Stack direction="horizontal">
+                                <Link to={"/cart"} className="position-relative">
+                                    <img src={process.env.PUBLIC_URL + "/assets/images/cart.png"} alt="cart" />
+                                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                        {cartItems.length}
+                                        <span class="visually-hidden">cart items</span>
+                                    </span>
+                                </Link>
+                            </Stack>
                         </Nav>
                     </Navbar.Collapse>
                 </Container>

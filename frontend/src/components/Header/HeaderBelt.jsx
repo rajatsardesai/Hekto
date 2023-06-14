@@ -78,8 +78,9 @@ const HeaderBelt = () => {
             <HeaderAlert allProductsError={allProductsError} productDetailsError={productDetailsError} showAlert={showAlert} login={login} register={register} />
 
             {/* Navbar */}
+            <HeaderMain categorySubmitHandler={categorySubmitHandler} />
             <Navbar className="header-belt bg-blue-100" expand="lg">
-                <Container fluid>
+                <Container>
                     <Navbar.Brand><Link className="text-decoration-none text-light" to={'/'}><img src={process.env.PUBLIC_URL + "/assets/images/logo.png"} alt="logo"></img></Link></Navbar.Brand>
                     <Navbar.Toggle aria-controls="navbarScroll" />
                     <Navbar.Collapse id="navbarScroll">
@@ -120,7 +121,6 @@ const HeaderBelt = () => {
                     </Navbar.Collapse>
                 </Container>
             </Navbar>
-            <HeaderMain categorySubmitHandler={categorySubmitHandler} />
         </>
     )
 }

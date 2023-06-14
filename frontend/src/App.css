@@ -50,6 +50,10 @@
     background-color: var(--page-color);
 }
 
+.bg-purple-300-color {
+    background-color: var(--purple-300-color);
+}
+
 .bg-gray-200-color {
     background-color: var(--gray-200-color);
 }
@@ -151,6 +155,10 @@
 .header-modal .modal-content {
     width: 255px;
     border-radius: 0;
+}
+
+.header-main{
+    /* height: 44px; */
 }
 
 /* Pagination */

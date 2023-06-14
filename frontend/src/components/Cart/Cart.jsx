@@ -70,13 +70,7 @@ const Cart = () => {
                                             <hr className="mb-4" />
                                             <Stack direction="horizontal" className="justify-content-between my-3">
                                                 <span className="font-lato fw-semibold font-18 text-blue-500-color">Total:</span>
-                                                {
-                                                    cartItems && cartItems.map(item => {
-                                                        return (
-                                                            <span key={item.product} className="font-lato font-16 text-blue-400-color">₹{item.price}00</span>
-                                                        )
-                                                    })
-                                                }
+                                                <span className="font-lato font-16 text-blue-400-color">₹{cartItems.reduce((acc, item) => acc + item.quantity * item.price, 0)}.00</span>
                                             </Stack>
                                             <hr className="mb-4" />
                                             <Stack direction="horizontal" className="mb-4">
