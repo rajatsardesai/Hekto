@@ -12,6 +12,7 @@ import Profile from './components/User/Profile';
 import ProtectedRoute from './components/Route/ProtectedRoute';
 import ForgotPassword from './components/User/ForgotPassword';
 import ResetPassword from './components/User/ResetPassword';
+import Cart from './components/Cart/Cart';
 import { loadUser } from './store/actions/userAction';
 import store from "./store/store";
 
@@ -30,6 +31,7 @@ function App() {
             <Route exact path="/products" Component={Products} />
             <Route exact path="/product/:id" Component={ProductDetails} />
             <Route path="/products/:keyword" Component={Products} />
+            <Route path="/cart" Component={Cart} />
             <Route exact path='/account' Component={ProtectedRoute}>
               <Route exact path='/account' Component={Profile} />
             </Route>
