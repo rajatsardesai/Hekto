@@ -27,7 +27,9 @@ const Cart = () => {
 
     const checkoutHandler = () => {
         navigate("/login?redirect=shipping");
-    }
+    };
+
+    const totalPrice = cartItems.reduce((acc, item) => acc + item.quantity * item.price, 0);
 
     return (
         <>
@@ -55,10 +57,10 @@ const Cart = () => {
                                         }
                                         <Button className="bg-secondary-color text-white border-0 my-2 py-2 px-3 rounded-0" onClick={clearCart}>Clear Cart</Button>
                                     </Col>
-                                    
+
                                     <Col md={4}>
                                         <h5 className="fw-bold font-20 text-blue-500-color text-center mb-4">Cart Totals</h5>
-                                        <CartTotals cartItems={cartItems} checkoutHandler={checkoutHandler} />
+                                        <CartTotals cartItems={cartItems} checkoutHandler={checkoutHandler} totalPrice={totalPrice} />
                                     </Col>
                                 </Row>
                             </Container>

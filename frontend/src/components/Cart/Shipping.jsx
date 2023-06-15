@@ -44,7 +44,7 @@ const Shipping = () => {
         };
         sessionStorage.setItem("orderInfo", JSON.stringify(data));
         dispatch(saveShippingInfo({ address, city, state, landmark, pinCode, phoneNo }));
-        navigate("/order/confirm");
+        navigate("/process/payment");
     }
 
 
@@ -83,7 +83,7 @@ const Shipping = () => {
                                 </Form.Group>
                                 <Form.Group className="w-100" value={state} controlId="state">
                                     <Form.Label>State</Form.Label>
-                                    <Form.Select aria-label="Select State" onSelect={(e) => setState(e.target.value)}>
+                                    <Form.Select aria-label="Select State" onChange={(e) => setState(e.target.value)}>
                                         <option>State</option>
                                         {
                                             State &&

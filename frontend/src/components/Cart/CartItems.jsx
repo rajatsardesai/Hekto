@@ -38,16 +38,16 @@ const CartItems = (props) => {
                 <Stack direction="vertical">
                     <div className="d-flex flex-column flex-md-row justify-content-between" gap={3}>
                         <Link to={`/product/${product}`} className="font-18 text-decoration-none text-dark text-overflow"
-                            style={!(location.pathname === "/shipping") ? { width: "70%" } : { width: "100%" }}>{name}</Link>
+                            style={location.pathname === "/cart" ? { width: "70%" } : { width: "100%" }}>{name}</Link>
                         {
-                            !(location.pathname === "/shipping") && <Link className="text-dark" onClick={removeCartItem}>Remove</Link>
+                            location.pathname === "/cart" && <Link className="text-dark" onClick={removeCartItem}>Remove</Link>
                         }
                     </div>
                     <div className="py-2">
                         <span className="fs-6">₹</span><span className="font-18 fw-bold text-blue-400-color">{price}.00</span>
                     </div>
                     {
-                        !(location.pathname === "/shipping") && 
+                        location.pathname === "/cart" && 
                         <Dropdown onSelect={updateQuantity}>
                             <Dropdown.Toggle className="border" variant="transparent" id="quantity-dropdown">
                                 Qty: {selectedQuantityValue && selectedQuantityValue}
