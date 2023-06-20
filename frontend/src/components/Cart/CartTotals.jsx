@@ -4,7 +4,7 @@ import Button from 'react-bootstrap/Button';
 import { useLocation } from 'react-router-dom';
 
 const CartTotals = forwardRef((props, ref) => {
-    const { cartItems, checkoutHandler, submitButtonRef, shippingSubmit, totalPrice, shippingPrice, gstPrice, grandTotal } = props;
+    const { cartItems, checkoutHandler, submitbuttonRef, shippingSubmit, totalPrice, shippingPrice, gstPrice, grandTotal } = props;
 
     const location = useLocation();
 
@@ -56,7 +56,7 @@ const CartTotals = forwardRef((props, ref) => {
                             <img src={process.env.PUBLIC_URL + "/assets/images/check.png"} alt="check symbol" />
                             <span className="font-lato font-12 text-gray-100-color ms-2">Shipping & taxes calculated at checkout</span>
                         </Stack>
-                        <Button className="w-100 font-lato font-14 fw-bold bg-green-100-color border-0 p-2 mb-2" submitButtonRef={submitButtonRef} onClick={checkoutHandler || shippingSubmit}>{(location.pathname === "/shipping") ? "Proceed To Payment" : "Proceed To Checkout"}</Button>
+                        <Button className="w-100 font-lato font-14 fw-bold bg-green-100-color border-0 p-2 mb-2" submitbuttonRef={submitbuttonRef} onClick={checkoutHandler || shippingSubmit}>{(location.pathname === "/shipping") ? "Proceed To Payment" : "Proceed To Checkout"}</Button>
                     </>
                 }
             </Stack>

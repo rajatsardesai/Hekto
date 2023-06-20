@@ -20,6 +20,7 @@
     --gray-100-color: #8a91ab;
     --gray-200-color: #f4f4fc;
     --gray-300-color: #f8f8fd;
+    --gray-400-color: #eeeffb;
     --green-100-color: #19d16f;
     --white: #ffffff;
     --black: #000000;
@@ -61,6 +62,10 @@
 
 .bg-gray-300-color {
     background-color: var(--gray-300-color);
+}
+
+.bg-gray-400-color {
+    background-color: var(--gray-400-color);
 }
 
 .bg-green-100-color {
@@ -116,6 +121,18 @@
 }
 
 /* Actions and other styles */
+.h-100vh {
+    min-height: 100vh;
+}
+
+.h-80vh {
+    min-height: 80vh;
+}
+
+.h-60vh {
+    min-height: 60vh;
+}
+
 .cursor-pointer {
     cursor: pointer;
 }

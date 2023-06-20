@@ -15,6 +15,9 @@ import ResetPassword from './components/User/ResetPassword';
 import Cart from './components/Cart/Cart';
 import Shipping from './components/Cart/Shipping';
 import Payment from './components/Cart/Payment';
+import OrderSucess from './components/Cart/OrderSucess';
+import MyOrders from './components/Orders/MyOrders';
+import OrderDetails from './components/Orders/OrderDetails';
 import { loadUser } from './store/actions/userAction';
 import store from "./store/store";
 import axios from "axios";
@@ -34,6 +37,8 @@ function App() {
     }
   };
 
+  const promise = loadStripe(stripeApiKey);
+
   useEffect(() => {
     store.dispatch(loadUser());
     getStripeApiKey();
@@ -42,7 +47,7 @@ function App() {
   return (
     <>
       <Router>
-        <Elements stripe={loadStripe(stripeApiKey)}>
+        <Elements stripe={promise}>
           <Routes>
             <Route element={<PageLayout />}>
               <Route exact path="/" Component={Home} />
@@ -69,6 +74,15 @@ function App() {
                   </Route>
                 )
               }
+              <Route exact path='/success' Component={ProtectedRoute}>
+                <Route exact path='/success' Component={OrderSucess} />
+              </Route>
+              <Route exact path='/orders' Component={ProtectedRoute}>
+                <Route exact path='/orders' Component={MyOrders} />
+              </Route>
+              <Route exact path='/order/:id' Component={ProtectedRoute}>
+                <Route exact path='/order/:id' Component={OrderDetails} />
+              </Route>
             </Route>
             <Route exact path="/login" Component={Login} />
             <Route exact path='/password/forgot' Component={ForgotPassword} />
