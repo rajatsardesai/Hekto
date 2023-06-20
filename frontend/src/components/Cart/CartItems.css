@@ -8,12 +8,6 @@
     }
 }
 
-.product-cart-items--name {
-    @media screen and (min-width:992px) {
-        width: 70%;
-    }
-}
-
 .addtocart-dropdown {
     min-width: 82px !important;
 }
