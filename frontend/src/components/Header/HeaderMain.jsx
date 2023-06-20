@@ -24,9 +24,9 @@ const HeaderMain = ({ categorySubmitHandler }) => {
                             <Stack direction="horizontal">
                                 <Link to={"/cart"} className="position-relative">
                                     <img src={process.env.PUBLIC_URL + "/assets/images/cart.png"} alt="cart" />
-                                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                    <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
                                         {cartItems.length}
-                                        <span class="visually-hidden">cart items</span>
+                                        <span className="visually-hidden">cart items</span>
                                     </span>
                                 </Link>
                             </Stack>

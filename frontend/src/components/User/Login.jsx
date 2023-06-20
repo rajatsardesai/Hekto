@@ -4,7 +4,7 @@ import Card from 'react-bootstrap/Card';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Image from 'react-bootstrap/Image';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Stack from 'react-bootstrap/esm/Stack';
 import MetaData from '../MetaData';
 import { useDispatch, useSelector } from "react-redux";
@@ -13,6 +13,8 @@ import { login } from '../../store/actions/userAction';
 const Login = () => {
 
     const navigate = useNavigate();
+
+    const location = useLocation();
 
     const [loginEmail, setLoginEmail] = useState("");
     const [loginPassword, setLoginPassword] = useState("");
@@ -38,13 +40,16 @@ const Login = () => {
         setValidated(true);
     };
 
+    // Redirect for shipping or home if logged in
+    const redirect = location.search ? `/${location.search.split("=")[1]}` : "/";
+
     useEffect(() => {
         if (isAuthenticated) {
-            navigate("/");
+            navigate(redirect);
         } else {
             navigate("/login");
         }
-    }, [isAuthenticated, navigate]);
+    }, [isAuthenticated, navigate, redirect]);
 
     return (
         <>

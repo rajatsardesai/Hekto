@@ -19,6 +19,7 @@
     --purple-400-color: #9f63b5;
     --gray-100-color: #8a91ab;
     --gray-200-color: #f4f4fc;
+    --gray-300-color: #f8f8fd;
     --green-100-color: #19d16f;
     --white: #ffffff;
     --black: #000000;
@@ -56,6 +57,10 @@
 
 .bg-gray-200-color {
     background-color: var(--gray-200-color);
+}
+
+.bg-gray-300-color {
+    background-color: var(--gray-300-color);
 }
 
 .bg-green-100-color {
@@ -155,10 +160,6 @@
 .header-modal .modal-content {
     width: 255px;
     border-radius: 0;
-}
-
-.header-main{
-    /* height: 44px; */
 }
 
 /* Pagination */
