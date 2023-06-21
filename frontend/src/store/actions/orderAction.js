@@ -73,7 +73,7 @@ export const orderDetails = (id) => async (dispatch) => {
             orderLoading: 0
         });
 
-        const { data } = await axios.get(`/api/v1/orders/${id}`);
+        const { data } = await axios.get(`/api/v1/order/${id}`);
 
         dispatch({
             type: SET_LOADER_PROGRESS,

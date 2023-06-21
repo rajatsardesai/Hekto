@@ -4,7 +4,7 @@ import Button from 'react-bootstrap/Button';
 import { useLocation } from 'react-router-dom';
 
 const CartTotals = forwardRef((props, ref) => {
-    const { cartItems, checkoutHandler, submitbuttonRef, shippingSubmit, totalPrice, shippingPrice, gstPrice, grandTotal } = props;
+    const { cartItems, id, checkoutHandler, submitbuttonRef, shippingSubmit, totalPrice, shippingPrice, gstPrice, grandTotal } = props;
 
     const location = useLocation();
 
@@ -26,7 +26,7 @@ const CartTotals = forwardRef((props, ref) => {
                     </Stack>
                 </Stack>
                 {
-                    (location.pathname === "/shipping") &&
+                    (location.pathname === "/shipping" || location.pathname === `/order/${id}`) &&
                     <Stack direction="horizontal" className="align-items-start my-3">
                         <span className="font-lato fw-semibold font-18 text-blue-500-color">Shipping:</span>
                         <Stack direction="vertical">
@@ -35,7 +35,7 @@ const CartTotals = forwardRef((props, ref) => {
                     </Stack>
                 }
                 {
-                    (location.pathname === "/shipping") &&
+                    (location.pathname === "/shipping" || location.pathname === `/order/${id}`) &&
                     <Stack direction="horizontal" className="align-items-start my-3">
                         <span className="font-lato fw-semibold font-18 text-blue-500-color">GST:</span>
                         <Stack direction="vertical">
@@ -48,8 +48,8 @@ const CartTotals = forwardRef((props, ref) => {
                     <span className="font-lato fw-semibold font-18 text-blue-500-color">Total:</span>
                     <span className="font-lato font-16 text-blue-400-color">₹{(location.pathname === "/cart") ? Math.floor(totalPrice) : Math.floor(grandTotal)}.00</span>
                 </Stack>
-                {
-                    location.pathname !== "/process/payment" &&
+                {   
+                    (location.pathname !== "/process/payment" && location.pathname !== `/order/${id}`) &&
                     <>
                         <hr className="mb-4" />
                         <Stack direction="horizontal" className="mb-4">

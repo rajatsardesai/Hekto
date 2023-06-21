@@ -107,7 +107,10 @@ const ProductDetails = () => {
                                                 </Dropdown.Menu>
                                             </Dropdown>
                                         </Stack>
-                                        <Button variant="warning" className="my-2" onClick={addProductToCart}>Add to Cart</Button>
+                                        <Stack className="flex-column flex-md-row">
+                                            <Button variant="warning" disabled={product.stock < 1 ? true : false} className="my-2 me-2" onClick={addProductToCart}>Add to Cart</Button>
+                                            <Button variant="warning" className="my-2" onClick={addProductToCart}>Write a review</Button>
+                                        </Stack>
                                     </>
                             }
                             <hr />
