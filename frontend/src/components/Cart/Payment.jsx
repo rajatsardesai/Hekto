@@ -17,6 +17,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from "axios";
 import CartTotals from './CartTotals';
 import CartItems from './CartItems';
+import { createOrder } from '../../store/actions/orderAction';
 
 const Payment = () => {
     const orderInfo = JSON.parse(sessionStorage.getItem("orderInfo"));
@@ -32,6 +33,15 @@ const Payment = () => {
 
     const paymentData = {
         amount: Math.round(orderInfo.grandTotal * 100)
+    };
+
+    const order = {
+        shippingInfo,
+        orderItems: cartItems,
+        itemPrice: orderInfo.totalPrice,
+        taxPrice: orderInfo.gstPrice,
+        shippingPrice: orderInfo.shippingPrice,
+        totalPrice: orderInfo.grandTotal
     }
 
     const submitHandler = async (e) => {
@@ -75,6 +85,11 @@ const Payment = () => {
                 payBtn.current.disabled = false;
             } else {
                 if (result.paymentIntent.status === "succeeded") {
+                    order.paymentInfo = {
+                        id: result.paymentIntent.id,
+                        status: result.paymentIntent.status
+                    };
+                    dispatch(createOrder(order));
                     navigate("/success");
                 }
             }
@@ -92,7 +107,7 @@ const Payment = () => {
                         <Form className="bg-gray-300-color px-4 py-5" onSubmit={(e) => submitHandler(e)}>
                             <h5 className="fw-bold font-18 text-blue-500-color mb-4">Contact Information</h5>
                             <span className="fw-bold font-16">{user.name}</span>
-                            <p className="font-16 m-0">{shippingInfo.address}, {shippingInfo.landmark ? `${shippingInfo.landmark},`: ""} {shippingInfo.city}, {shippingInfo.state}, {shippingInfo.pinCode}</p>
+                            <p className="font-16 m-0">{shippingInfo.address}, {shippingInfo.landmark ? `${shippingInfo.landmark},` : ""} {shippingInfo.city}, {shippingInfo.state}, {shippingInfo.pinCode}</p>
                             <p className="font-16 m-0">+91 {shippingInfo.phoneNo}</p>
                             <p className="font-16 mb-5">{user.email}</p>
                             <h5 className="fw-bold font-18 text-blue-500-color mb-4">Card Details</h5>

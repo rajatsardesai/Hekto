@@ -119,7 +119,7 @@ const Shipping = () => {
                                 )
                             })
                         }
-                        <CartTotals cartItems={cartItems} submitButtonRef={submitButtonRef} shippingSubmit={shippingSubmit} totalPrice={totalPrice} shippingPrice={shippingPrice} gstPrice={gstPrice} grandTotal={grandTotal} />
+                        <CartTotals cartItems={cartItems} submitbuttonRef={submitButtonRef} shippingSubmit={shippingSubmit} totalPrice={totalPrice} shippingPrice={shippingPrice} gstPrice={gstPrice} grandTotal={grandTotal} />
                     </Col>
                 </Row>
             </Container>

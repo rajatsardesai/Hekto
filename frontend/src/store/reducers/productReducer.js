@@ -1,4 +1,4 @@
-import { ALL_PRODUCT_REQUEST, ALL_PRODUCT_SUCCESS, ALL_PRODUCT_FAIL, PRODUCT_DETAILS_REQUEST, PRODUCT_DETAILS_SUCCESS, PRODUCT_DETAILS_FAIL, SET_LOADER_PROGRESS } from "../constants/productConstants"
+import { ALL_PRODUCT_REQUEST, ALL_PRODUCT_SUCCESS, ALL_PRODUCT_FAIL, PRODUCT_DETAILS_REQUEST, PRODUCT_DETAILS_SUCCESS, PRODUCT_DETAILS_FAIL, SET_LOADER_PROGRESS, NEW_REVIEW_REQUEST, NEW_REVIEW_SUCCESS, NEW_REVIEW_RESET, NEW_REVIEW_FAIL } from "../constants/productConstants"
 
 export const productReducer = (state = { products: [] }, action) => {
     switch (action.type) {
@@ -54,6 +54,41 @@ export const productDetailsReducer = (state = { product: {} }, action) => {
             return {
                 loading: false,
                 productDetailsError: action.payload
+            }
+        default:
+            return state;
+
+    }
+};
+
+export const newReviewReducer = (state = {}, action) => {
+    switch (action.type) {
+        case SET_LOADER_PROGRESS:
+            return {
+                loading: true,
+                ...state,
+                newReviewLoading: action.productDetailsLoading
+            }
+        case NEW_REVIEW_REQUEST:
+            return {
+                ...state,
+                loading: true,
+            }
+        case NEW_REVIEW_SUCCESS:
+            return {
+                loading: false,
+                success: action.payload
+            }
+        case NEW_REVIEW_RESET:
+            return {
+                ...state,
+                success: false
+            }
+        case NEW_REVIEW_FAIL:
+            return {
+                ...state,
+                loading: false,
+                reviewsError: action.payload
             }
         default:
             return state;
