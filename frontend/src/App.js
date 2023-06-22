@@ -18,6 +18,8 @@ import Payment from './components/Cart/Payment';
 import OrderSucess from './components/Cart/OrderSucess';
 import MyOrders from './components/Orders/MyOrders';
 import OrderDetails from './components/Orders/OrderDetails';
+import Dashboard from './components/Admin/Dashboard';
+import ProductList from './components/Admin/ProductList';
 import { loadUser } from './store/actions/userAction';
 import store from "./store/store";
 import axios from "axios";
@@ -82,6 +84,12 @@ function App() {
               </Route>
               <Route exact path='/order/:id' Component={ProtectedRoute}>
                 <Route exact path='/order/:id' Component={OrderDetails} />
+              </Route>
+              <Route exact path='/admin/dashboard' element={<ProtectedRoute isAdmin={true} />}>
+                <Route exact path='/admin/dashboard' Component={Dashboard} />
+              </Route>
+              <Route exact path='/admin/products' element={<ProtectedRoute isAdmin={true} />}>
+                <Route exact path='/admin/products' Component={ProductList} />
               </Route>
             </Route>
             <Route exact path="/login" Component={Login} />
