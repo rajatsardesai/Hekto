@@ -16,7 +16,6 @@ const ReviewCard = ({ review }) => {
     return (
         <>
             <div className="reviewCard">
-                {/* <img src={profilePng} alt="User" /> */}
                 <IconContext.Provider value={{ color: "gray", size:"30px" }}>
                     <div className="d-inline-block me-2">
                         <MdAccountCircle />
