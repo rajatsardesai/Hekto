@@ -41,6 +41,11 @@ const HeaderBelt = () => {
         (state) => state.productDetails
     );
 
+    // To show success when review submitted
+    const { success } = useSelector(
+        (state) => state.newReview
+    );
+
     // Handling search results
     const searchSubmitHandler = (e) => {
         e.preventDefault();
@@ -75,7 +80,7 @@ const HeaderBelt = () => {
             <HeaderLoading />
 
             {/* Alert */}
-            <HeaderAlert allProductsError={allProductsError} productDetailsError={productDetailsError} showAlert={showAlert} login={login} register={register} />
+            <HeaderAlert allProductsError={allProductsError} productDetailsError={productDetailsError} showAlert={showAlert} login={login} register={register} success={success} />
 
             {/* Navbar */}
             <HeaderMain categorySubmitHandler={categorySubmitHandler} />

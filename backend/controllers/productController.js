@@ -85,19 +85,19 @@ exports.createProductReview = catchAsyncError(async (req, res, next) => {
 
     const product = await Product.findById(productId);
 
-    const isReviewed = product.reviews.find(rev => rev.user.toString() === req.user._id.toString());
+    // const isReviewed = product.reviews.find(rev => rev.user.toString() === req.user._id.toString());
 
-    if (isReviewed) {
-        product.reviews.forEach(rev => {
-            if (rev.user.toString() === req.user._id.toString()) {
-                rev.rating = Number(rating);
-                rev.comment = comment;
-            }
-        })
-    } else {
+    // if (isReviewed) {
+    //     product.reviews.forEach(rev => {
+    //         if (rev.user.toString() === req.user._id.toString()) {
+    //             rev.rating = Number(rating);
+    //             rev.comment = comment;
+    //         }
+    //     })
+    // } else {
         product.reviews.push(review);
         product.numberOfReviews = product.reviews.length
-    };
+    // };
 
     // For average rating (indicated as stars)
     let avg = 0;
