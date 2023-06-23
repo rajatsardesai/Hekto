@@ -20,6 +20,8 @@ import MyOrders from './components/Orders/MyOrders';
 import OrderDetails from './components/Orders/OrderDetails';
 import Dashboard from './components/Admin/Dashboard';
 import ProductList from './components/Admin/ProductList';
+import NewProduct from './components/Admin/NewProduct';
+import UpdateProduct from './components/Admin/UpdateProduct';
 import { loadUser } from './store/actions/userAction';
 import store from "./store/store";
 import axios from "axios";
@@ -90,6 +92,12 @@ function App() {
               </Route>
               <Route exact path='/admin/products' element={<ProtectedRoute isAdmin={true} />}>
                 <Route exact path='/admin/products' Component={ProductList} />
+              </Route>
+              <Route exact path='/admin/product' element={<ProtectedRoute isAdmin={true} />}>
+                <Route exact path='/admin/product' Component={NewProduct} />
+              </Route>
+              <Route exact path='/admin/product/:id' element={<ProtectedRoute isAdmin={true} />}>
+                <Route exact path='/admin/product/:id' Component={UpdateProduct} />
               </Route>
             </Route>
             <Route exact path="/login" Component={Login} />
