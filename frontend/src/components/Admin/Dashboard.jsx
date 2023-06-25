@@ -7,6 +7,8 @@ import Stack from 'react-bootstrap/esm/Stack';
 import Sidebar from "./Sidebar";
 import { useDispatch, useSelector } from 'react-redux';
 import { getAdminProduct } from '../../store/actions/productAction';
+import { getAllOrders } from '../../store/actions/orderAction';
+import { getAllUsers } from '../../store/actions/userAction';
 import { Link } from 'react-router-dom';
 import { Doughnut, Line } from "react-chartjs-2";
 import Chart from 'chart.js/auto';
@@ -18,6 +20,8 @@ const Dashboard = () => {
     const dispatch = useDispatch();
 
     const { products } = useSelector((state => state.products));
+    const { orders } = useSelector((state => state.allOrders));
+    const { users } = useSelector((state => state.allUsers));
 
     let outOfStock = 0;
 
@@ -53,6 +57,8 @@ const Dashboard = () => {
 
     useEffect(() => {
         dispatch(getAdminProduct());
+        dispatch(getAllOrders());
+        dispatch(getAllUsers());
     }, [dispatch]);
 
     return (
@@ -72,8 +78,8 @@ const Dashboard = () => {
                         <span className="fw-bold font-22 text-dark mb-4">Total Amount: 500</span>
                         <Stack className="flex-column flex-md-row mt-4" gap={1}>
                             <Link to={"/admin/products"} className="w-100 bg-gray-400-color text-center p-4 text-decoration-none text-blue-500-color font-18">Products: {products && products.length}</Link>
-                            <Link to={"/admin/orders"} className="w-100 bg-gray-400-color text-center p-4 text-decoration-none text-blue-500-color font-18">Orders: 10</Link>
-                            <Link to={"/admin/users"} className="w-100 bg-gray-400-color text-center p-4 text-decoration-none text-blue-500-color font-18">Users: 2</Link>
+                            <Link to={"/admin/orders"} className="w-100 bg-gray-400-color text-center p-4 text-decoration-none text-blue-500-color font-18">Orders: {orders && orders.length}</Link>
+                            <Link to={"/admin/users"} className="w-100 bg-gray-400-color text-center p-4 text-decoration-none text-blue-500-color font-18">Users: {users && users.length}</Link>
                         </Stack>
                         <Line data={lineState} className="my-5" />
                         <div className="w-50 m-auto">

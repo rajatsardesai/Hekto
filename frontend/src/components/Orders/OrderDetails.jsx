@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react';
+import MetaData from '../MetaData';
 import Container from 'react-bootstrap/Container';
 import Stack from 'react-bootstrap/esm/Stack';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { useDispatch, useSelector } from 'react-redux';
-import { orderDetails } from '../../store/actions/orderAction';
+import { getOrderDetails } from '../../store/actions/orderAction';
 import { useParams } from 'react-router-dom';
-import MetaData from '../MetaData';
 import CartItems from '../Cart/CartItems';
 import CartTotals from '../Cart/CartTotals';
 
@@ -14,11 +14,14 @@ const OrderDetails = () => {
     const dispatch = useDispatch();
     const params = useParams();
 
-    const { order } = useSelector((state) => state.orderDetails);
+    const { error, order } = useSelector((state) => state.orderDetails);
 
     useEffect(() => {
-        dispatch(orderDetails(params.id));
-    }, [dispatch, params.id]);
+        if (error) {
+            alert(error);
+        };
+        dispatch(getOrderDetails(params.id));
+    }, [dispatch, params.id, error]);
 
     const orderedDate = new Date(order.createdAt).toLocaleDateString();
 

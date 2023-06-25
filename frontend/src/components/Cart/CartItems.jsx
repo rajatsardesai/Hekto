@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import "./CartItems.css"
 import Stack from 'react-bootstrap/Stack';
 import Dropdown from 'react-bootstrap/Dropdown';
 import { Link, useLocation } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { addToCart, removeFromCart } from '../../store/actions/cartAction';
+import { removeFromCart } from '../../store/actions/cartAction';
 
 const CartItems = (props) => {
     const { image, name, product, price, quantity, stock } = props.item;
@@ -27,10 +27,6 @@ const CartItems = (props) => {
         dispatch(removeFromCart(product));
     };
 
-    useEffect(() => {
-        dispatch(addToCart(product, selectedQuantityValue));
-    }, [dispatch, product, selectedQuantityValue]);
-
     return (
         <>
             <Stack direction="horizontal" className="product-cart-items mb-3">
@@ -47,7 +43,7 @@ const CartItems = (props) => {
                         <span className="fs-6">₹</span><span className="font-18 fw-bold text-blue-400-color">{price}.00</span>
                     </div>
                     {
-                        location.pathname === "/cart" && 
+                        location.pathname === "/cart" &&
                         <Dropdown onSelect={updateQuantity}>
                             <Dropdown.Toggle className="border" variant="transparent" id="quantity-dropdown">
                                 Qty: {selectedQuantityValue && selectedQuantityValue}
