@@ -32,6 +32,11 @@ const Dashboard = () => {
             }
         });
 
+    let totalPrice = 0;
+    orders && orders.forEach(order => {
+        totalPrice += Math.round(order.totalPrice);
+    });
+
     const lineState = {
         labels: ["Initial Amount", "Amount Earned"],
         datasets: [
@@ -39,7 +44,7 @@ const Dashboard = () => {
                 label: "TOTAL AMOUNT",
                 backgroundColor: ["#fb2e86"],
                 hoverBackgroundColor: ["#fb2448"],
-                data: [0, 4000]
+                data: [0, totalPrice]
             }
         ]
     };
@@ -75,7 +80,7 @@ const Dashboard = () => {
 
                     {/* Dashboard */}
                     <Col lg={8}>
-                        <span className="fw-bold font-22 text-dark mb-4">Total Amount: 500</span>
+                        <span className="fw-bold font-22 text-dark mb-4">Total Amount: {totalPrice}</span>
                         <Stack className="flex-column flex-md-row mt-4" gap={1}>
                             <Link to={"/admin/products"} className="w-100 bg-gray-400-color text-center p-4 text-decoration-none text-blue-500-color font-18">Products: {products && products.length}</Link>
                             <Link to={"/admin/orders"} className="w-100 bg-gray-400-color text-center p-4 text-decoration-none text-blue-500-color font-18">Orders: {orders && orders.length}</Link>

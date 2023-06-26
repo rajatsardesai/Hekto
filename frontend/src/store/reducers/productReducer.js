@@ -1,4 +1,4 @@
-import { ALL_PRODUCT_REQUEST, ALL_PRODUCT_SUCCESS, ALL_PRODUCT_FAIL, PRODUCT_DETAILS_REQUEST, PRODUCT_DETAILS_SUCCESS, PRODUCT_DETAILS_FAIL, SET_LOADER_PROGRESS, NEW_REVIEW_REQUEST, NEW_REVIEW_SUCCESS, NEW_REVIEW_RESET, NEW_REVIEW_FAIL, ADMIN_PRODUCT_REQUEST, ADMIN_PRODUCT_SUCCESS, ADMIN_PRODUCT_FAIL, NEW_PRODUCT_REQUEST, NEW_PRODUCT_SUCCESS, NEW_PRODUCT_RESET, NEW_PRODUCT_FAIL, DELETE_PRODUCT_REQUEST, DELETE_PRODUCT_SUCCESS, DELETE_PRODUCT_RESET, DELETE_PRODUCT_FAIL, UPDATE_PRODUCT_REQUEST, UPDATE_PRODUCT_SUCCESS, UPDATE_PRODUCT_RESET, UPDATE_PRODUCT_FAIL } from "../constants/productConstants"
+import { ALL_PRODUCT_REQUEST, ALL_PRODUCT_SUCCESS, ALL_PRODUCT_FAIL, PRODUCT_DETAILS_REQUEST, PRODUCT_DETAILS_SUCCESS, PRODUCT_DETAILS_FAIL, SET_LOADER_PROGRESS, NEW_REVIEW_REQUEST, NEW_REVIEW_SUCCESS, NEW_REVIEW_RESET, NEW_REVIEW_FAIL, ADMIN_PRODUCT_REQUEST, ADMIN_PRODUCT_SUCCESS, ADMIN_PRODUCT_FAIL, NEW_PRODUCT_REQUEST, NEW_PRODUCT_SUCCESS, NEW_PRODUCT_RESET, NEW_PRODUCT_FAIL, DELETE_PRODUCT_REQUEST, DELETE_PRODUCT_SUCCESS, DELETE_PRODUCT_RESET, DELETE_PRODUCT_FAIL, UPDATE_PRODUCT_REQUEST, UPDATE_PRODUCT_SUCCESS, UPDATE_PRODUCT_RESET, UPDATE_PRODUCT_FAIL, ALL_REVIEW_REQUEST, ALL_REVIEW_SUCCESS, ALL_REVIEW_FAIL, DELETE_REVIEW_REQUEST, DELETE_REVIEW_SUCCESS, DELETE_REVIEW_RESET, DELETE_REVIEW_FAIL } from "../constants/productConstants"
 
 export const productsReducer = (state = { products: [] }, action) => {
     switch (action.type) {
@@ -181,6 +181,71 @@ export const newReviewReducer = (state = {}, action) => {
                 ...state,
                 loading: false,
                 reviewsError: action.payload
+            }
+        default:
+            return state;
+
+    }
+};
+
+export const productReviewsReducer = (state = { reviews: [] }, action) => {
+    switch (action.type) {
+        case SET_LOADER_PROGRESS:
+            return {
+                ...state,
+                loading: true,
+                productDetailsLoading: action.productDetailsLoading
+            }
+        case ALL_REVIEW_REQUEST:
+            return {
+                ...state,
+                loading: true
+            }
+        case ALL_REVIEW_SUCCESS:
+            return {
+                loading: false,
+                reviews: action.payload,
+            }
+        case ALL_REVIEW_FAIL:
+            return {
+                ...state,
+                loading: false,
+                error: action.payload
+            }
+        default:
+            return state;
+
+    }
+};
+
+export const reviewReducer = (state = {}, action) => {
+    switch (action.type) {
+        case SET_LOADER_PROGRESS:
+            return {
+                loading: true,
+                ...state,
+                newReviewLoading: action.productDetailsLoading
+            }
+        case DELETE_REVIEW_REQUEST:
+            return {
+                ...state,
+                loading: true,
+            }
+        case DELETE_REVIEW_SUCCESS:
+            return {
+                loading: false,
+                isDeleted: action.payload
+            }
+        case DELETE_REVIEW_RESET:
+            return {
+                ...state,
+                isDeleted: false
+            }
+        case DELETE_REVIEW_FAIL:
+            return {
+                ...state,
+                loading: false,
+                error: action.payload
             }
         default:
             return state;
