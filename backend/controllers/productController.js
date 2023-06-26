@@ -2,15 +2,40 @@ const Product = require("../models/productModel");
 const ErrorHandler = require("../utils/errorHandler");
 const catchAsyncError = require("../middleware/catchAsyncError");
 const ApiFeatures = require("../utils/apiFeatures");
+const cloudinary = require("cloudinary");
 
 // Create product -- Admin
 exports.createProduct = catchAsyncError(async (req, res, next) => {
+    let images = [];
+
+    if (typeof req.body.images === "string") {
+        images.push(req.body.images);
+    } else {
+        images = req.body.images;
+    };
+
+    const imagesLinks = [];
+
+    for (let i = 0; i < images.length; i++) {
+        const result = await cloudinary.v2.uploader.upload(images[i], {
+            folder: "products",
+        });
+
+        imagesLinks.push({
+            public_id: result.public_id,
+            url: result.secure_url,
+        });
+    };
+
+    req.body.images = imagesLinks;
     req.body.user = req.user.id;
+
     const product = await Product.create(req.body);
+
     res.status(201).json({
         success: true,
-        product
-    })
+        product,
+    });
 });
 
 // Get all products
@@ -33,6 +58,16 @@ exports.getAllProducts = catchAsyncError(async (req, res) => {
     });
 });
 
+// Get all products (Admin)
+exports.getAdminProducts = catchAsyncError(async (req, res) => {
+    const products = await Product.find();
+
+    res.status(200).json({
+        success: true,
+        products
+    });
+});
+
 // Get all product details
 exports.getProductDetails = catchAsyncError(async (req, res) => {
     let product = await Product.findById(req.params.id);
@@ -49,10 +84,43 @@ exports.getProductDetails = catchAsyncError(async (req, res) => {
 // Update products -- Admin
 exports.updateProduct = catchAsyncError(async (req, res, next) => {
     let product = await Product.findById(req.params.id);
+
     if (!product) {
         return next(new ErrorHandler("Product not found", 404));
+    };
+
+    let images = [];
+
+    if (typeof req.body.images === "string") {
+        images.push(req.body.images);
+    } else {
+        images = req.body.images;
+    };
+
+    if (images !== undefined) {
+        // Deleting images from cloudinary
+        for (let i = 0; i < product.images.length; i++) {
+            await cloudinary.v2.uploader.destroy(product.images[i].public_id);
+        };
+
+        const imagesLinks = [];
+
+        for (let i = 0; i < images.length; i++) {
+            const result = await cloudinary.v2.uploader.upload(images[i], {
+                folder: "products",
+            });
+
+            imagesLinks.push({
+                public_id: result.public_id,
+                url: result.secure_url,
+            });
+        };
+
+        req.body.images = imagesLinks;
     }
+
     product = await Product.findByIdAndUpdate(req.params.id, req.body);
+
     res.status(200).json({
         success: true,
         product
@@ -64,7 +132,13 @@ exports.deleteProduct = catchAsyncError(async (req, res, next) => {
     const product = await Product.findById(req.params.id);
     if (!product) {
         return next(new ErrorHandler("Product not found", 404));
-    }
+    };
+
+    // Deleting images from cloudinary
+    for (let i = 0; i < product.images.length; i++) {
+        await cloudinary.v2.uploader.destroy(product.images[i].public_id);
+    };
+
     await product.deleteOne();
     res.status(200).json({
         success: true,
@@ -95,8 +169,8 @@ exports.createProductReview = catchAsyncError(async (req, res, next) => {
     //         }
     //     })
     // } else {
-        product.reviews.push(review);
-        product.numberOfReviews = product.reviews.length
+    product.reviews.push(review);
+    product.numberOfReviews = product.reviews.length
     // };
 
     // For average rating (indicated as stars)
@@ -138,7 +212,13 @@ exports.deleteProductReview = catchAsyncError(async (req, res, next) => {
     // For average rating (indicated as stars)
     let avg = 0;
     reviews.forEach(rev => avg += rev.rating);
-    const ratings = avg / product.reviews.length;
+
+    let ratings = 0;
+    if (reviews.length === 0) {
+        ratings = 0;
+    }else{
+        ratings = avg / product.reviews.length;
+    }
 
     const numberOfReviews = reviews.length;
 

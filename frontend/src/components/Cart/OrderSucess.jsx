@@ -1,10 +1,20 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import "./OrderSuccess.css"
 import Button from 'react-bootstrap/Button';
 import Stack from 'react-bootstrap/Stack';
 import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { RESET_CART } from '../../store/constants/cartConstants';
 
 const OrderSucess = () => {
+
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch({ type: RESET_CART });
+        localStorage.removeItem("cartItems");
+    }, [dispatch]);
+
     return (
         <>
             <Stack className="order-success justify-content-center align-items-center h-60vh">

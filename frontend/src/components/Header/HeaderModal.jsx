@@ -13,7 +13,7 @@ const HeaderModal = ({ user, show, handleClose }) => {
 
     const dashboard = () => {
         if (user.role === "admin") {
-            navigate("/dashboard")
+            navigate("/admin/dashboard")
         }
     };
 
