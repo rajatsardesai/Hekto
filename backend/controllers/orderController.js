@@ -15,6 +15,7 @@ exports.placeOrder = catchAsyncError(async (req, res, next) => {
         totalPrice
     } = req.body;
 
+    
     const order = await Order.create({
         shippingInfo,
         orderItems,
@@ -26,7 +27,7 @@ exports.placeOrder = catchAsyncError(async (req, res, next) => {
         paidAt: Date.now(),
         user: req.user._id
     });
-
+    
     res.status(201).json({
         success: true,
         order
@@ -85,9 +86,11 @@ exports.updateOrder = catchAsyncError(async (req, res, next) => {
         return next(new ErrorHandler("You have already delivered this order", 400));
     };
 
-    order.orderItems.forEach(async (order) => {
-        await updateStock(order.product, order.quantity);
-    });
+    if (req.body.status === "Shipped") {
+        order.orderItems.forEach(async (order) => {
+            await updateStock(order.product, order.quantity);
+        });
+    };
 
     order.orderStatus = req.body.status;
 
@@ -123,7 +126,7 @@ exports.deleteOrder = catchAsyncError(async (req, res, next) => {
     };
 
     await Order.findByIdAndDelete(req.params.id);
-    
+
     res.status(200).json({
         success: true,
         message: "Order has been deleted"

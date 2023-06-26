@@ -22,6 +22,7 @@ app.use(cors(corsOptions));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(fileUpload());
 
+
 // Route imports
 const product = require("./routes/productRoute");
 const user = require("./routes/userRoute");

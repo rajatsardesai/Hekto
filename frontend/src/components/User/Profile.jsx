@@ -6,6 +6,7 @@ import Button from 'react-bootstrap/Button';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { updatePassword, updateProfile } from '../../store/actions/userAction';
+import { UPDATE_PASSWORD_RESET, UPDATE_PROFILE_RESET } from '../../store/constants/userConstants';
 import EditProfile from './EditProfile';
 
 const Profile = () => {
@@ -72,7 +73,13 @@ const Profile = () => {
             setUpdateName(user.name);
             setUpdateEmail(user.email);
         }
-    }, [isAuthenticated, navigate, user]);
+        dispatch({
+            type: UPDATE_PROFILE_RESET
+        });
+        dispatch({
+            type: UPDATE_PASSWORD_RESET
+        });
+    }, [isAuthenticated, navigate, user, dispatch]);
 
     return (
         <>

@@ -18,6 +18,15 @@ import Payment from './components/Cart/Payment';
 import OrderSucess from './components/Cart/OrderSucess';
 import MyOrders from './components/Orders/MyOrders';
 import OrderDetails from './components/Orders/OrderDetails';
+import Dashboard from './components/Admin/Dashboard';
+import ProductList from './components/Admin/ProductList';
+import NewProduct from './components/Admin/NewProduct';
+import UpdateProduct from './components/Admin/UpdateProduct';
+import OrderList from './components/Admin/OrderList';
+import ProcessOrder from './components/Admin/ProcessOrder';
+import UsersList from './components/Admin/UsersList';
+import UpdateUser from './components/Admin/UpdateUser';
+import ProductReviews from './components/Admin/ProductReviews';
 import { loadUser } from './store/actions/userAction';
 import store from "./store/store";
 import axios from "axios";
@@ -82,6 +91,33 @@ function App() {
               </Route>
               <Route exact path='/order/:id' Component={ProtectedRoute}>
                 <Route exact path='/order/:id' Component={OrderDetails} />
+              </Route>
+              <Route exact path='/admin/dashboard' element={<ProtectedRoute isAdmin={true} />}>
+                <Route exact path='/admin/dashboard' Component={Dashboard} />
+              </Route>
+              <Route exact path='/admin/products' element={<ProtectedRoute isAdmin={true} />}>
+                <Route exact path='/admin/products' Component={ProductList} />
+              </Route>
+              <Route exact path='/admin/product' element={<ProtectedRoute isAdmin={true} />}>
+                <Route exact path='/admin/product' Component={NewProduct} />
+              </Route>
+              <Route exact path='/admin/product/:id' element={<ProtectedRoute isAdmin={true} />}>
+                <Route exact path='/admin/product/:id' Component={UpdateProduct} />
+              </Route>
+              <Route exact path='/admin/orders' element={<ProtectedRoute isAdmin={true} />}>
+                <Route exact path='/admin/orders' Component={OrderList} />
+              </Route>
+              <Route exact path='/admin/order/:id' element={<ProtectedRoute isAdmin={true} />}>
+                <Route exact path='/admin/order/:id' Component={ProcessOrder} />
+              </Route>
+              <Route exact path='/admin/users' element={<ProtectedRoute isAdmin={true} />}>
+                <Route exact path='/admin/users' Component={UsersList} />
+              </Route>
+              <Route exact path='/admin/user/:id' element={<ProtectedRoute isAdmin={true} />}>
+                <Route exact path='/admin/user/:id' Component={UpdateUser} />
+              </Route>
+              <Route exact path='/admin/reviews' element={<ProtectedRoute isAdmin={true} />}>
+                <Route exact path='/admin/reviews' Component={ProductReviews} />
               </Route>
             </Route>
             <Route exact path="/login" Component={Login} />
