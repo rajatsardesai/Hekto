@@ -8,21 +8,21 @@ const Carousels = () => {
                 <Carousel.Item>
                     <img
                         className="d-block w-100"
-                        src={process.env.PUBLIC_URL + `/assets/images/banner1.jpg`}
+                        src={process.env.PUBLIC_URL + `/assets/style/banner1.jpg`}
                         alt="banner1"
                     />
                 </Carousel.Item>
                 <Carousel.Item>
                     <img
                         className="d-block w-100"
-                        src={process.env.PUBLIC_URL + `/assets/images/banner2.jpg`}
+                        src={process.env.PUBLIC_URL + `/assets/style/banner2.jpg`}
                         alt="banner2"
                     />
                 </Carousel.Item>
                 <Carousel.Item>
                     <img
                         className="d-block w-100"
-                        src={process.env.PUBLIC_URL + `/assets/images/banner3.jpg`}
+                        src={process.env.PUBLIC_URL + `/assets/style/banner3.jpg`}
                         alt="banner3"
                     />
                 </Carousel.Item>

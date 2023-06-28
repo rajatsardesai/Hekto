@@ -34,7 +34,7 @@ const ResetPassword = () => {
             <div className="login-signup-page bg-white">
                 <Container >
                     <div className="text-center">
-                        <Image src={process.env.PUBLIC_URL + "/assets/images/logo.png"} alt="logo" className="my-3" />
+                        <Image src={process.env.PUBLIC_URL + "/assets/style/logo.png"} alt="logo" className="my-3" />
                     </div>
                     <Card style={{ width: '22rem' }} className="m-auto p-3">
                         <Card.Body>

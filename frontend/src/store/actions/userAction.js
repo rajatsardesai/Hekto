@@ -10,7 +10,7 @@ export const login = (email, password) => async (dispatch) => {
 
         dispatch({
             type: SET_LOADER_PROGRESS,
-            loginLoading: 0
+            headerLoading: 0
         });
 
         const config = { headers: { "Content-Type": "application/json" } };
@@ -23,14 +23,14 @@ export const login = (email, password) => async (dispatch) => {
 
         dispatch({
             type: SET_LOADER_PROGRESS,
-            loginLoading: 50
+            headerLoading: 50
         });
 
-        dispatch({ type: LOGIN_SUCCESS, payload: data.user, login: true });
+        dispatch({ type: LOGIN_SUCCESS, payload: data.user, message: "Logged in successfully" });
 
         dispatch({
             type: SET_LOADER_PROGRESS,
-            loginLoading: 100
+            headerLoading: 100
         });
     } catch (error) {
         dispatch({ type: LOGIN_FAIL, payload: error.response.data.message });
@@ -44,7 +44,7 @@ export const register = (userData) => async (dispatch) => {
 
         dispatch({
             type: SET_LOADER_PROGRESS,
-            registerLoading: 0
+            headerLoading: 0
         });
 
         const config = { headers: { "Content-Type": "multipart/form-data" } };
@@ -57,15 +57,15 @@ export const register = (userData) => async (dispatch) => {
 
         dispatch({
             type: SET_LOADER_PROGRESS,
-            registerLoading: 50
+            headerLoading: 50
         });
 
 
-        dispatch({ type: REGISTER_SUCCESS, payload: data.user, register: true });
+        dispatch({ type: REGISTER_SUCCESS, payload: data.user, message: "Signed up successfully" });
 
         dispatch({
             type: SET_LOADER_PROGRESS,
-            registerLoading: 100
+            headerLoading: 100
         });
 
     } catch (error) {
@@ -80,21 +80,21 @@ export const loadUser = () => async (dispatch) => {
 
         dispatch({
             type: SET_LOADER_PROGRESS,
-            loadUserLoading: 0
+            headerLoading: 0
         });
 
         const { data } = await axios.get(`/api/v1/me`);
 
         dispatch({
             type: SET_LOADER_PROGRESS,
-            loadUserLoading: 50
+            headerLoading: 50
         });
 
         dispatch({ type: LOAD_USER_SUCCESS, payload: data.user });
 
         dispatch({
             type: SET_LOADER_PROGRESS,
-            loadUserLoading: 100
+            headerLoading: 100
         });
     } catch (error) {
         dispatch({ type: LOAD_USER_FAIL, payload: error.response.data.message });
@@ -106,21 +106,21 @@ export const logoutUser = () => async (dispatch) => {
     try {
         dispatch({
             type: SET_LOADER_PROGRESS,
-            logoutLoading: 0
+            headerLoading: 0
         });
 
-        await axios.get(`/api/v1/logout`);
+        const { data } = await axios.get(`/api/v1/logout`);
 
         dispatch({
             type: SET_LOADER_PROGRESS,
-            logoutLoading: 50
+            headerLoading: 50
         });
 
-        dispatch({ type: LOGOUT_SUCCESS });
+        dispatch({ type: LOGOUT_SUCCESS, payload: data });
 
         dispatch({
             type: SET_LOADER_PROGRESS,
-            logoutLoading: 100
+            headerLoading: 100
         });
     } catch (error) {
         dispatch({ type: LOGOUT_FAIL, payload: error.response.data.message });
@@ -203,7 +203,7 @@ export const forgotPassword = (email) => async (dispatch) => {
 
         dispatch({
             type: SET_LOADER_PROGRESS,
-            forgotPasswordLoading: 0
+            headerLoading: 0
         });
 
         const config = { headers: { "Content-Type": "application/json" } };
@@ -216,14 +216,14 @@ export const forgotPassword = (email) => async (dispatch) => {
 
         dispatch({
             type: SET_LOADER_PROGRESS,
-            forgotPasswordLoading: 50
+            headerLoading: 50
         });
 
         dispatch({ type: FORGOT_PASSWORD_SUCCESS, payload: data.message });
 
         dispatch({
             type: SET_LOADER_PROGRESS,
-            forgotPasswordLoading: 100
+            headerLoading: 100
         });
     } catch (error) {
         dispatch({ type: FORGOT_PASSWORD_FAIL, payload: error.response.data.message });

@@ -53,7 +53,7 @@ const CartTotals = forwardRef((props, ref) => {
                     <>
                         <hr className="mb-4" />
                         <Stack direction="horizontal" className="mb-4">
-                            <img src={process.env.PUBLIC_URL + "/assets/images/check.png"} alt="check symbol" />
+                            <img src={process.env.PUBLIC_URL + "/assets/style/check.png"} alt="check symbol" />
                             <span className="font-lato font-12 text-gray-100-color ms-2">Shipping & taxes calculated at checkout</span>
                         </Stack>
                         <Button className="w-100 font-lato font-14 fw-bold bg-green-100-color border-0 p-2 mb-2" submitbuttonRef={submitbuttonRef} onClick={checkoutHandler || shippingSubmit}>{(location.pathname === "/shipping") ? "Proceed To Payment" : "Proceed To Checkout"}</Button>

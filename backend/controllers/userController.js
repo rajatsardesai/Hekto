@@ -8,7 +8,7 @@ const cloudinary = require("cloudinary");
 
 // Register user
 exports.registerUser = catchAsyncError(async (req, res, next) => {
-    const cloud = await cloudinary.uploader.upload(req.body.avatar, {
+    const cloud = await cloudinary.v2.uploader.upload(req.body.avatar, {
         folder: "avatars",
         width: 150,
         crop: "scale"
@@ -55,7 +55,7 @@ exports.logoutUser = catchAsyncError(async (req, res, next) => {
 
     res.status(200).json({
         success: true,
-        message: "Logged out"
+        message: "Logged out successfully"
     });
 });
 
@@ -82,7 +82,7 @@ exports.forgotPassword = catchAsyncError(async (req, res, next) => {
     try {
         await sendEmail({
             email: user.email,
-            subject: "eBuy Password Recovery",
+            subject: "Hekto Password Recovery",
             message
         });
 

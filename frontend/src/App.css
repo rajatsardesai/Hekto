@@ -13,6 +13,7 @@
     --blue-300-color: #151875;
     --blue-400-color: #15245e;
     --blue-500-color: #1d3178;
+    --blue-600-color: #0d0e43;
     --purple-100-color: #f3f9ff;
     --purple-200-color: #e0d3f5;
     --purple-300-color: #7e33e0;
@@ -21,6 +22,7 @@
     --gray-200-color: #f4f4fc;
     --gray-300-color: #f8f8fd;
     --gray-400-color: #eeeffb;
+    --gray-500-color: #9096b2;
     --green-100-color: #19d16f;
     --white: #ffffff;
     --black: #000000;
@@ -31,7 +33,7 @@
 }
 
 .container {
-    max-width: 1166px !important;
+    max-width: 1177px !important;
 }
 
 /* Background Colors */
@@ -86,10 +88,22 @@
     color: var(--gray-100-color);
 }
 
+.text-gray-500-color {
+    color: var(--gray-500-color);
+}
+
+.text-blue-600-color {
+    color: var(--blue-600-color);
+}
+
 /* Fonts */
 
 .font-lato {
     font-family: 'Lato', sans-serif;
+}
+
+.font-32 {
+    font-size: 32px;
 }
 
 .font-24 {
@@ -106,6 +120,10 @@
 
 .font-18 {
     font-size: 18px;
+}
+
+.font-17 {
+    font-size: 17px;
 }
 
 .font-16 {
@@ -162,23 +180,6 @@
 }
 
 /* -------------- LAYOUT CSS -------------- */
-
-/* Header */
-.header-modal .modal-dialog {
-    border-radius: 0;
-
-    @media screen and (min-width:992px) {
-        margin-right: 0;
-        top: 31px;
-        right: -205px;
-    }
-}
-
-.header-modal .modal-content {
-    width: 255px;
-    border-radius: 0;
-}
-
 /* Pagination */
 .pagination>.page-item.active>.page-link {
     background-color: var(--button-color);
@@ -241,29 +242,42 @@
     min-width: 47px !important;
 }
 
-/* Login Signup */
-.login-signup-page {
-    height: 100vh;
+/* Global users page - Login, Forgot password, Signup */
+.users-page .h5 {
+    font-size: 32px;
 }
 
-.login-signup-page .login-signup-forms {
-    width: 100%;
-
+.users-page .card {
     @media screen and (min-width:768px) {
-        width: 22rem;
+        width: 544px;
+        margin: auto;
+        box-shadow: 3px 3px 25px -10px rgba(0, 0, 0, 0.1), -3px -3px 25px -10px rgba(0, 0, 0, 0.1);
+        ;
     }
 }
 
-.new-signup {
-    width: 100%;
+.users-page input {
+    @media screen and (min-width:768px) {
+        height: 52px;
+    }
+}
+
+.users-page button {
+    font-family: 'Lato', sans-serif;
+    font-size: 17px;
 
     @media screen and (min-width:768px) {
-        width: 110px;
+        height: 47px;
     }
+}
+
+.register-image>input[type=file] {
+    color: transparent
 }
 
 .register-image>input::file-selector-button {
-    width: 206px;
+    width: 100%;
+    height: 52px;
 }
 
 /* Your account */

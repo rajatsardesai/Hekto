@@ -1,9 +1,10 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import HeaderLoading from '../Header/HeaderLoading';
+import HeaderAlert from '../Header/HeaderAlert';
 import Container from 'react-bootstrap/esm/Container';
 import Card from 'react-bootstrap/Card';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-import Image from 'react-bootstrap/Image';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Stack from 'react-bootstrap/esm/Stack';
 import MetaData from '../MetaData';
@@ -13,31 +14,20 @@ import { login } from '../../store/actions/userAction';
 const Login = () => {
 
     const navigate = useNavigate();
-
     const location = useLocation();
 
     const [loginEmail, setLoginEmail] = useState("");
     const [loginPassword, setLoginPassword] = useState("");
 
-    const { userError, isAuthenticated } = useSelector(
+    const { isAuthenticated, success, error, message, headerLoading } = useSelector(
         (state) => state.user
     );
-
-    // Handle form validation (errors)
-    const errorRef = useRef(null);
-    const [validated, setValidated] = useState(false);
 
     // Handle login submit
     const dispatch = useDispatch();
     const loginSubmit = (e) => {
         e.preventDefault();
-        const form = e.currentTarget;
-        if (form.checkValidity() === false) {
-            e.stopPropagation();
-        }
-        errorRef.current.textContent = userError;
         dispatch(login(loginEmail, loginPassword));
-        setValidated(true);
     };
 
     // Redirect for shipping or home if logged in
@@ -54,49 +44,39 @@ const Login = () => {
     return (
         <>
             {/* Title tag */}
-            <MetaData title={"eBuy Sign In"} />
+            <MetaData title={"Hekto Log In"} />
+
+            {/* React top loading bar */}
+            <HeaderLoading progressLoading={headerLoading} />
+
+            {/* Header alert */}
+            {
+                (error || success) &&
+                <HeaderAlert error={error} message={message} />
+            }
 
             {/* Login */}
-            <div className="login-signup-page bg-white">
+            <Stack className="users-page my-5 py-5">
                 <Container >
-                    <div className="text-center">
-                        <Image src={process.env.PUBLIC_URL + "/assets/images/logo.png"} alt="logo" className="my-3" />
-                    </div>
-                    <div className="login-signup-forms m-auto">
-                        <Card className="p-4">
-                            <Card.Title className="fs-3 fw-normal mb-3">Sign in</Card.Title>
-                            <Form noValidate validated={validated} onSubmit={loginSubmit}>
-                                <Form.Group className="mb-3" controlId="loginEmail">
-                                    <Form.Label className="fs-6 fw-bold mb-1">Email address</Form.Label>
-                                    <Form.Control type="email" required value={loginEmail} onChange={(e) => setLoginEmail(e.target.value)} />
-                                </Form.Group>
-                                <Form.Group className="mb-3" controlId="loginPassword">
-                                    <Form.Label className="fs-6 fw-bold mb-1">Password</Form.Label>
-                                    <Form.Label className="float-end"><Link to={"/password/forgot"} className="text-decoration-none">Forgot Password</Link></Form.Label>
-                                    <Form.Control type="password" required value={loginPassword} onChange={(e) => setLoginPassword(e.target.value)} />
-                                    <Form.Control.Feedback type="invalid" ref={errorRef}>
-
-                                    </Form.Control.Feedback>
-                                </Form.Group>
-                                <Button variant="warning" type="submit" className="w-100 my-2">
-                                    Sign in
-                                </Button>
-                                <p>By continuing, you agree to eBuy's Conditions of Use and Privacy Notice.</p>
-                            </Form>
-                        </Card>
-                        <Stack direction="horizontal" className="justify-content-center mt-4">
-                            <hr className="new-signup" />
-                            <span className="text-secondary mx-3 font-14 text-nowrap">New to eBuy?</span>
-                            <hr className="new-signup" />
-                        </Stack>
-                        <Button variant="outline-secondary" type="submit" className="my-2 w-100 text-dark">
-                            <Link to={"/register"} className="text-decoration-none text-dark">Create your eBuy account</Link>
-                        </Button>
-                    </div>
-                    <hr className="my-4" />
-                    <p className="text-center">&copy; 2023, eBuy, Inc. or its affiliates</p>
+                    <Card className="p-3 p-md-5 border-0">
+                        <Card.Title className="fw-bold mb-1 text-center">Login</Card.Title>
+                        <span className="text-center text-gray-500-color font-lato font-17">Please login using account details below.</span>
+                        <Form onSubmit={loginSubmit} className="mt-5">
+                            <Form.Group className="mb-4" controlId="loginEmail">
+                                <Form.Control type="email" required value={loginEmail} placeholder="Email address" className="font-lato font-16" onChange={(e) => setLoginEmail(e.target.value)} />
+                            </Form.Group>
+                            <Form.Group controlId="loginPassword">
+                                <Form.Control type="password" required value={loginPassword} placeholder="Password" className="font-lato font-16 mb-2" onChange={(e) => setLoginPassword(e.target.value)} />
+                                <Link to={"/password/forgot"} className="text-decoration-none text-gray-500-color font-lato font-17">Forgot your password?</Link>
+                            </Form.Group>
+                            <Button type="submit" className="w-100 my-4 bg-secondary-color border-0 rounded-1">
+                                Log in
+                            </Button>
+                            <p className="text-center text-gray-500-color font-lato font-17 m-0">Don't have an Account?<Link to={"/register"} className="text-decoration-none text-gray-500-color">Create account</Link></p>
+                        </Form>
+                    </Card>
                 </Container>
-            </div>
+            </Stack >
         </>
     )
 }

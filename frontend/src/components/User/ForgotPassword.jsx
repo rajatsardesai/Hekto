@@ -1,16 +1,19 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
+import MetaData from '../MetaData';
+import HeaderLoading from '../Header/HeaderLoading';
+import HeaderAlert from '../Header/HeaderAlert';
 import Container from 'react-bootstrap/esm/Container';
+import Stack from 'react-bootstrap/esm/Stack';
 import Card from 'react-bootstrap/Card';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-import Image from 'react-bootstrap/Image';
 import { useDispatch, useSelector } from 'react-redux';
 import { forgotPassword } from '../../store/actions/userAction';
 
 const ForgotPassword = () => {
     const dispatch = useDispatch();
 
-    const { message } = useSelector((state) => state.forgotPassword);
+    const { error, isResetPassword, message, headerLoading } = useSelector((state) => state.forgotPassword);
 
     const [email, setEmail] = useState("");
 
@@ -26,30 +29,35 @@ const ForgotPassword = () => {
 
     return (
         <>
-            <div className="login-signup-page bg-white">
+            {/* Title tag */}
+            <MetaData title={"Forgot Password"} />
+
+            {/* React top loading bar */}
+            <HeaderLoading progressLoading={headerLoading} />
+
+            {/* Header alert */}
+            {
+                (error || isResetPassword) &&
+                <HeaderAlert error={error} message={message} />
+            }
+
+            {/* Forgot Password? */}
+            <Stack className="users-page my-5 py-5">
                 <Container >
-                    <div className="text-center">
-                        <Image src={process.env.PUBLIC_URL + "/assets/images/logo.png"} alt="logo" className="my-3" />
-                    </div>
-                    <Card style={{ width: '22rem' }} className="m-auto p-3">
-                        <Card.Body>
-                            <Card.Title className="fs-3 fw-normal mb-2">Password assistance</Card.Title>
-                            <p className="font-12">Enter the email address associated with your eBuy account.</p>
-                            <Form onSubmit={forgotPasswordSubmit}>
-                                <Form.Group className="mb-3" controlId="registerEmail">
-                                    <Form.Label className="fs-6 fw-bold mb-1">Email address</Form.Label>
-                                    <Form.Control type="email" name="registerEmail" required value={email} onChange={(e) => setEmail(e.target.value)} />
-                                </Form.Group>
-                                <Button variant="warning" type="submit" className="w-100 my-2">
-                                    Continue
-                                </Button>
-                            </Form>
-                        </Card.Body>
+                    <Card className="p-3 p-md-5 border-0">
+                        <Card.Title className="fw-bold mb-1 text-center">Forgot Password?</Card.Title>
+                        <span className="text-center text-gray-500-color font-lato font-17">Please enter your registered email address below.</span>
+                        <Form onSubmit={forgotPasswordSubmit} className="mt-5">
+                            <Form.Group className="mb-4" controlId="forgotPasswordEmail">
+                                <Form.Control type="email" required value={email} placeholder="Email address" className="font-lato font-16" onChange={(e) => setEmail(e.target.value)} />
+                            </Form.Group>
+                            <Button type="submit" className="w-100 my-4 bg-secondary-color border-0 rounded-1">
+                                Submit
+                            </Button>
+                        </Form>
                     </Card>
-                    <hr className="my-4" />
-                    <p className="text-center">&copy; 2023, eBuy, Inc. or its affiliates</p>
                 </Container>
-            </div>
+            </Stack>
         </>
     )
 }

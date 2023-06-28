@@ -2,7 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { Outlet, useNavigate } from 'react-router-dom';
 
-const ProtectedRoute = ({ isAdmin }) => {
+const ProtectedRoute = ({ isAdmin, getStripeApiKey }) => {
     const navigate = useNavigate();
 
     const { loading, isAuthenticated, user } = useSelector(state => state.user);

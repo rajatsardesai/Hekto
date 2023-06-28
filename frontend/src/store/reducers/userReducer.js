@@ -5,19 +5,16 @@ export const userReducer = (state = { user: {} }, action) => {
     switch (action.type) {
         case SET_LOADER_PROGRESS:
             return {
-                loading: true,
                 ...state,
-                loginLoading: action.loginLoading,
-                registerLoading: action.registerLoading,
-                loadUserLoading: action.loadUserLoading,
-                logoutLoading: action.logoutLoading
+                loading: true,
+                headerLoading: action.headerLoading
             };
         case LOGIN_REQUEST:
         case REGISTER_REQUEST:
         case LOAD_USER_REQUEST:
             return {
                 loading: true,
-                isAuthenticated: true
+                isAuthenticated: false
             };
         case LOGIN_SUCCESS:
         case REGISTER_SUCCESS:
@@ -27,14 +24,16 @@ export const userReducer = (state = { user: {} }, action) => {
                 loading: false,
                 isAuthenticated: true,
                 user: action.payload,
-                login: action.login,
-                register: action.register
+                success: true,
+                message: action.message
             }
         case LOGOUT_SUCCESS:
             return {
                 loading: false,
                 isAuthenticated: false,
-                user: null
+                user: null,
+                isLoggedout: action.payload.success,
+                message: action.payload.message
             }
         case LOGIN_FAIL:
         case REGISTER_FAIL:
@@ -43,22 +42,20 @@ export const userReducer = (state = { user: {} }, action) => {
                 loading: false,
                 isAuthenticated: false,
                 user: null,
-                userError: action.payload,
-                login: false,
-                register: false
+                error: action.payload
             }
         case LOAD_USER_FAIL:
             return {
                 loading: false,
                 isAuthenticated: false,
                 user: null,
-                userError: action.payload
+                error: action.payload
             }
         case LOGOUT_FAIL:
             return {
                 ...state,
                 loading: false,
-                userError: action.payload
+                error: action.payload
             }
         default:
             return state;
@@ -134,8 +131,7 @@ export const forgotPasswordReducer = (state = {}, action) => {
             return {
                 loading: true,
                 ...state,
-                forgotPasswordLoading: action.forgotPasswordLoading,
-                resetPasswordLoading: action.resetPasswordLoading
+                headerLoading: action.headerLoading,
             };
         case FORGOT_PASSWORD_REQUEST:
         case RESET_PASSWORD_REQUEST:
@@ -148,13 +144,14 @@ export const forgotPasswordReducer = (state = {}, action) => {
             return {
                 ...state,
                 loading: false,
+                isResetPassword: true,
                 message: action.payload,
             }
         case RESET_PASSWORD_SUCCESS:
             return {
                 ...state,
                 loading: false,
-                success: action.payload,
+                success: action.payload
             }
         case FORGOT_PASSWORD_FAIL:
         case RESET_PASSWORD_FAIL:
