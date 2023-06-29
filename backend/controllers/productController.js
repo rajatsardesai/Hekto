@@ -40,6 +40,16 @@ exports.createProduct = catchAsyncError(async (req, res, next) => {
 
 // Get all products
 exports.getAllProducts = catchAsyncError(async (req, res) => {
+    const products = await Product.find();
+
+    res.status(200).json({
+        success: true,
+        products
+    });
+});
+
+// Get filtered products
+exports.getFilteredProducts = catchAsyncError(async (req, res) => {
     // throw new Error("THis is new error");
     const resultPerPage = 6;
     const productsCount = await Product.countDocuments();

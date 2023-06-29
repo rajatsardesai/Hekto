@@ -1,3 +1,7 @@
+.header-main{
+    z-index: 5000;
+}
+
 .account-dropdown>a::after {
     content: "";
     border: 0;

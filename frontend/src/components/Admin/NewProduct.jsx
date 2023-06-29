@@ -28,14 +28,14 @@ const NewProduct = () => {
     const [imagesPreview, setImagesPreview] = useState([]);
 
     const categories = [
-        "Laptops",
-        "Home & Kitchen",
-        "Accessories",
-        "Fashion",
-        "Electronics",
-        "Cameras",
-        "Smartphones",
-        "Smartwatches",
+        "Sofas",
+        "Beds",
+        "Wardrobes",
+        "Dressing Tables",
+        "Dining Tables",
+        "Study Tables",
+        "Chairs",
+        "TV and Media Units",
     ];
 
     const createProductSubmitHandler = (e) => {

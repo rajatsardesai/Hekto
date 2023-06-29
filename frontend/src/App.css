@@ -14,6 +14,7 @@
     --blue-400-color: #15245e;
     --blue-500-color: #1d3178;
     --blue-600-color: #0d0e43;
+    --blue-700-color: #1a0b5b;
     --purple-100-color: #f3f9ff;
     --purple-200-color: #e0d3f5;
     --purple-300-color: #7e33e0;
@@ -76,12 +77,20 @@
 
 /* Text Colors */
 
+.text-secondary-color {
+    color: var(--secondary-color);
+}
+
 .text-blue-400-color {
     color: var(--blue-400-color);
 }
 
 .text-blue-500-color {
     color: var(--blue-500-color);
+}
+
+.text-blue-700-color {
+    color: var(--blue-700-color);
 }
 
 .text-gray-100-color {
@@ -187,30 +196,11 @@
 }
 
 /* Home page */
-
-.carousel-indicators {
-    display: none !important;
-}
-
-.carousel-control-prev>span {
-    filter: invert(1);
-}
-
-.carousel-control-next>span {
-    filter: invert(1);
-}
-
-.home-carousel .carousel-item>img {
-    object-fit: cover;
-    object-position: top;
-    height: 317px;
-}
-
-.home-carousel>.carousel-item>.card-image {
+/* .home-carousel>.carousel-item>.card-image {
     width: 262px;
     height: 246px;
     object-fit: contain;
-}
+} */
 
 /* products */
 .product-cards .cards {

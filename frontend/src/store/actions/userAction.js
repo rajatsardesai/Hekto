@@ -60,7 +60,6 @@ export const register = (userData) => async (dispatch) => {
             headerLoading: 50
         });
 
-
         dispatch({ type: REGISTER_SUCCESS, payload: data.user, message: "Signed up successfully" });
 
         dispatch({

@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Home from './components/Home';
+import Home from './components/Home/Home';
 import Products from './components/Products/Products';
 import ProductDetails from './components/Products/ProductDetails';
 import Login from './components/User/Login';

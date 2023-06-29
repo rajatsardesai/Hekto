@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from 'react';
+import MetaData from '../MetaData';
+import HeaderLoading from '../Header/HeaderLoading';
+import HeaderAlert from '../Header/HeaderAlert';
 import ProductsCard from './ProductsCard';
 import ProductFilters from './ProductFilters';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { getProduct } from '../../store/actions/productAction';
+import { getFilteredProducts } from '../../store/actions/productAction';
 import Container from 'react-bootstrap/esm/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Pagination from 'react-bootstrap/Pagination';
-import MetaData from '../MetaData';
 
 const Products = () => {
     const dispatch = useDispatch();
@@ -16,7 +18,7 @@ const Products = () => {
     // For search filter
     const { keyword } = useParams();
 
-    const { products, productsCount, loading, resultPerPage } = useSelector(
+    const { products, productsCount, resultPerPage, loading, headerLoading, error, message } = useSelector(
         (state) => state.products
     );
 
@@ -45,7 +47,7 @@ const Products = () => {
     const [ratings, setRatings] = useState(0);
 
     useEffect(() => {
-        dispatch(getProduct(keyword, currentPage, price, category, ratings));
+        dispatch(getFilteredProducts(keyword, currentPage, price, category, ratings));
     }, [dispatch, keyword, currentPage, price, category, ratings]);
 
     // let count = filteredProductsCount;
@@ -55,6 +57,15 @@ const Products = () => {
         <>
             {/* Title tag */}
             <MetaData title={"All Products: Buy Latest Products Online at Best Prices in India | Buy New Products Online - eBuy"} />
+
+            {/* React top loading bar */}
+            <HeaderLoading progressLoading={headerLoading} />
+
+            {/* Header alert */}
+            {
+                (error) &&
+                <HeaderAlert error={error} message={message} />
+            }
 
             {/* Products */}
             <Container fluid className="products-page">
