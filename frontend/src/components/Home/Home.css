@@ -1,0 +1,19 @@
+/* Featured product carousel */
+.featured-products-carousel {
+    .carousel-indicators [data-bs-target] {
+        height: 4px;
+        background-color: var(--pink-100-color);
+    }
+
+    .carousel-indicators .active {
+        background-color: var(--secondary-color);
+    }
+
+    .carousel-control-prev {
+        display: none;
+    }
+
+    .carousel-control-next {
+        display: none;
+    }
+}

@@ -25,6 +25,7 @@
     --gray-400-color: #eeeffb;
     --gray-500-color: #9096b2;
     --green-100-color: #19d16f;
+    --pink-100-color: #febad7;
     --white: #ffffff;
     --black: #000000;
 }
@@ -79,6 +80,10 @@
 
 .text-secondary-color {
     color: var(--secondary-color);
+}
+
+.text-blue-300-color {
+    color: var(--blue-300-color);
 }
 
 .text-blue-400-color {
@@ -188,6 +193,11 @@
     list-style-position: inside;
 }
 
+.card-shadow {
+    box-shadow: 3px 3px 25px -10px rgba(0, 0, 0, 0.1), -3px -3px 25px -10px rgba(0, 0, 0, 0.1);
+    ;
+}
+
 /* -------------- LAYOUT CSS -------------- */
 /* Pagination */
 .pagination>.page-item.active>.page-link {
@@ -241,8 +251,6 @@
     @media screen and (min-width:768px) {
         width: 544px;
         margin: auto;
-        box-shadow: 3px 3px 25px -10px rgba(0, 0, 0, 0.1), -3px -3px 25px -10px rgba(0, 0, 0, 0.1);
-        ;
     }
 }
 

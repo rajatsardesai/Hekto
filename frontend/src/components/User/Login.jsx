@@ -56,7 +56,7 @@ const Login = () => {
             {/* Login */}
             <Stack className="users-page my-5 py-5">
                 <Container >
-                    <Card className="p-3 p-md-5 border-0">
+                    <Card className="p-3 p-md-5 border-0 card-shadow">
                         <Card.Title className="fw-bold mb-1 text-center">Login</Card.Title>
                         <span className="text-center text-gray-500-color font-lato font-17">Please login using account details below.</span>
                         <Form onSubmit={loginSubmit} className="mt-5">
