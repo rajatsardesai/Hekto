@@ -18,11 +18,11 @@
     }
 
     .carousel-control-prev>span {
-        filter: invert(1);
+        display: none;
     }
 
     .carousel-control-next>span {
-        filter: invert(1);
+        display: none;
     }
 
     .home-carousel .carousel-item>img {
@@ -45,6 +45,7 @@
     .carousel-caption a {
         width: 163px;
         font-size: 10px;
+        height: auto;
 
         @media screen and (min-width:576px) {
             height: 50px;

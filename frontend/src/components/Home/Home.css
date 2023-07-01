@@ -17,3 +17,77 @@
         display: none;
     }
 }
+
+/* Latest Trending Product */
+.latest-trending-product {
+    padding-bottom: 120px;
+}
+
+.latest-trending-product .latest-trending-chair {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    @media screen and (min-width:612px) {
+        left: 20%;
+    }
+
+    @media screen and (min-width:768px) {
+        left: 0;
+    }
+}
+
+.latest-trending-product .latest-trending-product-text ul li {
+    text-indent: -0.8em;
+}
+
+.latest-trending-product .latest-trending-product-text ul li::before {
+    content: "•";
+    display: inline-block;
+    font-size: 32px;
+    margin-right: 7px;
+    color: var(--secondary-color);
+    vertical-align: sub;
+}
+
+.latest-trending-product .latest-trending-product-text ul li:nth-child(2)::before {
+    color: var(--primary-color);
+}
+
+.latest-trending-product .latest-trending-product-text ul li:nth-child(3)::before {
+    color: var(--green-100-color);
+}
+
+.latest-trending-product .latest-trending-product-text .latest-trending-product-name {
+    @media screen and (min-width:992px) {
+        width: 50%;
+    }
+}
+
+/* Trending products */
+.trending-products {
+    .col {
+        min-width: 254px;
+    }
+
+    .home-product-cards {
+        width: auto;
+    }
+
+    .trending-product-offers-card {
+        width: auto;
+        height: 270px;
+    }
+
+    .trending-product-offers-card .trending-product-offers-chair {
+        position: absolute;
+        top: 50px;
+        right: 0;
+    }
+
+    .trending-product-offers-card .trending-product-offers-tv {
+        position: absolute;
+        top: 80px;
+        right: 0;
+    }
+}

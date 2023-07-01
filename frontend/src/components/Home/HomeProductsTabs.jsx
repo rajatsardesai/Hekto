@@ -49,7 +49,7 @@ const HomeProductsTabs = ({ latestProducts, bestSellerProducts, filteredRatingPr
                         tabs && tabs.map(item => {
                             return (
                                 <Tab.Pane eventKey={item.tab}>
-                                    <Row className="mb-5 pb-4 justify-content-center g-5">
+                                    <Row className="mb-5 pb-4 justify-content-center g-4">
                                         {
                                             (item.products) && item.products.slice(0, 6).map(product => {
                                                 return (

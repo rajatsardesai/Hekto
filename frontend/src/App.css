@@ -25,7 +25,9 @@
     --gray-400-color: #eeeffb;
     --gray-500-color: #9096b2;
     --green-100-color: #19d16f;
+    --green-200-color: #dfffee;
     --pink-100-color: #febad7;
+    --pink-200-color: #fff6fb;
     --white: #ffffff;
     --black: #000000;
 }
@@ -76,7 +78,19 @@
     background-color: var(--green-100-color) !important;
 }
 
+.bg-green-200-color {
+    background-color: var(--green-200-color);
+}
+
+.bg-pink-200-color {
+    background-color: var(--pink-200-color);
+}
+
 /* Text Colors */
+
+.text-primary-color {
+    color: var(--primary-color);
+}
 
 .text-secondary-color {
     color: var(--secondary-color);
@@ -116,8 +130,16 @@
     font-family: 'Lato', sans-serif;
 }
 
+.font-35 {
+    font-size: 35px;
+}
+
 .font-32 {
     font-size: 32px;
+}
+
+.font-26 {
+    font-size: 26px;
 }
 
 .font-24 {
@@ -133,7 +155,7 @@
 }
 
 .font-18 {
-    font-size: 18px;
+    font-size: 18px !important;
 }
 
 .font-17 {
@@ -141,7 +163,7 @@
 }
 
 .font-16 {
-    font-size: 16px;
+    font-size: 16px !important;
 }
 
 .font-14 {
@@ -193,12 +215,24 @@
     list-style-position: inside;
 }
 
+.list-style-none {
+    list-style: none;
+}
+
 .card-shadow {
     box-shadow: 3px 3px 25px -10px rgba(0, 0, 0, 0.1), -3px -3px 25px -10px rgba(0, 0, 0, 0.1);
     ;
 }
 
 /* -------------- LAYOUT CSS -------------- */
+
+
+a[role="button"] {
+    width: 163px;
+    height: 50px;
+    font-size: 17px;
+}
+
 /* Pagination */
 .pagination>.page-item.active>.page-link {
     background-color: var(--button-color);

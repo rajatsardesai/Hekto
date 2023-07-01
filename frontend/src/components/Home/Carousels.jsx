@@ -33,7 +33,7 @@ const Carousels = () => {
                                 <br className="d-none d-lg-block" />Trends in 2023</h1>
                             <p className="d-none d-lg-block font-lato font-16 fw-bold text-gray-100-color">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Magna in est adipiscing
                                 <br className="d-none d-lg-block" />in phasellus non in justo.</p>
-                            <Button as={Link} to="/products" className="my-0 my-md-2 bg-secondary-color border-0 rounded-0 fw-semibold">
+                            <Button as={Link} to="/products" className="my-0 my-md-2 bg-secondary-color border-0 rounded-0 fw-semibold d-flex align-items-center justify-content-center">
                                 Shop Now
                             </Button>
                         </Carousel.Caption>
