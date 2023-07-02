@@ -14,7 +14,9 @@ import { getAllOrders } from '../../store/actions/orderAction';
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from 'react-router-dom';
 import HomeProductCards from './HomeProductCards';
-import HomeProductsTabs from './HomeProductsTabs';
+import LatestProductsTabs from './LatestProductsTabs';
+import DiscountProductsTabs from './DiscountProductsTabs';
+import BlogCards from './BlogCards';
 
 const Home = () => {
     const dispatch = useDispatch();
@@ -147,7 +149,7 @@ const Home = () => {
                 <Stack className="mt-5 pt-5">
                     <h2 className="mb-0 fs-1 fw-bold text-center text-blue-700-color">Latest Products</h2>
 
-                    <HomeProductsTabs latestProducts={latestProducts} bestSellerProducts={bestSellerProducts} filteredRatingProducts={filteredRatingProducts} />
+                    <LatestProductsTabs latestProducts={latestProducts} bestSellerProducts={bestSellerProducts} filteredRatingProducts={filteredRatingProducts} />
                 </Stack>
             </Container>
 
@@ -240,13 +242,37 @@ const Home = () => {
                                 <span className="font-26 text-primary-color">70% off on Sofas</span>
                                 <Link to="/products" className="font-16 font-lato fw-semibold text-secondary-color">View Sofas</Link>
                                 <img
-                                    className="d-block img-fluid trending-product-offers-tv"
+                                    className="d-block img-fluid trending-product-offers-tv w-50"
                                     src={process.env.PUBLIC_URL + '/assets/content/hekto-latest-trending-sofa-offer.png'}
                                     alt={`hekto-latest-trending-sofa-offer`}
                                 />
                             </Stack>
                         </Col>
                     </Row>
+                </Stack>
+
+                <Stack className="mt-5 pt-5 discount-products-tab">
+                    <h2 className="mb-0 fs-1 fw-bold text-center text-blue-700-color">Discounted Products</h2>
+
+                    <DiscountProductsTabs />
+                </Stack>
+            </Container>
+
+            <Stack className="mt-5 pt-5 newsletter-section justify-content-center align-items-center">
+                <h5 className="fw-bold text-primary-color text-center">Get Latest Update By Subscribing to
+                    <br className="d-none d-md-block" />&nbsp;0ur Newslater</h5>
+                <Button as={Link} to="/products" className=" bg-secondary-color border-0 rounded-0 fw-semibold d-flex align-items-center justify-content-center mt-2">
+                    Shop Now
+                </Button>
+            </Stack>
+
+            <Container>
+                <Stack className="home-blog-cards my-5 py-5">
+                    <h2 className="mb-5 fs-1 fw-bold text-center text-blue-700-color">Latest Blogs</h2>
+
+                    <Row xs={1} sm={2} md={3} className="justify-content-center g-4">
+                        <BlogCards />
+                    </Row >
                 </Stack>
             </Container>
         </>

@@ -24,6 +24,7 @@
     --gray-300-color: #f8f8fd;
     --gray-400-color: #eeeffb;
     --gray-500-color: #9096b2;
+    --gray-600-color: #e7e4f8;
     --green-100-color: #19d16f;
     --green-200-color: #dfffee;
     --pink-100-color: #febad7;
@@ -72,6 +73,10 @@
 
 .bg-gray-400-color {
     background-color: var(--gray-400-color);
+}
+
+.bg-gray-600-color {
+    background-color: var(--gray-600-color);
 }
 
 .bg-green-100-color {
@@ -227,7 +232,7 @@
 /* -------------- LAYOUT CSS -------------- */
 
 
-a[role="button"] {
+.btn[role="button"] {
     width: 163px;
     height: 50px;
     font-size: 17px;
@@ -316,4 +321,10 @@ a[role="button"] {
 .profile-container {
     max-width: 598px !important;
     height: 60vh;
+}
+
+/* Footer */
+.footer-social-media img{
+    width: 19px;
+    height: 19px;
 }

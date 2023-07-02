@@ -91,3 +91,30 @@
         right: 0;
     }
 }
+
+/* Newsletter */
+.newsletter-section {
+    background: url("../../../public/assets/content/hekto-newsletter.png") no-repeat center center/cover;
+    width: 100%;
+    height: 300px;
+
+    h5 {
+        font-size: 25px;
+
+        @media screen and (min-width:768px) {
+            font-size: 35px;
+        }
+    }
+}
+
+.newsletter-section h5 {
+    font-size: 25px;
+
+    @media screen and (min-width:768px) {
+        font-size: 35px;
+    }
+}
+
+.home-blog-cards .col{
+    width: 370px;
+}

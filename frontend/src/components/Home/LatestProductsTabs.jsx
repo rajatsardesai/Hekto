@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import "./HomeProductsTabs.css"
+import "./LatestProductsTabs.css"
 import Nav from 'react-bootstrap/Nav';
 import Tab from 'react-bootstrap/Tab';
 import Row from 'react-bootstrap/Row';
@@ -7,7 +7,7 @@ import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
 import { Link } from 'react-router-dom';
 
-const HomeProductsTabs = ({ latestProducts, bestSellerProducts, filteredRatingProducts }) => {
+const LatestProductsTabs = ({ latestProducts, bestSellerProducts, filteredRatingProducts }) => {
     const [activeTab, setActiveTab] = useState('tab1');
 
     const handleTabSelect = (tab) => {
@@ -34,13 +34,13 @@ const HomeProductsTabs = ({ latestProducts, bestSellerProducts, filteredRatingPr
             <Tab.Container defaultActiveKey={activeTab} onSelect={handleTabSelect}>
                 <Nav variant="tabs" className="home-products-tab justify-content-center flex-column flex-md-row border-0 mb-5">
                     <Nav.Item>
-                        <Nav.Link eventKey="tab1" className="border-0 text-center my-2 mx-0 mx-md-3">New Arrival</Nav.Link>
+                        <Nav.Link eventKey="tab1" className="border-0 font-lato text-center my-2 mx-0 mx-md-3">New Arrival</Nav.Link>
                     </Nav.Item>
                     <Nav.Item>
-                        <Nav.Link eventKey="tab2" className="border-0 text-center my-2 mx-0 mx-md-3">Best Seller</Nav.Link>
+                        <Nav.Link eventKey="tab2" className="border-0 font-lato text-center my-2 mx-0 mx-md-3">Best Seller</Nav.Link>
                     </Nav.Item>
                     <Nav.Item>
-                        <Nav.Link eventKey="tab3" className="border-0 text-center my-2 mx-0 mx-md-3">Featured</Nav.Link>
+                        <Nav.Link eventKey="tab3" className="border-0 font-lato text-center my-2 mx-0 mx-md-3">Featured</Nav.Link>
                     </Nav.Item>
                 </Nav>
 
@@ -78,4 +78,4 @@ const HomeProductsTabs = ({ latestProducts, bestSellerProducts, filteredRatingPr
     )
 }
 
-export default HomeProductsTabs;
+export default LatestProductsTabs;

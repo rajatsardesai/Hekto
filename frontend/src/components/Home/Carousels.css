@@ -25,17 +25,14 @@
         display: none;
     }
 
-    .home-carousel .carousel-item>img {
-        object-fit: contain;
+    .carousel-item>img {
+        object-fit: cover;
+        height: 499px;
         object-position: top;
     }
 
     .carousel-caption h1 {
-        font-size: 15px;
-
-        @media screen and (min-width:576px) {
-            font-size: 25px;
-        }
+        font-size: 25px;
 
         @media screen and (min-width:992px) {
             font-size: 53px;
@@ -44,12 +41,7 @@
 
     .carousel-caption a {
         width: 163px;
-        font-size: 10px;
-        height: auto;
-
-        @media screen and (min-width:576px) {
-            height: 50px;
-            font-size: 17px;
-        }
+        height: 50px;
+        font-size: 17px;
     }
 }
