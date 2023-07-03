@@ -43,7 +43,8 @@ export const getFilteredProducts = (keyword = "", currentPage = 1, price = 50000
             headerLoading: 0
         });
 
-        let link = `/api/v1/products?keyword=${keyword}&page=${currentPage}&price[lte]=${price}&ratings[gte]=${ratings}`;
+        let link;
+        link = `/api/v1/products?keyword=${keyword}&page=${currentPage}&price[lte]=${price}&ratings[gte]=${ratings}`;
 
         if (category) {
             link = `/api/v1/products?category=${category}&keyword=${keyword}&page=${currentPage}&price[lte]=${price}&ratings[gte]=${ratings}`;

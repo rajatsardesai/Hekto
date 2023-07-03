@@ -51,20 +51,22 @@ exports.getAllProducts = catchAsyncError(async (req, res) => {
 // Get filtered products
 exports.getFilteredProducts = catchAsyncError(async (req, res) => {
     // throw new Error("THis is new error");
-    const resultPerPage = 6;
+    const resultPerPage = 1;
     const productsCount = await Product.countDocuments();
 
-    const apiFeature = new ApiFeatures(Product.find(), req.query).search().filter().pagination(resultPerPage);
+    const apiFeature = new ApiFeatures(Product.find(), req.query).search().filter();
     let products = await apiFeature.query;
-    // let filteredProductsCount = products.length;
-    // apiFeature.pagination(resultPerPage);
-    // products = await apiFeature.query;
+    const filteredProductsCount = products.length;
+    
+    // For category
+    const categoryApiFeature = new ApiFeatures(Product.find(), req.query).search().filter().pagination(resultPerPage);
+    products = await categoryApiFeature.query;
     res.status(200).json({
         success: true,
         products,
         productsCount,
         resultPerPage,
-        // filteredProductsCount
+        filteredProductsCount
     });
 });
 
@@ -226,7 +228,7 @@ exports.deleteProductReview = catchAsyncError(async (req, res, next) => {
     let ratings = 0;
     if (reviews.length === 0) {
         ratings = 0;
-    }else{
+    } else {
         ratings = avg / product.reviews.length;
     }
 

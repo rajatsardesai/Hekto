@@ -52,9 +52,9 @@ const DiscountProductsTabs = () => {
 
                 <Tab.Content>
                     {
-                        tabs && tabs.map(item => {
+                        tabs && tabs.map((item, index) => {
                             return (
-                                <Tab.Pane eventKey={item.tab}>
+                                <Tab.Pane key={index} eventKey={item.tab}>
                                     <Row className="justify-content-center">
                                         <Col md="6" className="mb-4 mb-md-0">
                                             <h2 className="text-primary-color fw-bold font-35 mb-3">20% Discount Off on {item.productName}</h2>

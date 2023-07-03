@@ -46,16 +46,16 @@ const LatestProductsTabs = ({ latestProducts, bestSellerProducts, filteredRating
 
                 <Tab.Content>
                     {
-                        tabs && tabs.map(item => {
+                        tabs && tabs.map((item, index) => {
                             return (
-                                <Tab.Pane eventKey={item.tab}>
+                                <Tab.Pane key={index} eventKey={item.tab}>
                                     <Row className="mb-5 pb-4 justify-content-center g-4">
                                         {
                                             (item.products) && item.products.slice(0, 6).map(product => {
                                                 return (
                                                     <Col key={product._id}>
                                                         <Card className=" home-latest-product-cards text-decoration-none border-0 p-0 m-auto" as={Link} to={`/product/${product._id}`}>
-                                                            <Card.Img variant="top" src={product.images[0].url} alt={product.name} className="card-image m-auto object-fit" />
+                                                            <Card.Img variant="top" src={product.images[0].url} alt={product.name} className="card-image m-auto object-fit-contain" />
                                                             <Card.Body className="text-dark d-flex justify-content-between px-0 pb-0">
                                                                 <Card.Title className="text-overflow text-secondary-color me-3 mb-0">{product.name}</Card.Title>
                                                                 <Card.Text>

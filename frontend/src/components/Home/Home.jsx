@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import "./Home.css";
 import MetaData from '../MetaData';
 import Stack from 'react-bootstrap/esm/Stack';
 import Carousels from "./Carousels";
-import ProductsCard from '../Products/ProductsCard';
 import Container from 'react-bootstrap/esm/Container';
 import Button from 'react-bootstrap/Button';
 import Row from 'react-bootstrap/Row';
@@ -17,6 +16,7 @@ import HomeProductCards from './HomeProductCards';
 import LatestProductsTabs from './LatestProductsTabs';
 import DiscountProductsTabs from './DiscountProductsTabs';
 import BlogCards from './BlogCards';
+import LatestTrendingProducts from './LatestTrendingProducts';
 
 const Home = () => {
     const dispatch = useDispatch();
@@ -48,6 +48,27 @@ const Home = () => {
             ],
         }
     ];
+
+    const trendingCards = [
+        {
+            image: "/assets/content/hekto-latest-trending-chair-offer.png",
+            alt: "hekto-latest-trending-chair-offer",
+            title: "23% off on Chairs",
+            link: "Shop Now"
+        },
+        {
+            image: "/assets/content/hekto-latest-trending-tv-offer.png",
+            alt: "hekto-latest-trending-tv-offer",
+            title: "50% off on Tv Units",
+            link: "View Collection"
+        },
+        {
+            image: "/assets/content/hekto-latest-trending-sofa-offer.png",
+            alt: "hekto-latest-trending-sofa-offer",
+            title: "70% off on Sofas",
+            link: "View Sofas"
+        },
+    ]
 
     // Filter featured products to show ratings above 4
     const filteredRatingProducts = products && products.filter(product => product.ratings > 3);
@@ -131,7 +152,7 @@ const Home = () => {
     return (
         <>
             {/* Title tag */}
-            <MetaData title={"Online Furniture Shopping Store: Shop Online in India for Furniture, Home Decor, Homeware Products @ Hekto"} />
+            <MetaData title={"Online Furniture Shopping Store: Shop Online in India for Furniture, Home Decor, Homeware Products @Hekto"} />
 
             {/* Carousel Banners */}
             <Carousels />
@@ -156,47 +177,7 @@ const Home = () => {
             <Stack className="latest-trending-product mt-5 pt-5 bg-gray-400-color">
                 <Container>
                     <Row className="align-items-center">
-                        <Col md="6 position-relative">
-                            <img
-                                className="d-block img-fluid m-auto"
-                                src={process.env.PUBLIC_URL + '/assets/content/hekto-latest-trending-bubble.png'}
-                                alt={`hekto-latest-trending-bubble`}
-                            />
-                            <img
-                                className="latest-trending-chair d-block img-fluid ps-md-5"
-                                src={process.env.PUBLIC_URL + '/assets/content/hekto-latest-trending-chair.png'}
-                                alt={`hekto-latest-trending-chair`}
-                            />
-                        </Col>
-                        <Col md="6 latest-trending-product-text mt-5 mt-md-0">
-                            <h3 className="text-primary-color fw-bold font-35 mb-3">Unique Features Of Latest &
-                                Trending Products</h3>
-                            <ul className="text-gray-100-color font-lato ps-4 list-style-none mx-0 mb-4">
-                                <li>All frames constructed with hardwood solids and laminates</li>
-                                <li>Reinforced with double wood dowels, glue, screw - nails corner
-                                    blocks and machine nails</li>
-                                <li>Arms, backs and seats are structurally reinforced</li>
-                            </ul>
-                            <Stack className="flex-column-reverse flex-md-row" gap={3}>
-                                <Button as={Link} to="/products" className=" bg-secondary-color border-0 rounded-0 fw-semibold d-flex align-items-center justify-content-center flex-shrink-0">
-                                    Shop Now
-                                </Button>
-                                {
-                                    products && products.map((product, index) => {
-                                        if (index === 0) {
-                                            return (
-                                                <Stack key={index} className="text-primary-color" >
-                                                    <span className="text-overflow line-clamp-1 fw-semibold latest-trending-product-name">{product.name}</span>
-                                                    <span>{product.price}</span>
-                                                </Stack>
-                                            )
-                                        } else {
-                                            return;
-                                        }
-                                    })
-                                }
-                            </Stack>
-                        </Col>
+                        <LatestTrendingProducts products={products} />
                     </Row>
                 </Container>
             </Stack >
@@ -207,47 +188,31 @@ const Home = () => {
 
                     <Row md={3} lg={4} className="justify-content-center g-4">
                         {
-                            bestSellerProducts && bestSellerProducts.slice(0, 4).map((product, index) => {
+                            bestSellerProducts && bestSellerProducts.slice(0, 4).map((product) => {
                                 return (
-                                    <HomeProductCards key={index} product={product} styles={styles[0].trendingProductsStyles} />
+                                    <HomeProductCards key={product._id} product={product} styles={styles[0].trendingProductsStyles} />
                                 )
                             })
                         }
                     </Row>
                     <Row xs={1} md={2} lg={3} className="justify-content-center g-4 mt-3">
-                        <Col>
-                            <Stack className="trending-product-offers-card bg-pink-200-color p-4 position-relative">
-                                <span className="font-26 text-primary-color">23% off on Chairs</span>
-                                <Link to="/products" className="font-16 font-lato fw-semibold text-secondary-color">Shop Now</Link>
-                                <img
-                                    className=" d-block img-fluid trending-product-offers-chair"
-                                    src={process.env.PUBLIC_URL + '/assets/content/hekto-latest-trending-chair-offer.png'}
-                                    alt={`hekto-latest-trending-chair-offer`}
-                                />
-                            </Stack>
-                        </Col>
-                        <Col>
-                            <Stack className="trending-product-offers-card bg-gray-400-color p-4 position-relative">
-                                <span className="font-26 text-primary-color">50% off on Tv Units</span>
-                                <Link to="/products" className="font-16 font-lato fw-semibold text-secondary-color">View Collection</Link>
-                                <img
-                                    className="d-block img-fluid trending-product-offers-tv"
-                                    src={process.env.PUBLIC_URL + '/assets/content/hekto-latest-trending-tv-offer.png'}
-                                    alt={`hekto-latest-trending-tv-offer`}
-                                />
-                            </Stack>
-                        </Col>
-                        <Col>
-                            <Stack className="trending-product-offers-card bg-green-200-color p-4 position-relative">
-                                <span className="font-26 text-primary-color">70% off on Sofas</span>
-                                <Link to="/products" className="font-16 font-lato fw-semibold text-secondary-color">View Sofas</Link>
-                                <img
-                                    className="d-block img-fluid trending-product-offers-tv w-50"
-                                    src={process.env.PUBLIC_URL + '/assets/content/hekto-latest-trending-sofa-offer.png'}
-                                    alt={`hekto-latest-trending-sofa-offer`}
-                                />
-                            </Stack>
-                        </Col>
+                        {
+                            trendingCards && trendingCards.map((data, index) => {
+                                return (
+                                    <Col key={index}>
+                                        <Stack className="trending-product-offers-card bg-pink-200-color p-4 position-relative">
+                                            <span className="font-26 text-primary-color">{data.title}</span>
+                                            <Link to="/products" className="font-16 font-lato fw-semibold text-secondary-color">{data.link}</Link>
+                                            <img
+                                                className=" d-block img-fluid trending-product-offers-chair"
+                                                src={process.env.PUBLIC_URL + data.image}
+                                                alt={data.alt}
+                                            />
+                                        </Stack>
+                                    </Col>
+                                )
+                            })
+                        }
                     </Row>
                 </Stack>
 

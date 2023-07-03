@@ -141,7 +141,7 @@ const NewProduct = () => {
                                 {
                                     imagesPreview.map((image, index) => {
                                         return (
-                                            <Image key={index} src={image} alt="product preview" rounded thumbnail fluid className="w-25 object-fit" />
+                                            <Image key={index} src={image} alt="product preview" rounded thumbnail fluid className="w-25 object-fit-contain" />
                                         )
                                     })
                                 }

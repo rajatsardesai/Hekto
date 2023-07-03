@@ -6,14 +6,14 @@ import Accordion from 'react-bootstrap/Accordion';
 import ReactStars from "react-rating-stars-component";
 
 const categories = [
-    "Laptops",
-    "Home & Kitchen",
-    "Accessories",
-    "Fashion",
-    "Electronics",
-    "Cameras",
-    "Smartphones",
-    "Smartwatches",
+    "Sofas",
+    "Beds",
+    "Wardrobes",
+    "Dressing Tables",
+    "Dining Tables",
+    "Study Tables",
+    "Chairs",
+    "TV and Media Units",
 ];
 
 const ProductFilters = (props) => {
@@ -59,17 +59,17 @@ const ProductFilters = (props) => {
     return (
         <>
             {/* Category filter */}
-            <div className="bg-white p-4">
+            <div className="bg-white">
                 <Accordion>
                     <Accordion.Item className="border-0">
                         <Accordion.Header className="d-md-none">Filter</Accordion.Header>
-                        <Accordion.Body>
-                            <Form.Label className="fs-6 fw-bold">Category</Form.Label>
+                        <Accordion.Body className="ps-0">
+                            <Form.Label className="font-20 fw-bold text-primary-color text-decoration-underline">Category</Form.Label>
                             <ListGroup as="ul">
                                 {
                                     categories.map((category, index) => {
                                         return (
-                                            <ListGroup.Item key={index} as="li" className={`border-0 cursor-pointer py-1 ${activeIndex === index ? 'fw-bold' : ''}`} onClick={() => {
+                                            <ListGroup.Item key={index} as="li" className={`font-lato text-gray-500-color border-0 cursor-pointer py-1 px-0 ${activeIndex === index ? 'fw-bold' : ''}`} onClick={() => {
                                                 setCategory(category);
                                                 handleSelection(index);
                                             }}>{category}</ListGroup.Item>
@@ -79,15 +79,15 @@ const ProductFilters = (props) => {
                             </ListGroup>
 
                             {/* Price filter */}
-                            <Form.Label className="mt-5 fs-6 fw-bold">Price</Form.Label>
+                            <Form.Label className="mt-5 font-20 fw-bold text-primary-color text-decoration-underline">Price</Form.Label>
                             <Form.Range min={0} max={50000} value={price} onChange={priceHandler} />
                             <Stack direction="horizontal" className="justify-content-between">
-                                <Form.Label className="fs-6">₹0</Form.Label>
-                                <Form.Label className="fs-6">₹{price}</Form.Label>
+                                <Form.Label className="font-lato text-gray-500-color">₹0</Form.Label>
+                                <Form.Label className="font-lato text-gray-500-color">₹{price}</Form.Label>
                             </Stack>
 
                             {/* Rating filter */}
-                            <Form.Label className="mt-5 fs-6 fw-bold">Avg. Customer Review</Form.Label>
+                            <Form.Label className="mt-5 font-20 fw-bold text-primary-color text-decoration-underline">Avg. Customer Review</Form.Label>
                             <div className="d-flex cursor-pointer" onClick={() => {
                                 handleRatings(4);
                                 handleSelection(3);
