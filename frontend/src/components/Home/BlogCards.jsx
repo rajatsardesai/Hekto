@@ -29,7 +29,7 @@ const BlogCards = () => {
                                     <Card.Title className="text-overflow font-18 fw-bold text-primary-color my-2">Top esssential Trends in 2023</Card.Title>
                                     <Card.Text className="font-lato text-gray-100-color">
                                         More off this less hello samlande lied much over tightly circa horse taped mightly
-                                        <Link to={"/products"} className="text-primary-color d-block mt-3">Read More</Link>
+                                        <Link to={"/blogs"} className="text-primary-color d-block mt-3">Read More</Link>
                                     </Card.Text>
                                 </Card.Body>
                             </Card>

@@ -28,7 +28,7 @@ const Products = () => {
     // For ratings filter
     const [ratings, setRatings] = useState(0);
 
-    const { products, productsCount, filteredProductsCount, resultPerPage, loading, headerLoading, error, message } = useSelector(
+    const { products, productsCount, filteredProductsCount, resultPerPage, loading: productsLoading, headerLoading: productsHeaderLoading, error: productsError, message } = useSelector(
         (state) => state.products
     );
 
@@ -52,18 +52,18 @@ const Products = () => {
     }, [dispatch, keyword, currentPage, price, category, ratings]);
 
     return (
-        !loading &&
+        !productsLoading &&
         <>
             {/* Title tag */}
             <MetaData title={"All Products: Shop Online in India for Furniture, Home Decor, Homeware Products @Hekto"} />
 
             {/* React top loading bar */}
-            <HeaderLoading progressLoading={headerLoading} />
+            <HeaderLoading progressLoading={productsHeaderLoading} />
 
             {/* Header alert */}
             {
-                (error) &&
-                <HeaderAlert error={error} message={message} />
+                (productsError) &&
+                <HeaderAlert error={productsError} message={message} />
             }
 
             {/* Products */}

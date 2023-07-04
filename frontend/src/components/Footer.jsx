@@ -86,9 +86,15 @@ const Footer = () => {
                     <Stack className="flex-column flex-md-row justify-content-between align-items-center">
                         <span className="font-lato font-semibold text-gray-100-color mb-3 mb-md-0">&copy;Webecy - All Rights Reserved</span>
                         <Stack direction="horizontal" className="justify-content-center">
-                            <img src={process.env.PUBLIC_URL + "/assets/style/fb-icon.svg"} alt="fb-icon" className="me-2" />
-                            <img src={process.env.PUBLIC_URL + "/assets/style/insta-icon.svg"} alt="insta-icon" className="me-2" />
-                            <img src={process.env.PUBLIC_URL + "/assets/style/tweet-icon.svg"} alt="tweet-icon" />
+                            <Link to="https://www.facebook.com" target="_blank">
+                                <img src={process.env.PUBLIC_URL + "/assets/style/fb-icon.svg"} alt="fb-icon" className="me-2" />
+                            </Link>
+                            <Link to="https://www.instagram.com" target="_blank">
+                                <img src={process.env.PUBLIC_URL + "/assets/style/insta-icon.svg"} alt="insta-icon" className="me-2" />
+                            </Link>
+                            <Link to="https://www.twitter.com" target="_blank">
+                                <img src={process.env.PUBLIC_URL + "/assets/style/tweet-icon.svg"} alt="tweet-icon" />
+                            </Link>
                         </Stack>
                     </Stack>
                 </Container>

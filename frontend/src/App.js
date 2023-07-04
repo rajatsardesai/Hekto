@@ -26,6 +26,8 @@ import ProcessOrder from './components/Admin/ProcessOrder';
 import UsersList from './components/Admin/UsersList';
 import UpdateUser from './components/Admin/UpdateUser';
 import ProductReviews from './components/Admin/ProductReviews';
+import Blogs from './components/Blogs/Blogs';
+import Contact from './components/Contact/Contact';
 import { loadUser } from './store/actions/userAction';
 import store from "./store/store";
 import axios from "axios";
@@ -47,7 +49,7 @@ function App() {
     }
   };
 
-  const promise = loadStripe(stripeApiKey);
+  const promise = stripeApiKey ? loadStripe(stripeApiKey) : null;
 
   useEffect(() => {
     store.dispatch(loadUser());
@@ -64,6 +66,8 @@ function App() {
             <Route exact path="/products" Component={Products} />
             <Route exact path="/product/:id" Component={ProductDetails} />
             <Route path="/products/:keyword" Component={Products} />
+            <Route path="/blogs" Component={Blogs} />
+            <Route path="/contact" Component={Contact} />
             <Route path="/cart" Component={Cart} />
             <Route exact path="/login" Component={Login} />
             <Route exact path='/password/forgot' Component={ForgotPassword} />

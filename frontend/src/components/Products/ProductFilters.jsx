@@ -19,9 +19,12 @@ const categories = [
 const ProductFilters = (props) => {
     const { price, setPrice, setCategory, setRatings } = props;
     const [activeIndex, setActiveIndex] = useState(null);
+    const [isCategory, setIsCategory] = useState(false);
 
-    // Selection handler
-    const handleSelection = (index) => {
+    // Category filter handler
+    const handleCategory = (category, index) => {
+        setIsCategory(!isCategory);
+        setCategory(isCategory ? "" : category);
         setActiveIndex(index);
     };
 
@@ -31,8 +34,9 @@ const ProductFilters = (props) => {
     }
 
     // Ratings filter handler
-    const handleRatings = (value) => {
+    const handleRatings = (value, index) => {
         setRatings(value);
+        setActiveIndex(index);
     };
 
     // Resize handler to disable filter accordion
@@ -69,10 +73,7 @@ const ProductFilters = (props) => {
                                 {
                                     categories.map((category, index) => {
                                         return (
-                                            <ListGroup.Item key={index} as="li" className={`font-lato text-gray-500-color border-0 cursor-pointer py-1 px-0 ${activeIndex === index ? 'fw-bold' : ''}`} onClick={() => {
-                                                setCategory(category);
-                                                handleSelection(index);
-                                            }}>{category}</ListGroup.Item>
+                                            <ListGroup.Item key={index} as="li" className={`font-lato text-gray-500-color border-0 cursor-pointer py-1 px-0 ${activeIndex === index ? 'fw-bold' : ''}`} onClick={() => handleCategory(category, index)}>{category}</ListGroup.Item>
                                         )
                                     })
                                 }
@@ -88,28 +89,16 @@ const ProductFilters = (props) => {
 
                             {/* Rating filter */}
                             <Form.Label className="mt-5 font-20 fw-bold text-primary-color text-decoration-underline">Avg. Customer Review</Form.Label>
-                            <div className="d-flex cursor-pointer" onClick={() => {
-                                handleRatings(4);
-                                handleSelection(3);
-                            }}>
+                            <div className="d-flex cursor-pointer" onClick={() => handleRatings(4, 3)}>
                                 < ReactStars {...options} value={4} /> <span className={`mx-2 fs-6 ${activeIndex === 3 ? 'fw-bold' : ''}`}>& up</span>
                             </div>
-                            <div className="d-flex cursor-pointer" onClick={() => {
-                                handleRatings(3);
-                                handleSelection(2);
-                            }}>
+                            <div className="d-flex cursor-pointer" onClick={() => handleRatings(3, 2)}>
                                 < ReactStars {...options} value={3} /> <span className={`mx-2 fs-6 ${activeIndex === 2 ? 'fw-bold' : ''}`}>& up</span>
                             </div>
-                            <div className="d-flex cursor-pointer" onClick={() => {
-                                handleRatings(2);
-                                handleSelection(1);
-                            }}>
+                            <div className="d-flex cursor-pointer" onClick={() => handleRatings(2, 1)}>
                                 < ReactStars {...options} value={2} /> <span className={`mx-2 fs-6 ${activeIndex === 1 ? 'fw-bold' : ''}`}>& up</span>
                             </div>
-                            <div className="d-flex cursor-pointer" onClick={() => {
-                                handleRatings(1);
-                                handleSelection(0);
-                            }}>
+                            <div className="d-flex cursor-pointer" onClick={() => handleRatings(1, 0)}>
                                 < ReactStars {...options} value={1} /> <span className={`mx-2 fs-6 ${activeIndex === 0 ? 'fw-bold' : ''}`}>& up</span>
                             </div>
                         </Accordion.Body>

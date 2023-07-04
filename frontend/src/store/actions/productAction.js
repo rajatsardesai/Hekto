@@ -8,14 +8,14 @@ export const getAllProducts = () => async (dispatch) => {
 
         dispatch({
             type: SET_LOADER_PROGRESS,
-            headerLoading: 0
+            productsHeaderLoading: 0
         });
 
         const { data } = await axios.get(`/api/v1/allproducts`);
 
         dispatch({
             type: SET_LOADER_PROGRESS,
-            headerLoading: 50
+            productsHeaderLoading: 50
         });
         dispatch({
             type: ALL_PRODUCTS_SUCCESS,
@@ -23,7 +23,7 @@ export const getAllProducts = () => async (dispatch) => {
         });
         dispatch({
             type: SET_LOADER_PROGRESS,
-            headerLoading: 100
+            productsHeaderLoading: 100
         });
     } catch (error) {
         dispatch({
@@ -110,12 +110,12 @@ export const getProductDetails = (id) => async (dispatch) => {
 
         dispatch({
             type: SET_LOADER_PROGRESS,
-            productDetailsLoading: 0
+            productDetailsHeaderLoading: 0
         });
         const { data } = await axios.get(`/api/v1/product/${id}`);
         dispatch({
             type: SET_LOADER_PROGRESS,
-            productDetailsLoading: 50
+            productDetailsHeaderLoading: 50
         });
         dispatch({
             type: PRODUCT_DETAILS_SUCCESS,
@@ -123,7 +123,7 @@ export const getProductDetails = (id) => async (dispatch) => {
         });
         dispatch({
             type: SET_LOADER_PROGRESS,
-            productDetailsLoading: 100
+            productDetailsHeaderLoading: 100
         });
     } catch (error) {
         dispatch({
@@ -140,7 +140,7 @@ export const newReview = (reviewData) => async (dispatch) => {
 
         dispatch({
             type: SET_LOADER_PROGRESS,
-            newReviewLoading: 0
+            newReviewHeaderLoading: 0
         });
 
         const config = { headers: { "Content-Type": "application/json" } };
@@ -149,7 +149,7 @@ export const newReview = (reviewData) => async (dispatch) => {
 
         dispatch({
             type: SET_LOADER_PROGRESS,
-            productDetailsLoading: 50
+            newReviewHeaderLoading: 50
         });
         dispatch({
             type: NEW_REVIEW_SUCCESS,
@@ -157,7 +157,7 @@ export const newReview = (reviewData) => async (dispatch) => {
         });
         dispatch({
             type: SET_LOADER_PROGRESS,
-            productDetailsLoading: 100
+            newReviewHeaderLoading: 100
         });
     } catch (error) {
         dispatch({

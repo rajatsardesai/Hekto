@@ -19,7 +19,7 @@ const HeaderAccount = ({ user, color }) => {
     // Check login status
     const checkLoginStatus = (link) => {
         if (user && link !== "logout") {
-            navigate(`/${link}`);
+            navigate(`/`);
         } else if (user && link === "logout") {
             dispatch(logoutUser());
         } else {

@@ -48,16 +48,16 @@ const HeaderBelt = () => {
             <HeaderMain />
             <Navbar className="header-belt bg-white" expand="md" variant="dark" sticky="top">
                 <Container>
-                    <Navbar.Brand as={Link} to={'/'} className="fs-2 fw-semibold">Hekto</Navbar.Brand>
+                    <Navbar.Brand as={Link} to={'/'} className="fs-2 fw-semibold text-primary-color">Hekto</Navbar.Brand>
                     <Navbar.Toggle aria-controls="navbarScroll" />
                     <Navbar.Collapse id="navbarScroll" className="py-2 py-md-0">
                         <Nav
                             className="me-auto ms-0 ms-lg-5 my-2 my-lg-0 font-16 font-lato"
                         >
                             <Nav.Link active={location.pathname === "/" ? true : false} as={Link} to={'/'} className="px-3">Home</Nav.Link>
-                            <Nav.Link active={location.pathname === "/products" ? true : false} as={Link} to={'/products'} className="px-3">Products</Nav.Link>
-                            <Nav.Link active={location.pathname === "/blog" ? true : false} as={Link} to={'/blog'} className="px-3">Blog</Nav.Link>
-                            <Nav.Link active={location.pathname === "/contact" ? true : false} as={Link} to={'/contact'} className="px-3">Contact</Nav.Link>
+                            <Nav.Link active={location.pathname.includes("/product")} as={Link} to={'/products'} className="px-3">Products</Nav.Link>
+                            <Nav.Link active={location.pathname.includes("/blogs")} as={Link} to={'/blogs'} className="px-3">Blog</Nav.Link>
+                            <Nav.Link active={location.pathname.includes("/contact")} as={Link} to={'/contact'} className="px-3">Contact</Nav.Link>
                             <Stack className="d-block d-md-none">
                                 <HeaderAccount user={user} color={"#0d0e43"} />
                             </Stack>

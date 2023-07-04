@@ -4,20 +4,21 @@ import { Outlet, useNavigate } from 'react-router-dom';
 
 const ProtectedRoute = ({ isAdmin }) => {
     const navigate = useNavigate();
-
-    const { isAuthenticated, loading, user } = useSelector(
-        (state) => state.user
-    );
+    const { isAuthenticated, loading, user } = useSelector((state) => state.user);
 
     useEffect(() => {
-        if (isAdmin === true && user.role !== "admin") {
-            navigate("/");
+        if (!loading && isAuthenticated) {
+            if (!isAdmin && (!user || user.role !== 'admin')) {
+                navigate('/');
+            }
         }
-    }, [isAdmin, navigate, user.role])
+    }, [isAdmin, loading, navigate, isAuthenticated, user]);
 
-    return (
-        loading && isAuthenticated && <Outlet />
-    )
+    if (!loading || (!isAdmin && (!user || user.role !== 'admin'))) {
+        return null;
+    }
+
+    return <Outlet />;
 }
 
 export default ProtectedRoute;

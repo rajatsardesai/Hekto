@@ -5,18 +5,18 @@ export const productsReducer = (state = { products: [] }, action) => {
         case SET_LOADER_PROGRESS:
             return {
                 ...state,
-                headerLoading: action.headerLoading
+                productsHeaderLoading: action.productsHeaderLoading
             }
         case ALL_PRODUCTS_REQUEST:
         case FILTERED_PRODUCTS_REQUEST:
         case ADMIN_PRODUCT_REQUEST:
             return {
                 ...state,
-                loading: true,
+                productsLoading: true,
             }
         case FILTERED_PRODUCTS_SUCCESS:
             return {
-                loading: false,
+                productsLoading: false,
                 products: action.payload.products,
                 productsCount: action.payload.productsCount,
                 resultPerPage: action.payload.resultPerPage,
@@ -24,20 +24,20 @@ export const productsReducer = (state = { products: [] }, action) => {
             }
         case ALL_PRODUCTS_SUCCESS:
             return {
-                loading: false,
+                productsLoading: false,
                 products: action.payload.products
             }
         case ADMIN_PRODUCT_SUCCESS:
             return {
-                loading: false,
+                productsLoading: false,
                 products: action.payload
             }
         case ALL_PRODUCTS_FAIL:
         case FILTERED_PRODUCTS_FAIL:
         case ADMIN_PRODUCT_FAIL:
             return {
-                loading: false,
-                error: action.payload
+                productsLoading: false,
+                productsError: action.payload
             }
         default:
             return state;
@@ -134,23 +134,23 @@ export const productDetailsReducer = (state = { product: {} }, action) => {
     switch (action.type) {
         case SET_LOADER_PROGRESS:
             return {
-                loading: true,
+                productDetailsLoading: true,
                 ...state,
-                productDetailsLoading: action.productDetailsLoading
+                productDetailsHeaderLoading: action.productDetailsHeaderLoading
             }
         case PRODUCT_DETAILS_REQUEST:
             return {
-                loading: true,
+                productDetailsLoading: true,
                 ...state
             }
         case PRODUCT_DETAILS_SUCCESS:
             return {
-                loading: false,
+                productDetailsLoading: false,
                 product: action.payload,
             }
         case PRODUCT_DETAILS_FAIL:
             return {
-                loading: false,
+                productDetailsLoading: false,
                 productDetailsError: action.payload
             }
         default:
@@ -163,18 +163,18 @@ export const newReviewReducer = (state = {}, action) => {
     switch (action.type) {
         case SET_LOADER_PROGRESS:
             return {
-                loading: true,
                 ...state,
-                newReviewLoading: action.productDetailsLoading
+                newReviewLoading: true,
+                newReviewHeaderLoading: action.newReviewHeaderLoading
             }
         case NEW_REVIEW_REQUEST:
             return {
                 ...state,
-                loading: true,
+                newReviewLoading: true,
             }
         case NEW_REVIEW_SUCCESS:
             return {
-                loading: false,
+                newReviewLoading: false,
                 success: action.payload
             }
         case NEW_REVIEW_RESET:
@@ -185,8 +185,8 @@ export const newReviewReducer = (state = {}, action) => {
         case NEW_REVIEW_FAIL:
             return {
                 ...state,
-                loading: false,
-                reviewsError: action.payload
+                newReviewLoading: false,
+                newReviewError: action.payload
             }
         default:
             return state;

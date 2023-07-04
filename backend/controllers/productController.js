@@ -51,13 +51,13 @@ exports.getAllProducts = catchAsyncError(async (req, res) => {
 // Get filtered products
 exports.getFilteredProducts = catchAsyncError(async (req, res) => {
     // throw new Error("THis is new error");
-    const resultPerPage = 1;
+    const resultPerPage = 6;
     const productsCount = await Product.countDocuments();
 
     const apiFeature = new ApiFeatures(Product.find(), req.query).search().filter();
     let products = await apiFeature.query;
     const filteredProductsCount = products.length;
-    
+
     // For category
     const categoryApiFeature = new ApiFeatures(Product.find(), req.query).search().filter().pagination(resultPerPage);
     products = await categoryApiFeature.query;
@@ -165,6 +165,7 @@ exports.createProductReview = catchAsyncError(async (req, res, next) => {
     const review = {
         user: req.user._id,
         name: req.user.name,
+        avatar: req.user.avatar.url,
         rating: Number(rating),
         comment
     };

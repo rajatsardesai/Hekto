@@ -43,6 +43,10 @@
 
 /* Background Colors */
 
+.bg-primary-color {
+    background-color: var(--primary-color);
+}
+
 .bg-secondary-color {
     background-color: var(--secondary-color) !important;
 }
@@ -234,12 +238,27 @@
 }
 
 /* -------------- LAYOUT CSS -------------- */
-
-
 .btn[role="button"] {
     width: 163px;
     height: 50px;
     font-size: 17px;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-color: var(--secondary-color);
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, .5);
+}
+
+::-webkit-scrollbar-track {
+    border-radius: 10px;
+    background-color: var(--gray-200-color);
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, .4);
 }
 
 /* Pagination */
@@ -250,6 +269,29 @@
 .pagination>.page-item.active>.page-link {
     background-color: var(--secondary-color);
     border: 0;
+}
+
+/* Accordion */
+.accordion {
+    .accordion-button:focus {
+        border-color: transparent;
+        box-shadow: none;
+    }
+
+    .accordion-button[aria-expanded="true"] {
+        background-color: var(--secondary-color);
+        color: var(--white);
+    }
+
+    .accordion-button[aria-expanded="false"] {
+        background-color: var(--secondary-color);
+        color: var(--white);
+    }
+
+    .accordion-button::after {
+        content: "";
+        filter: invert(1);
+    }
 }
 
 /* Home page */
@@ -267,23 +309,17 @@
 /* product-details-carousel */
 
 .product-details-carousel {
-    height: 594px;
-}
-
-.product-details-carousel .carousel-item img {
-    width: 546px;
-    height: 546px;
-    object-fit: contain;
+    /* height: 594px; */
 }
 
 .product-details-carousel>.carousel-indicators {
-    display: block !important;
-    text-align: center;
+    /* display: block !important; */
+    /* text-align: center; */
 }
 
-.product-details-carousel>.carousel-indicators>button {
+/* .product-details-carousel>.carousel-indicators>button {
     background-color: #131921;
-}
+} */
 
 .product-details-dropdown {
     min-width: 47px !important;
