@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react';
 import MetaData from '../MetaData';
+import HeaderLoading from '../Header/HeaderLoading';
+import HeaderAlert from '../Header/HeaderAlert';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Table from 'react-bootstrap/Table';
@@ -15,30 +17,36 @@ import Sidebar from './Sidebar';
 const UsersList = () => {
     const dispatch = useDispatch();
 
-    const { error, users } = useSelector((state => state.allUsers));
-    const { error: deleteError, isDeleted, message } = useSelector((state => state.profile));
+    const { headerLoading: allUsersHeaderLoading, error: allUsersError, message: allUsersMessage, users } = useSelector((state => state.allUsers));
+    const { headerLoading: deleteHeaderLoading, error: deleteError, message: deleteMessage, isDeleted } = useSelector((state => state.profile));
 
     const deleteUserHandler = (id) => {
         dispatch(deleteUser(id));
     };
 
     useEffect(() => {
-        if (error || deleteError) {
-            alert(error || deleteError);
-        };
-
         if (isDeleted) {
-            alert(message);
-            dispatch({ type: DELETE_USER_RESET });
+            setTimeout(() => {
+                dispatch({ type: DELETE_USER_RESET });
+            }, 5000);
         };
 
         dispatch(getAllUsers());
-    }, [dispatch, isDeleted, deleteError, error, message]);
+    }, [dispatch, isDeleted, deleteError]);
 
     return (
         <>
             {/* Title tag */}
-            <MetaData title={"All Products - Admin"} />
+            <MetaData title={"All Users - Admin"} />
+
+            {/* React top loading bar */}
+            <HeaderLoading progressLoading={allUsersHeaderLoading || deleteHeaderLoading} />
+
+            {/* Header alert */}
+            {
+                (allUsersError || deleteError || isDeleted) &&
+                <HeaderAlert error={allUsersError || deleteError} message={allUsersMessage || deleteMessage} />
+            }
 
             {/* All products list */}
             <Container className="my-5 h-60vh">
@@ -52,7 +60,7 @@ const UsersList = () => {
                     <Col lg={8}>
                         {
                             users.length > 0 ?
-                                <Table bordered hover responsive="md">
+                                <Table bordered hover responsive>
                                     <thead className="bg-gray-400-color">
                                         <tr>
                                             <th>User Id</th>
@@ -73,7 +81,7 @@ const UsersList = () => {
                                                         <td>{user.email}</td>
                                                         <td>{user.role}</td>
                                                         <td className="d-flex">
-                                                            <Button as={Link} to={`/admin/user/${user._id}`} className="bg-secondary-color border-0 py-2 px-3 rounded-0 text-nowrap me-2">Edit</Button>
+                                                            <Button as={Link} to={`/admin/user/${user._id}`} className="bg-secondary-color border-0 py-2 px-3 rounded-0 text-nowrap me-2 w-auto d-flex justify-content-center align-items-center">Edit</Button>
                                                             <Button onClick={() => deleteUserHandler(user._id)} className="bg-secondary-color border-0 py-2 px-3 rounded-0 text-nowrap">Delete</Button>
                                                         </td>
                                                     </tr>

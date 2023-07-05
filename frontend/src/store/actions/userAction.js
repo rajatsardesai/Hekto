@@ -272,14 +272,14 @@ export const getAllUsers = () => async (dispatch) => {
 
         dispatch({
             type: SET_LOADER_PROGRESS,
-            logoutLoading: 0
+            headerLoading: 0
         });
 
         const { data } = await axios.get(`/api/v1/admin/users`);
 
         dispatch({
             type: SET_LOADER_PROGRESS,
-            logoutLoading: 50
+            headerLoading: 50
         });
 
         dispatch({
@@ -289,7 +289,7 @@ export const getAllUsers = () => async (dispatch) => {
 
         dispatch({
             type: SET_LOADER_PROGRESS,
-            logoutLoading: 100
+            headerLoading: 100
         });
     } catch (error) {
         dispatch({ type: ALL_USERS_FAIL, payload: error.response.data.message });
@@ -305,14 +305,14 @@ export const getUserDetails = (id) => async (dispatch) => {
 
         dispatch({
             type: SET_LOADER_PROGRESS,
-            logoutLoading: 0
+            headerLoading: 0
         });
 
         const { data } = await axios.get(`/api/v1/admin/user/${id}`);
 
         dispatch({
             type: SET_LOADER_PROGRESS,
-            logoutLoading: 50
+            headerLoading: 50
         });
 
         dispatch({
@@ -322,7 +322,7 @@ export const getUserDetails = (id) => async (dispatch) => {
 
         dispatch({
             type: SET_LOADER_PROGRESS,
-            logoutLoading: 100
+            headerLoading: 100
         });
     } catch (error) {
         dispatch({ type: USER_DETAILS_FAIL, payload: error.response.data.message });
@@ -352,7 +352,7 @@ export const updateUser = (id, userData) => async (dispatch) => {
             updatePasswordLoading: 50
         });
 
-        dispatch({ type: UPDATE_USER_SUCCESS, payload: data.success });
+        dispatch({ type: UPDATE_USER_SUCCESS, payload: data });
 
         dispatch({
             type: SET_LOADER_PROGRESS,
@@ -370,7 +370,7 @@ export const deleteUser = (id) => async (dispatch) => {
 
         dispatch({
             type: SET_LOADER_PROGRESS,
-            updatePasswordLoading: 0
+            headerLoading: 0
         });
 
         const { data } = await axios.delete(
@@ -379,14 +379,14 @@ export const deleteUser = (id) => async (dispatch) => {
 
         dispatch({
             type: SET_LOADER_PROGRESS,
-            updatePasswordLoading: 50
+            headerLoading: 50
         });
 
         dispatch({ type: DELETE_USER_SUCCESS, payload: data });
 
         dispatch({
             type: SET_LOADER_PROGRESS,
-            updatePasswordLoading: 100
+            headerLoading: 100
         });
     } catch (error) {
         dispatch({ type: DELETE_USER_FAIL, payload: error.response.data.message });

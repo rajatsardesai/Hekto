@@ -1,5 +1,9 @@
-.order-success > svg{
+.order-success>svg {
     width: 150px;
+}
+
+.order-success a[role="button"] {
+    width: auto;
 }
 
 .path {

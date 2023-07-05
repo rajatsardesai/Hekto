@@ -5,18 +5,18 @@ export const productsReducer = (state = { products: [] }, action) => {
         case SET_LOADER_PROGRESS:
             return {
                 ...state,
-                productsHeaderLoading: action.productsHeaderLoading
+                headerLoading: action.headerLoading
             }
         case ALL_PRODUCTS_REQUEST:
         case FILTERED_PRODUCTS_REQUEST:
         case ADMIN_PRODUCT_REQUEST:
             return {
                 ...state,
-                productsLoading: true,
+                loading: true,
             }
         case FILTERED_PRODUCTS_SUCCESS:
             return {
-                productsLoading: false,
+                loading: false,
                 products: action.payload.products,
                 productsCount: action.payload.productsCount,
                 resultPerPage: action.payload.resultPerPage,
@@ -24,20 +24,20 @@ export const productsReducer = (state = { products: [] }, action) => {
             }
         case ALL_PRODUCTS_SUCCESS:
             return {
-                productsLoading: false,
+                loading: false,
                 products: action.payload.products
             }
         case ADMIN_PRODUCT_SUCCESS:
             return {
-                productsLoading: false,
+                loading: false,
                 products: action.payload
             }
         case ALL_PRODUCTS_FAIL:
         case FILTERED_PRODUCTS_FAIL:
         case ADMIN_PRODUCT_FAIL:
             return {
-                productsLoading: false,
-                productsError: action.payload
+                loading: false,
+                error: action.payload
             }
         default:
             return state;
@@ -49,9 +49,9 @@ export const newProductReducer = (state = { product: {} }, action) => {
     switch (action.type) {
         case SET_LOADER_PROGRESS:
             return {
-                loading: true,
                 ...state,
-                newProductLoading: action.newProductLoading
+                loading: true,
+                headerLoading: action.headerLoading
             }
         case NEW_PRODUCT_REQUEST:
             return {
@@ -62,6 +62,7 @@ export const newProductReducer = (state = { product: {} }, action) => {
             return {
                 loading: false,
                 success: action.payload.success,
+                message: action.payload.message,
                 product: action.payload.product
             }
         case NEW_PRODUCT_RESET:
@@ -85,9 +86,9 @@ export const productReducer = (state = {}, action) => {
     switch (action.type) {
         case SET_LOADER_PROGRESS:
             return {
-                loading: true,
                 ...state,
-                newReviewLoading: action.productDetailsLoading
+                loading: true,
+                headerLoading: action.headerLoading
             }
         case DELETE_PRODUCT_REQUEST:
         case UPDATE_PRODUCT_REQUEST:
@@ -99,13 +100,15 @@ export const productReducer = (state = {}, action) => {
             return {
                 ...state,
                 loading: false,
-                isDeleted: action.payload
+                isDeleted: action.payload.success,
+                message: action.payload.message
             }
         case UPDATE_PRODUCT_SUCCESS:
             return {
                 ...state,
                 loading: false,
-                isUpdated: action.payload
+                isUpdated: action.payload.success,
+                message: action.payload.message
             }
         case DELETE_PRODUCT_RESET:
             return {
@@ -134,24 +137,24 @@ export const productDetailsReducer = (state = { product: {} }, action) => {
     switch (action.type) {
         case SET_LOADER_PROGRESS:
             return {
-                productDetailsLoading: true,
                 ...state,
-                productDetailsHeaderLoading: action.productDetailsHeaderLoading
+                loading: true,
+                headerLoading: action.headerLoading
             }
         case PRODUCT_DETAILS_REQUEST:
             return {
-                productDetailsLoading: true,
+                loading: true,
                 ...state
             }
         case PRODUCT_DETAILS_SUCCESS:
             return {
-                productDetailsLoading: false,
+                loading: false,
                 product: action.payload,
             }
         case PRODUCT_DETAILS_FAIL:
             return {
-                productDetailsLoading: false,
-                productDetailsError: action.payload
+                loading: false,
+                error: action.payload
             }
         default:
             return state;
@@ -164,17 +167,17 @@ export const newReviewReducer = (state = {}, action) => {
         case SET_LOADER_PROGRESS:
             return {
                 ...state,
-                newReviewLoading: true,
-                newReviewHeaderLoading: action.newReviewHeaderLoading
+                loading: true,
+                headerLoading: action.headerLoading
             }
         case NEW_REVIEW_REQUEST:
             return {
                 ...state,
-                newReviewLoading: true,
+                loading: true,
             }
         case NEW_REVIEW_SUCCESS:
             return {
-                newReviewLoading: false,
+                loading: false,
                 success: action.payload
             }
         case NEW_REVIEW_RESET:
@@ -185,8 +188,8 @@ export const newReviewReducer = (state = {}, action) => {
         case NEW_REVIEW_FAIL:
             return {
                 ...state,
-                newReviewLoading: false,
-                newReviewError: action.payload
+                loading: false,
+                error: action.payload
             }
         default:
             return state;
@@ -200,7 +203,7 @@ export const productReviewsReducer = (state = { reviews: [] }, action) => {
             return {
                 ...state,
                 loading: true,
-                productDetailsLoading: action.productDetailsLoading
+                headerLoading: action.headerLoading
             }
         case ALL_REVIEW_REQUEST:
             return {
@@ -228,9 +231,9 @@ export const reviewReducer = (state = {}, action) => {
     switch (action.type) {
         case SET_LOADER_PROGRESS:
             return {
-                loading: true,
                 ...state,
-                newReviewLoading: action.productDetailsLoading
+                loading: true,
+                headerLoading: action.headerLoading
             }
         case DELETE_REVIEW_REQUEST:
             return {
@@ -240,7 +243,8 @@ export const reviewReducer = (state = {}, action) => {
         case DELETE_REVIEW_SUCCESS:
             return {
                 loading: false,
-                isDeleted: action.payload
+                isDeleted: action.payload.success,
+                message: action.payload.message,
             }
         case DELETE_REVIEW_RESET:
             return {

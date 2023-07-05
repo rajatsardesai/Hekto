@@ -35,6 +35,7 @@ exports.createProduct = catchAsyncError(async (req, res, next) => {
     res.status(201).json({
         success: true,
         product,
+        message: "New product created successfully!!"
     });
 });
 
@@ -135,7 +136,8 @@ exports.updateProduct = catchAsyncError(async (req, res, next) => {
 
     res.status(200).json({
         success: true,
-        product
+        product,
+        message: "Product updated succcessfully!"
     })
 });
 
@@ -154,7 +156,7 @@ exports.deleteProduct = catchAsyncError(async (req, res, next) => {
     await product.deleteOne();
     res.status(200).json({
         success: true,
-        message: "Product deleted"
+        message: "Product deleted successfully!"
     })
 });
 
@@ -243,6 +245,6 @@ exports.deleteProductReview = catchAsyncError(async (req, res, next) => {
 
     res.status(200).json({
         success: true,
-        message: "Review deleted"
+        message: "Review deleted successfully!!"
     })
 });

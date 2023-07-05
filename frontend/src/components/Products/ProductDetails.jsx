@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import "./ProductDetails.css"
+import MetaData from '../MetaData';
 import HeaderLoading from '../Header/HeaderLoading';
 import HeaderAlert from '../Header/HeaderAlert';
 import Carousel from 'react-bootstrap/Carousel';
@@ -19,7 +20,6 @@ import ProductsCard from './ProductsCard';
 import { useSelector, useDispatch } from "react-redux";
 import { Link, useParams } from 'react-router-dom';
 import ReactStars from "react-rating-stars-component";
-import MetaData from '../MetaData';
 import { NEW_REVIEW_RESET } from '../../store/constants/productConstants';
 
 const ProductDetails = () => {
@@ -102,7 +102,7 @@ const ProductDetails = () => {
     }, [dispatch, id, success]);
 
     return (
-        !(productsLoading || productDetailsLoading || newReviewLoading) && <>
+        (productsLoading === false || productDetailsLoading === false || newReviewLoading === false) && <>
             {/* Title tag */}
             <MetaData title={`${product.name} -@Hekto`} />
 

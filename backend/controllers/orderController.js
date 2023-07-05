@@ -102,7 +102,7 @@ exports.updateOrder = catchAsyncError(async (req, res, next) => {
 
     res.status(200).json({
         success: true,
-        message: "Status has been updated"
+        message: "Status updated successfully!!"
     });
 });
 
@@ -129,6 +129,6 @@ exports.deleteOrder = catchAsyncError(async (req, res, next) => {
 
     res.status(200).json({
         success: true,
-        message: "Order has been deleted"
+        message: "Order deleted successfully!!"
     });
 });

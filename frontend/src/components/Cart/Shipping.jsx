@@ -1,4 +1,8 @@
 import React, { useState, useRef } from 'react';
+import "./Shipping.css";
+import HeaderLoading from '../Header/HeaderLoading';
+import HeaderAlert from '../Header/HeaderAlert';
+import MetaData from '../MetaData';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -20,7 +24,7 @@ const Shipping = () => {
     const submitButtonRef = useRef();
 
     const { shippingInfo, cartItems } = useSelector(state => state.cart);
-    const { user } = useSelector(state => state.user);
+    const { user, error, message, headerLoading } = useSelector(state => state.user);
 
     const [address, setAddress] = useState(shippingInfo.address);
     const [city, setCity] = useState(shippingInfo.city);
@@ -50,10 +54,22 @@ const Shipping = () => {
 
     return (
         <>
+            {/* Title tag */}
+            <MetaData title={`Shipping -@Hekto`} />
+
+            {/* React top loading bar */}
+            <HeaderLoading progressLoading={headerLoading} />
+
+            {/* Header alert */}
+            {
+                (error) &&
+                <HeaderAlert error={error} message={message} />
+            }
+
             <Container className="my-5">
                 <Row>
-                    <Col lg={8} className="mb-5 pe-md-5">
-                        <h5 className="fw-bold font-20 text-blue-500-color mb-4">Checkout</h5>
+                    <Col lg={8} className="mb-5 mb-lg-0 pe-md-5">
+                        <h5 className="fw-bold font-22 text-blue-500-color mb-4">Checkout</h5>
                         <Form className="bg-gray-300-color px-4 py-5" onSubmit={shippingSubmit}>
                             <h5 className="fw-bold font-18 text-blue-500-color mb-4">Contact Information</h5>
                             <Stack className="flex-column flex-md-row mt-4" gap={3}>
@@ -66,7 +82,7 @@ const Shipping = () => {
                                     <Form.Control disabled type="email" placeholder={user.email} />
                                 </Form.Group>
                             </Stack>
-                            <Form.Group className="mb-5 w-50" controlId="phoneNo">
+                            <Form.Group className="mb-5" controlId="phoneNo">
                                 <Form.Label>Phone number</Form.Label>
                                 <Form.Control type="number" value={phoneNo} onChange={(e) => setPhoneNo(e.target.value)} />
                             </Form.Group>
@@ -106,19 +122,21 @@ const Shipping = () => {
                                     <Form.Control type="number" value={pinCode} onChange={(e) => setPinCode(e.target.value)} />
                                 </Form.Group>
                             </Stack>
-                            <Link to={"/products"} className="text-white text-decoration-none"><Button className="bg-secondary-color border-0 my-2 py-2 px-3 rounded-0">Continue Shopping</Button></Link>
+                            <Link to={"/products"} className="font-lato text-white text-decoration-none"><Button className="bg-secondary-color border-0 my-2 py-2 px-3 rounded-0">Continue Shopping</Button></Link>
                         </Form>
                     </Col>
 
                     <Col lg={4}>
-                        <h5 className="fw-bold font-20 text-blue-500-color text-center mb-4">Order Summary</h5>
-                        {
-                            cartItems && cartItems.map(item => {
-                                return (
-                                    <CartItems key={item.product} item={item} />
-                                )
-                            })
-                        }
+                        <h5 className="fw-bold font-22 text-blue-500-color text-center mb-4">Order Summary</h5>
+                        <div className="shipping-order-details overflow-auto mb-5">
+                            {
+                                cartItems && cartItems.map(item => {
+                                    return (
+                                        <CartItems key={item.product} item={item} />
+                                    )
+                                })
+                            }
+                        </div>
                         <CartTotals cartItems={cartItems} submitbuttonRef={submitButtonRef} shippingSubmit={shippingSubmit} totalPrice={totalPrice} shippingPrice={shippingPrice} gstPrice={gstPrice} grandTotal={grandTotal} />
                     </Col>
                 </Row>

@@ -211,7 +211,8 @@ exports.updateUserRole = catchAsyncError(async (req, res, next) => {
     await User.findByIdAndUpdate(req.params.id, newUserData);
 
     res.status(200).json({
-        success: true
+        success: true,
+        message: "User Update Successfully!!"
     });
 });
 

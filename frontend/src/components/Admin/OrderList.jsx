@@ -1,4 +1,6 @@
 import React, { useEffect } from 'react';
+import HeaderLoading from '../Header/HeaderLoading';
+import HeaderAlert from '../Header/HeaderAlert';
 import MetaData from '../MetaData';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -15,30 +17,36 @@ import Sidebar from './Sidebar';
 const OrderList = () => {
   const dispatch = useDispatch();
 
-  const { error, orders } = useSelector(state => state.allOrders);
-  const { error: deleteError, isDeleted } = useSelector(state => state.order);
+  const { orders, headerLoading: ordersHeaderLoading, error: ordersError, message: ordersMessage } = useSelector(state => state.allOrders);
+  const { headerLoading: deleteHeaderLoading, error: deleteError, message: deleteMessage, isDeleted } = useSelector(state => state.order);
 
   const deleteOrderHandler = (id) => {
     dispatch(deleteOrder(id));
   };
 
   useEffect(() => {
-    if (deleteError || error) {
-      alert(deleteError || error);
-    };
-
     if (isDeleted) {
-      alert("Order deleted successfully");
-      dispatch({ type: DELETE_ORDER_RESET });
+      setTimeout(() => {
+        dispatch({ type: DELETE_ORDER_RESET });
+      }, 5000);
     };
 
     dispatch(getAllOrders());
-  }, [dispatch, isDeleted, deleteError, error]);
+  }, [dispatch, isDeleted, deleteError]);
 
   return (
     <>
       {/* Title tag */}
       <MetaData title={"All Products - Admin"} />
+
+      {/* React top loading bar */}
+      <HeaderLoading progressLoading={ordersHeaderLoading || deleteHeaderLoading} />
+
+      {/* Header alert */}
+      {
+        (ordersError || deleteError || isDeleted) &&
+        <HeaderAlert error={ordersError || deleteError} message={ordersMessage || deleteMessage} />
+      }
 
       {/* All products list */}
       <Container className="my-5 h-60vh">
@@ -73,7 +81,7 @@ const OrderList = () => {
                             <td>{order.orderItems.length}</td>
                             <td>{order.totalPrice}</td>
                             <td className="d-flex">
-                              <Button as={Link} to={`/admin/order/${order._id}`} className="bg-secondary-color border-0 py-2 px-3 rounded-0 text-nowrap me-2">Edit</Button>
+                              <Button as={Link} to={`/admin/order/${order._id}`} className="bg-secondary-color border-0 py-2 px-3 rounded-0 text-nowrap me-2 w-auto d-flex justify-content-center align-items-center">Edit</Button>
                               <Button onClick={() => deleteOrderHandler(order._id)} className="bg-secondary-color border-0 py-2 px-3 rounded-0 text-nowrap">Delete</Button>
                             </td>
                           </tr>

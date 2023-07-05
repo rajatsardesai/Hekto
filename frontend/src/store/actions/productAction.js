@@ -8,14 +8,14 @@ export const getAllProducts = () => async (dispatch) => {
 
         dispatch({
             type: SET_LOADER_PROGRESS,
-            productsHeaderLoading: 0
+            headerLoading: 0
         });
 
         const { data } = await axios.get(`/api/v1/allproducts`);
 
         dispatch({
             type: SET_LOADER_PROGRESS,
-            productsHeaderLoading: 50
+            headerLoading: 50
         });
         dispatch({
             type: ALL_PRODUCTS_SUCCESS,
@@ -23,7 +23,7 @@ export const getAllProducts = () => async (dispatch) => {
         });
         dispatch({
             type: SET_LOADER_PROGRESS,
-            productsHeaderLoading: 100
+            headerLoading: 100
         });
     } catch (error) {
         dispatch({
@@ -78,14 +78,14 @@ export const getAdminProduct = () => async (dispatch) => {
 
         dispatch({
             type: SET_LOADER_PROGRESS,
-            productLoading: 0
+            headerLoading: 0
         });
 
         const { data } = await axios.get(`/api/v1/admin/products`);
 
         dispatch({
             type: SET_LOADER_PROGRESS,
-            productLoading: 50
+            headerLoading: 50
         });
         dispatch({
             type: ADMIN_PRODUCT_SUCCESS,
@@ -93,7 +93,7 @@ export const getAdminProduct = () => async (dispatch) => {
         });
         dispatch({
             type: SET_LOADER_PROGRESS,
-            productLoading: 100
+            headerLoading: 100
         });
     } catch (error) {
         dispatch({
@@ -110,12 +110,12 @@ export const getProductDetails = (id) => async (dispatch) => {
 
         dispatch({
             type: SET_LOADER_PROGRESS,
-            productDetailsHeaderLoading: 0
+            headerLoading: 0
         });
         const { data } = await axios.get(`/api/v1/product/${id}`);
         dispatch({
             type: SET_LOADER_PROGRESS,
-            productDetailsHeaderLoading: 50
+            headerLoading: 50
         });
         dispatch({
             type: PRODUCT_DETAILS_SUCCESS,
@@ -123,7 +123,7 @@ export const getProductDetails = (id) => async (dispatch) => {
         });
         dispatch({
             type: SET_LOADER_PROGRESS,
-            productDetailsHeaderLoading: 100
+            headerLoading: 100
         });
     } catch (error) {
         dispatch({
@@ -140,7 +140,7 @@ export const newReview = (reviewData) => async (dispatch) => {
 
         dispatch({
             type: SET_LOADER_PROGRESS,
-            newReviewHeaderLoading: 0
+            headerLoading: 0
         });
 
         const config = { headers: { "Content-Type": "application/json" } };
@@ -149,7 +149,7 @@ export const newReview = (reviewData) => async (dispatch) => {
 
         dispatch({
             type: SET_LOADER_PROGRESS,
-            newReviewHeaderLoading: 50
+            headerLoading: 50
         });
         dispatch({
             type: NEW_REVIEW_SUCCESS,
@@ -157,7 +157,7 @@ export const newReview = (reviewData) => async (dispatch) => {
         });
         dispatch({
             type: SET_LOADER_PROGRESS,
-            newReviewHeaderLoading: 100
+            headerLoading: 100
         });
     } catch (error) {
         dispatch({
@@ -174,14 +174,14 @@ export const getAllReviews = (id) => async (dispatch) => {
 
         dispatch({
             type: SET_LOADER_PROGRESS,
-            newReviewLoading: 0
+            headerLoading: 0
         });
 
         const { data } = await axios.get(`/api/v1/reviews?id=${id}`);
 
         dispatch({
             type: SET_LOADER_PROGRESS,
-            productDetailsLoading: 50
+            headerLoading: 50
         });
         dispatch({
             type: ALL_REVIEW_SUCCESS,
@@ -189,7 +189,7 @@ export const getAllReviews = (id) => async (dispatch) => {
         });
         dispatch({
             type: SET_LOADER_PROGRESS,
-            productDetailsLoading: 100
+            headerLoading: 100
         });
     } catch (error) {
         dispatch({
@@ -206,22 +206,22 @@ export const deleteReviews = (reviewId, productId) => async (dispatch) => {
 
         dispatch({
             type: SET_LOADER_PROGRESS,
-            newReviewLoading: 0
+            headerLoading: 0
         });
 
         const { data } = await axios.delete(`/api/v1/reviews?id=${reviewId}&productId=${productId}`);
 
         dispatch({
             type: SET_LOADER_PROGRESS,
-            productDetailsLoading: 50
+            headerLoading: 50
         });
         dispatch({
             type: DELETE_REVIEW_SUCCESS,
-            payload: data.success
+            payload: data
         });
         dispatch({
             type: SET_LOADER_PROGRESS,
-            productDetailsLoading: 100
+            headerLoading: 100
         });
     } catch (error) {
         dispatch({
@@ -238,7 +238,7 @@ export const createProduct = (productData) => async (dispatch) => {
 
         dispatch({
             type: SET_LOADER_PROGRESS,
-            newProductLoading: 0
+            headerLoading: 0
         });
 
         const config = { headers: { "Content-Type": "multipart/form-data" } };
@@ -247,7 +247,7 @@ export const createProduct = (productData) => async (dispatch) => {
 
         dispatch({
             type: SET_LOADER_PROGRESS,
-            newProductLoading: 50
+            headerLoading: 50
         });
         dispatch({
             type: NEW_PRODUCT_SUCCESS,
@@ -255,7 +255,7 @@ export const createProduct = (productData) => async (dispatch) => {
         });
         dispatch({
             type: SET_LOADER_PROGRESS,
-            newProductLoading: 100
+            headerLoading: 100
         });
     } catch (error) {
         dispatch({
@@ -272,22 +272,22 @@ export const deleteProduct = (id) => async (dispatch) => {
 
         dispatch({
             type: SET_LOADER_PROGRESS,
-            newProductLoading: 0
+            headerLoading: 0
         });
 
         const { data } = await axios.delete(`/api/v1/admin/product/${id}`);
 
         dispatch({
             type: SET_LOADER_PROGRESS,
-            newProductLoading: 50
+            headerLoading: 50
         });
         dispatch({
             type: DELETE_PRODUCT_SUCCESS,
-            payload: data.success
+            payload: data
         });
         dispatch({
             type: SET_LOADER_PROGRESS,
-            newProductLoading: 100
+            headerLoading: 100
         });
     } catch (error) {
         dispatch({
@@ -304,7 +304,7 @@ export const updateProduct = (id, productData) => async (dispatch) => {
 
         dispatch({
             type: SET_LOADER_PROGRESS,
-            newProductLoading: 0
+            headerLoading: 0
         });
 
         const config = { headers: { "Content-Type": "multipart/form-data" } };
@@ -313,15 +313,15 @@ export const updateProduct = (id, productData) => async (dispatch) => {
 
         dispatch({
             type: SET_LOADER_PROGRESS,
-            newProductLoading: 50
+            headerLoading: 50
         });
         dispatch({
             type: UPDATE_PRODUCT_SUCCESS,
-            payload: data.success
+            payload: data
         });
         dispatch({
             type: SET_LOADER_PROGRESS,
-            newProductLoading: 100
+            headerLoading: 100
         });
     } catch (error) {
         dispatch({

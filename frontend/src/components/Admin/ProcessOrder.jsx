@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import MetaData from '../MetaData';
+import HeaderLoading from '../Header/HeaderLoading';
+import HeaderAlert from '../Header/HeaderAlert';
 import Sidebar from './Sidebar';
 import Container from 'react-bootstrap/Container';
 import Stack from 'react-bootstrap/esm/Stack';
@@ -17,8 +19,8 @@ const ProcessOrder = () => {
     const dispatch = useDispatch();
     const params = useParams();
 
-    const { error, order } = useSelector((state) => state.orderDetails);
-    const { error: updateError, isUpdated } = useSelector((state) => state.order);
+    const { headerLoading: orderDetailsHeaderLoading, error: orderDetailsError, message: orderDetailsMessage, order } = useSelector((state) => state.orderDetails);
+    const { headerLoading: updateHeaderLoading, error: updateError, message: updateMessage, isUpdated } = useSelector((state) => state.order);
 
     const [status, setStatus] = useState("");
 
@@ -35,20 +37,27 @@ const ProcessOrder = () => {
     };
 
     useEffect(() => {
-        if (error || updateError) {
-            alert(error || updateError);
-        };
         if (isUpdated) {
-            alert("Order updated successfully");
-            dispatch({ type: UPDATE_ORDER_RESET })
+            setTimeout(() => {
+                dispatch({ type: UPDATE_ORDER_RESET });
+            }, 5000);
         };
         dispatch(getOrderDetails(params.id));
-    }, [dispatch, params.id, error, updateError, isUpdated]);
+    }, [dispatch, params.id, updateError, isUpdated]);
 
     return (
         <>
             {/* Title tag */}
             <MetaData title={"Process Order - Admin"} />
+
+            {/* React top loading bar */}
+            <HeaderLoading progressLoading={orderDetailsHeaderLoading || updateHeaderLoading} />
+
+            {/* Header alert */}
+            {
+                (updateError || orderDetailsError || isUpdated) &&
+                <HeaderAlert error={updateError || orderDetailsError} message={updateMessage || orderDetailsMessage} />
+            }
 
             {/* Order Details */}
             <Container className="my-5 h-60vh">

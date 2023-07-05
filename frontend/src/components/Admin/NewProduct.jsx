@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import MetaData from '../MetaData';
+import HeaderLoading from '../Header/HeaderLoading';
+import HeaderAlert from '../Header/HeaderAlert';
 import Sidebar from './Sidebar';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -17,7 +19,7 @@ const NewProduct = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    const { loading, success } = useSelector(state => state.newProduct);
+    const { headerLoading: newProductHeaderLoading, error: newProductError, message: newProductMessage, success } = useSelector(state => state.newProduct);
 
     const [name, setName] = useState("");
     const [price, setPrice] = useState(0);
@@ -77,8 +79,10 @@ const NewProduct = () => {
 
     useEffect(() => {
         if (success) {
-            navigate("/admin/dashboard");
-            dispatch({ type: NEW_PRODUCT_RESET });
+            setTimeout(() => {
+                navigate("/admin/products");
+                dispatch({ type: NEW_PRODUCT_RESET });
+            }, 5000);
         }
     }, [navigate, dispatch, success]);
 
@@ -86,6 +90,16 @@ const NewProduct = () => {
         <>
             {/* Title tag */}
             <MetaData title={"Create New Product - Admin"} />
+
+            {/* React top loading bar */}
+            <HeaderLoading progressLoading={newProductHeaderLoading} />
+
+            {/* Header alert */}
+            {
+                (newProductError || success) &&
+                <HeaderAlert error={newProductError} message={newProductMessage} />
+            }
+
 
             {/* All products list */}
             <Container className="my-5 h-60vh">
@@ -111,7 +125,7 @@ const NewProduct = () => {
                             </Stack>
                             <Form.Group className="mb-3 w-100" controlId="description">
                                 <Form.Label>Description</Form.Label>
-                                <Form.Control as="textarea" value={description} onChange={(e) => setDescription(e.target.value)} />
+                                <Form.Control as="textarea" rows={4} value={description} onChange={(e) => setDescription(e.target.value)} />
                             </Form.Group>
                             <Stack className="flex-column flex-md-row mt-4" gap={3}>
                                 <Form.Group className="mb-3 w-100" value={categories} controlId="categories">
@@ -148,7 +162,7 @@ const NewProduct = () => {
                             </Stack>
                             <Stack className="flex-column flex-md-row" gap={2}>
                                 <Button className="bg-secondary-color border-0 py-2 px-3 rounded-0" type="submit">Add</Button>
-                                <Button as={Link} to={"/admin/products"} className="bg-secondary-color border-0 py-2 px-3 rounded-0" type="submit">Cancel</Button>
+                                <Button as={Link} to={"/admin/products"} className="bg-secondary-color border-0 py-2 px-3 rounded-0 w-auto d-flex justify-content-center align-items-center" type="submit">Cancel</Button>
                             </Stack>
                         </Form>
                     </Col>

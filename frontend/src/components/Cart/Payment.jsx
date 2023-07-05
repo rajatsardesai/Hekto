@@ -1,4 +1,8 @@
 import React, { useRef } from 'react';
+import "./Payment.css";
+import MetaData from '../MetaData';
+import HeaderLoading from '../Header/HeaderLoading';
+import HeaderAlert from '../Header/HeaderAlert';
 import Container from 'react-bootstrap/Container';
 import Stack from 'react-bootstrap/esm/Stack';
 import Row from 'react-bootstrap/Row';
@@ -29,7 +33,7 @@ const Payment = () => {
     const payBtn = useRef(null);
 
     const { shippingInfo, cartItems } = useSelector(state => state.cart);
-    const { user } = useSelector(state => state.user);
+    const { user, error, message, headerLoading } = useSelector(state => state.user);
 
     const paymentData = {
         amount: Math.round(orderInfo.grandTotal * 100)
@@ -100,11 +104,23 @@ const Payment = () => {
 
     return (
         <>
+            {/* Title tag */}
+            <MetaData title={`Payment -@Hekto`} />
+
+            {/* React top loading bar */}
+            <HeaderLoading progressLoading={headerLoading} />
+
+            {/* Header alert */}
+            {
+                (error) &&
+                <HeaderAlert error={error} message={message} />
+            }
+
             <Container className="my-5">
                 <Row>
-                    <Col lg={8} className="mb-5 pe-md-5">
-                        <h5 className="fw-bold font-20 text-blue-500-color mb-4">Payment</h5>
-                        <Form className="bg-gray-300-color px-4 py-5" onSubmit={(e) => submitHandler(e)}>
+                    <Col lg={8} className="mb-5 mb-lg-0 pe-md-5">
+                        <h5 className="fw-bold font-22 text-blue-500-color mb-4">Payment</h5>
+                        <Form className="card-details bg-gray-300-color px-4 py-5" onSubmit={(e) => submitHandler(e)}>
                             <h5 className="fw-bold font-18 text-blue-500-color mb-4">Contact Information</h5>
                             <span className="fw-bold font-16">{user.name}</span>
                             <p className="font-16 m-0">{shippingInfo.address}, {shippingInfo.landmark ? `${shippingInfo.landmark},` : ""} {shippingInfo.city}, {shippingInfo.state}, {shippingInfo.pinCode}</p>
@@ -113,31 +129,33 @@ const Payment = () => {
                             <h5 className="fw-bold font-18 text-blue-500-color mb-4">Card Details</h5>
                             <Form.Group className="mb-3" controlId="cardNumber">
                                 <Form.Label>Card Number</Form.Label>
-                                <CardNumberElement className="form-control py-2" />
+                                <CardNumberElement className="form-control py-2 card-details-input" />
                             </Form.Group>
-                            <Stack className="flex-column flex-md-row" gap={3}>
-                                <Form.Group className="mb-3 w-100" controlId="cardExpiry">
+                            <Stack className="flex-column flex-md-row mb-4" gap={3}>
+                                <Form.Group className="w-100" controlId="cardExpiry">
                                     <Form.Label>Card Expiry</Form.Label>
-                                    <CardExpiryElement className="form-control py-2" />
+                                    <CardExpiryElement className="form-control py-2 card-details-input" />
                                 </Form.Group>
-                                <Form.Group className="mb-3 w-100" controlId="cardCVV">
+                                <Form.Group className="w-100" controlId="cardCVV">
                                     <Form.Label>Card CVV</Form.Label>
-                                    <CardCvcElement className="form-control py-2" />
+                                    <CardCvcElement className="form-control py-2 card-details-input" />
                                 </Form.Group>
                             </Stack>
-                            <Button type="submit" className="w-100 font-lato font-14 fw-bold bg-green-100-color border-0 p-2 mb-2" ref={payBtn}>Pay ₹{orderInfo && orderInfo.grandTotal}</Button>
+                            <Button type="submit" className="w-100 font-lato font-14 fw-bold bg-green-100-color border-0 p-2 mb-2" ref={payBtn}>Pay ₹{orderInfo && Math.floor(orderInfo.grandTotal)}.00</Button>
                         </Form>
                     </Col>
 
                     <Col lg={4}>
-                        <h5 className="fw-bold font-20 text-blue-500-color text-center mb-4">Order Summary</h5>
-                        {
-                            cartItems && cartItems.map(item => {
-                                return (
-                                    <CartItems key={item.product} item={item} />
-                                )
-                            })
-                        }
+                        <h5 className="fw-bold font-22 text-blue-500-color text-center mb-4">Order Summary</h5>
+                        <div className="payment-order-details overflow-auto mb-5">
+                            {
+                                cartItems && cartItems.map(item => {
+                                    return (
+                                        <CartItems key={item.product} item={item} />
+                                    )
+                                })
+                            }
+                        </div>
                         <CartTotals cartItems={cartItems} totalPrice={orderInfo.totalPrice} shippingPrice={orderInfo.shippingPrice} gstPrice={orderInfo.gstPrice} grandTotal={orderInfo.grandTotal} />
                     </Col>
                 </Row>

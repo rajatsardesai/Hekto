@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import MetaData from '../MetaData';
+import HeaderLoading from '../Header/HeaderLoading';
+import HeaderAlert from '../Header/HeaderAlert';
 import Sidebar from './Sidebar';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -17,8 +19,8 @@ const UpdateUser = () => {
     const navigate = useNavigate();
     const { id } = useParams();
 
-    const { error, user } = useSelector(state => state.userDetails);
-    const { error: updateError, isUpdated } = useSelector(state => state.profile);
+    const { headerLoading: userDetailsHeaderLoading, error: userDetailsError, message: userDetailsMessage, user } = useSelector(state => state.userDetails);
+    const { headerLoading: updateHeaderLoading, error: updateError, message: updateMessage, isUpdated } = useSelector(state => state.profile);
 
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
@@ -45,21 +47,27 @@ const UpdateUser = () => {
             setRole(user.role);
         };
 
-        if (error || updateError) {
-            alert(error || updateError);
-        };
-
         if (isUpdated) {
-            alert("User Update Successfully");
-            navigate("/admin/users");
-            dispatch({ type: UPDATE_USER_RESET });
+            setTimeout(() => {
+                navigate("/admin/users");
+                dispatch({ type: UPDATE_USER_RESET });
+            }, 5000);
         }
-    }, [navigate, dispatch, isUpdated, error, updateError, id, user]);
+    }, [navigate, dispatch, isUpdated, updateError, id, user]);
 
     return (
         <>
             {/* Title tag */}
             <MetaData title={"Update User - Admin"} />
+
+            {/* React top loading bar */}
+            <HeaderLoading progressLoading={userDetailsHeaderLoading || updateHeaderLoading} />
+
+            {/* Header alert */}
+            {
+                (userDetailsError || updateError || isUpdated) &&
+                <HeaderAlert error={userDetailsError || updateError} message={userDetailsMessage || updateMessage} />
+            }
 
             {/* All products list */}
             <Container className="my-5 h-60vh">

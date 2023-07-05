@@ -70,7 +70,7 @@ export const updateOrder = (id, order) => async (dispatch) => {
 
         dispatch({
             type: SET_LOADER_PROGRESS,
-            orderLoading: 0
+            headerLoading: 0
         });
 
         const config = { headers: { "Content-Type": "application/json" } };
@@ -83,14 +83,14 @@ export const updateOrder = (id, order) => async (dispatch) => {
 
         dispatch({
             type: SET_LOADER_PROGRESS,
-            orderLoading: 50
+            headerLoading: 50
         });
 
-        dispatch({ type: UPDATE_ORDER_SUCCESS, payload: data.success });
+        dispatch({ type: UPDATE_ORDER_SUCCESS, payload: data });
 
         dispatch({
             type: SET_LOADER_PROGRESS,
-            orderLoading: 100
+            headerLoading: 100
         });
     } catch (error) {
         dispatch({ type: UPDATE_ORDER_FAIL, payload: error.response.data.message });
@@ -104,21 +104,21 @@ export const deleteOrder = (id) => async (dispatch) => {
 
         dispatch({
             type: SET_LOADER_PROGRESS,
-            orderLoading: 0
+            headerLoading: 0
         });
 
         const { data } = await axios.delete(`/api/v1/admin/order/${id}`);
 
         dispatch({
             type: SET_LOADER_PROGRESS,
-            orderLoading: 50
+            headerLoading: 50
         });
 
-        dispatch({ type: DELETE_ORDER_SUCCESS, payload: data.success });
+        dispatch({ type: DELETE_ORDER_SUCCESS, payload: data });
 
         dispatch({
             type: SET_LOADER_PROGRESS,
-            orderLoading: 100
+            headerLoading: 100
         });
     } catch (error) {
         dispatch({ type: DELETE_ORDER_FAIL, payload: error.response.data.message });
@@ -132,21 +132,21 @@ export const getAllOrders = () => async (dispatch) => {
 
         dispatch({
             type: SET_LOADER_PROGRESS,
-            orderLoading: 0
+            headerLoading: 0
         });
 
         const { data } = await axios.get(`/api/v1/admin/orders`);
 
         dispatch({
             type: SET_LOADER_PROGRESS,
-            orderLoading: 50
+            headerLoading: 50
         });
 
         dispatch({ type: ALL_ORDER_SUCCESS, payload: data.orders });
 
         dispatch({
             type: SET_LOADER_PROGRESS,
-            orderLoading: 100
+            headerLoading: 100
         });
     } catch (error) {
         dispatch({ type: ALL_ORDER_FAIL, payload: error.response.data.message });
@@ -160,21 +160,21 @@ export const getOrderDetails = (id) => async (dispatch) => {
 
         dispatch({
             type: SET_LOADER_PROGRESS,
-            orderDetailsLoading: 0
+            headerLoading: 0
         });
 
         const { data } = await axios.get(`/api/v1/order/${id}`);
 
         dispatch({
             type: SET_LOADER_PROGRESS,
-            orderDetailsLoading: 50
+            headerLoading: 50
         });
 
         dispatch({ type: ORDER_DETAILS_SUCCESS, payload: data.order });
 
         dispatch({
             type: SET_LOADER_PROGRESS,
-            orderDetailsLoading: 100
+            headerLoading: 100
         });
     } catch (error) {
         dispatch({ type: ORDER_DETAILS_FAIL, payload: error.response.data.message });

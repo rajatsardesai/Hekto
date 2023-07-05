@@ -73,10 +73,9 @@ export const profileReducer = (state = {}, action) => {
     switch (action.type) {
         case SET_LOADER_PROGRESS:
             return {
-                loading: true,
                 ...state,
-                updateProfileLoading: action.updateProfileLoading,
-                updatePasswordLoading: action.updatePasswordLoading
+                loading: true,
+                headerLoading: action.headerLoading,
             };
         case UPDATE_PROFILE_REQUEST:
         case UPDATE_PASSWORD_REQUEST:
@@ -92,7 +91,8 @@ export const profileReducer = (state = {}, action) => {
             return {
                 ...state,
                 loading: false,
-                isUpdated: action.payload,
+                isUpdated: action.payload.success,
+                message: action.payload.message,
             }
         case DELETE_USER_SUCCESS:
             return {
@@ -109,7 +109,7 @@ export const profileReducer = (state = {}, action) => {
                 ...state,
                 loading: false,
                 user: null,
-                updateError: action.payload
+                error: action.payload
             }
         case UPDATE_PROFILE_RESET:
         case UPDATE_PASSWORD_RESET:
@@ -123,7 +123,7 @@ export const profileReducer = (state = {}, action) => {
             return {
                 ...state,
                 loading: false,
-                isUpdated: false
+                isDeleted: false
             }
         default:
             return state;
@@ -176,8 +176,8 @@ export const allUsersReducer = (state = { users: [] }, action) => {
     switch (action.type) {
         case SET_LOADER_PROGRESS:
             return {
-                loading: true,
-                ...state
+                ...state,
+                headerLoading: true,
             };
         case ALL_USERS_REQUEST:
             return {
@@ -206,8 +206,8 @@ export const userDetailReducer = (state = { user: {} }, action) => {
     switch (action.type) {
         case SET_LOADER_PROGRESS:
             return {
-                loading: true,
-                ...state
+                ...state,
+                headerLoading: true,
             };
         case USER_DETAILS_REQUEST:
             return {

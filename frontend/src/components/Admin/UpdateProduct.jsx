@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import MetaData from '../MetaData';
+import HeaderLoading from '../Header/HeaderLoading';
+import HeaderAlert from '../Header/HeaderAlert';
 import Sidebar from './Sidebar';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -18,8 +20,8 @@ const UpdateProduct = () => {
     const navigate = useNavigate();
     const { id } = useParams();
 
-    const { loading, error: updateError, isUpdated } = useSelector(state => state.product);
-    const { error, product } = useSelector(state => state.productDetails);
+    const { headerLoading: updateHeaderLoading, error: updateError, message: updateMessage, isUpdated } = useSelector(state => state.product);
+    const { headerLoading: productDetailsHeaderLoading, error: productDetailsError, message: productDetailsMessage, product } = useSelector(state => state.productDetails);
 
     const [name, setName] = useState("");
     const [price, setPrice] = useState(0);
@@ -91,21 +93,27 @@ const UpdateProduct = () => {
             setOldImages(product.images);
         };
 
-        if (error || updateError) {
-            alert(error || updateError);
-        };
-
         if (isUpdated) {
-            alert("Product Updated Successfully");
-            navigate("/admin/products");
-            dispatch({ type: UPDATE_PRODUCT_RESET });
+            setTimeout(() => {
+                navigate("/admin/products");
+                dispatch({ type: UPDATE_PRODUCT_RESET });
+            }, 5000);
         }
-    }, [navigate, dispatch, isUpdated, id, product, error, updateError]);
+    }, [navigate, dispatch, isUpdated, id, product, updateError]);
 
     return (
         <>
             {/* Title tag */}
             <MetaData title={"Update Product - Admin"} />
+
+            {/* React top loading bar */}
+            <HeaderLoading progressLoading={productDetailsHeaderLoading || updateHeaderLoading} />
+
+            {/* Header alert */}
+            {
+                (updateError || productDetailsError || isUpdated) &&
+                <HeaderAlert error={updateError || productDetailsError} message={updateMessage || productDetailsMessage} />
+            }
 
             {/* All products list */}
             <Container className="my-5 h-60vh">
@@ -131,7 +139,7 @@ const UpdateProduct = () => {
                             </Stack>
                             <Form.Group className="mb-3 w-100" controlId="description">
                                 <Form.Label>Description</Form.Label>
-                                <Form.Control as="textarea" value={description} onChange={(e) => setDescription(e.target.value)} />
+                                <Form.Control as="textarea" rows={4} value={description} onChange={(e) => setDescription(e.target.value)} />
                             </Form.Group>
                             <Stack className="flex-column flex-md-row mt-4" gap={3}>
                                 <Form.Group className="mb-3 w-100" controlId="categories">
@@ -157,7 +165,7 @@ const UpdateProduct = () => {
                                 <Form.Label>Upload images</Form.Label>
                                 <Form.Control type="file" name="avatar" accept="image/*" onChange={updateProductImagesChange} multiple />
                             </Form.Group>
-                            <Stack className="flex-column flex-md-row flex-wrap my-4" gap={3}>
+                            <Stack className="flex-row flex-wrap my-4" gap={3}>
                                 {
                                     oldImages && oldImages.map((image, index) => {
                                         return (
@@ -175,7 +183,7 @@ const UpdateProduct = () => {
                             </Stack>
                             <Stack className="flex-column flex-md-row" gap={2}>
                                 <Button className="bg-secondary-color border-0 py-2 px-3 rounded-0" type="submit">Update</Button>
-                                <Button as={Link} to={"/admin/products"} className="bg-secondary-color border-0 py-2 px-3 rounded-0" type="submit">Cancel</Button>
+                                <Button as={Link} to={"/admin/products"} className="bg-secondary-color border-0 py-2 px-3 rounded-0 w-auto d-flex justify-content-center align-items-center" type="submit">Cancel</Button>
                             </Stack>
                         </Form>
                     </Col>
