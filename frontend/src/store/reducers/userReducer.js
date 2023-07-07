@@ -6,7 +6,6 @@ export const userReducer = (state = { user: {} }, action) => {
         case SET_LOADER_PROGRESS:
             return {
                 ...state,
-                loading: true,
                 headerLoading: action.headerLoading
             };
         case LOGIN_REQUEST:
@@ -74,7 +73,6 @@ export const profileReducer = (state = {}, action) => {
         case SET_LOADER_PROGRESS:
             return {
                 ...state,
-                loading: true,
                 headerLoading: action.headerLoading,
             };
         case UPDATE_PROFILE_REQUEST:
@@ -136,7 +134,6 @@ export const forgotPasswordReducer = (state = {}, action) => {
         case SET_LOADER_PROGRESS:
             return {
                 loading: true,
-                ...state,
                 headerLoading: action.headerLoading,
             };
         case FORGOT_PASSWORD_REQUEST:

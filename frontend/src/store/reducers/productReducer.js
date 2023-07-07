@@ -50,7 +50,6 @@ export const newProductReducer = (state = { product: {} }, action) => {
         case SET_LOADER_PROGRESS:
             return {
                 ...state,
-                loading: true,
                 headerLoading: action.headerLoading
             }
         case NEW_PRODUCT_REQUEST:
@@ -87,7 +86,6 @@ export const productReducer = (state = {}, action) => {
         case SET_LOADER_PROGRESS:
             return {
                 ...state,
-                loading: true,
                 headerLoading: action.headerLoading
             }
         case DELETE_PRODUCT_REQUEST:
@@ -138,7 +136,6 @@ export const productDetailsReducer = (state = { product: {} }, action) => {
         case SET_LOADER_PROGRESS:
             return {
                 ...state,
-                loading: true,
                 headerLoading: action.headerLoading
             }
         case PRODUCT_DETAILS_REQUEST:
@@ -167,7 +164,6 @@ export const newReviewReducer = (state = {}, action) => {
         case SET_LOADER_PROGRESS:
             return {
                 ...state,
-                loading: true,
                 headerLoading: action.headerLoading
             }
         case NEW_REVIEW_REQUEST:
@@ -202,7 +198,6 @@ export const productReviewsReducer = (state = { reviews: [] }, action) => {
         case SET_LOADER_PROGRESS:
             return {
                 ...state,
-                loading: true,
                 headerLoading: action.headerLoading
             }
         case ALL_REVIEW_REQUEST:
@@ -232,7 +227,6 @@ export const reviewReducer = (state = {}, action) => {
         case SET_LOADER_PROGRESS:
             return {
                 ...state,
-                loading: true,
                 headerLoading: action.headerLoading
             }
         case DELETE_REVIEW_REQUEST:

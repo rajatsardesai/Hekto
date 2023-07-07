@@ -15,7 +15,7 @@ const Signup = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    const { success, error, message, headerLoading } = useSelector(
+    const { isAuthenticated, success, error, message, headerLoading } = useSelector(
         (state) => state.user
     );
 
@@ -70,7 +70,7 @@ const Signup = () => {
 
             {/* Header alert */}
             {
-                (error || success) &&
+                (error || success) && isAuthenticated &&
                 <HeaderAlert error={error} message={message} />
             }
 

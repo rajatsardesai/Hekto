@@ -101,7 +101,7 @@ const Contact = () => {
                     <Col>
                         <img
                             className="d-block w-100"
-                            src={process.env.PUBLIC_URL + '/assets/content/hekto-contact-vector.png'}
+                            src={process.env.PUBLIC_URL + '/assets/content/hekto-contact-vector.webp'}
                             alt={"heckto-contact-vector"}
                         />
                     </Col>

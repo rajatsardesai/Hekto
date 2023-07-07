@@ -8,17 +8,17 @@ import Card from 'react-bootstrap/Card';
 const Blogs = () => {
     const data = [
         {
-            image: "/assets/content/hekto-blog-post-1.png",
+            image: "/assets/content/hekto-blog-post-1.webp",
             alt: "hekto-blog-post-1",
             title: "Mauris at orci non vulputate diam tincidunt nec.",
         },
         {
-            image: "/assets/content/hekto-blog-post-2.png",
+            image: "/assets/content/hekto-blog-post-2.webp",
             alt: "hekto-blog-post-2",
             title: "Aenean vitae in aliquam ultrices lectus. Etiam.",
         },
         {
-            image: "/assets/content/hekto-blog-post-3.png",
+            image: "/assets/content/hekto-blog-post-3.webp",
             alt: "hekto-blog-post-3",
             title: "Sit nam congue feugiat nisl, mauris amet nisi.",
         },

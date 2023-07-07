@@ -12,7 +12,7 @@ import HeaderAccount from './HeaderAccount';
 
 const HeaderMain = () => {
 
-    const { user, error, isLoggedout, message, headerLoading } = useSelector(
+    const { isAuthenticated, user, error, isLoggedout, message, headerLoading } = useSelector(
         (state) => state.user
     );
     const { cartItems } = useSelector(state => state.cart);
@@ -24,7 +24,7 @@ const HeaderMain = () => {
 
             {/* Header alert */}
             {
-                (error || isLoggedout) &&
+                (error || isLoggedout) && isAuthenticated &&
                 <HeaderAlert error={error} message={message} />
             }
 

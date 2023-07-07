@@ -1,7 +1,8 @@
 import React from 'react';
+import HeaderAlert from './HeaderAlert';
 import Stack from 'react-bootstrap/Stack';
 import { Link } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import { logoutUser } from '../../store/actions/userAction';
@@ -9,6 +10,10 @@ import { logoutUser } from '../../store/actions/userAction';
 const HeaderAccount = ({ user, color }) => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
+
+    const { isLoggedout, message } = useSelector(
+        (state) => state.user
+    );
 
     const dashboard = () => {
         if (user.role === "admin") {
@@ -22,6 +27,7 @@ const HeaderAccount = ({ user, color }) => {
             navigate(`/${link}`);
         } else if (user && link === "logout") {
             dispatch(logoutUser());
+            navigate("/login");
         } else {
             navigate("/login");
         }
@@ -29,6 +35,12 @@ const HeaderAccount = ({ user, color }) => {
 
     return (
         <>
+            {/* Header alert */}
+            {
+                (isLoggedout) &&
+                <HeaderAlert message={message} />
+            }
+
             {
                 user ?
                     <NavDropdown

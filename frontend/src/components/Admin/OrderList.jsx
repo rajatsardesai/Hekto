@@ -59,7 +59,7 @@ const OrderList = () => {
           {/* Dashboard */}
           <Col lg={8}>
             {
-              orders.length > 0 ?
+              orders && orders.length > 0 ?
                 <Table bordered hover responsive="md">
                   <thead className="bg-gray-400-color">
                     <tr>

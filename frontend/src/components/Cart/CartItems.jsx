@@ -45,7 +45,7 @@ const CartItems = (props) => {
                     {
                         location.pathname === "/cart" &&
                         <Dropdown onSelect={updateQuantity}>
-                            <Dropdown.Toggle className="border" variant="transparent" id="quantity-dropdown">
+                            <Dropdown.Toggle className="border" variant="transparent">
                                 Qty: {selectedQuantityValue && selectedQuantityValue}
                             </Dropdown.Toggle>
 

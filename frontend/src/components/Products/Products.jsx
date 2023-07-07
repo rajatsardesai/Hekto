@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import MetaData from '../MetaData';
+import InitLoader from "../Utils/InitLoader";
 import Container from 'react-bootstrap/esm/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -52,55 +53,57 @@ const Products = () => {
     }, [dispatch, keyword, currentPage, price, category, ratings]);
 
     return (
-        !productsLoading &&
-        <>
-            {/* Title tag */}
-            <MetaData title={"All Products: Shop Online in India for Furniture, Home Decor, Homeware Products @Hekto"} />
+        productsLoading ?
+            <InitLoader />
+            :
+            <>
+                {/* Title tag */}
+                <MetaData title={"All Products: Shop Online in India for Furniture, Home Decor, Homeware Products @Hekto"} />
 
-            {/* React top loading bar */}
-            <HeaderLoading progressLoading={productsHeaderLoading} />
+                {/* React top loading bar */}
+                <HeaderLoading progressLoading={productsHeaderLoading} />
 
-            {/* Header alert */}
-            {
-                (productsError) &&
-                <HeaderAlert error={productsError} message={message} />
-            }
+                {/* Header alert */}
+                {
+                    (productsError) &&
+                    <HeaderAlert error={productsError} message={message} />
+                }
 
-            {/* Products */}
-            <Container>
-                <Stack className="flex-column flex-md-row align-items-start align-items-xs-center justify-content-between my-5">
-                    <Stack className="mb-4 mb-md-0">
-                        <h2 className="font-22 text-primary-color fw-bold">{keyword ? "Searched Products" : "All Products"}</h2>
-                        <span className="font-12 font-lato text-gray-100-color">About {filteredProductsCount} products (0.62 seconds)</span>
+                {/* Products */}
+                <Container>
+                    <Stack className="flex-column flex-md-row align-items-start align-items-xs-center justify-content-between my-5">
+                        <Stack className="mb-4 mb-md-0">
+                            <h2 className="font-22 text-primary-color fw-bold">{keyword ? "Searched Products" : "All Products"}</h2>
+                            <span className="font-12 font-lato text-gray-100-color">About {filteredProductsCount} products (0.62 seconds)</span>
+                        </Stack>
+                        <span className="text-start text-xs-center text-md-end">Per Page: <input disabled type="number" placeholder={resultPerPage} className="w-25" /></span>
                     </Stack>
-                    <span className="text-start text-xs-center text-md-end">Per Page: <input disabled type="number" placeholder={resultPerPage} className="w-25" /></span>
-                </Stack>
-                <hr />
-                <Row className="mb-5">
-                    <Col md={3}>
-                        <ProductFilters price={price} setPrice={setPrice} setCategory={setCategory} setRatings={setRatings} />
-                    </Col>
-                    <Col md={9}>
-                        {/* Products */}
-                        <Container className="p-4 text-center">
-                            {
-                                products.length > 0 ?
-                                    <Row xs={1} md={2} xl={3} className="g-4">
-                                        {products && products.map(product => <ProductsCard key={product._id} product={product} />)}
-                                    </Row>
-                                    : <span>No products to show</span>
-                            }
-                            {
-                                resultPerPage < (category ? filteredProductsCount : productsCount) &&
-                                <div className="my-4">
-                                    <Pagination size="lg" onClick={handlePageChange} className="justify-content-center">{items}</Pagination>
-                                </div>
-                            }
-                        </Container >
-                    </Col>
-                </Row>
-            </Container>
-        </>
+                    <hr />
+                    <Row className="mb-5">
+                        <Col md={3}>
+                            <ProductFilters price={price} setPrice={setPrice} setCategory={setCategory} setRatings={setRatings} />
+                        </Col>
+                        <Col md={9}>
+                            {/* Products */}
+                            <Container className="p-4 text-center">
+                                {
+                                    products.length > 0 ?
+                                        <Row xs={1} md={2} xl={3} className="g-4">
+                                            {products && products.map(product => <ProductsCard key={product._id} product={product} />)}
+                                        </Row>
+                                        : <span>No products to show</span>
+                                }
+                                {
+                                    resultPerPage < (category ? filteredProductsCount : productsCount) &&
+                                    <div className="my-4">
+                                        <Pagination size="lg" onClick={handlePageChange} className="justify-content-center">{items}</Pagination>
+                                    </div>
+                                }
+                            </Container >
+                        </Col>
+                    </Row>
+                </Container>
+            </>
     )
 }
 

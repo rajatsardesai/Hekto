@@ -51,19 +51,19 @@ const Home = () => {
 
     const trendingCards = [
         {
-            image: "/assets/content/hekto-latest-trending-chair-offer.png",
+            image: "/assets/content/hekto-latest-trending-chair-offer.webp",
             alt: "hekto-latest-trending-chair-offer",
             title: "23% off on Chairs",
             link: "Shop Now"
         },
         {
-            image: "/assets/content/hekto-latest-trending-tv-offer.png",
+            image: "/assets/content/hekto-latest-trending-tv-offer.webp",
             alt: "hekto-latest-trending-tv-offer",
             title: "50% off on Tv Units",
             link: "View Collection"
         },
         {
-            image: "/assets/content/hekto-latest-trending-sofa-offer.png",
+            image: "/assets/content/hekto-latest-trending-sofa-offer.webp",
             alt: "hekto-latest-trending-sofa-offer",
             title: "70% off on Sofas",
             link: "View Sofas"
@@ -224,8 +224,8 @@ const Home = () => {
             </Container>
 
             <Stack className="mt-5 pt-5 newsletter-section justify-content-center align-items-center">
-                <h5 className="fw-bold text-primary-color text-center">Get Latest Update By Subscribing to
-                    <br className="d-none d-md-block" />&nbsp;0ur Newslater</h5>
+                <span className="font-35 fw-bold text-primary-color text-center">Get Latest Update By Subscribing to
+                    <br className="d-none d-md-block" />&nbsp;0ur Newslater</span>
                 <Button as={Link} to="/products" className=" bg-secondary-color border-0 rounded-0 fw-semibold d-flex align-items-center justify-content-center mt-2">
                     Shop Now
                 </Button>

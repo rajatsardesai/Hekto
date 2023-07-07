@@ -42,21 +42,21 @@ export const myOrders = () => async (dispatch) => {
 
         dispatch({
             type: SET_LOADER_PROGRESS,
-            orderLoading: 0
+            headerLoading: 0
         });
 
         const { data } = await axios.get(`/api/v1/orders/me`);
 
         dispatch({
             type: SET_LOADER_PROGRESS,
-            orderLoading: 50
+            headerLoading: 50
         });
 
         dispatch({ type: MY_ORDER_SUCCESS, payload: data.orders });
 
         dispatch({
             type: SET_LOADER_PROGRESS,
-            orderLoading: 100
+            headerLoading: 100
         });
     } catch (error) {
         dispatch({ type: MY_ORDER_FAIL, payload: error.response.data.message });

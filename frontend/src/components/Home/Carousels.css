@@ -1,15 +1,15 @@
 .home-carousel {
     .carousel-indicators [data-bs-target] {
-        width: 5px;
-        height: 5px;
+        width: 12px;
+        height: 12px;
         transform: rotate(45deg);
         border: 2px solid var(--secondary-color);
         background-color: transparent;
+        margin: 0 8px 30px 8px;
 
         @media screen and (min-width:768px) {
             width: 10px;
             height: 10px;
-            margin: 0 8px 30px 8px;
         }
     }
 
@@ -17,18 +17,22 @@
         background-color: var(--secondary-color);
     }
 
-    .carousel-control-prev>span {
+    .carousel-control-prev {
         display: none;
     }
 
-    .carousel-control-next>span {
+    .carousel-control-next {
         display: none;
     }
 
     .carousel-item>img {
         object-fit: cover;
-        height: 499px;
         object-position: top;
+        height: 499px;
+
+        @media screen and (min-width:992px) {
+            height: auto;
+        }
     }
 
     .carousel-caption h1 {

@@ -18,19 +18,19 @@ const DiscountProductsTabs = () => {
         {
             tab: "tab1",
             productName: "Chairs",
-            productImage: "/assets/content/hekto-discounted-products-chair.png",
+            productImage: "/assets/content/hekto-discounted-products-chair.webp",
             productAlt: "hekto-discounted-products-chair"
         },
         {
             tab: "tab2",
             productName: "Sofas",
-            productImage: "/assets/content/hekto-latest-trending-chair.png",
+            productImage: "/assets/content/hekto-latest-trending-chair.webp",
             productAlt: "hekto-latest-trending-chair"
         },
         {
             tab: "tab3",
             productName: "Sofa Collection",
-            productImage: "/assets/content/hekto-discounted-products-sofa-collection.png",
+            productImage: "/assets/content/hekto-discounted-products-sofa-collection.webp",
             productAlt: "hekto-discounted-products-sofa-collection"
         }
     ];
@@ -72,7 +72,7 @@ const DiscountProductsTabs = () => {
                                         <Col md="6 position-relative">
                                             <img
                                                 className="d-block img-fluid m-auto"
-                                                src={process.env.PUBLIC_URL + '/assets/content/hekto-discounted-products-bubble.png'}
+                                                src={process.env.PUBLIC_URL + '/assets/content/hekto-discounted-products-bubble.webp'}
                                                 alt={`hekto-discounted-products-bubble`}
                                             />
                                             <img

@@ -7,13 +7,13 @@ const BlogCards = () => {
 
     const data = [
         {
-            image: "/assets/content/hekto-home-blog-1.png"
+            image: "/assets/content/hekto-home-blog-1.webp"
         },
         {
-            image: "/assets/content/hekto-home-blog-2.png"
+            image: "/assets/content/hekto-home-blog-2.webp"
         },
         {
-            image: "/assets/content/hekto-home-blog-3.png"
+            image: "/assets/content/hekto-home-blog-3.webp"
         }
     ]
 

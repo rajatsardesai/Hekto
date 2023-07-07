@@ -62,7 +62,7 @@ const ProductList = () => {
                             <Button as={Link} to={"/admin/product"} className="bg-secondary-color border-0 my-2 py-2 px-3 rounded-0 d-flex justify-content-center align-items-center" type="submit">Add Product</Button>
                         </Stack>
                         {
-                            products.length > 0 ?
+                            products && products.length > 0 ?
                                 <Table bordered hover responsive="md">
                                     <thead className="bg-gray-400-color">
                                         <tr>

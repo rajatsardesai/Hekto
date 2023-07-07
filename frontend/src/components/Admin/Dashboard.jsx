@@ -57,7 +57,7 @@ const Dashboard = () => {
             {
                 backgroundColor: ["#151875", "#fb2e86"],
                 hoverBackgroundColor: ["#151875", "#fb2e86"],
-                data: [outOfStock, products.length - outOfStock]
+                data: [outOfStock, products && products.length - outOfStock]
             }
         ]
     };

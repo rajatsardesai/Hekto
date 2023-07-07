@@ -19,7 +19,7 @@ const HeaderBelt = () => {
 
     const [keyword, setKeyword] = useState("");
 
-    const { user, error, success, isLoggedout, message, headerLoading } = useSelector(
+    const { isAuthenticated, user, error, success, isLoggedout, message, headerLoading } = useSelector(
         (state) => state.user
     );
 
@@ -40,7 +40,7 @@ const HeaderBelt = () => {
 
             {/* Header alert */}
             {
-                (error || success || isLoggedout) &&
+                (error || success || isLoggedout) && isAuthenticated &&
                 <HeaderAlert error={error} message={message} />
             }
 

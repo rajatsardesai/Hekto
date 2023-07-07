@@ -49,7 +49,7 @@ const Login = () => {
 
             {/* Header alert */}
             {
-                (error || success) &&
+                (error || success) && isAuthenticated &&
                 <HeaderAlert error={error} message={message} />
             }
 

@@ -18,7 +18,7 @@ const Footer = () => {
                             <span className="text-gray-100-color font-lato font-lato">Basant Lok, Vasant Vihar, New Delhi, India</span>
                         </Col>
                         <Col sm={12} md={2} className="text-center text-md-start mb-5 mb-md-0">
-                            <h6 className="text-dark font-22 mb-4">Catagories</h6>
+                            <p className="text-dark font-22 mb-4">Catagories</p>
                             <ListGroup as="ul">
                                 <ListGroup.Item as={Link} to={"/products"} className="border-0 bg-transparent p-0 mb-2">
                                     <span className="text-gray-100-color font-lato">Sofas</span>
@@ -47,7 +47,7 @@ const Footer = () => {
                             </ListGroup>
                         </Col>
                         <Col sm={12} md={2} className="text-center text-md-start mb-5 mb-md-0">
-                            <h6 className="text-dark font-22 mb-4">Customer Care</h6>
+                            <p className="text-dark font-22 mb-4">Customer Care</p>
                             <ListGroup as="ul">
                                 <ListGroup.Item as={Link} to={"/account"} className="border-0 bg-transparent p-0 mb-2">
                                     <span className="text-gray-100-color font-lato">My Account</span>
@@ -61,7 +61,7 @@ const Footer = () => {
                             </ListGroup>
                         </Col>
                         <Col sm={12} md="auto" className="text-center text-md-start">
-                            <h6 className="text-dark font-22 mb-4">Pages</h6>
+                            <p className="text-dark font-22 mb-4">Pages</p>
                             <ListGroup as="ul">
                                 <ListGroup.Item as={Link} to={"/"} className="border-0 bg-transparent p-0 mb-2">
                                     <span className="text-gray-100-color font-lato">Blog</span>

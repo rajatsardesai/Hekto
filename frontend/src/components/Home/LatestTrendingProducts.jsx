@@ -10,12 +10,12 @@ const LatestTrendingProducts = ({ products }) => {
             <Col md="6 position-relative">
                 <img
                     className="d-block img-fluid m-auto"
-                    src={process.env.PUBLIC_URL + '/assets/content/hekto-latest-trending-bubble.png'}
+                    src={process.env.PUBLIC_URL + '/assets/content/hekto-latest-trending-bubble.webp'}
                     alt={`hekto-latest-trending-bubble`}
                 />
                 <img
                     className="latest-trending-chair d-block img-fluid ps-md-5"
-                    src={process.env.PUBLIC_URL + '/assets/content/hekto-latest-trending-chair.png'}
+                    src={process.env.PUBLIC_URL + '/assets/content/hekto-latest-trending-chair.webp'}
                     alt={`hekto-latest-trending-chair`}
                 />
             </Col>

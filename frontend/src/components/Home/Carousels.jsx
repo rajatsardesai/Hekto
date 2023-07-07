@@ -8,13 +8,13 @@ import { Link } from 'react-router-dom';
 const Carousels = () => {
     const slides = [
         {
-            image: '/assets/content/hekto-banner-1.jpg',
+            image: '/assets/content/hekto-banner-1.webp',
         },
         {
-            image: '/assets/content/hekto-banner-2.jpg',
+            image: '/assets/content/hekto-banner-2.webp',
         },
         {
-            image: '/assets/content/hekto-banner-3.jpg',
+            image: '/assets/content/hekto-banner-3.webp',
         }
     ];
     return (
