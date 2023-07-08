@@ -9,21 +9,19 @@ const ProtectedRoute = ({ isAdmin }) => {
 
     useEffect(() => {
         if (!loading && isAuthenticated) {
-            if (!isAdmin && (user || user.role !== 'admin')) {
-                navigate('/');
+            if (!isAdmin && !user) {
+                return <Forbidden />;
             }
         }
     }, [isAdmin, loading, navigate, isAuthenticated, user]);
 
-    // if (!loading || (!isAdmin && (!user || user.role !== 'admin'))) {
-    //     return null;
-    // }
-
+    // When user role is user
     if (isAdmin && (!user || user.role !== 'admin')) {
         return <Forbidden />;
     }
 
-    if (!isAdmin && !user) {
+    // When user is guest
+    if (!isAdmin && !isAuthenticated) {
         return <Forbidden />;
     }
 

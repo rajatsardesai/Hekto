@@ -11,17 +11,14 @@ import Row from 'react-bootstrap/esm/Row';
 import Stack from 'react-bootstrap/Stack';
 import Dropdown from 'react-bootstrap/Dropdown';
 import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
-import Nav from 'react-bootstrap/Nav';
-import Tab from 'react-bootstrap/Tab';
-import { getAllProducts, getProductDetails, newReview } from '../../store/actions/productAction';
+import { getAllProducts, getProductDetails } from '../../store/actions/productAction';
 import { addToCart } from '../../store/actions/cartAction';
-import ReviewCard from './ReviewCard';
 import ProductsCard from './ProductsCard';
 import { useSelector, useDispatch } from "react-redux";
 import { Link, useParams } from 'react-router-dom';
 import ReactStars from "react-rating-stars-component";
 import { NEW_REVIEW_RESET } from '../../store/constants/productConstants';
+import ProductDetailsTab from './ProductDetailsTab';
 
 const ProductDetails = () => {
     const { id } = useParams();
@@ -30,15 +27,9 @@ const ProductDetails = () => {
 
     const tabContainerRef = useRef(null);
 
+    const [activeTab, setActiveTab] = useState('tab1');
     const [selectedStockValue, setSelectedStockValue] = useState(1);
     const [open, setOpen] = useState("d-none");
-    const [rating, setRating] = useState(0);
-    const [comment, setComment] = useState("");
-    const [activeTab, setActiveTab] = useState('tab1');
-
-    const handleTabSelect = (tab) => {
-        setActiveTab(tab);
-    };
 
     const { products, error: productsError, message } = useSelector(
         (state) => state.products
@@ -70,21 +61,6 @@ const ProductDetails = () => {
         if (tabContainerRef.current) {
             tabContainerRef.current.scrollIntoView({ behavior: 'smooth' });
         };
-    };
-
-    const ratingChanged = (newRating) => {
-        setRating(newRating);
-    };
-
-    const submitReviewHandler = () => {
-        const reviewForm = new FormData();
-
-        reviewForm.set("rating", rating);
-        reviewForm.set("comment", comment);
-        reviewForm.set("productId", id);
-
-        dispatch(newReview(reviewForm));
-        setOpen("d-none");
     };
 
     const options = {
@@ -149,7 +125,7 @@ const ProductDetails = () => {
                             <p className="mt-2 text-gray-100-color font-16 fw-semibold text-overflow">{product.description}</p>
                             {
                                 product.stock < 1 ?
-                                    <span className="d-block fs-2 text-danger">Out of stock</span> :
+                                    <span className="d-block font-26 text-danger">Out of stock</span> :
                                     <>
                                         <Stack direction="horizontal" gap={3} className="my-2">
                                             <label htmlFor="quantity-dropdown" className="text-primary-color">
@@ -199,69 +175,15 @@ const ProductDetails = () => {
                     </Row>
                 </Container>
 
-                <Stack ref={tabContainerRef} className="product-details-info bg-gray-200-color my-5">
-                    <Container className="py-5">
-                        <Tab.Container activeKey={activeTab} onSelect={handleTabSelect}>
-                            <Nav variant="tabs" className="home-products-tab justify-content-center justify-content-md-start flex-column flex-md-row border-0 mb-4">
-                                <Nav.Item>
-                                    <Nav.Link eventKey="tab1" className="border-0 font-lato text-center my-2 mx-0 mx-md-3 bg-transparent">Description</Nav.Link>
-                                </Nav.Item>
-                                <Nav.Item>
-                                    <Nav.Link eventKey="tab2" className="border-0 font-lato text-center my-2 mx-0 mx-md-3 bg-transparent">Reviews</Nav.Link>
-                                </Nav.Item>
-                            </Nav>
-
-                            <Tab.Content>
-                                <Tab.Pane eventKey={"tab1"} className="overflow-auto">
-                                    <p>{product.description}</p>
-                                </Tab.Pane>
-                                <Tab.Pane eventKey={"tab2"} className="overflow-auto">
-                                    <Stack className={`mb-5 ${open}`}>
-                                        <h4>Create Review</h4>
-                                        <h5 className="mt-3">Overall rating</h5>
-                                        <ReactStars {...options} value={rating} onChange={ratingChanged} edit={true} />
-                                        <h5 className="mt-3">Add a written review</h5>
-                                        <Form.Control
-                                            as="textarea"
-                                            cols={30}
-                                            rows={5}
-                                            value={comment}
-                                            onChange={(e) => setComment(e.target.value)}
-                                        />
-                                        <Stack className="flex-column flex-md-row my-3">
-                                            <Button className="my-2 my-md-0 me-md-2 bg-secondary-color border-0 rounded-0" onClick={submitReviewHandler}>Submit</Button>
-                                            <Button className="my-2 my-md-0 bg-secondary-color border-0 rounded-0" onClick={submitReviewToggle}>Cancel</Button>
-                                        </Stack>
-                                    </Stack>
-
-                                    {
-                                        product.reviews && product.reviews[0] ?
-                                            <Stack className="reviews">
-                                                {
-                                                    product.reviews &&
-                                                    product.reviews.map((review, index) => <ReviewCard key={index} review={review} />)
-                                                }
-                                            </Stack> :
-                                            <span className="fw-bold">No reviews</span>
-                                    }
-                                </Tab.Pane>
-                            </Tab.Content>
-                        </Tab.Container>
-                    </Container>
-                </Stack>
+                <ProductDetailsTab tabContainerRef={tabContainerRef} product={product} options={options} id={id} activeTab={activeTab} setActiveTab={setActiveTab} submitReviewToggle={submitReviewToggle} open={open} setOpen={setOpen} />
 
                 <Container>
                     <h4 className="font-26 text-primary-color fw-bold mb-4">Related Products</h4>
                     <Row xs={1} md={2} xl={3} className="g-4">
                         {
-                            products && products.map((item, index) => (
-                                <>
-                                    {
-                                        (item.category === product.category) && (item._id !== id) &&
-                                        <ProductsCard key={index} product={item} />
-                                    }
-                                </>
-                            )
+                            products && products.map((item) =>
+                                (item.category === product.category) && (item._id !== id) &&
+                                <ProductsCard key={item._id} product={item} />
                             )
                         }
                     </Row>

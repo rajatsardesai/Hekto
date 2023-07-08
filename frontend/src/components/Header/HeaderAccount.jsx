@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import { logoutUser } from '../../store/actions/userAction';
 
-const HeaderAccount = ({ user, color }) => {
+const HeaderAccount = ({ isAuthenticated, user, color }) => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
@@ -42,7 +42,7 @@ const HeaderAccount = ({ user, color }) => {
             }
 
             {
-                user ?
+                isAuthenticated ?
                     <NavDropdown
                         id="account-dropdown"
                         title={<span className="font-16" style={{

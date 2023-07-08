@@ -86,7 +86,7 @@ const OrderDetails = () => {
                         <h5 className="fw-bold font-22 text-blue-500-color text-center mb-4">Order Summary</h5>
                         <div className="order-details overflow-auto mb-5">
                             {
-                                order.orderItems && order.orderItems.map(item => {
+                                order.orderItems && order.orderItems.map((item) => {
                                     return (
                                         <CartItems key={item.product} item={item} />
                                     )

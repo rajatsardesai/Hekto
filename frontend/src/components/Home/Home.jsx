@@ -24,6 +24,8 @@ const Home = () => {
     const { products } = useSelector(
         (state) => state.products
     );
+    const { isAuthenticated } = useSelector((state) => state.user);
+
     const { orders } = useSelector(
         (state) => state.allOrders
     );
@@ -93,7 +95,7 @@ const Home = () => {
     }, []);
 
     // Sort products based on totalQuantitySold in descending order
-    const bestSellerProducts = productQuantitySold && productQuantitySold.sort((a, b) => b.totalQuantitySold - a.totalQuantitySold);
+    const bestSellerProducts = productQuantitySold.sort((a, b) => b.totalQuantitySold - a.totalQuantitySold);
 
     // For product slideshow
     function generateCarouselItems(products) {
@@ -146,8 +148,11 @@ const Home = () => {
 
     useEffect(() => {
         dispatch(getAllProducts());
-        dispatch(getAllOrders());
-    }, [dispatch]);
+
+        if (isAuthenticated) {
+            dispatch(getAllOrders());
+        }
+    }, [dispatch, isAuthenticated]);
 
     return (
         <>

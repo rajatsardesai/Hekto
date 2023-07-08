@@ -49,8 +49,8 @@ const HeaderMain = () => {
 
                         {/* Header main right */}
                         <Stack direction="horizontal" gap={4} className="d-none d-lg-flex">
-                            <span className="text-light font-16">Hello, {user ? user.name : "guest"}</span>
-                            <HeaderAccount user={user} />
+                            <span className="text-light font-16">Hello, {isAuthenticated ? user.name : "guest"}</span>
+                            <HeaderAccount isAuthenticated={isAuthenticated} user={user} />
 
                             <Stack as={Link} to={"/cart"} className="position-relative align-self-center">
                                 <img src={process.env.PUBLIC_URL + "/assets/style/cart.svg"} alt="cart" />

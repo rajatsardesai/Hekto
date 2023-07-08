@@ -64,7 +64,7 @@ const Login = () => {
                                 <Form.Control type="email" required value={loginEmail} placeholder="Email address" className="font-lato font-16" onChange={(e) => setLoginEmail(e.target.value)} />
                             </Form.Group>
                             <Form.Group controlId="loginPassword">
-                                <Form.Control type="password" required value={loginPassword} placeholder="Password" className="font-lato font-16 mb-2" onChange={(e) => setLoginPassword(e.target.value)} />
+                                <Form.Control type="password" required autoComplete={loginPassword.toString()} value={loginPassword} placeholder="Password" className="font-lato font-16 mb-2" onChange={(e) => setLoginPassword(e.target.value)} />
                                 <Link to={"/password/forgot"} className="text-decoration-none text-gray-500-color font-lato font-17">Forgot your password?</Link>
                             </Form.Group>
                             <Button type="submit" className="w-100 my-4 bg-secondary-color border-0 rounded-1">

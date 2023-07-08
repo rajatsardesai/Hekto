@@ -36,7 +36,7 @@ const Products = () => {
     // For pagination
     let items = [];
     const [currentPage, setCurrentPage] = useState(1);
-    const totalPages = Math.floor((category ? filteredProductsCount : productsCount) / resultPerPage);
+    const totalPages = Math.ceil((category ? filteredProductsCount : productsCount) / resultPerPage);
     for (let number = 1; number <= totalPages; number++) {
         items.push(
             <Pagination.Item key={number} active={number === Number(currentPage)}>
@@ -87,7 +87,7 @@ const Products = () => {
                             {/* Products */}
                             <Container className="p-4 text-center">
                                 {
-                                    products.length > 0 ?
+                                    products && products.length > 0 ?
                                         <Row xs={1} md={2} xl={3} className="g-4">
                                             {products && products.map(product => <ProductsCard key={product._id} product={product} />)}
                                         </Row>

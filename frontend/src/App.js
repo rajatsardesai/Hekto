@@ -10,6 +10,7 @@ import { loadStripe } from '@stripe/stripe-js';
 import { Elements } from '@stripe/react-stripe-js';
 import HeaderBelt from './components/Header/HeaderBelt';
 import Footer from './components/Footer';
+import Forbidden from './components/Utils/Forbidden';
 
 const Home = lazy(() => import('./components/Home/Home'));
 const Products = lazy(() => import('./components/Products/Products'));
@@ -131,6 +132,7 @@ function App() {
               <Route exact path='/admin/reviews' element={<ProtectedRoute isAdmin={true} />}>
                 <Route exact path='/admin/reviews' Component={ProductReviews} />
               </Route>
+              <Route path='*' Component={Forbidden} />
             </Routes>
             <Footer />
           </Elements>

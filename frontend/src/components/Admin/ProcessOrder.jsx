@@ -19,7 +19,7 @@ const ProcessOrder = () => {
     const dispatch = useDispatch();
     const params = useParams();
 
-    const { headerLoading: orderDetailsHeaderLoading, error: orderDetailsError, message: orderDetailsMessage, order } = useSelector((state) => state.orderDetails);
+    const { loading: orderLoading, headerLoading: orderDetailsHeaderLoading, error: orderDetailsError, message: orderDetailsMessage, order } = useSelector((state) => state.orderDetails);
     const { headerLoading: updateHeaderLoading, error: updateError, message: updateMessage, isUpdated } = useSelector((state) => state.order);
 
     const [status, setStatus] = useState("");
@@ -68,14 +68,16 @@ const ProcessOrder = () => {
                     </Col>
                     <Col lg={8}>
                         <Stack className="bg-gray-300-color px-4 py-5">
-                            <Stack className="mb-5 font-18">
-                                <h5 className="fw-bold text-blue-500-color mb-4">Shipping Address</h5>
-                                <span className="fw-bold">Rajat</span>
-                                <p className="m-0">Address</p>
-                                <span className="m-0">+91 1234233232</span>
-                                <span>email@email.com</span>
-                            </Stack>
-
+                            {
+                                (!orderLoading && order.user && order.shippingInfo) &&
+                                <Stack className="mb-5 font-18">
+                                    <h5 className="fw-bold text-blue-500-color mb-4">Shipping Address</h5>
+                                    <span className="fw-bold">{order.user.name}</span>
+                                    <p className="m-0">{order.shippingInfo.address}, {order.shippingInfo.landmark}, {order.shippingInfo.city}, {order.shippingInfo.state}, {order.shippingInfo.country}</p>
+                                    <span className="m-0">{order.shippingInfo.phoneNo}</span>
+                                    <span>{order.user.email}</span>
+                                </Stack>
+                            }
                             <Stack className="mb-5 font-18">
                                 <h5 className="fw-bold text-blue-500-color mb-4">Order Summary</h5>
                                 <Stack className="mb-4 flex-column flex-md-row" gap={3}>
@@ -85,7 +87,7 @@ const ProcessOrder = () => {
                                 {
                                     order.orderItems && order.orderItems.map(item => {
                                         return (
-                                            <CartItems key={item.product} item={item} />
+                                            <CartItems key={item.product} item={item} quantity={item.quantity} />
                                         )
                                     })
                                 }
@@ -96,13 +98,13 @@ const ProcessOrder = () => {
                                     <h5 className="fw-bold text-blue-500-color mb-4">Payment Status</h5>
                                     <span className={
                                         order.paymentInfo &&
-                                            order.paymentInfo.status === "succeded"
+                                            order.paymentInfo.status === "succeeded"
                                             ? "text-success"
                                             : "text-danger"
                                     }>
                                         {
                                             order.paymentInfo &&
-                                                order.paymentInfo.status === "succeded"
+                                                order.paymentInfo.status === "succeeded"
                                                 ? "Paid"
                                                 : "Not paid"
                                         }

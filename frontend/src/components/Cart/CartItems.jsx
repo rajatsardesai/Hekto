@@ -43,22 +43,24 @@ const CartItems = (props) => {
                         <span className="fs-6">₹</span><span className="font-18 fw-bold text-blue-400-color">{price}.00</span>
                     </div>
                     {
-                        location.pathname === "/cart" &&
-                        <Dropdown onSelect={updateQuantity}>
-                            <Dropdown.Toggle className="border" variant="transparent">
-                                Qty: {selectedQuantityValue && selectedQuantityValue}
-                            </Dropdown.Toggle>
+                        location.pathname === "/cart" ?
+                            <Dropdown onSelect={updateQuantity}>
+                                <Dropdown.Toggle className="border" variant="transparent">
+                                    Qty: {selectedQuantityValue && selectedQuantityValue}
+                                </Dropdown.Toggle>
 
-                            <Dropdown.Menu className="addtocart-dropdown">
-                                {
-                                    productStock.map((stock, index) => {
-                                        return (
-                                            <Dropdown.Item key={index} eventKey={stock}>{stock}</Dropdown.Item>
-                                        )
-                                    })
-                                }
-                            </Dropdown.Menu>
-                        </Dropdown>
+                                <Dropdown.Menu className="addtocart-dropdown">
+                                    {
+                                        productStock.map((stock, index) => {
+                                            return (
+                                                <Dropdown.Item key={index} eventKey={stock}>{stock}</Dropdown.Item>
+                                            )
+                                        })
+                                    }
+                                </Dropdown.Menu>
+                            </Dropdown>
+                            :
+                            <span>Qty: {quantity}</span>
                     }
                 </Stack>
             </Stack >

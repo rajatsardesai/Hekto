@@ -21,7 +21,7 @@ const HomeProductCards = ({ product, styles }) => {
                 styles && styles.map((style, index) => {
                     return (
                         <Col key={index}>
-                            <Card className="home-product-cards text-decoration-none border-0 card-shadow p-0 font-lato text-center mx-auto mx-md-2" as={Link} to={`/product/${product._id}`}>
+                            <Card className="home-product-cards text-decoration-none border-0 card-shadow p-0 font-lato text-center mx-auto" as={Link} to={`/product/${product._id}`}>
                                 <Card.Img variant="top" src={product.images[0].url} alt={product.name} className="card-image m-auto object-fit-contain" />
                                 <Card.Body className="text-dark">
                                     <Card.Title className={`text-overflow fw-bold  my-2 ${style.cardTitleColor} ${style.cardTitleSize}`}>{product.name}</Card.Title>

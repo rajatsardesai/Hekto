@@ -120,7 +120,7 @@ const Profile = () => {
                                 <>
                                     <Form onSubmit={updatedPasswordsSubmit} className="w-100">
                                         <Form.Group className="mb-3">
-                                            <div className="ms-md-2 me-md-auto mx-2">
+                                            <div className="ms-md-2 me-md-auto mx-2 mb-3">
                                                 <Form.Control
                                                     type="password"
                                                     value={oldPassword}

@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import Form from 'react-bootstrap/Form';
-import Stack from 'react-bootstrap/esm/Stack';
-import ListGroup from 'react-bootstrap/ListGroup';
 import Accordion from 'react-bootstrap/Accordion';
-import ReactStars from "react-rating-stars-component";
+import CategoryFilterItem from './CategoryFilterItem';
+import PriceFilterItem from './PriceFilterItem';
+import RatingFilterItem from './RatingFilterItem';
 
 const categories = [
     "Sofas",
@@ -18,26 +17,9 @@ const categories = [
 
 const ProductFilters = (props) => {
     const { price, setPrice, setCategory, setRatings } = props;
-    const [activeIndex, setActiveIndex] = useState(null);
+    const [categoryActiveIndex, setCategoryActiveIndex] = useState(null);
+    const [ratingActiveIndex, setRatingActiveIndex] = useState(null);
     const [isCategory, setIsCategory] = useState(false);
-
-    // Category filter handler
-    const handleCategory = (category, index) => {
-        setIsCategory(!isCategory);
-        setCategory(isCategory ? "" : category);
-        setActiveIndex(index);
-    };
-
-    // Price filter handler
-    const priceHandler = (event) => {
-        setPrice(event.target.value);
-    }
-
-    // Ratings filter handler
-    const handleRatings = (value, index) => {
-        setRatings(value);
-        setActiveIndex(index);
-    };
 
     // Resize handler to disable filter accordion
     const handleResize = () => {
@@ -52,14 +34,6 @@ const ProductFilters = (props) => {
         window.addEventListener('resize', handleResize);
     }, []);
 
-    const options = {
-        edit: false,
-        color: "rgb(20,20,20,0.1)",
-        activeColor: "tomato",
-        size: window.innerWidth < 600 ? 20 : 25,
-        isHalf: true
-    };
-
     return (
         <>
             {/* Category filter */}
@@ -68,39 +42,14 @@ const ProductFilters = (props) => {
                     <Accordion.Item className="border-0">
                         <Accordion.Header className="d-md-none">Filter</Accordion.Header>
                         <Accordion.Body className="ps-0">
-                            <Form.Label className="font-20 fw-bold text-primary-color text-decoration-underline">Category</Form.Label>
-                            <ListGroup as="ul">
-                                {
-                                    categories.map((category, index) => {
-                                        return (
-                                            <ListGroup.Item key={index} as="li" className={`font-lato text-gray-500-color border-0 cursor-pointer py-1 px-0 ${activeIndex === index ? 'fw-bold' : ''}`} onClick={() => handleCategory(category, index)}>{category}</ListGroup.Item>
-                                        )
-                                    })
-                                }
-                            </ListGroup>
+                            {/* Category Filter */}
+                            <CategoryFilterItem categories={categories} categoryActiveIndex={categoryActiveIndex} isCategory={isCategory} setIsCategory={setIsCategory} setCategory={setCategory} setCategoryActiveIndex={setCategoryActiveIndex} />
 
                             {/* Price filter */}
-                            <Form.Label className="mt-5 font-20 fw-bold text-primary-color text-decoration-underline">Price</Form.Label>
-                            <Form.Range min={0} max={50000} value={price} onChange={priceHandler} aria-label="price-range" />
-                            <Stack direction="horizontal" className="justify-content-between">
-                                <Form.Label className="font-lato text-gray-500-color">₹0</Form.Label>
-                                <Form.Label className="font-lato text-gray-500-color">₹{price}</Form.Label>
-                            </Stack>
+                            <PriceFilterItem price={price} setPrice={setPrice} />
 
                             {/* Rating filter */}
-                            <Form.Label className="mt-5 font-20 fw-bold text-primary-color text-decoration-underline">Avg. Customer Review</Form.Label>
-                            <div className="d-flex cursor-pointer" onClick={() => handleRatings(4, 3)}>
-                                < ReactStars {...options} value={4} /> <span className={`mx-2 fs-6 ${activeIndex === 3 ? 'fw-bold' : ''}`}>& up</span>
-                            </div>
-                            <div className="d-flex cursor-pointer" onClick={() => handleRatings(3, 2)}>
-                                < ReactStars {...options} value={3} /> <span className={`mx-2 fs-6 ${activeIndex === 2 ? 'fw-bold' : ''}`}>& up</span>
-                            </div>
-                            <div className="d-flex cursor-pointer" onClick={() => handleRatings(2, 1)}>
-                                < ReactStars {...options} value={2} /> <span className={`mx-2 fs-6 ${activeIndex === 1 ? 'fw-bold' : ''}`}>& up</span>
-                            </div>
-                            <div className="d-flex cursor-pointer" onClick={() => handleRatings(1, 0)}>
-                                < ReactStars {...options} value={1} /> <span className={`mx-2 fs-6 ${activeIndex === 0 ? 'fw-bold' : ''}`}>& up</span>
-                            </div>
+                            <RatingFilterItem ratingActiveIndex={ratingActiveIndex} setRatings={setRatings} setRatingActiveIndex={setRatingActiveIndex} />
                         </Accordion.Body>
                     </Accordion.Item>
                 </Accordion>
