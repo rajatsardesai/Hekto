@@ -3,7 +3,7 @@ import Stack from 'react-bootstrap/esm/Stack';
 import Button from 'react-bootstrap/Button';
 import { useLocation } from 'react-router-dom';
 
-const CartTotals = forwardRef((props) => {
+const CartTotals = forwardRef((props, ref) => {
     const { cartItems, id, checkoutHandler, submitbuttonref, shippingSubmit, totalPrice, shippingPrice, gstPrice, grandTotal } = props;
 
     const location = useLocation();
@@ -15,13 +15,9 @@ const CartTotals = forwardRef((props) => {
                     <span className="font-lato fw-semibold font-18 text-blue-500-color">Subtotal:</span>
                     <Stack direction="vertical">
                         {
-                            cartItems && cartItems.map(item => {
-                                return (
-                                    <>
-                                        <span key={item.product} className="font-lato font-16 text-blue-400-color text-end">₹{item.price * item.quantity}.00 ({item.quantity} items)</span>
-                                    </>
-                                )
-                            })
+                            cartItems && cartItems.map(item =>
+                                <span key={item.product} className="font-lato font-16 text-blue-400-color text-end">₹{item.price * item.quantity}.00 ({item.quantity} items)</span>
+                            )
                         }
                     </Stack>
                 </Stack>
@@ -48,7 +44,7 @@ const CartTotals = forwardRef((props) => {
                     <span className="font-lato fw-semibold font-18 text-blue-500-color">Total:</span>
                     <span className="font-lato font-16 text-blue-400-color">₹{(location.pathname === "/cart") ? Math.floor(totalPrice) : Math.floor(grandTotal)}.00</span>
                 </Stack>
-                {   
+                {
                     (location.pathname !== "/process/payment" && location.pathname !== `/order/${id}`) &&
                     <>
                         <hr className="mb-4" />

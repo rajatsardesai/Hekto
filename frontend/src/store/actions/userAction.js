@@ -209,7 +209,7 @@ export const forgotPassword = (email) => async (dispatch) => {
 
         const { data } = await axios.post(
             `/api/v1/password/forgot`,
-            email,
+            { email },
             config
         );
 
@@ -236,7 +236,7 @@ export const resetPassword = (token, passwords) => async (dispatch) => {
 
         dispatch({
             type: SET_LOADER_PROGRESS,
-            resetPasswordLoading: 0
+            headerLoading: 0
         });
 
         const config = { headers: { "Content-Type": "application/json" } };
@@ -249,14 +249,14 @@ export const resetPassword = (token, passwords) => async (dispatch) => {
 
         dispatch({
             type: SET_LOADER_PROGRESS,
-            resetPasswordLoading: 50
+            headerLoading: 50
         });
 
-        dispatch({ type: RESET_PASSWORD_SUCCESS, payload: data.success });
+        dispatch({ type: RESET_PASSWORD_SUCCESS, payload: data });
 
         dispatch({
             type: SET_LOADER_PROGRESS,
-            resetPasswordLoading: 100
+            headerLoading: 100
         });
     } catch (error) {
         dispatch({ type: RESET_PASSWORD_FAIL, payload: error.response.data.message });

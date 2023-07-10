@@ -13,7 +13,8 @@ export const userReducer = (state = { user: {} }, action) => {
         case LOAD_USER_REQUEST:
             return {
                 loading: true,
-                isAuthenticated: false
+                isAuthenticated: false,
+                message: "Please wait..."
             };
         case LOGIN_SUCCESS:
         case REGISTER_SUCCESS:
@@ -133,7 +134,6 @@ export const forgotPasswordReducer = (state = {}, action) => {
     switch (action.type) {
         case SET_LOADER_PROGRESS:
             return {
-                loading: true,
                 headerLoading: action.headerLoading,
             };
         case FORGOT_PASSWORD_REQUEST:
@@ -154,14 +154,15 @@ export const forgotPasswordReducer = (state = {}, action) => {
             return {
                 ...state,
                 loading: false,
-                success: action.payload
+                success: action.payload.success,
+                message: action.payload.message,
             }
         case FORGOT_PASSWORD_FAIL:
         case RESET_PASSWORD_FAIL:
             return {
                 ...state,
                 loading: false,
-                forgotPassError: action.payload
+                error: action.payload
             }
         default:
             return state;

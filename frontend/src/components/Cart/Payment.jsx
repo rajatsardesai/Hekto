@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import "./Payment.css";
 import MetaData from '../MetaData';
 import HeaderLoading from '../Header/HeaderLoading';
@@ -34,6 +34,11 @@ const Payment = () => {
 
     const { shippingInfo, cartItems } = useSelector(state => state.cart);
     const { user, error, message, headerLoading } = useSelector(state => state.user);
+    const [stripeValidation, setStripeValidation] = useState({
+        cardError: "",
+        expiryMonthError: "",
+        cvvError: ""
+    });
 
     const paymentData = {
         amount: Math.round(orderInfo.grandTotal * 100)
@@ -46,7 +51,16 @@ const Payment = () => {
         taxPrice: orderInfo.gstPrice,
         shippingPrice: orderInfo.shippingPrice,
         totalPrice: orderInfo.grandTotal
-    }
+    };
+
+    // Handling stripe validation
+    const handleStripeValidation = (e, name) => {
+        if (e.error && e.error.message) {
+            setStripeValidation({ ...stripeValidation, [name]: e.error.message });
+        } else {
+            setStripeValidation({ ...stripeValidation, [name]: "" });
+        }
+    };
 
     const submitHandler = async (e) => {
         e.preventDefault();
@@ -126,19 +140,41 @@ const Payment = () => {
                             <p className="font-16 m-0">{shippingInfo.address}, {shippingInfo.landmark ? `${shippingInfo.landmark},` : ""} {shippingInfo.city}, {shippingInfo.state}, {shippingInfo.pinCode}</p>
                             <p className="font-16 m-0">+91 {shippingInfo.phoneNo}</p>
                             <p className="font-16 mb-5">{user.email}</p>
+
                             <h5 className="fw-bold font-18 text-blue-500-color mb-4">Card Details</h5>
                             <Form.Group className="mb-3" controlId="cardNumber">
                                 <Form.Label>Card Number</Form.Label>
-                                <CardNumberElement className="form-control py-2 card-details-input" />
+                                <CardNumberElement className="form-control py-2 card-details-input mb-2" onChange={(e) => handleStripeValidation(e, "cardError")} />
+                                {
+                                    stripeValidation.cardError ?
+                                        <span className="text-danger">
+                                            {stripeValidation.cardError}
+                                        </span>
+                                        : null
+                                }
                             </Form.Group>
                             <Stack className="flex-column flex-md-row mb-4" gap={3}>
                                 <Form.Group className="w-100" controlId="cardExpiry">
                                     <Form.Label>Card Expiry</Form.Label>
-                                    <CardExpiryElement className="form-control py-2 card-details-input" />
+                                    <CardExpiryElement className="form-control py-2 card-details-input mb-1" onChange={(e) => handleStripeValidation(e, "expiryMonthError")} />
+                                    {
+                                        stripeValidation.expiryMonthError ?
+                                            <span className="text-danger">
+                                                {stripeValidation.expiryMonthError}
+                                            </span>
+                                            : null
+                                    }
                                 </Form.Group>
                                 <Form.Group className="w-100" controlId="cardCVV">
                                     <Form.Label>Card CVV</Form.Label>
-                                    <CardCvcElement className="form-control py-2 card-details-input" />
+                                    <CardCvcElement className="form-control py-2 card-details-input mb-1" onChange={(e) => handleStripeValidation(e, "cvvError")} />
+                                    {
+                                        stripeValidation.cvvError ?
+                                            <span className="text-danger">
+                                                {stripeValidation.cvvError}
+                                            </span>
+                                            : null
+                                    }
                                 </Form.Group>
                             </Stack>
                             <Button type="submit" className="w-100 font-lato font-14 fw-bold bg-green-100-color border-0 p-2 mb-2" ref={payBtn}>Pay ₹{orderInfo && Math.floor(orderInfo.grandTotal)}.00</Button>

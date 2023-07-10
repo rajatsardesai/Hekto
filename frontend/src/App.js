@@ -55,8 +55,8 @@ function App() {
   const promise = stripeApiKey ? loadStripe(stripeApiKey) : null;
 
   useEffect(() => {
-    store.dispatch(loadUser());
-    getStripeApiKey();
+      store.dispatch(loadUser());
+      getStripeApiKey();
   }, []);
 
   return (

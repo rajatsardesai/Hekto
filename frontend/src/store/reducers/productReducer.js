@@ -56,6 +56,7 @@ export const newProductReducer = (state = { product: {} }, action) => {
             return {
                 ...state,
                 loading: true,
+                message: "Please wait..."
             }
         case NEW_PRODUCT_SUCCESS:
             return {
@@ -93,6 +94,7 @@ export const productReducer = (state = {}, action) => {
             return {
                 ...state,
                 loading: true,
+                message: "Please wait..."
             }
         case DELETE_PRODUCT_SUCCESS:
             return {

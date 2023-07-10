@@ -116,7 +116,7 @@ const ProductDetails = () => {
                             </Carousel>
                         </Col>
                         <Col sm={12} lg={6}>
-                            <h2 className="font-35 text-primary-color fw-semibold mb-1">{product.name}</h2>
+                            <h2 className="font-35 text-primary-color fw-semibold mb-1 text-overflow">{product.name}</h2>
                             <Stack direction="horizontal" gap={1}>
                                 <ReactStars {...options} value={product.ratings} edit={false} />
                                 <span className="text-primary-color">({product.numberOfReviews})</span>

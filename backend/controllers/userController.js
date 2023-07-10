@@ -11,7 +11,8 @@ exports.registerUser = catchAsyncError(async (req, res, next) => {
     const cloud = await cloudinary.v2.uploader.upload(req.body.avatar, {
         folder: "avatars",
         width: 150,
-        crop: "scale"
+        crop: "scale",
+        format: "webp"
     })
 
     const { name, email, password } = req.body
