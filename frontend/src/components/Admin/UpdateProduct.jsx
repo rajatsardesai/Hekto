@@ -127,12 +127,16 @@ const UpdateProduct = () => {
 
             {/* Header alert */}
             {
-                (updateError || productDetailsError || isUpdated || updateLoading) &&
+                updateLoading &&
+                <HeaderAlert message={updateMessage} />
+            }
+            {
+                (updateError || productDetailsError || isUpdated) &&
                 <HeaderAlert error={updateError || productDetailsError} message={updateMessage || productDetailsMessage} />
             }
 
             {/* All products list */}
-            <Container className="my-5 h-60vh">
+            <Container className="admin-products my-5 h-60vh">
                 <Row>
                     <h5 className="fw-bold font-22 text-blue-500-color mb-4">Admin Dashboard</h5>
                     <Col lg={4} className="mb-5 pe-md-5">

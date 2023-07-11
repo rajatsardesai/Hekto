@@ -19,7 +19,7 @@ const initialValues = {
 const ForgotPassword = () => {
     const dispatch = useDispatch();
 
-    const { error, isResetPassword, message, headerLoading } = useSelector((state) => state.forgotPassword);
+    const { loading, error, isResetPassword, message, headerLoading } = useSelector((state) => state.forgotPassword);
 
     // Form handling and validation -- Formik and Yup
     const { values, errors, touched, handleBlur, handleChange, handleSubmit } = useFormik({
@@ -38,7 +38,7 @@ const ForgotPassword = () => {
 
             {/* Header alert */}
             {
-                (error || isResetPassword) &&
+                (error || isResetPassword || loading) &&
                 <HeaderAlert error={error} message={message} />
             }
 

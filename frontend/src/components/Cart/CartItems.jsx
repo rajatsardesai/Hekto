@@ -29,7 +29,7 @@ const CartItems = (props) => {
 
     return (
         <>
-            <Stack direction="horizontal" className="product-cart-items mb-3">
+            <Stack direction="horizontal" className="mb-3">
                 <Link to={`/product/${product}`} className="me-3"><img src={image} alt={name} className="rounded product-cart-items--image" /></Link>
                 <Stack direction="vertical">
                     <div className="d-flex flex-column flex-md-row justify-content-between" gap={3}>

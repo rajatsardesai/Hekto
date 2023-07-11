@@ -12,12 +12,12 @@ const Footer = () => {
             <footer className="bg-gray-400-color mt-5">
                 <Container className="py-5">
                     <Row>
-                        <Col sm={12} md={4} className="text-center text-md-start mb-5 mb-md-0">
+                        <Col sm={12} md={3} lg={4} className="text-center text-md-start mb-5 mb-md-0">
                             <h3 as={Link} to={'/'} className="fs-2 fw-bold mb-3">Hekto</h3>
                             <span className="d-block text-gray-100-color font-lato font-lato">Contact Info</span>
                             <span className="text-gray-100-color font-lato font-lato">Basant Lok, Vasant Vihar, New Delhi, India</span>
                         </Col>
-                        <Col sm={12} md={2} className="text-center text-md-start mb-5 mb-md-0">
+                        <Col sm={12} md={3} lg={2} className="text-center text-md-start mb-5 mb-md-0">
                             <p className="text-dark font-22 mb-4">Catagories</p>
                             <ListGroup as="ul">
                                 <ListGroup.Item as={Link} to={"/products"} className="border-0 bg-transparent p-0 mb-2">
@@ -46,8 +46,8 @@ const Footer = () => {
                                 </ListGroup.Item>
                             </ListGroup>
                         </Col>
-                        <Col sm={12} md={2} className="text-center text-md-start mb-5 mb-md-0">
-                            <p className="text-dark font-22 mb-4">Customer Care</p>
+                        <Col sm={12} md={3} lg={2} className="text-center text-md-start mb-5 mb-md-0">
+                            <p className="text-dark font-22 mb-4 text-nowrap">Customer Care</p>
                             <ListGroup as="ul">
                                 <ListGroup.Item as={Link} to={"/account"} className="border-0 bg-transparent p-0 mb-2">
                                     <span className="text-gray-100-color font-lato">My Account</span>

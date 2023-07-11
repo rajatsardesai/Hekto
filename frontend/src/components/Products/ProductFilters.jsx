@@ -23,7 +23,7 @@ const ProductFilters = (props) => {
 
     // Resize handler to disable filter accordion
     const handleResize = () => {
-        if (window.innerWidth > 768) {
+        if (window.innerWidth > 767 && document.querySelector(".accordion-collapse").classList) {
             document.querySelector(".accordion-collapse").classList.add("show");
         } else {
             document.querySelector(".accordion-collapse").classList.remove("show");

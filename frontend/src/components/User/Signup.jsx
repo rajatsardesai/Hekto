@@ -39,8 +39,8 @@ const Signup = () => {
         onSubmit: values => {
             const registerForm = new FormData();
 
-            registerForm.set("name", values.name);
-            registerForm.set("email", values.email);
+            registerForm.set("name", values.name.trim());
+            registerForm.set("email", values.email.trim().toLowerCase());
             registerForm.set("password", values.password);
             registerForm.set("avatar", values.avatar);
 
@@ -121,14 +121,14 @@ const Signup = () => {
                                 <Stack direction="horizontal" className="register-image">
                                     <img src={values.avatarPreview} alt="Avatar Preview" className="w-25 me-2 rounded-circle" />
                                     <Form.Control type="file" name="avatar" accept="image/*" placeholder="Upload your Avatar" className="font-lato font-16" onChange={handleAvatarChange} onBlur={handleBlur} isInvalid={touched.avatar && errors.avatar} />
-                                    {
-                                        errors.avatar && touched.avatar ?
-                                            <Form.Control.Feedback type="invalid">
-                                                {errors.avatar}
-                                            </Form.Control.Feedback>
-                                            : null
-                                    }
                                 </Stack>
+                                {
+                                    errors.avatar && touched.avatar ?
+                                        <Form.Control.Feedback type="invalid" className="d-block">
+                                            {errors.avatar}
+                                        </Form.Control.Feedback>
+                                        : null
+                                }
                             </Form.Group>
                             <Button type="submit" onClick={() => setCheckAuthentication(true)} className="w-100 my-4 bg-secondary-color border-0 rounded-1">
                                 Create Account

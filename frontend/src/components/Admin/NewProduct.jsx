@@ -91,12 +91,12 @@ const NewProduct = () => {
 
     useEffect(() => {
         if (success) {
-            setTimeout(() => {
-                navigate("/admin/products");
-                dispatch({ type: NEW_PRODUCT_RESET });
-            }, 5000);
+            setFieldValue("images", []);
+            setFieldValue("imagesPreview", []);
+            dispatch({ type: NEW_PRODUCT_RESET });
+            navigate("/admin/products");
         }
-    }, [navigate, dispatch, success]);
+    }, [navigate, dispatch, success, setFieldValue]);
 
     return (
         <>
@@ -108,13 +108,17 @@ const NewProduct = () => {
 
             {/* Header alert */}
             {
+                newProductLoading &&
+                <HeaderAlert message={newProductMessage} />
+            }
+            {
                 (newProductError || success || newProductLoading) &&
                 <HeaderAlert error={newProductError} message={newProductMessage} />
             }
 
 
             {/* All products list */}
-            <Container className="my-5 h-60vh">
+            <Container className="admin-products my-5 h-60vh">
                 <Row>
                     <h5 className="fw-bold font-22 text-blue-500-color mb-4">Admin Dashboard</h5>
                     <Col lg={4} className="mb-5 pe-md-5">
@@ -205,7 +209,7 @@ const NewProduct = () => {
                                         : null
                                 }
                             </Form.Group>
-                            <Stack className="flex-column flex-md-row flex-wrap my-4" gap={3}>
+                            <Stack className="flex-row flex-wrap my-4" gap={3}>
                                 {
                                     values.imagesPreview.map((image, index) => {
                                         return (

@@ -56,19 +56,22 @@ const Home = () => {
             image: "/assets/content/hekto-latest-trending-chair-offer.webp",
             alt: "hekto-latest-trending-chair-offer",
             title: "23% off on Chairs",
-            link: "Shop Now"
+            link: "Shop Now",
+            bgColor: "bg-pink-200-color"
         },
         {
             image: "/assets/content/hekto-latest-trending-tv-offer.webp",
             alt: "hekto-latest-trending-tv-offer",
             title: "50% off on Tv Units",
-            link: "View Collection"
+            link: "View Collection",
+            bgColor: "bg-purple-100-color"
         },
         {
             image: "/assets/content/hekto-latest-trending-sofa-offer.webp",
             alt: "hekto-latest-trending-sofa-offer",
             title: "70% off on Sofas",
-            link: "View Sofas"
+            link: "View Sofas",
+            bgColor: "bg-green-200-color"
         },
     ]
 
@@ -205,7 +208,7 @@ const Home = () => {
                             trendingCards && trendingCards.map((data, index) => {
                                 return (
                                     <Col key={index}>
-                                        <Stack className="trending-product-offers-card bg-pink-200-color p-4 position-relative">
+                                        <Stack className={`trending-product-offers-card ${data.bgColor} p-4 position-relative`}>
                                             <span className="font-26 text-primary-color">{data.title}</span>
                                             <Link to="/products" className="font-16 font-lato fw-semibold text-secondary-color">{data.link}</Link>
                                             <img

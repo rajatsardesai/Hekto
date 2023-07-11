@@ -63,6 +63,10 @@
     background-color: var(--page-color);
 }
 
+.bg-purple-100-color {
+    background-color: var(--purple-100-color);
+}
+
 .bg-purple-300-color {
     background-color: var(--purple-300-color);
 }
@@ -294,33 +298,7 @@
     }
 }
 
-/* Home page */
-/* .home-carousel>.carousel-item>.card-image {
-    width: 262px;
-    height: 246px;
-    object-fit: contain;
-} */
-
-/* products */
-/* .product-cards .cards {
-    height: 339px !important;
-} */
-
 /* product-details-carousel */
-
-.product-details-carousel {
-    /* height: 594px; */
-}
-
-.product-details-carousel>.carousel-indicators {
-    /* display: block !important; */
-    /* text-align: center; */
-}
-
-/* .product-details-carousel>.carousel-indicators>button {
-    background-color: #131921;
-} */
-
 .product-details-dropdown {
     min-width: 47px !important;
 }
@@ -359,6 +337,15 @@
 .register-image>input::file-selector-button {
     width: 100%;
     height: 52px;
+}
+
+/* New and update product -- admin */
+.admin-products img {
+    min-width: 100%;
+
+    @media screen and (min-width:768px) {
+        min-width: 25%;
+    }
 }
 
 /* Your account */
