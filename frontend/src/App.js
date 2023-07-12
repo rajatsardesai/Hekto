@@ -11,6 +11,9 @@ import { Elements } from '@stripe/react-stripe-js';
 import HeaderBelt from './components/Header/HeaderBelt';
 import Footer from './components/Footer';
 import Forbidden from './components/Utils/Forbidden';
+import NetworkStatus from './components/Utils/NetworkStatus';
+import { ErrorBoundary } from "react-error-boundary";
+import Fallback from './components/Utils/ErrorBoundary';
 
 const Home = lazy(() => import('./components/Home/Home'));
 const Products = lazy(() => import('./components/Products/Products'));
@@ -55,89 +58,97 @@ function App() {
   const promise = stripeApiKey ? loadStripe(stripeApiKey) : null;
 
   useEffect(() => {
-      store.dispatch(loadUser());
-      getStripeApiKey();
+    store.dispatch(loadUser());
+    getStripeApiKey();
   }, []);
 
   return (
     <>
-      <Suspense fallback={<InitLoader />}>
-        <Router>
-          <Elements stripe={promise}>
-            <HeaderBelt />
-            <Routes>
-              <Route exact path="/" Component={Home} />
-              <Route exact path="/products" Component={Products} />
-              <Route exact path="/product/:id" Component={ProductDetails} />
-              <Route path="/products/:keyword" Component={Products} />
-              <Route path="/blogs" Component={Blogs} />
-              <Route path="/contact" Component={Contact} />
-              <Route path="/cart" Component={Cart} />
-              <Route exact path="/login" Component={Login} />
-              <Route exact path='/password/forgot' Component={ForgotPassword} />
-              <Route exact path='/password/reset/:token' Component={ResetPassword} />
-              <Route exact path="/register" Component={Signup} />
-              <Route exact path='/account' element={<ProtectedRoute isAdmin={false} />}>
-                <Route exact path='/account' Component={Profile} />
-              </Route>
-              <Route exact path='/me/update' element={<ProtectedRoute isAdmin={false} />}>
-                <Route exact path='/me/update' Component={Profile} />
-              </Route>
-              <Route exact path='/password/update' element={<ProtectedRoute isAdmin={false} />}>
-                <Route exact path='/password/update' Component={Profile} />
-              </Route>
-              <Route exact path='/shipping' element={<ProtectedRoute isAdmin={false} />}>
-                <Route exact path='/shipping' Component={Shipping} />
-              </Route>
-              {
-                stripeApiKey && (
-                  <Route exact path="/process/payment" element={<ProtectedRoute isAdmin={false} />}>
-                    <Route exact path="/process/payment" Component={Payment} />
-                  </Route>
-                )
-              }
-              <Route exact path='/success' element={<ProtectedRoute isAdmin={false} />}>
-                <Route exact path='/success' Component={OrderSucess} />
-              </Route>
-              <Route exact path='/orders' element={<ProtectedRoute isAdmin={false} />}>
-                <Route exact path='/orders' Component={MyOrders} />
-              </Route>
-              <Route exact path='/order/:id' element={<ProtectedRoute isAdmin={false} />}>
-                <Route exact path='/order/:id' Component={OrderDetails} />
-              </Route>
-              <Route exact path='/admin/dashboard' element={<ProtectedRoute isAdmin={true} />}>
-                <Route exact path='/admin/dashboard' Component={Dashboard} />
-              </Route>
-              <Route exact path='/admin/products' element={<ProtectedRoute isAdmin={true} />}>
-                <Route exact path='/admin/products' Component={ProductList} />
-              </Route>
-              <Route exact path='/admin/product' element={<ProtectedRoute isAdmin={true} />}>
-                <Route exact path='/admin/product' Component={NewProduct} />
-              </Route>
-              <Route exact path='/admin/product/:id' element={<ProtectedRoute isAdmin={true} />}>
-                <Route exact path='/admin/product/:id' Component={UpdateProduct} />
-              </Route>
-              <Route exact path='/admin/orders' element={<ProtectedRoute isAdmin={true} />}>
-                <Route exact path='/admin/orders' Component={OrderList} />
-              </Route>
-              <Route exact path='/admin/order/:id' element={<ProtectedRoute isAdmin={true} />}>
-                <Route exact path='/admin/order/:id' Component={ProcessOrder} />
-              </Route>
-              <Route exact path='/admin/users' element={<ProtectedRoute isAdmin={true} />}>
-                <Route exact path='/admin/users' Component={UsersList} />
-              </Route>
-              <Route exact path='/admin/user/:id' element={<ProtectedRoute isAdmin={true} />}>
-                <Route exact path='/admin/user/:id' Component={UpdateUser} />
-              </Route>
-              <Route exact path='/admin/reviews' element={<ProtectedRoute isAdmin={true} />}>
-                <Route exact path='/admin/reviews' Component={ProductReviews} />
-              </Route>
-              <Route path='*' Component={Forbidden} />
-            </Routes>
-            <Footer />
-          </Elements>
-        </Router >
-      </Suspense>
+      <ErrorBoundary
+        FallbackComponent={Fallback}
+        onReset={() => {
+          window.location.reload()
+        }}
+      >
+        <Suspense fallback={<InitLoader />}>
+          <Router>
+            <NetworkStatus />
+            <Elements stripe={promise}>
+              <HeaderBelt />
+              <Routes>
+                <Route exact path="/" Component={Home} />
+                <Route exact path="/products" Component={Products} />
+                <Route exact path="/product/:id" Component={ProductDetails} />
+                <Route path="/products/:keyword" Component={Products} />
+                <Route path="/blogs" Component={Blogs} />
+                <Route path="/contact" Component={Contact} />
+                <Route path="/cart" Component={Cart} />
+                <Route exact path="/login" Component={Login} />
+                <Route exact path='/password/forgot' Component={ForgotPassword} />
+                <Route exact path='/password/reset/:token' Component={ResetPassword} />
+                <Route exact path="/register" Component={Signup} />
+                <Route exact path='/account' element={<ProtectedRoute isAdmin={false} />}>
+                  <Route exact path='/account' Component={Profile} />
+                </Route>
+                <Route exact path='/me/update' element={<ProtectedRoute isAdmin={false} />}>
+                  <Route exact path='/me/update' Component={Profile} />
+                </Route>
+                <Route exact path='/password/update' element={<ProtectedRoute isAdmin={false} />}>
+                  <Route exact path='/password/update' Component={Profile} />
+                </Route>
+                <Route exact path='/shipping' element={<ProtectedRoute isAdmin={false} />}>
+                  <Route exact path='/shipping' Component={Shipping} />
+                </Route>
+                {
+                  stripeApiKey && (
+                    <Route exact path="/process/payment" element={<ProtectedRoute isAdmin={false} />}>
+                      <Route exact path="/process/payment" Component={Payment} />
+                    </Route>
+                  )
+                }
+                <Route exact path='/success' element={<ProtectedRoute isAdmin={false} />}>
+                  <Route exact path='/success' Component={OrderSucess} />
+                </Route>
+                <Route exact path='/orders' element={<ProtectedRoute isAdmin={false} />}>
+                  <Route exact path='/orders' Component={MyOrders} />
+                </Route>
+                <Route exact path='/order/:id' element={<ProtectedRoute isAdmin={false} />}>
+                  <Route exact path='/order/:id' Component={OrderDetails} />
+                </Route>
+                <Route exact path='/admin/dashboard' element={<ProtectedRoute isAdmin={true} />}>
+                  <Route exact path='/admin/dashboard' Component={Dashboard} />
+                </Route>
+                <Route exact path='/admin/products' element={<ProtectedRoute isAdmin={true} />}>
+                  <Route exact path='/admin/products' Component={ProductList} />
+                </Route>
+                <Route exact path='/admin/product' element={<ProtectedRoute isAdmin={true} />}>
+                  <Route exact path='/admin/product' Component={NewProduct} />
+                </Route>
+                <Route exact path='/admin/product/:id' element={<ProtectedRoute isAdmin={true} />}>
+                  <Route exact path='/admin/product/:id' Component={UpdateProduct} />
+                </Route>
+                <Route exact path='/admin/orders' element={<ProtectedRoute isAdmin={true} />}>
+                  <Route exact path='/admin/orders' Component={OrderList} />
+                </Route>
+                <Route exact path='/admin/order/:id' element={<ProtectedRoute isAdmin={true} />}>
+                  <Route exact path='/admin/order/:id' Component={ProcessOrder} />
+                </Route>
+                <Route exact path='/admin/users' element={<ProtectedRoute isAdmin={true} />}>
+                  <Route exact path='/admin/users' Component={UsersList} />
+                </Route>
+                <Route exact path='/admin/user/:id' element={<ProtectedRoute isAdmin={true} />}>
+                  <Route exact path='/admin/user/:id' Component={UpdateUser} />
+                </Route>
+                <Route exact path='/admin/reviews' element={<ProtectedRoute isAdmin={true} />}>
+                  <Route exact path='/admin/reviews' Component={ProductReviews} />
+                </Route>
+                <Route path='*' Component={Forbidden} />
+              </Routes>
+              <Footer />
+            </Elements>
+          </Router >
+        </Suspense>
+      </ErrorBoundary>
     </>
   )
 }

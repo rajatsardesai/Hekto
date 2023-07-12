@@ -4,13 +4,13 @@ import ListGroup from 'react-bootstrap/ListGroup';
 
 const CategoryFilterItem = memo((props) => {
 
-    const { categories, categoryActiveIndex, isCategory, setIsCategory, setCategoryActiveIndex, setActiveIndex } = props;
+    const { categories, categoryActiveIndex, isCategory, setIsCategory, setCategory, setCategoryActiveIndex } = props;
 
     // Category filter handler
     const handleCategory = (category, index) => {
         setIsCategory(!isCategory);
-        setCategoryActiveIndex(isCategory ? "" : category);
-        setActiveIndex(index);
+        setCategoryActiveIndex(!isCategory ? "" : index);
+        setCategory(!isCategory ? "" : category);
     };
 
     return (

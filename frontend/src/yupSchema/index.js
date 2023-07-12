@@ -19,7 +19,7 @@ export const signupSchema = Yup.object({
     name: Yup.string().min(2, "Name must be at least 2 characters").max(25, "Name should not be more than 25 characters").required("Please enter your name"),
     email: Yup.string().email("Invalid Email").required("Please enter your email"),
     password: Yup.string().min(6, 'Password must be at least 6 characters').required("Please enter your password"),
-    avatar: Yup.mixed().required("Please enter your image"),
+    avatar: Yup.mixed().required("Please enter your image")
 });
 
 export const profileSchema = Yup.object({

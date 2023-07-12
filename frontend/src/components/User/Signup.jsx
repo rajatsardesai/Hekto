@@ -50,14 +50,18 @@ const Signup = () => {
 
     // Handle avatar data change
     const handleAvatarChange = (e) => {
-        const reader = new FileReader();
-        reader.onload = () => {
-            if (reader.readyState === 2) {
-                setFieldValue('avatar', reader.result);
-                setFieldValue('avatarPreview', reader.result);
+        try {
+            const reader = new FileReader();
+            reader.onload = () => {
+                if (reader.readyState === 2) {
+                    setFieldValue('avatar', reader.result);
+                    setFieldValue('avatarPreview', reader.result);
+                }
             }
+            reader.readAsDataURL(e.target.files[0]);
+        } catch (error) {
+            return <HeaderAlert error={true} message={"File size exceeds 1mb."} />;
         }
-        reader.readAsDataURL(e.target.files[0]);
     };
 
     useEffect(() => {
@@ -119,9 +123,10 @@ const Signup = () => {
                             </Form.Group>
                             <Form.Group className="mb-4" controlId="avatar">
                                 <Stack direction="horizontal" className="register-image">
-                                    <img src={values.avatarPreview} alt="Avatar Preview" className="w-25 me-2 rounded-circle" />
+                                    <img src={values.avatarPreview} alt="Avatar Preview" className="me-2 rounded-circle" />
                                     <Form.Control type="file" name="avatar" accept="image/*" placeholder="Upload your Avatar" className="font-lato font-16" onChange={handleAvatarChange} onBlur={handleBlur} isInvalid={touched.avatar && errors.avatar} />
                                 </Stack>
+                                <span className="text-gray-500-color font-lato font-15">*Image size should not exceed 1mb</span>
                                 {
                                     errors.avatar && touched.avatar ?
                                         <Form.Control.Feedback type="invalid" className="d-block">

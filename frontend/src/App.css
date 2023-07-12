@@ -330,6 +330,11 @@
     }
 }
 
+.register-image img {
+    width: 122px;
+    height: 100px;
+}
+
 .register-image>input[type=file] {
     color: transparent
 }

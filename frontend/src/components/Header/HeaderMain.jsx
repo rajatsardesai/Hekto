@@ -37,11 +37,11 @@ const HeaderMain = () => {
                     >
                         {/* Header main left */}
                         <Stack className="flex-column flex-sm-row justify-content-sm-center justify-content-lg-start">
-                            <Stack direction="horizontal" gap={2} className="text-decoration-none text-light font-16 me-sm-5" as={Link} to={'/'}>
+                            <Stack direction="horizontal" gap={2} className="text-decoration-none text-light font-16 me-sm-5" as={Link} to={'mailto:hektoofficialindia@gmail.com'}>
                                 <img src={process.env.PUBLIC_URL + "/assets/style/mail.svg"} alt="mail" />
-                                <span>ebuyofficialindia@gmail.com</span>
+                                <span>hektoofficialindia@gmail.com</span>
                             </Stack>
-                            <Stack direction="horizontal" gap={2} className="text-decoration-none text-light font-16" as={Link} to={'/'}>
+                            <Stack direction="horizontal" gap={2} className="text-decoration-none text-light font-16" as={Link} to={'tel:(12345)67890'}>
                                 <img src={process.env.PUBLIC_URL + "/assets/style/call.svg"} alt="call" />
                                 <span>(12345)67890</span>
                             </Stack>
