@@ -1,0 +1,33 @@
+.home-products-tab {
+    .nav-link {
+        position: relative;
+        color: var(--blue-300-color);
+    }
+
+    .nav-link.active {
+        color: var(--secondary-color);
+    }
+
+    .nav-link.active::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background-color: var(--secondary-color);
+        color: var(--secondary-color);
+    }
+}
+
+.home-latest-product-cards {
+    width: 272px;
+}
+
+.home-latest-product-cards {
+    .card-body {
+        .card-title {
+            font-size: 18px;
+        }
+    }
+}

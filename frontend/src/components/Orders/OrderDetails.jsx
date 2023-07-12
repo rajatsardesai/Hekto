@@ -1,5 +1,8 @@
 import React, { useEffect } from 'react';
+import "./OrderDetails.css";
 import MetaData from '../MetaData';
+import HeaderLoading from '../Header/HeaderLoading';
+import HeaderAlert from '../Header/HeaderAlert';
 import Container from 'react-bootstrap/Container';
 import Stack from 'react-bootstrap/esm/Stack';
 import Row from 'react-bootstrap/Row';
@@ -14,12 +17,9 @@ const OrderDetails = () => {
     const dispatch = useDispatch();
     const params = useParams();
 
-    const { error, order } = useSelector((state) => state.orderDetails);
+    const { headerLoading, error, message, order } = useSelector((state) => state.orderDetails);
 
     useEffect(() => {
-        if (error) {
-            alert(error);
-        };
         dispatch(getOrderDetails(params.id));
     }, [dispatch, params.id, error]);
 
@@ -28,13 +28,22 @@ const OrderDetails = () => {
     return (
         <>
             {/* Title tag */}
-            <MetaData title={"Order Details"} />
+            <MetaData title={"Order Details -@Hekto"} />
+
+            {/* React top loading bar */}
+            <HeaderLoading progressLoading={headerLoading} />
+
+            {/* Header alert */}
+            {
+                (error) &&
+                <HeaderAlert error={error} message={message} />
+            }
 
             {/* Order Details */}
             <Container className="my-5">
                 <Row>
                     <Col lg={8} className="mb-5 pe-md-5">
-                        <h5 className="fw-bold font-20 text-blue-500-color mb-2">Order Details</h5>
+                        <h5 className="fw-bold font-22 text-blue-500-color mb-2">Order Details</h5>
                         <Stack className="mb-4 flex-column flex-md-row" gap={3}>
                             <span>Ordered on {order && orderedDate}</span>
                             <span>Order #{order && order._id}</span>
@@ -74,14 +83,16 @@ const OrderDetails = () => {
                     </Col>
 
                     <Col lg={4}>
-                        <h5 className="fw-bold font-20 text-blue-500-color text-center mb-4">Order Summary</h5>
-                        {
-                            order.orderItems && order.orderItems.map(item => {
-                                return (
-                                    <CartItems key={item.product} item={item} />
-                                )
-                            })
-                        }
+                        <h5 className="fw-bold font-22 text-blue-500-color text-center mb-4">Order Summary</h5>
+                        <div className="order-details overflow-auto mb-5">
+                            {
+                                order.orderItems && order.orderItems.map((item) => {
+                                    return (
+                                        <CartItems key={item.product} item={item} />
+                                    )
+                                })
+                            }
+                        </div>
                         <CartTotals cartItems={order.orderItems} id={params.id} totalPrice={order.itemPrice} shippingPrice={order.shippingPrice} gstPrice={order.taxPrice} grandTotal={order.totalPrice} />
                     </Col>
                 </Row>

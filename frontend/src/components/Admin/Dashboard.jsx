@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react';
 import MetaData from '../MetaData';
+import HeaderLoading from '../Header/HeaderLoading';
+import HeaderAlert from '../Header/HeaderAlert';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -19,9 +21,9 @@ const Dashboard = () => {
 
     const dispatch = useDispatch();
 
-    const { products } = useSelector((state => state.products));
-    const { orders } = useSelector((state => state.allOrders));
-    const { users } = useSelector((state => state.allUsers));
+    const { products, error: productsError, message: productsMessage } = useSelector((state => state.products));
+    const { orders, headerLoading: ordersHeaderLoading, error: ordersError, message: ordersMessage } = useSelector((state => state.allOrders));
+    const { users, error: usersError, message: usersMessage } = useSelector((state => state.allUsers));
 
     let outOfStock = 0;
 
@@ -55,7 +57,7 @@ const Dashboard = () => {
             {
                 backgroundColor: ["#151875", "#fb2e86"],
                 hoverBackgroundColor: ["#151875", "#fb2e86"],
-                data: [outOfStock, products.length - outOfStock]
+                data: [outOfStock, products && products.length - outOfStock]
             }
         ]
     };
@@ -70,6 +72,15 @@ const Dashboard = () => {
         <>
             {/* Title tag */}
             <MetaData title={"Dashboard - Admin"} />
+
+            {/* React top loading bar */}
+            <HeaderLoading progressLoading={ordersHeaderLoading} />
+
+            {/* Header alert */}
+            {
+                (productsError || ordersError || usersError) &&
+                <HeaderAlert error={productsError || ordersError || usersError} message={productsMessage || ordersMessage || usersMessage} />
+            }
 
             <Container className="my-5">
                 <Row>

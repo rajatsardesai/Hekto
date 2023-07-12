@@ -4,7 +4,6 @@ export const newOrderReducer = (state = {}, action) => {
     switch (action.type) {
         case SET_LOADER_PROGRESS:
             return {
-                loading: true,
                 ...state,
                 orderLoading: action.orderLoading
             }
@@ -33,14 +32,13 @@ export const myOrdersReducer = (state = { orders: [] }, action) => {
     switch (action.type) {
         case SET_LOADER_PROGRESS:
             return {
-                loading: true,
                 ...state,
-                orderLoading: action.orderLoading
+                headerLoading: action.headerLoading
             }
         case MY_ORDER_REQUEST:
             return {
-                loading: true,
                 ...state,
+                loading: true,
             }
         case MY_ORDER_SUCCESS:
             return {
@@ -63,9 +61,8 @@ export const allOrdersReducer = (state = { orders: [] }, action) => {
     switch (action.type) {
         case SET_LOADER_PROGRESS:
             return {
-                loading: true,
                 ...state,
-                orderLoading: action.orderLoading
+                headerLoading: action.headerLoading
             }
         case ALL_ORDER_REQUEST:
             return {
@@ -93,9 +90,8 @@ export const orderReducer = (state = { orders: [] }, action) => {
     switch (action.type) {
         case SET_LOADER_PROGRESS:
             return {
-                loading: true,
                 ...state,
-                orderLoading: action.orderLoading
+                headerLoading: action.headerLoading
             }
         case UPDATE_ORDER_REQUEST:
         case DELETE_ORDER_REQUEST:
@@ -107,13 +103,15 @@ export const orderReducer = (state = { orders: [] }, action) => {
             return {
                 ...state,
                 loading: false,
-                isUpdated: action.payload
+                isUpdated: action.payload.success,
+                message: action.payload.message,
             }
         case DELETE_ORDER_SUCCESS:
             return {
                 ...state,
                 loading: false,
-                isDeleted: action.payload
+                isDeleted: action.payload.success,
+                message: action.payload.message,
             }
         case UPDATE_ORDER_RESET:
             return {
@@ -142,14 +140,13 @@ export const orderDetailsReducer = (state = { order: {} }, action) => {
     switch (action.type) {
         case SET_LOADER_PROGRESS:
             return {
-                loading: true,
                 ...state,
-                orderDetailsLoading: action.orderDetailsLoading
+                headerLoading: action.headerLoading
             }
         case ORDER_DETAILS_REQUEST:
             return {
-                loading: true,
                 ...state,
+                loading: true,
             }
         case ORDER_DETAILS_SUCCESS:
             return {

@@ -1,0 +1,7 @@
+.alert {
+    z-index: 6000;
+}
+
+.alert .btn-close {
+    padding: 15px;
+}

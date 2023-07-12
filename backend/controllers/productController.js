@@ -19,6 +19,7 @@ exports.createProduct = catchAsyncError(async (req, res, next) => {
     for (let i = 0; i < images.length; i++) {
         const result = await cloudinary.v2.uploader.upload(images[i], {
             folder: "products",
+            format: "webp"
         });
 
         imagesLinks.push({
@@ -35,31 +36,44 @@ exports.createProduct = catchAsyncError(async (req, res, next) => {
     res.status(201).json({
         success: true,
         product,
+        message: "New product created successfully!!"
     });
 });
 
 // Get all products
 exports.getAllProducts = catchAsyncError(async (req, res) => {
+    const products = await Product.find();
+
+    res.status(200).json({
+        success: true,
+        products
+    });
+});
+
+// Get filtered products
+exports.getFilteredProducts = catchAsyncError(async (req, res) => {
     // throw new Error("THis is new error");
     const resultPerPage = 6;
     const productsCount = await Product.countDocuments();
 
-    const apiFeature = new ApiFeatures(Product.find(), req.query).search().filter().pagination(resultPerPage);
+    const apiFeature = new ApiFeatures(Product.find(), req.query).search().filter();
     let products = await apiFeature.query;
-    // let filteredProductsCount = products.length;
-    // apiFeature.pagination(resultPerPage);
-    // products = await apiFeature.query;
+    const filteredProductsCount = products.length;
+
+    // For category
+    const categoryApiFeature = new ApiFeatures(Product.find(), req.query).search().filter().pagination(resultPerPage);
+    products = await categoryApiFeature.query;
     res.status(200).json({
         success: true,
         products,
         productsCount,
         resultPerPage,
-        // filteredProductsCount
+        filteredProductsCount
     });
 });
 
 // Get all products (Admin)
-exports.getAdminProducts = catchAsyncError(async (req, res) => {
+exports.getAdminProducts = catchAsyncError(async (req, res, next) => {
     const products = await Product.find();
 
     res.status(200).json({
@@ -108,6 +122,7 @@ exports.updateProduct = catchAsyncError(async (req, res, next) => {
         for (let i = 0; i < images.length; i++) {
             const result = await cloudinary.v2.uploader.upload(images[i], {
                 folder: "products",
+                format: "webp"
             });
 
             imagesLinks.push({
@@ -123,7 +138,8 @@ exports.updateProduct = catchAsyncError(async (req, res, next) => {
 
     res.status(200).json({
         success: true,
-        product
+        product,
+        message: "Product updated succcessfully!"
     })
 });
 
@@ -142,7 +158,7 @@ exports.deleteProduct = catchAsyncError(async (req, res, next) => {
     await product.deleteOne();
     res.status(200).json({
         success: true,
-        message: "Product deleted"
+        message: "Product deleted successfully!"
     })
 });
 
@@ -153,6 +169,7 @@ exports.createProductReview = catchAsyncError(async (req, res, next) => {
     const review = {
         user: req.user._id,
         name: req.user.name,
+        avatar: req.user.avatar.url,
         rating: Number(rating),
         comment
     };
@@ -216,7 +233,7 @@ exports.deleteProductReview = catchAsyncError(async (req, res, next) => {
     let ratings = 0;
     if (reviews.length === 0) {
         ratings = 0;
-    }else{
+    } else {
         ratings = avg / product.reviews.length;
     }
 
@@ -230,6 +247,6 @@ exports.deleteProductReview = catchAsyncError(async (req, res, next) => {
 
     res.status(200).json({
         success: true,
-        message: "Review deleted"
+        message: "Review deleted successfully!!"
     })
 });

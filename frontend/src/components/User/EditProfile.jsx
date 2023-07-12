@@ -3,34 +3,42 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 
 const EditProfile = (props) => {
-    const { label, name, isEditing, updateValue, setUpdateValue, handleEditClick, updatedSubmit }
+    const { label, name, isEditing, value, handleEditClick, errors, touched, handleBlur, handleChange, handleSubmit }
         = props;
+
     return (
         <>
             {!isEditing ?
                 <>
                     <div className="ms-md-2 me-md-auto mx-2">
                         <div className="fw-bold">{label}:</div>
-                        {updateValue}
+                        {value}
                     </div>
-                    <Button variant="secondary" onClick={() => handleEditClick(true, updateValue)}>Edit</Button>
+                    <Button variant="secondary" onClick={() => handleEditClick(true, value)}>Edit</Button>
                 </>
                 :
                 <>
                     <div className="ms-md-2 me-md-auto mx-2">
                         <Form.Control
                             type="text"
-                            value={updateValue}
+                            value={value}
                             name={name}
-                            onChange={(e) => {
-                                setUpdateValue(e.target.value)
-                                updatedSubmit(e)
-                            }}
-                            aria-label="Name"
-                            aria-describedby="name"
+                            onChange={handleChange} onBlur={handleBlur} isInvalid={touched && errors}
+                            aria-label={label}
+                            aria-describedby={label}
                         />
+                        {
+                            errors && touched ?
+                                <Form.Control.Feedback type="invalid">
+                                    {errors}
+                                </Form.Control.Feedback>
+                                : null
+                        }
                     </div>
-                    <Button variant="secondary" type="submit" onClick={() => handleEditClick(false, updateValue)}>
+                    <Button variant="secondary" type="submit" onClick={() => {
+                        handleEditClick(false, value)
+                        handleSubmit();
+                    }}>
                         Save
                     </Button>
                 </>

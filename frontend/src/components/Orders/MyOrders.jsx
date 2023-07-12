@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react';
 import MetaData from '../MetaData';
+import HeaderLoading from '../Header/HeaderLoading';
+import HeaderAlert from '../Header/HeaderAlert';
 import Table from 'react-bootstrap/Table';
 import Container from 'react-bootstrap/esm/Container';
 import Button from 'react-bootstrap/Button';
@@ -11,8 +13,7 @@ import { Link } from 'react-router-dom';
 const MyOrders = () => {
     const dispatch = useDispatch();
 
-    const { orders } = useSelector((state => state.myOrders));
-    const { user } = useSelector((state => state.user));
+    const { headerLoading, error, message, orders } = useSelector((state => state.myOrders));
 
     useEffect(() => {
         dispatch(myOrders());
@@ -20,11 +21,20 @@ const MyOrders = () => {
 
     return (
         <>
-            <MetaData title={"Your Orders"} />
+            <MetaData title={"Your Orders -@Hekto"} />
+
+            {/* React top loading bar */}
+            <HeaderLoading progressLoading={headerLoading} />
+
+            {/* Header alert */}
+            {
+                (error) &&
+                <HeaderAlert error={error} message={message} />
+            }
 
             <Container className="my-5 h-60vh">
                 {
-                    orders.length > 0 ?
+                    orders && orders.length > 0 ?
                         <Table bordered hover responsive="md">
                             <thead className="bg-gray-400-color">
                                 <tr>

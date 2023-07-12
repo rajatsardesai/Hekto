@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react';
 import MetaData from '../MetaData';
+import HeaderLoading from '../Header/HeaderLoading';
+import HeaderAlert from '../Header/HeaderAlert';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Table from 'react-bootstrap/Table';
@@ -15,30 +17,36 @@ import Sidebar from './Sidebar';
 const ProductList = () => {
     const dispatch = useDispatch();
 
-    const { error, products } = useSelector((state => state.products));
-    const { error: deleteError, isDeleted } = useSelector((state => state.product));
+    const { products, headerLoading: productsHeaderLoading, error: productsError, message: productsMessage } = useSelector((state => state.products));
+    const {headerLoading: deleteHeaderLoading, error: deleteError, message: deleteMessage, isDeleted } = useSelector((state => state.product));
 
     const deleteProductHandler = (id) => {
         dispatch(deleteProduct(id));
     };
 
     useEffect(() => {
-        if (error || deleteError) {
-            alert(error || deleteError);
-        };
-
         if (isDeleted) {
-            alert("Product deleted successfully");
-            dispatch({ type: DELETE_PRODUCT_RESET });
+            setTimeout(() => {
+                dispatch({ type: DELETE_PRODUCT_RESET });
+            },5000);
         };
 
         dispatch(getAdminProduct());
-    }, [dispatch, isDeleted, error, deleteError]);
+    }, [dispatch, isDeleted, deleteError]);
 
     return (
         <>
             {/* Title tag */}
             <MetaData title={"All Products - Admin"} />
+
+            {/* React top loading bar */}
+            <HeaderLoading progressLoading={productsHeaderLoading || deleteHeaderLoading} />
+
+            {/* Header alert */}
+            {
+                (productsError || deleteError || isDeleted) &&
+                <HeaderAlert error={productsError || deleteError} message={productsMessage || deleteMessage} />
+            }
 
             {/* All products list */}
             <Container className="my-5 h-60vh">
@@ -51,10 +59,10 @@ const ProductList = () => {
                     {/* Dashboard */}
                     <Col lg={8}>
                         <Stack className="align-items-end mb-3">
-                            <Button as={Link} to={"/admin/product"} className="bg-secondary-color border-0 my-2 py-2 px-3 rounded-0" type="submit">Add Product</Button>
+                            <Button as={Link} to={"/admin/product"} className="bg-secondary-color border-0 my-2 py-2 px-3 rounded-0 d-flex justify-content-center align-items-center" type="submit">Add Product</Button>
                         </Stack>
                         {
-                            products.length > 0 ?
+                            products && products.length > 0 ?
                                 <Table bordered hover responsive="md">
                                     <thead className="bg-gray-400-color">
                                         <tr>
@@ -76,7 +84,7 @@ const ProductList = () => {
                                                         <td>{product.stock}</td>
                                                         <td>{product.price}</td>
                                                         <td className="d-flex">
-                                                            <Button as={Link} to={`/admin/product/${product._id}`} className="bg-secondary-color border-0 py-2 px-3 rounded-0 text-nowrap me-2">Edit</Button>
+                                                            <Button as={Link} to={`/admin/product/${product._id}`} className="bg-secondary-color border-0 w-auto py-2 px-3 rounded-0 text-nowrap me-2 d-flex justify-content-center align-items-center">Edit</Button>
                                                             <Button onClick={() => deleteProductHandler(product._id)} className="bg-secondary-color border-0 py-2 px-3 rounded-0 text-nowrap">Delete</Button>
                                                         </td>
                                                     </tr>

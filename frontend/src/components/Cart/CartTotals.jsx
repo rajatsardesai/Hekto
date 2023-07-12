@@ -4,7 +4,7 @@ import Button from 'react-bootstrap/Button';
 import { useLocation } from 'react-router-dom';
 
 const CartTotals = forwardRef((props, ref) => {
-    const { cartItems, id, checkoutHandler, submitbuttonRef, shippingSubmit, totalPrice, shippingPrice, gstPrice, grandTotal } = props;
+    const { cartItems, id, checkoutHandler, submitbuttonref, shippingSubmit, totalPrice, shippingPrice, gstPrice, grandTotal } = props;
 
     const location = useLocation();
 
@@ -15,13 +15,9 @@ const CartTotals = forwardRef((props, ref) => {
                     <span className="font-lato fw-semibold font-18 text-blue-500-color">Subtotal:</span>
                     <Stack direction="vertical">
                         {
-                            cartItems && cartItems.map(item => {
-                                return (
-                                    <>
-                                        <span key={item.product} className="font-lato font-16 text-blue-400-color text-end">₹{item.price * item.quantity}.00 ({item.quantity} items)</span>
-                                    </>
-                                )
-                            })
+                            cartItems && cartItems.map(item =>
+                                <span key={item.product} className="font-lato font-16 text-blue-400-color text-end">₹{item.price * item.quantity}.00 ({item.quantity} items)</span>
+                            )
                         }
                     </Stack>
                 </Stack>
@@ -48,15 +44,15 @@ const CartTotals = forwardRef((props, ref) => {
                     <span className="font-lato fw-semibold font-18 text-blue-500-color">Total:</span>
                     <span className="font-lato font-16 text-blue-400-color">₹{(location.pathname === "/cart") ? Math.floor(totalPrice) : Math.floor(grandTotal)}.00</span>
                 </Stack>
-                {   
+                {
                     (location.pathname !== "/process/payment" && location.pathname !== `/order/${id}`) &&
                     <>
                         <hr className="mb-4" />
                         <Stack direction="horizontal" className="mb-4">
-                            <img src={process.env.PUBLIC_URL + "/assets/images/check.png"} alt="check symbol" />
+                            <img src={process.env.PUBLIC_URL + "/assets/style/check.png"} alt="check symbol" />
                             <span className="font-lato font-12 text-gray-100-color ms-2">Shipping & taxes calculated at checkout</span>
                         </Stack>
-                        <Button className="w-100 font-lato font-14 fw-bold bg-green-100-color border-0 p-2 mb-2" submitbuttonRef={submitbuttonRef} onClick={checkoutHandler || shippingSubmit}>{(location.pathname === "/shipping") ? "Proceed To Payment" : "Proceed To Checkout"}</Button>
+                        <Button className="w-100 font-lato font-14 fw-bold bg-green-100-color border-0 p-2 mb-2" submitbuttonref={submitbuttonref} onClick={checkoutHandler || shippingSubmit}>{(location.pathname === "/shipping") ? "Proceed To Payment" : "Proceed To Checkout"}</Button>
                     </>
                 }
             </Stack>
