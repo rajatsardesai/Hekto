@@ -1,71 +1,93 @@
-import React, { useState } from 'react';
+import React from 'react';
+import MetaData from '../MetaData';
+import HeaderLoading from '../Header/HeaderLoading';
+import HeaderAlert from '../Header/HeaderAlert';
 import Container from 'react-bootstrap/esm/Container';
+import Stack from 'react-bootstrap/esm/Stack';
 import Card from 'react-bootstrap/Card';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-import Image from 'react-bootstrap/Image';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from "react-router-dom"
 import { resetPassword } from '../../store/actions/userAction';
+import { useFormik } from "formik";
+import { resetPassSchema } from '../../yupSchema';
+
+const initialValues = {
+    password: "",
+    confirmPassword: "",
+};
 
 const ResetPassword = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const { token } = useParams();
 
-    const [password, setPassword] = useState("");
-    const [confirmPassword, setConfirmPassword] = useState("");
+    const { loading, error, success, message, headerLoading } = useSelector((state) => state.forgotPassword);
 
-    // Handle forgot password form
-    const resetPasswordSubmit = (e) => {
-        e.preventDefault();
-        const resetPasswordForm = new FormData();
+    // Form handling and validation -- Formik and Yup
+    const { values, errors, touched, handleBlur, handleChange, handleSubmit } = useFormik({
+        initialValues,
+        validationSchema: resetPassSchema,
+        onSubmit: values => {
+            const resetPasswordForm = new FormData();
 
-        resetPasswordForm.set("password", password);
-        resetPasswordForm.set("confirmPassword", confirmPassword);
+            resetPasswordForm.set("password", values.password);
+            resetPasswordForm.set("confirmPassword", values.confirmPassword);
 
-        dispatch(resetPassword(token, resetPasswordForm));
-
-        navigate("/login");
-    };
+            dispatch(resetPassword(token, resetPasswordForm));
+            navigate("/login");
+        }
+    });
 
     return (
         <>
-            <div className="login-signup-page bg-white">
+            {/* Title tag */}
+            <MetaData title={"Hekto Reset Password"} />
+
+            {/* React top loading bar */}
+            <HeaderLoading progressLoading={headerLoading} />
+
+            {/* Header alert */}
+            {
+                (error || success || loading) &&
+                <HeaderAlert error={error} message={message} />
+            }
+
+            {/* Forgot Password? */}
+            <Stack className="users-page my-5 py-5">
                 <Container >
-                    <div className="text-center">
-                        <Image src={process.env.PUBLIC_URL + "/assets/images/logo.png"} alt="logo" className="my-3" />
-                    </div>
-                    <Card style={{ width: '22rem' }} className="m-auto p-3">
-                        <Card.Body>
-                            <Card.Title className="fs-3 fw-normal mb-2">Create new password</Card.Title>
-                            <p className="font-12">We'll ask for this password whenever you sign in.</p>
-                            <Form onSubmit={resetPasswordSubmit}>
-                                <Form.Group className="mb-3">
-                                    <Form.Label className="fs-6 fw-bold mb-1">New Password</Form.Label>
-                                    <Form.Control type="password" name="resetPassword" required value={password} onChange={(e) => setPassword(e.target.value)} />
-                                </Form.Group>
-                                <Form.Group className="mb-3">
-                                    <Form.Label className="fs-6 fw-bold mb-1">Password again</Form.Label>
-                                    <Form.Control type="password" name="resetPassword" required value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} />
-                                </Form.Group>
-                                <Button variant="warning" type="submit" className="w-100 my-2">
-                                    Continue
-                                </Button>
-                            </Form>
-                        </Card.Body>
+                    <Card className="p-3 p-md-5 border-0 card-shadow">
+                        <Card.Title className="fw-bold mb-1 text-center">Create new password</Card.Title>
+                        <span className="text-center text-gray-500-color font-lato font-17">We'll ask for this password whenever you sign in.</span>
+                        <Form onSubmit={handleSubmit} className="mt-5">
+                            <Form.Group controlId="password" className="mb-4">
+                                <Form.Control type="password" name="password" value={values.password} autoComplete="off" placeholder="Password" className="font-lato font-16 mb-2" onChange={handleChange} onBlur={handleBlur} isInvalid={touched.password && errors.password} />
+                                {
+                                    errors.password && touched.password ?
+                                        <Form.Control.Feedback type="invalid">
+                                            {errors.password}
+                                        </Form.Control.Feedback>
+                                        : null
+                                }
+                            </Form.Group>
+                            <Form.Group controlId="confirmPassword">
+                                <Form.Control type="password" name="confirmPassword" value={values.confirmPassword} autoComplete="off" placeholder="Confirm Password" className="font-lato font-16 mb-2" onChange={handleChange} onBlur={handleBlur} isInvalid={touched.confirmPassword && errors.confirmPassword} />
+                                {
+                                    errors.confirmPassword && touched.confirmPassword ?
+                                        <Form.Control.Feedback type="invalid">
+                                            {errors.confirmPassword}
+                                        </Form.Control.Feedback>
+                                        : null
+                                }
+                            </Form.Group>
+                            <Button type="submit" className="w-100 my-4 bg-secondary-color border-0 rounded-1">
+                                Continue
+                            </Button>
+                        </Form>
                     </Card>
-                    <ul style={{ width: '22rem' }} className="mx-auto my-4 p-0 list-style-position" >
-                        <p className="mb-1">Secure password tips:</p>
-                        <li className="font-12">Use at least 8 characters, a combination of numbers and letters is best.</li>
-                        <li className="font-12">Do not use the same password you have used with us previously.</li>
-                        <li className="font-12">Do not use dictionary words, your name, e-mail address, mobile phone number or other personal information that can be easily obtained.</li>
-                        <li className="font-12">Do not use the same password for multiple online accounts.</li>
-                    </ul>
-                    <hr className="my-4" />
-                    <p className="text-center">&copy; 2023, eBuy, Inc. or its affiliates</p>
                 </Container>
-            </div>
+            </Stack>
         </>
     )
 }

@@ -1,0 +1,15 @@
+.header-belt{
+    box-shadow: 0px 15px 10px -15px rgba(0, 0, 0, 0.2);
+}
+
+.header-belt .navbar-brand {
+    color: var(--blue-600-color);
+}
+
+.header-belt .nav-link {
+    color: var(--blue-600-color);
+}
+
+.header-belt .navbar-nav .nav-link.active {
+    color: var(--secondary-color);
+}

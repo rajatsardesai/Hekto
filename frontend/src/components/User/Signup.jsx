@@ -1,103 +1,145 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import HeaderLoading from '../Header/HeaderLoading';
+import HeaderAlert from '../Header/HeaderAlert';
 import Container from 'react-bootstrap/esm/Container';
 import Card from 'react-bootstrap/Card';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-import Image from 'react-bootstrap/Image';
 import MetaData from '../MetaData';
 import Stack from 'react-bootstrap/esm/Stack';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { register } from '../../store/actions/userAction';
+import { useNavigate } from 'react-router-dom';
+import { useFormik } from "formik";
+import { signupSchema } from '../../yupSchema';
+
+const initialValues = {
+    name: "",
+    email: "",
+    password: "",
+    avatar: process.env.PUBLIC_URL + "/assets/style/profile.png",
+    avatarPreview: process.env.PUBLIC_URL + "/assets/style/profile.png",
+};
 
 const Signup = () => {
-    // Handle register submit
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
-    const [user, setUser] = useState({
-        registerName: "",
-        registerEmail: "",
-        registerPassword: "",
+    const { loading, isAuthenticated, success, error, message, headerLoading } = useSelector(
+        (state) => state.user
+    );
+
+    // Checks auhentication on button click
+    const [checkAuthentication, setCheckAuthentication] = useState(isAuthenticated);
+
+    // Form handling and validation -- Formik and Yup
+    const { values, setFieldValue, errors, touched, handleBlur, handleChange, handleSubmit } = useFormik({
+        initialValues,
+        validationSchema: signupSchema,
+        onSubmit: values => {
+            const registerForm = new FormData();
+
+            registerForm.set("name", values.name.trim());
+            registerForm.set("email", values.email.trim().toLowerCase());
+            registerForm.set("password", values.password);
+            registerForm.set("avatar", values.avatar);
+
+            dispatch(register(registerForm));
+        }
     });
 
-    const { registerName, registerEmail, registerPassword } = user;
-
-    const [registerAvatar, setRegisterAvatar] = useState(process.env.PUBLIC_URL + "/assets/images/profile.png");
-    const [registerAvatarPreview, setRegisterAvatarPreview] = useState(process.env.PUBLIC_URL + "/assets/images/profile.png");
-    
-    const registerSubmit = (e) => {
-        e.preventDefault();
-        
-        const registerForm = new FormData();
-        
-        registerForm.set("name", registerName);
-        registerForm.set("email", registerEmail);
-        registerForm.set("password", registerPassword);
-        registerForm.set("avatar", registerAvatar);
-
-        dispatch(register(registerForm));
-    };
-
-    // Handle register data change
-    const registerDataChange = (e) => {
-        if (e.target.name === "registerAvatar") {
+    // Handle avatar data change
+    const handleAvatarChange = (e) => {
+        try {
             const reader = new FileReader();
             reader.onload = () => {
                 if (reader.readyState === 2) {
-                    setRegisterAvatarPreview(reader.result);
-                    setRegisterAvatar(reader.result);
+                    setFieldValue('avatar', reader.result);
+                    setFieldValue('avatarPreview', reader.result);
                 }
             }
             reader.readAsDataURL(e.target.files[0]);
-        } else {
-            setUser({ ...user, [e.target.name]: e.target.value });
+        } catch (error) {
+            return <HeaderAlert error={true} message={"File size exceeds 1mb."} />;
         }
     };
+
+    useEffect(() => {
+        if (success) {
+            navigate('/');
+        }
+    }, [success, navigate]);
 
     return (
         <>
             {/* Title tag */}
-            <MetaData title={"eBuy Registration"} />
+            <MetaData title={"Hekto Sign Up"} />
+
+            {/* React top loading bar */}
+            <HeaderLoading progressLoading={headerLoading} />
+
+            {/* Header alert */}
+            {
+                (error || success || loading) && checkAuthentication &&
+                <HeaderAlert error={error} message={message} />
+            }
 
             {/* Signup */}
-            <div className="login-signup-page bg-white">
+            <div className="users-page my-5 py-5">
                 <Container >
-                    <div className="text-center">
-                        <Image src={process.env.PUBLIC_URL + "/assets/images/logo.png"} alt="logo" className="my-3" />
-                    </div>
-                    <Card style={{ width: '22rem' }} className="m-auto p-3">
-                        <Card.Body>
-                            <Card.Title className="fs-3 fw-normal mb-3">Create Account</Card.Title>
-                            <Card.Text>
-                                <Form encType="multipart/form-data" onSubmit={registerSubmit}>
-                                    <Form.Group className="mb-3" controlId="registerName">
-                                        <Form.Label className="fs-6 fw-bold mb-1">Your name</Form.Label>
-                                        <Form.Control type="text" name="registerName" required value={registerName} onChange={registerDataChange} />
-                                    </Form.Group>
-                                    <Form.Group className="mb-3" controlId="registerEmail">
-                                        <Form.Label className="fs-6 fw-bold mb-1">Email address</Form.Label>
-                                        <Form.Control type="email" name="registerEmail" required value={registerEmail} onChange={registerDataChange} />
-                                    </Form.Group>
-                                    <Form.Group className="mb-3" controlId="registerPassword">
-                                        <Form.Label className="fs-6 fw-bold mb-1">Password</Form.Label>
-                                        <Form.Control type="password" name="registerPassword" required value={registerPassword} onChange={registerDataChange} />
-                                    </Form.Group>
-                                    <Form.Group className="mb-3" controlId="registerAvatar">
-                                        <Form.Label className="fs-6 fw-bold mb-1">Upload your Avatar</Form.Label>
-                                        <Stack direction="horizontal" className="register-image">
-                                            <img src={registerAvatarPreview} alt="Avatar Preview" className="w-25 me-2 rounded-circle" />
-                                            <Form.Control type="file" name="registerAvatar" required accept="image/*" onChange={registerDataChange} />
-                                        </Stack>
-                                    </Form.Group>
-                                    <Button variant="warning" type="submit" className="w-100 my-2">
-                                        Create Account
-                                    </Button>
-                                    <p>By continuing, you agree to eBuy's Conditions of Use and Privacy Notice.</p>
-                                </Form>
-                            </Card.Text>
-                        </Card.Body>
+                    <Card className="p-3 p-md-5 border-0 card-shadow">
+                        <Card.Title className="fw-bold mb-1 text-center">Create Account</Card.Title>
+                        <span className="text-center text-gray-500-color font-lato font-17">Join Hekto today for exciting offers.</span>
+                        <Form encType="multipart/form-data" onSubmit={handleSubmit} className="mt-5">
+                            <Form.Group className="mb-4" controlId="name">
+                                <Form.Control type="text" name="name" value={values.name} placeholder="Your name" autoComplete="off" className="font-lato font-16" onChange={handleChange} onBlur={handleBlur} isInvalid={touched.name && errors.name} />
+                                {
+                                    errors.name && touched.name ?
+                                        <Form.Control.Feedback type="invalid">
+                                            {errors.name}
+                                        </Form.Control.Feedback>
+                                        : null
+                                }
+                            </Form.Group>
+                            <Form.Group className="mb-4" controlId="email">
+                                <Form.Control type="email" name="email" value={values.email} autoComplete="off" placeholder="Email address" className="font-lato font-16" onChange={handleChange} onBlur={handleBlur} isInvalid={touched.email && errors.email} />
+                                {
+                                    errors.email && touched.email ?
+                                        <Form.Control.Feedback type="invalid">
+                                            {errors.email}
+                                        </Form.Control.Feedback>
+                                        : null
+                                }
+                            </Form.Group>
+                            <Form.Group className="mb-4" controlId="password">
+                                <Form.Control type="password" autoComplete="off" name="password" value={values.password} placeholder="Password" className="font-lato font-16" onChange={handleChange} onBlur={handleBlur} isInvalid={touched.password && errors.password} />
+                                {
+                                    errors.password && touched.password ?
+                                        <Form.Control.Feedback type="invalid">
+                                            {errors.password}
+                                        </Form.Control.Feedback>
+                                        : null
+                                }
+                            </Form.Group>
+                            <Form.Group className="mb-4" controlId="avatar">
+                                <Stack direction="horizontal" className="register-image">
+                                    <img src={values.avatarPreview} alt="Avatar Preview" className="me-2 rounded-circle" />
+                                    <Form.Control type="file" name="avatar" accept="image/*" placeholder="Upload your Avatar" className="font-lato font-16" onChange={handleAvatarChange} onBlur={handleBlur} isInvalid={touched.avatar && errors.avatar} />
+                                </Stack>
+                                <span className="text-gray-500-color font-lato font-15">*Image size should not exceed 1mb</span>
+                                {
+                                    errors.avatar && touched.avatar ?
+                                        <Form.Control.Feedback type="invalid" className="d-block">
+                                            {errors.avatar}
+                                        </Form.Control.Feedback>
+                                        : null
+                                }
+                            </Form.Group>
+                            <Button type="submit" onClick={() => setCheckAuthentication(true)} className="w-100 my-4 bg-secondary-color border-0 rounded-1">
+                                Create Account
+                            </Button>
+                        </Form>
                     </Card>
-                    <hr className="my-4" />
-                    <p className="text-center">&copy; 2023, eBuy, Inc. or its affiliates</p>
                 </Container>
             </div>
         </>

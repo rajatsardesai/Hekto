@@ -16,9 +16,14 @@ const ReviewCard = ({ review }) => {
     return (
         <>
             <div className="reviewCard">
-                <IconContext.Provider value={{ color: "gray", size:"30px" }}>
+                <IconContext.Provider value={{ color: "gray", size: "30px" }}>
                     <div className="d-inline-block me-2">
-                        <MdAccountCircle />
+                        {
+                            review.avatar ?
+                                <img src={review.avatar} alt={review.name} className="rounded-circle" style={{ width: "25px", height: "25px" }} />
+                                : <MdAccountCircle />
+
+                        }
                     </div>
                 </IconContext.Provider>
                 <span className="fs-6">{review.name}</span>

@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import MetaData from '../MetaData';
+import HeaderLoading from '../Header/HeaderLoading';
+import HeaderAlert from '../Header/HeaderAlert';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Table from 'react-bootstrap/Table';
@@ -18,8 +20,8 @@ const ProductReviews = () => {
     const [productId, setProductId] = useState("");
     const [noReviews, setNoReviews] = useState("No reviews to show");
 
-    const { error, reviews } = useSelector((state => state.productReviews));
-    const { error: deleteError, isDeleted } = useSelector((state => state.review));
+    const { headerLoading: productReviewsHeaderLoading, error: productReviewsError, message: productReviewsMessage, reviews } = useSelector((state => state.productReviews));
+    const { headerLoading: deleteHeaderLoading, error: deleteError, message: deleteMessage, isDeleted } = useSelector((state => state.review));
 
     const deleteReviewHandler = (reviewId) => {
         dispatch(deleteReviews(reviewId, productId));
@@ -35,20 +37,27 @@ const ProductReviews = () => {
         if (productId.length === 24) {
             dispatch(getAllReviews(productId));
         };
-        if (error || deleteError) {
-            alert(error || deleteError);
-        };
 
         if (isDeleted) {
-            alert("Review deleted successfully");
-            dispatch({ type: DELETE_REVIEW_RESET });
+            setTimeout(() => {
+                dispatch({ type: DELETE_REVIEW_RESET });
+            }, 5000);
         };
-    }, [dispatch, isDeleted, error, deleteError, productId]);
+    }, [dispatch, isDeleted, deleteError, productId]);
 
     return (
         <>
             {/* Title tag */}
             <MetaData title={"All Reviews - Admin"} />
+
+            {/* React top loading bar */}
+            <HeaderLoading progressLoading={productReviewsHeaderLoading || deleteHeaderLoading} />
+
+            {/* Header alert */}
+            {
+                (productReviewsError || deleteError || isDeleted) &&
+                <HeaderAlert error={productReviewsError || deleteError} message={productReviewsMessage || deleteMessage} />
+            }
 
             {/* All products list */}
             <Container className="my-5 h-60vh">

@@ -13,6 +13,8 @@
     --blue-300-color: #151875;
     --blue-400-color: #15245e;
     --blue-500-color: #1d3178;
+    --blue-600-color: #0d0e43;
+    --blue-700-color: #1a0b5b;
     --purple-100-color: #f3f9ff;
     --purple-200-color: #e0d3f5;
     --purple-300-color: #7e33e0;
@@ -21,7 +23,12 @@
     --gray-200-color: #f4f4fc;
     --gray-300-color: #f8f8fd;
     --gray-400-color: #eeeffb;
+    --gray-500-color: #9096b2;
+    --gray-600-color: #e7e4f8;
     --green-100-color: #19d16f;
+    --green-200-color: #dfffee;
+    --pink-100-color: #febad7;
+    --pink-200-color: #fff6fb;
     --white: #ffffff;
     --black: #000000;
 }
@@ -31,10 +38,14 @@
 }
 
 .container {
-    max-width: 1166px !important;
+    max-width: 1177px !important;
 }
 
 /* Background Colors */
+
+.bg-primary-color {
+    background-color: var(--primary-color);
+}
 
 .bg-secondary-color {
     background-color: var(--secondary-color) !important;
@@ -50,6 +61,10 @@
 
 .bg-blue-300 {
     background-color: var(--page-color);
+}
+
+.bg-purple-100-color {
+    background-color: var(--purple-100-color);
 }
 
 .bg-purple-300-color {
@@ -68,11 +83,35 @@
     background-color: var(--gray-400-color);
 }
 
+.bg-gray-600-color {
+    background-color: var(--gray-600-color);
+}
+
 .bg-green-100-color {
     background-color: var(--green-100-color) !important;
 }
 
+.bg-green-200-color {
+    background-color: var(--green-200-color);
+}
+
+.bg-pink-200-color {
+    background-color: var(--pink-200-color);
+}
+
 /* Text Colors */
+
+.text-primary-color {
+    color: var(--primary-color);
+}
+
+.text-secondary-color {
+    color: var(--secondary-color);
+}
+
+.text-blue-300-color {
+    color: var(--blue-300-color);
+}
 
 .text-blue-400-color {
     color: var(--blue-400-color);
@@ -82,14 +121,38 @@
     color: var(--blue-500-color);
 }
 
+.text-blue-700-color {
+    color: var(--blue-700-color);
+}
+
 .text-gray-100-color {
     color: var(--gray-100-color);
+}
+
+.text-gray-500-color {
+    color: var(--gray-500-color);
+}
+
+.text-blue-600-color {
+    color: var(--blue-600-color);
 }
 
 /* Fonts */
 
 .font-lato {
     font-family: 'Lato', sans-serif;
+}
+
+.font-35 {
+    font-size: 35px;
+}
+
+.font-32 {
+    font-size: 32px;
+}
+
+.font-26 {
+    font-size: 26px;
 }
 
 .font-24 {
@@ -105,11 +168,15 @@
 }
 
 .font-18 {
-    font-size: 18px;
+    font-size: 18px !important;
+}
+
+.font-17 {
+    font-size: 17px;
 }
 
 .font-16 {
-    font-size: 16px;
+    font-size: 16px !important;
 }
 
 .font-14 {
@@ -153,121 +220,147 @@
     -webkit-line-clamp: 1;
 }
 
-.object-fit {
+.object-fit-contain {
     object-fit: contain;
+}
+
+.object-fit-cover {
+    object-fit: cover;
 }
 
 .list-style-position {
     list-style-position: inside;
 }
 
-/* -------------- LAYOUT CSS -------------- */
-
-/* Header */
-.header-modal .modal-dialog {
-    border-radius: 0;
-
-    @media screen and (min-width:992px) {
-        margin-right: 0;
-        top: 31px;
-        right: -205px;
-    }
+.list-style-none {
+    list-style: none;
 }
 
-.header-modal .modal-content {
-    width: 255px;
-    border-radius: 0;
+.card-shadow {
+    box-shadow: 3px 3px 25px -10px rgba(0, 0, 0, 0.1), -3px -3px 25px -10px rgba(0, 0, 0, 0.1);
+    ;
+}
+
+/* -------------- LAYOUT CSS -------------- */
+.btn[role="button"] {
+    width: 163px;
+    height: 50px;
+    font-size: 17px;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-color: var(--secondary-color);
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, .5);
+}
+
+::-webkit-scrollbar-track {
+    border-radius: 10px;
+    background-color: var(--gray-200-color);
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, .4);
 }
 
 /* Pagination */
+.pagination>.page-item>.page-link {
+    border-radius: 0 !important;
+}
+
 .pagination>.page-item.active>.page-link {
-    background-color: var(--button-color);
+    background-color: var(--secondary-color);
     border: 0;
 }
 
-/* Home page */
+/* Accordion */
+.accordion {
+    .accordion-button:focus {
+        border-color: transparent;
+        box-shadow: none;
+    }
 
-.carousel-indicators {
-    display: none !important;
-}
+    .accordion-button[aria-expanded="true"] {
+        background-color: var(--secondary-color);
+        color: var(--white);
+    }
 
-.carousel-control-prev>span {
-    filter: invert(1);
-}
+    .accordion-button[aria-expanded="false"] {
+        background-color: var(--secondary-color);
+        color: var(--white);
+    }
 
-.carousel-control-next>span {
-    filter: invert(1);
-}
-
-.home-carousel .carousel-item>img {
-    object-fit: cover;
-    object-position: top;
-    height: 317px;
-}
-
-.home-carousel>.carousel-item>.card-image {
-    width: 262px;
-    height: 246px;
-    object-fit: contain;
-}
-
-/* products */
-.product-cards .cards {
-    height: 339px !important;
+    .accordion-button::after {
+        content: "";
+        filter: invert(1);
+    }
 }
 
 /* product-details-carousel */
-
-.product-details-carousel {
-    height: 594px;
-}
-
-.product-details-carousel .carousel-item img {
-    width: 546px;
-    height: 546px;
-    object-fit: contain;
-}
-
-.product-details-carousel>.carousel-indicators {
-    display: block !important;
-    text-align: center;
-}
-
-.product-details-carousel>.carousel-indicators>button {
-    background-color: #131921;
-}
-
 .product-details-dropdown {
     min-width: 47px !important;
 }
 
-/* Login Signup */
-.login-signup-page {
-    height: 100vh;
+/* Global users page - Login, Forgot password, Signup */
+.users-page .h5 {
+    font-size: 32px;
 }
 
-.login-signup-page .login-signup-forms {
-    width: 100%;
-
+.users-page .card {
     @media screen and (min-width:768px) {
-        width: 22rem;
+        width: 544px;
+        margin: auto;
     }
 }
 
-.new-signup {
-    width: 100%;
+.users-page input {
+    @media screen and (min-width:768px) {
+        height: 52px;
+    }
+}
+
+.users-page button {
+    font-family: 'Lato', sans-serif;
+    font-size: 17px;
 
     @media screen and (min-width:768px) {
-        width: 110px;
+        height: 47px;
     }
+}
+
+.register-image img {
+    width: 122px;
+    height: 100px;
+}
+
+.register-image>input[type=file] {
+    color: transparent
 }
 
 .register-image>input::file-selector-button {
-    width: 206px;
+    width: 100%;
+    height: 52px;
+}
+
+/* New and update product -- admin */
+.admin-products img {
+    min-width: 100%;
+
+    @media screen and (min-width:768px) {
+        min-width: 25%;
+    }
 }
 
 /* Your account */
 .profile-container {
     max-width: 598px !important;
     height: 60vh;
+}
+
+/* Footer */
+.footer-social-media img {
+    width: 19px;
+    height: 19px;
 }

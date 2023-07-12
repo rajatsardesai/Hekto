@@ -5,36 +5,41 @@ export const userReducer = (state = { user: {} }, action) => {
     switch (action.type) {
         case SET_LOADER_PROGRESS:
             return {
-                loading: true,
                 ...state,
-                loginLoading: action.loginLoading,
-                registerLoading: action.registerLoading,
-                loadUserLoading: action.loadUserLoading,
-                logoutLoading: action.logoutLoading
+                headerLoading: action.headerLoading
             };
         case LOGIN_REQUEST:
         case REGISTER_REQUEST:
         case LOAD_USER_REQUEST:
             return {
                 loading: true,
-                isAuthenticated: true
+                isAuthenticated: false,
+                message: "Please wait..."
             };
         case LOGIN_SUCCESS:
         case REGISTER_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                isAuthenticated: true,
+                user: action.payload,
+                success: true,
+                message: action.message
+            }
         case LOAD_USER_SUCCESS:
             return {
                 ...state,
                 loading: false,
                 isAuthenticated: true,
                 user: action.payload,
-                login: action.login,
-                register: action.register
             }
         case LOGOUT_SUCCESS:
             return {
                 loading: false,
                 isAuthenticated: false,
-                user: null
+                user: null,
+                isLoggedout: action.payload.success,
+                message: action.payload.message
             }
         case LOGIN_FAIL:
         case REGISTER_FAIL:
@@ -43,22 +48,20 @@ export const userReducer = (state = { user: {} }, action) => {
                 loading: false,
                 isAuthenticated: false,
                 user: null,
-                userError: action.payload,
-                login: false,
-                register: false
+                error: action.payload
             }
         case LOAD_USER_FAIL:
             return {
                 loading: false,
                 isAuthenticated: false,
                 user: null,
-                userError: action.payload
+                error: action.payload
             }
         case LOGOUT_FAIL:
             return {
                 ...state,
                 loading: false,
-                userError: action.payload
+                error: action.payload
             }
         default:
             return state;
@@ -70,10 +73,8 @@ export const profileReducer = (state = {}, action) => {
     switch (action.type) {
         case SET_LOADER_PROGRESS:
             return {
-                loading: true,
                 ...state,
-                updateProfileLoading: action.updateProfileLoading,
-                updatePasswordLoading: action.updatePasswordLoading
+                headerLoading: action.headerLoading,
             };
         case UPDATE_PROFILE_REQUEST:
         case UPDATE_PASSWORD_REQUEST:
@@ -89,7 +90,8 @@ export const profileReducer = (state = {}, action) => {
             return {
                 ...state,
                 loading: false,
-                isUpdated: action.payload,
+                isUpdated: action.payload.success,
+                message: action.payload.message,
             }
         case DELETE_USER_SUCCESS:
             return {
@@ -106,7 +108,7 @@ export const profileReducer = (state = {}, action) => {
                 ...state,
                 loading: false,
                 user: null,
-                updateError: action.payload
+                error: action.payload
             }
         case UPDATE_PROFILE_RESET:
         case UPDATE_PASSWORD_RESET:
@@ -120,7 +122,7 @@ export const profileReducer = (state = {}, action) => {
             return {
                 ...state,
                 loading: false,
-                isUpdated: false
+                isDeleted: false
             }
         default:
             return state;
@@ -132,36 +134,36 @@ export const forgotPasswordReducer = (state = {}, action) => {
     switch (action.type) {
         case SET_LOADER_PROGRESS:
             return {
-                loading: true,
-                ...state,
-                forgotPasswordLoading: action.forgotPasswordLoading,
-                resetPasswordLoading: action.resetPasswordLoading
+                headerLoading: action.headerLoading,
             };
         case FORGOT_PASSWORD_REQUEST:
         case RESET_PASSWORD_REQUEST:
             return {
                 ...state,
                 loading: true,
-                forgotPassError: null
+                forgotPassError: null,
+                message: "Please wait..."
             };
         case FORGOT_PASSWORD_SUCCESS:
             return {
                 ...state,
                 loading: false,
+                isResetPassword: true,
                 message: action.payload,
             }
         case RESET_PASSWORD_SUCCESS:
             return {
                 ...state,
                 loading: false,
-                success: action.payload,
+                success: action.payload.success,
+                message: action.payload.message,
             }
         case FORGOT_PASSWORD_FAIL:
         case RESET_PASSWORD_FAIL:
             return {
                 ...state,
                 loading: false,
-                forgotPassError: action.payload
+                error: action.payload
             }
         default:
             return state;
@@ -173,8 +175,8 @@ export const allUsersReducer = (state = { users: [] }, action) => {
     switch (action.type) {
         case SET_LOADER_PROGRESS:
             return {
-                loading: true,
-                ...state
+                ...state,
+                headerLoading: true,
             };
         case ALL_USERS_REQUEST:
             return {
@@ -203,8 +205,8 @@ export const userDetailReducer = (state = { user: {} }, action) => {
     switch (action.type) {
         case SET_LOADER_PROGRESS:
             return {
-                loading: true,
-                ...state
+                ...state,
+                headerLoading: true,
             };
         case USER_DETAILS_REQUEST:
             return {

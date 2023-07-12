@@ -1,0 +1,28 @@
+.header-main{
+    z-index: 5000;
+}
+
+.account-dropdown>a::after {
+    content: "";
+    border: 0;
+    background: url("../../../public/assets/style/chevron-down.svg");
+    width: 16px;
+    height: 16px;
+    vertical-align: baseline;
+    filter: invert(1);
+}
+
+@media screen and (min-width:768px) {
+    .account-dropdown>a::after {
+        filter: invert(0);
+    }
+}
+
+.account-dropdown .dropdown-menu {
+    border-radius: 0;
+}
+
+.account-dropdown .dropdown-menu>a:active:focus:hover {
+    background-color: var(--gray-400-color);
+    color: var(--black);
+}

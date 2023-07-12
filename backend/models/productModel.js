@@ -60,6 +60,10 @@ const productSchema = new mongoose.Schema({
                 type: Number,
                 required: true,
             },
+            avatar: {
+                type: String,
+                required: true
+            },
             comment: {
                 type: String,
                 required: true

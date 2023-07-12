@@ -1,0 +1,26 @@
+.home-product-cards {
+    width: 254px;
+
+    .home-product-stars>div {
+        justify-content: center;
+    }
+}
+
+.home-product-cards:hover {
+    .card-body {
+        background-color: var(--primary-color);
+        color: var(--white);
+
+        .card-title {
+            color: var(--white);
+        }
+
+        .card-text {
+            color: var(--white);
+        }
+
+        .card-text span {
+            color: var(--white);
+        }
+    }
+}

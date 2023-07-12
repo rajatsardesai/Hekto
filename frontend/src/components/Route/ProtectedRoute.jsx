@@ -1,19 +1,31 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { Outlet, useNavigate } from 'react-router-dom';
+import Forbidden from '../Utils/Forbidden';
 
 const ProtectedRoute = ({ isAdmin }) => {
     const navigate = useNavigate();
+    const { isAuthenticated, loading, user } = useSelector((state) => state.user);
 
-    const { loading, isAuthenticated, user } = useSelector(state => state.user);
+    useEffect(() => {
+        if (!loading && isAuthenticated) {
+            if (!isAdmin && !user) {
+                return <Forbidden />;
+            }
+        }
+    }, [isAdmin, loading, navigate, isAuthenticated, user]);
 
-    if (isAdmin === true && user.role !== "admin") {
-        navigate("/");
+    // When user role is user
+    if (isAdmin && (!user || user.role !== 'admin')) {
+        return <Forbidden />;
     }
 
-    return (
-        !loading && isAuthenticated && <Outlet />
-    )
+    // When user is guest
+    if (!isAdmin && !isAuthenticated) {
+        return <Forbidden />;
+    }
+
+    return <Outlet />;
 }
 
 export default ProtectedRoute;

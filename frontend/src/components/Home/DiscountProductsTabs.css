@@ -1,0 +1,22 @@
+.discount-products-tab .discount-products-list .discount-products-list-items::before {
+    content: "";
+    background: url("../../../public/assets/style/checked-bullet.svg");
+    display: inline-block;
+    width: 18px;
+    height: 13px;
+    margin-right: 6px;
+}
+
+.discount-products-tab .dicounted-products-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    /* @media screen and (min-width:612px) {
+        left: 20%;
+    } */
+
+    @media screen and (min-width:768px) {
+        left: 0;
+    }
+}

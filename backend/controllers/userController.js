@@ -8,10 +8,11 @@ const cloudinary = require("cloudinary");
 
 // Register user
 exports.registerUser = catchAsyncError(async (req, res, next) => {
-    const cloud = await cloudinary.uploader.upload(req.body.avatar, {
+    const cloud = await cloudinary.v2.uploader.upload(req.body.avatar, {
         folder: "avatars",
         width: 150,
-        crop: "scale"
+        crop: "scale",
+        format: "webp"
     })
 
     const { name, email, password } = req.body
@@ -55,7 +56,7 @@ exports.logoutUser = catchAsyncError(async (req, res, next) => {
 
     res.status(200).json({
         success: true,
-        message: "Logged out"
+        message: "Logged out successfully"
     });
 });
 
@@ -75,14 +76,14 @@ exports.forgotPassword = catchAsyncError(async (req, res, next) => {
     const resetToken = user.getResetPasswordToken();
     await user.save({ validateBeforeSave: false });
 
-    const resetURL = `${process.env.FRONTEND_URL}/password/reset/${resetToken}`;
+    const resetURL = `${req.protocol}://${req.get("host")}/password/reset/${resetToken}`;
 
     const message = `Your password request token is :- \n\n ${resetURL} \n\nIf you have not requested this email, Please ignore it.`;
 
     try {
         await sendEmail({
             email: user.email,
-            subject: "eBuy Password Recovery",
+            subject: "Hekto Password Recovery",
             message
         });
 
@@ -211,7 +212,8 @@ exports.updateUserRole = catchAsyncError(async (req, res, next) => {
     await User.findByIdAndUpdate(req.params.id, newUserData);
 
     res.status(200).json({
-        success: true
+        success: true,
+        message: "User Update Successfully!!"
     });
 });
 
