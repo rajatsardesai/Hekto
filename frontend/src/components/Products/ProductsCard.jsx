@@ -19,7 +19,7 @@ const ProductsCard = ({ product }) => {
         <Link className="product-cards text-decoration-none" to={`/product/${product._id}`}>
             <Col>
                 <Card className="cards border-0">
-                    <Card.Img variant="top" src={product.images[0].url} alt={product.name} className="card-image m-auto object-fit-cover" />
+                    <Card.Img variant="top" src={product.images[0].url} alt={product.name} className="card-image m-auto object-fit-contain" />
                     <Card.Body className="text-dark">
                         <Card.Title className="text-overflow fw-bold font-18 text-primary-color text-center">{product.name}</Card.Title>
                         <Stack className="align-items-center">
