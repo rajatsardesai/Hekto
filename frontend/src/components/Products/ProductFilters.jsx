@@ -3,6 +3,7 @@ import Accordion from 'react-bootstrap/Accordion';
 import CategoryFilterItem from './CategoryFilterItem';
 import PriceFilterItem from './PriceFilterItem';
 import RatingFilterItem from './RatingFilterItem';
+import { useLocation } from 'react-router-dom';
 
 const categories = [
     "Sofas",
@@ -16,23 +17,27 @@ const categories = [
 ];
 
 const ProductFilters = (props) => {
+    const location = useLocation();
+
     const { price, setPrice, setCategory, setRatings } = props;
     const [categoryActiveIndex, setCategoryActiveIndex] = useState(null);
     const [ratingActiveIndex, setRatingActiveIndex] = useState(null);
     const [isCategory, setIsCategory] = useState(false);
 
-    // Resize handler to disable filter accordion
-    const handleResize = () => {
-        if (window.innerWidth > 767 && document.querySelector(".accordion-collapse")) {
-            document.querySelector(".accordion-collapse").classList.add("show");
-        } else {
-            document.querySelector(".accordion-collapse").classList.remove("show");
-        }
-    };
-
     useEffect(() => {
-        window.addEventListener('resize', handleResize);
-    }, []);
+        // Resize handler to disable filter accordion
+        if (location.pathname === "/products") {
+            const handleResize = () => {
+                if (window.innerWidth > 767) {
+                    document.querySelector(".accordion-collapse").classList.add("show");
+                } else {
+                    document.querySelector(".accordion-collapse").classList.remove("show");
+                }
+            };
+
+            window.addEventListener('resize', handleResize);
+        }
+    }, [location.pathname]);
 
     return (
         <>

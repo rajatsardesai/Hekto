@@ -138,9 +138,11 @@ const Home = () => {
             items.push(
                 <Carousel.Item key={slideNumber} active={(slideNumber === 0).toString()}>
                     <Row className="mb-5 pb-4 justify-content-center">
-                        {slideProducts.map((product) => (
-                            <HomeProductCards key={product._id} product={product} styles={styles[0].featuredProductsStyles} />
-                        ))}
+                        {
+                            slideProducts.map((product) => (
+                                <HomeProductCards key={product._id} product={product} styles={styles[0].featuredProductsStyles} />
+                            ))
+                        }
                     </Row>
                 </Carousel.Item>
             );
@@ -170,13 +172,18 @@ const Home = () => {
                 <Stack className="mt-5 pt-5">
                     <h2 className="mb-5 fs-1 fw-bold text-center text-blue-700-color">Featured Products</h2>
 
-                    <Carousel className="featured-products-carousel">
-                        {generateCarouselItems(filteredRatingProducts)}
-                    </Carousel>
+                    {
+                        generateCarouselItems(filteredRatingProducts).length === 0 ?
+                            <span className="text-center text-dark font-20">No products to show</span>
+                            :
+                            <Carousel className="featured-products-carousel">
+                                {generateCarouselItems(filteredRatingProducts)}
+                            </Carousel>
+                    }
                 </Stack>
 
                 <Stack className="mt-5 pt-5">
-                    <h2 className="mb-0 fs-1 fw-bold text-center text-blue-700-color">Latest Products</h2>
+                    <h2 className="mb-5 fs-1 fw-bold text-center text-blue-700-color">Latest Products</h2>
 
                     <LatestProductsTabs latestProducts={latestProducts} bestSellerProducts={bestSellerProducts} filteredRatingProducts={filteredRatingProducts} />
                 </Stack>
@@ -194,15 +201,20 @@ const Home = () => {
                 <Stack className="trending-products mt-5 pt-5">
                     <h2 className="mb-5 fs-1 fw-bold text-center text-blue-700-color">Trending Products</h2>
 
-                    <Row md={3} lg={4} className="justify-content-center g-4">
-                        {
-                            bestSellerProducts && bestSellerProducts.slice(0, 4).map((product) => {
-                                return (
-                                    <HomeProductCards key={product._id} product={product} styles={styles[0].trendingProductsStyles} />
-                                )
-                            })
-                        }
-                    </Row>
+                    {
+                        bestSellerProducts.length === 0 ?
+                            <span className="text-center text-dark font-20 mb-5">No products to show</span>
+                            :
+                            <Row md={3} lg={4} className="justify-content-center g-4">
+                                {
+                                    bestSellerProducts && bestSellerProducts.slice(0, 4).map((product) => {
+                                        return (
+                                            <HomeProductCards key={product._id} product={product} styles={styles[0].trendingProductsStyles} />
+                                        )
+                                    })
+                                }
+                            </Row>
+                    }
                     <Row xs={1} md={2} lg={3} className="justify-content-center g-4 mt-3">
                         {
                             trendingCards && trendingCards.map((data, index) => {

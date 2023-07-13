@@ -344,8 +344,14 @@
     height: 52px;
 }
 
-/* Products */
+/* Home and Products Cards */
 .product-cards .cards img{
+    height: 280px;
+}
+.home-product-cards img{
+    height: 280px;
+}
+.home-latest-product-cards img{
     height: 280px;
 }
 
