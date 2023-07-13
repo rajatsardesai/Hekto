@@ -315,11 +315,11 @@
     }
 }
 
-.card .form-control {
+/* .users-page .form-control {
     @media screen and (min-width:768px) {
         height: 52px;
     }
-}
+} */
 
 .users-page button {
     font-family: 'Lato', sans-serif;
