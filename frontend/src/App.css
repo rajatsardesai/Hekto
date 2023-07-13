@@ -316,7 +316,7 @@
     }
 }
 
-.users-page input {
+.users-page input.form-control {
     @media screen and (min-width:768px) {
         height: 52px;
     }
