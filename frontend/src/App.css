@@ -311,12 +311,11 @@
 .users-page .card {
     @media screen and (min-width:768px) {
         width: 544px;
-        height: auto;
         margin: auto;
     }
 }
 
-.users-page .form-control {
+.card .form-control {
     @media screen and (min-width:768px) {
         height: 52px;
     }
