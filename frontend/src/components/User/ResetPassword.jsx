@@ -36,7 +36,9 @@ const ResetPassword = () => {
             resetPasswordForm.set("confirmPassword", values.confirmPassword);
 
             dispatch(resetPassword(token, resetPasswordForm));
-            navigate("/login");
+            setTimeout(() => {
+                navigate("/login");
+            }, 5000);
         }
     });
 

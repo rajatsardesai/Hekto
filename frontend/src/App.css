@@ -317,7 +317,7 @@
 
 .users-page input {
     @media screen and (min-width:768px) {
-        height: 52px;
+        /* height: 52px; */
     }
 }
 

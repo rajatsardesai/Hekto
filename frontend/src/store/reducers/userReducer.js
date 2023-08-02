@@ -134,6 +134,7 @@ export const forgotPasswordReducer = (state = {}, action) => {
     switch (action.type) {
         case SET_LOADER_PROGRESS:
             return {
+                ...state,
                 headerLoading: action.headerLoading,
             };
         case FORGOT_PASSWORD_REQUEST:
