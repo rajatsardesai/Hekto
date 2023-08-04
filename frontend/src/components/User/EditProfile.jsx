@@ -35,7 +35,7 @@ const EditProfile = (props) => {
                                 : null
                         }
                     </div>
-                    <Button variant="secondary" type="submit" onClick={() => {
+                    <Button disabled={errors ? true : false} variant="secondary" type="submit" onClick={() => {
                         handleEditClick(false, value)
                         handleSubmit();
                     }}>

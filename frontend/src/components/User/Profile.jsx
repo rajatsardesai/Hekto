@@ -34,7 +34,9 @@ const Profile = () => {
             updateForm.set("email", values.email);
 
             dispatch(updateProfile(updateForm));
-        }
+        },
+        validateOnChange: true,
+        validateOnBlur: true
     });
 
     // States to update name and email
