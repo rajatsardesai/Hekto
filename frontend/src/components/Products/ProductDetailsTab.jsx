@@ -35,6 +35,8 @@ const ProductDetailsTab = memo((props) => {
         reviewForm.set("productId", id);
 
         dispatch(newReview(reviewForm));
+        setRating(0);
+        setComment("");
         setOpen("d-none");
     };
 

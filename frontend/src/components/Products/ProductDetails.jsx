@@ -21,7 +21,7 @@ import { NEW_REVIEW_RESET } from '../../store/constants/productConstants';
 import ProductDetailsTab from './ProductDetailsTab';
 
 const ProductDetails = () => {
-    const { id } = useParams();
+    const { name, id } = useParams();
 
     const dispatch = useDispatch();
 
@@ -33,6 +33,10 @@ const ProductDetails = () => {
 
     const { products, error: productsError, message } = useSelector(
         (state) => state.products
+    );
+
+    const { headerLoading } = useSelector(
+        (state) => state.cart
     );
 
     const { product, loading: productDetailsLoading, headerLoading: productDetailsHeaderLoading, error: productDetailsError } = useSelector(
@@ -51,7 +55,7 @@ const ProductDetails = () => {
     };
 
     const addProductToCart = () => {
-        dispatch(addToCart(id, selectedStockValue));
+        dispatch(addToCart(name, id, selectedStockValue));
     };
 
     // For review submit
@@ -71,12 +75,12 @@ const ProductDetails = () => {
     };
 
     useEffect(() => {
-        dispatch(getProductDetails(id));
+        dispatch(getProductDetails(name, id));
         dispatch(getAllProducts());
         if (success) {
             dispatch({ type: NEW_REVIEW_RESET });
         }
-    }, [dispatch, id, success]);
+    }, [dispatch, id, name, success]);
 
     return (
         productDetailsLoading ?
@@ -87,7 +91,7 @@ const ProductDetails = () => {
                 <MetaData title={`${product.name} -@Hekto`} />
 
                 {/* React top loading bar */}
-                <HeaderLoading progressLoading={productDetailsHeaderLoading} />
+                <HeaderLoading progressLoading={productDetailsHeaderLoading || headerLoading} />
 
                 {/* Header alert */}
                 {

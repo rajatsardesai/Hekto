@@ -12,7 +12,7 @@ router.route("/admin/products").get(isAuthenticatedUser, authorizeRoles("admin")
 
 router.route("/admin/product/new").post(isAuthenticatedUser, authorizeRoles("admin"), createProduct);
 
-router.route("/product/:id").get(getProductDetails);
+router.route("/product/:name/:id").get(getProductDetails);
 
 router.route("/admin/product/:id").put(isAuthenticatedUser, authorizeRoles("admin"), updateProduct).delete(isAuthenticatedUser, authorizeRoles("admin"), deleteProduct);
 

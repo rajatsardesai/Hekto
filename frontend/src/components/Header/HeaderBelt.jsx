@@ -56,7 +56,7 @@ const HeaderBelt = () => {
                         >
                             <Nav.Link active={location.pathname === "/" ? true : false} as={Link} to={'/'} className="px-3">Home</Nav.Link>
                             <Nav.Link active={location.pathname.includes("/product")} as={Link} to={'/products'} className="px-3">Products</Nav.Link>
-                            <Nav.Link active={location.pathname.includes("/blogs")} as={Link} to={'/blogs'} className="px-3">Blog</Nav.Link>
+                            <Nav.Link active={location.pathname.includes("/blogs")} as={Link} to={'/blogs'} className="px-3">Blogs</Nav.Link>
                             <Nav.Link active={location.pathname.includes("/contact")} as={Link} to={'/contact'} className="px-3">Contact</Nav.Link>
                             <Stack className="d-block d-md-none">
                                 <HeaderAccount user={user} color={"#0d0e43"} />

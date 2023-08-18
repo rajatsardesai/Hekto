@@ -105,7 +105,7 @@ const EditProfilePassword = () => {
                                             : null
                                     }
                                 </div>
-                                <Button disabled={errors ? true : false} variant="secondary" type="submit" onClick={() => handlePasswordClick(false)}>
+                                <Button disabled={Object.keys(errors).length !== 0 ? true : false} variant="secondary" type="submit" onClick={() => handlePasswordClick(false)}>
                                     Save
                                 </Button>
                             </Form.Group>

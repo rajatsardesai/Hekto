@@ -78,7 +78,7 @@ function App() {
               <Routes>
                 <Route exact path="/" Component={Home} />
                 <Route exact path="/products" Component={Products} />
-                <Route exact path="/product/:id" Component={ProductDetails} />
+                <Route exact path="/product/:name/:id" Component={ProductDetails} />
                 <Route path="/products/:keyword" Component={Products} />
                 <Route path="/blogs" Component={Blogs} />
                 <Route path="/contact" Component={Contact} />

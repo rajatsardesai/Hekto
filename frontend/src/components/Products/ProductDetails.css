@@ -23,7 +23,7 @@
 }
 
 .product-detail-page .dropdown-menu.show{
-    height: 170px;
+    max-height: 170px;
     overflow: auto;
 }
 

@@ -248,6 +248,18 @@
     font-size: 17px;
 }
 
+textarea,
+input,
+button:focus {
+    box-shadow: none !important;
+}
+
+/* Search Icon Cancel Button */
+input[type="search"]::-webkit-search-decoration:hover,
+input[type="search"]::-webkit-search-cancel-button:hover { 
+    cursor:pointer; 
+}
+
 /* Scrollbar */
 ::-webkit-scrollbar {
     width: 8px;

@@ -104,7 +104,7 @@ export const getAdminProduct = () => async (dispatch) => {
 };
 
 // Get product details
-export const getProductDetails = (id) => async (dispatch) => {
+export const getProductDetails = (name = "", id) => async (dispatch) => {
     try {
         dispatch({ type: PRODUCT_DETAILS_REQUEST });
 
@@ -112,7 +112,7 @@ export const getProductDetails = (id) => async (dispatch) => {
             type: SET_LOADER_PROGRESS,
             headerLoading: 0
         });
-        const { data } = await axios.get(`/api/v1/product/${id}`);
+        const { data } = await axios.get(`/api/v1/product/${name}/${id}`);
         dispatch({
             type: SET_LOADER_PROGRESS,
             headerLoading: 50

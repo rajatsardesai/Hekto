@@ -1,10 +1,16 @@
 import { ADD_TO_CART, REMOVE_FROM_CART, SAVE_SHIPPING_INFO } from "../constants/cartConstants";
 import axios from "axios";
+import { SET_LOADER_PROGRESS } from "../constants/cartConstants";
 
 // add to Cart
-export const addToCart = (id, quantity) => async (dispatch, getState) => {
+export const addToCart = (name, id, quantity) => async (dispatch, getState) => {
+    dispatch({
+        type: SET_LOADER_PROGRESS,
+        headerLoading: 0
+    });
+
     const { data } = await axios.get(
-        `/api/v1/product/${id}`
+        `/api/v1/product/${name}/${id}`
     );
 
     dispatch({
@@ -19,7 +25,17 @@ export const addToCart = (id, quantity) => async (dispatch, getState) => {
         }
     });
 
+    dispatch({
+        type: SET_LOADER_PROGRESS,
+        headerLoading: 50
+    });
+
     localStorage.setItem("cartItems", JSON.stringify(getState().cart.cartItems));
+
+    dispatch({
+        type: SET_LOADER_PROGRESS,
+        headerLoading: 100
+    });
 };
 
 // Remove from cart

@@ -171,7 +171,8 @@ exports.updateProfile = catchAsyncError(async (req, res, next) => {
     await User.findByIdAndUpdate(req.user.id, newUserData);
 
     res.status(200).json({
-        success: true
+        success: true,
+        message: "Profile Updated Successfully"
     });
 });
 

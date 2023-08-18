@@ -149,7 +149,7 @@ export const updateProfile = (userData) => async (dispatch) => {
             updateProfileLoading: 50
         });
 
-        dispatch({ type: UPDATE_PROFILE_SUCCESS, payload: data.success });
+        dispatch({ type: UPDATE_PROFILE_SUCCESS, payload: data });
 
         dispatch({
             type: SET_LOADER_PROGRESS,
@@ -184,7 +184,7 @@ export const updatePassword = (passwords) => async (dispatch) => {
             updatePasswordLoading: 50
         });
 
-        dispatch({ type: UPDATE_PASSWORD_SUCCESS, payload: data.success });
+        dispatch({ type: UPDATE_PASSWORD_SUCCESS, payload: data, message: "Password changed successfully" });
 
         dispatch({
             type: SET_LOADER_PROGRESS,
@@ -352,7 +352,7 @@ export const updateUser = (id, userData) => async (dispatch) => {
             updatePasswordLoading: 50
         });
 
-        dispatch({ type: UPDATE_USER_SUCCESS, payload: data });
+        dispatch({ type: UPDATE_USER_SUCCESS, payload: data.success, message: "Password updated successfully" });
 
         dispatch({
             type: SET_LOADER_PROGRESS,

@@ -57,13 +57,13 @@ const OrderDetails = () => {
                             <h5 className="fw-bold font-18 text-blue-500-color mb-4">Payment Details</h5>
                             <span className={
                                 order.paymentInfo &&
-                                    order.paymentInfo.status === "succeded"
+                                    order.paymentInfo.status === "succeeded"
                                     ? "text-success mb-5"
                                     : "text-danger mb-5"
                             }>
                                 {
                                     order.paymentInfo &&
-                                        order.paymentInfo.status === "succeded"
+                                        order.paymentInfo.status === "succeeded"
                                         ? "Paid"
                                         : "Not paid"
                                 }
