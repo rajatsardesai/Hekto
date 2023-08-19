@@ -17,8 +17,8 @@ const initialValues = {
     name: "",
     email: "",
     password: "",
-    avatar: process.env.PUBLIC_URL + "/assets/style/profile.png",
-    avatarPreview: process.env.PUBLIC_URL + "/assets/style/profile.png",
+    avatar: "https://res.cloudinary.com/dodtenm9q/image/upload/v1692464431/c2gxwg2zskvdmgpfm6gb.webp",
+    avatarPreview: "https://res.cloudinary.com/dodtenm9q/image/upload/v1692464431/c2gxwg2zskvdmgpfm6gb.webp",
 };
 
 const Signup = () => {

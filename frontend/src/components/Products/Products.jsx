@@ -52,6 +52,11 @@ const Products = () => {
         dispatch(getFilteredProducts(keyword, currentPage, price, category, ratings));
     }, [dispatch, keyword, currentPage, price, category, ratings]);
 
+    // Scroll to top
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
+
     return (
         productsLoading ?
             <InitLoader />
