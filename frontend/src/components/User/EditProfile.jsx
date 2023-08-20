@@ -10,7 +10,7 @@ const EditProfile = (props) => {
         <>
             {!isEditing ?
                 <>
-                    <div className="ms-md-2 me-md-auto mx-2">
+                    <div className="ms-md-2 me-md-auto mx-2 text-truncate">
                         <div className="fw-bold">{label}:</div>
                         {value}
                     </div>
@@ -35,7 +35,7 @@ const EditProfile = (props) => {
                                 : null
                         }
                     </div>
-                    <Button variant="secondary" type="submit" onClick={() => {
+                    <Button disabled={errors ? true : false} variant="secondary" type="submit" onClick={() => {
                         handleEditClick(false, value)
                         handleSubmit();
                     }}>

@@ -92,7 +92,7 @@ const Login = () => {
                             <Button type="submit" className="w-100 my-4 bg-secondary-color border-0 rounded-1" onClick={() => setCheckAuthentication(true)}>
                                 Log in
                             </Button>
-                            <p className="text-center text-gray-500-color font-lato font-17 m-0">Don't have an Account?<Link to={"/register"} className="text-decoration-none text-gray-500-color">Create account</Link></p>
+                            <p className="text-center text-gray-500-color font-lato font-17 m-0">Don't have an Account?&nbsp;<Link to={"/register"} className="text-decoration-none text-gray-500-color">Create account</Link></p>
                         </Form>
                     </Card>
                 </Container>

@@ -21,7 +21,7 @@ import { NEW_REVIEW_RESET } from '../../store/constants/productConstants';
 import ProductDetailsTab from './ProductDetailsTab';
 
 const ProductDetails = () => {
-    const { id } = useParams();
+    const { name, id } = useParams();
 
     const dispatch = useDispatch();
 
@@ -33,6 +33,10 @@ const ProductDetails = () => {
 
     const { products, error: productsError, message } = useSelector(
         (state) => state.products
+    );
+
+    const { headerLoading } = useSelector(
+        (state) => state.cart
     );
 
     const { product, loading: productDetailsLoading, headerLoading: productDetailsHeaderLoading, error: productDetailsError } = useSelector(
@@ -51,7 +55,7 @@ const ProductDetails = () => {
     };
 
     const addProductToCart = () => {
-        dispatch(addToCart(id, selectedStockValue));
+        dispatch(addToCart(name, id, selectedStockValue));
     };
 
     // For review submit
@@ -71,12 +75,17 @@ const ProductDetails = () => {
     };
 
     useEffect(() => {
-        dispatch(getProductDetails(id));
+        dispatch(getProductDetails(name, id));
         dispatch(getAllProducts());
         if (success) {
             dispatch({ type: NEW_REVIEW_RESET });
         }
-    }, [dispatch, id, success]);
+    }, [dispatch, id, name, success]);
+
+    // Scroll to top
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
 
     return (
         productDetailsLoading ?
@@ -87,7 +96,7 @@ const ProductDetails = () => {
                 <MetaData title={`${product.name} -@Hekto`} />
 
                 {/* React top loading bar */}
-                <HeaderLoading progressLoading={productDetailsHeaderLoading} />
+                <HeaderLoading progressLoading={productDetailsHeaderLoading || headerLoading} />
 
                 {/* Header alert */}
                 {
@@ -148,7 +157,7 @@ const ProductDetails = () => {
                                             </Dropdown>
                                         </Stack>
                                         <Stack className="flex-column flex-md-row">
-                                            <Button disabled={product.stock < 1 ? true : false} className="my-2 me-md-2 bg-secondary-color border-0 rounded-0" onClick={addProductToCart}>Add to Cart</Button>
+                                            <Button disabled={(product.stock < 1 || product.price === 0) ? true : false} className="my-2 me-md-2 bg-secondary-color border-0 rounded-0" onClick={addProductToCart}>Add to Cart</Button>
                                             <Button className="my-2 bg-secondary-color border-0 rounded-0" onClick={submitReviewToggle}>Write a review</Button>
                                         </Stack>
                                     </>

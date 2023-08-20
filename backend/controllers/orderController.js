@@ -15,7 +15,7 @@ exports.placeOrder = catchAsyncError(async (req, res, next) => {
         totalPrice
     } = req.body;
 
-    
+
     const order = await Order.create({
         shippingInfo,
         orderItems,
@@ -27,7 +27,7 @@ exports.placeOrder = catchAsyncError(async (req, res, next) => {
         paidAt: Date.now(),
         user: req.user._id
     });
-    
+
     res.status(201).json({
         success: true,
         order
@@ -84,6 +84,12 @@ exports.updateOrder = catchAsyncError(async (req, res, next) => {
 
     if (order.orderStatus === "Delivered") {
         return next(new ErrorHandler("You have already delivered this order", 400));
+    };
+
+    if (req.body.status === "Delivered") {
+        order.orderItems.forEach(async (order) => {
+            await updateStock(order.product, order.quantity);
+        });
     };
 
     if (req.body.status === "Shipped") {

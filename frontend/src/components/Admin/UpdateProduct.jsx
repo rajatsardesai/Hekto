@@ -99,7 +99,7 @@ const UpdateProduct = () => {
 
     useEffect(() => {
         if (product && product._id !== id) {
-            dispatch(getProductDetails(id));
+            dispatch(getProductDetails(" ", id));
         } else {
             setFieldValue("name", product.name);
             setFieldValue("price", product.price);
@@ -185,7 +185,7 @@ const UpdateProduct = () => {
                             <Stack className="flex-column flex-md-row mt-4" gap={3}>
                                 <Form.Group className="mb-3 w-100" controlId="categories">
                                     <Form.Label>Categories</Form.Label>
-                                    <Form.Select defaultValue={product.category} aria-label="Select Categories" autoComplete="off" name="category" className="font-lato font-16" onChange={handleChange} onBlur={handleBlur} isInvalid={touched.category && errors.category}>
+                                    <Form.Select aria-label="Select Categories" autoComplete="off" name="category" className="font-lato font-16" onChange={handleChange} onBlur={handleBlur} isInvalid={touched.category && errors.category}>
                                         <option>Categories</option>
                                         {
                                             categories &&

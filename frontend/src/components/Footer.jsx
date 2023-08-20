@@ -63,17 +63,14 @@ const Footer = () => {
                         <Col sm={12} md="auto" className="text-center text-md-start">
                             <p className="text-dark font-22 mb-4">Pages</p>
                             <ListGroup as="ul">
-                                <ListGroup.Item as={Link} to={"/"} className="border-0 bg-transparent p-0 mb-2">
-                                    <span className="text-gray-100-color font-lato">Blog</span>
+                                <ListGroup.Item as={Link} to={"/products"} className="border-0 bg-transparent p-0 mb-2">
+                                    <span className="text-gray-100-color font-lato">Products</span>
                                 </ListGroup.Item>
-                                <ListGroup.Item as={Link} to={"/"} className="border-0 bg-transparent p-0 mb-2">
-                                    <span className="text-gray-100-color font-lato">Browse the Shop</span>
+                                <ListGroup.Item as={Link} to={"/blogs"} className="border-0 bg-transparent p-0 mb-2">
+                                    <span className="text-gray-100-color font-lato">Blogs</span>
                                 </ListGroup.Item>
-                                <ListGroup.Item as={Link} to={"/"} className="border-0 bg-transparent p-0 mb-2">
-                                    <span className="text-gray-100-color font-lato">Category</span>
-                                </ListGroup.Item>
-                                <ListGroup.Item as={Link} to={"/"} className="border-0 bg-transparent p-0 mb-2">
-                                    <span className="text-gray-100-color font-lato">Pre-Built Pages</span>
+                                <ListGroup.Item as={Link} to={"/contact"} className="border-0 bg-transparent p-0 mb-2">
+                                    <span className="text-gray-100-color font-lato">Contact</span>
                                 </ListGroup.Item>
                             </ListGroup>
                         </Col>

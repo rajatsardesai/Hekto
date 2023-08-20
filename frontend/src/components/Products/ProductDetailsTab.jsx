@@ -35,6 +35,8 @@ const ProductDetailsTab = memo((props) => {
         reviewForm.set("productId", id);
 
         dispatch(newReview(reviewForm));
+        setRating(0);
+        setComment("");
         setOpen("d-none");
     };
 
@@ -54,7 +56,7 @@ const ProductDetailsTab = memo((props) => {
 
                         <Tab.Content>
                             <Tab.Pane eventKey={"tab1"} className="overflow-auto">
-                                <p>{product.description}</p>
+                                <p style={{ whiteSpace: "pre-line" }}>{product.description}</p>
                             </Tab.Pane>
                             <Tab.Pane eventKey={"tab2"} className="overflow-auto">
                                 <Stack className={`mb-5 ${open}`}>

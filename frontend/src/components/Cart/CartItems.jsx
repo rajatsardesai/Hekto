@@ -4,10 +4,12 @@ import Stack from 'react-bootstrap/Stack';
 import Dropdown from 'react-bootstrap/Dropdown';
 import { Link, useLocation } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { removeFromCart } from '../../store/actions/cartAction';
+import { addToCart, removeFromCart } from '../../store/actions/cartAction';
 
 const CartItems = (props) => {
     const { image, name, product, price, quantity, stock } = props.item;
+
+    const productName = name.replace(/ /g, "-");
 
     const dispatch = useDispatch();
 
@@ -20,6 +22,7 @@ const CartItems = (props) => {
 
     const updateQuantity = (eventKey) => {
         setSelectedQuantityValue(eventKey);
+        dispatch(addToCart(productName, product, eventKey));
     };
 
     // For removing cart item
@@ -30,10 +33,10 @@ const CartItems = (props) => {
     return (
         <>
             <Stack direction="horizontal" className="mb-3">
-                <Link to={`/product/${product}`} className="me-3"><img src={image} alt={name} className="rounded product-cart-items--image" /></Link>
+                <Link to={`/product/${productName}/${product}`} className="me-3"><img src={image} alt={name} className="rounded product-cart-items--image" /></Link>
                 <Stack direction="vertical">
                     <div className="d-flex flex-column flex-md-row justify-content-between" gap={3}>
-                        <Link to={`/product/${product}`} className="font-18 text-decoration-none text-dark text-overflow"
+                        <Link to={`/product/${productName}/${product}`} className="font-18 text-decoration-none text-dark text-overflow"
                             style={location.pathname === "/cart" ? { width: "70%" } : { width: "100%" }}>{name}</Link>
                         {
                             location.pathname === "/cart" && <Link className="text-dark" onClick={removeCartItem}>Remove</Link>

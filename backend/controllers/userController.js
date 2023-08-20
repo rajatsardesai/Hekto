@@ -15,7 +15,13 @@ exports.registerUser = catchAsyncError(async (req, res, next) => {
         format: "webp"
     })
 
-    const { name, email, password } = req.body
+    const { name, email, password } = req.body;
+
+    const isEmailMatch = await User.findOne({ email });
+    if (isEmailMatch) {
+        return next(new ErrorHandler("Email already exists", 401));
+    };
+
     const user = await User.create({
         name,
         email,
@@ -171,7 +177,8 @@ exports.updateProfile = catchAsyncError(async (req, res, next) => {
     await User.findByIdAndUpdate(req.user.id, newUserData);
 
     res.status(200).json({
-        success: true
+        success: true,
+        message: "Profile Updated Successfully"
     });
 });
 

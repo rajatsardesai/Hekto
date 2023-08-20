@@ -78,7 +78,7 @@ const ProductReviews = () => {
                                 </Form.Group>
                             </Stack>
                             <Stack className="flex-column flex-md-row" gap={2}>
-                                <Button className="bg-secondary-color border-0 py-2 px-3 rounded-0" type="submit">Search</Button>
+                                <Button disabled={productId.length === 0 ? true : false} className="bg-secondary-color border-0 py-2 px-3 rounded-0" type="submit">Search</Button>
                             </Stack>
                         </Form>
                         {

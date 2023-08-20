@@ -18,6 +18,10 @@
     }
 }
 
+.home-product-cards .card-image {
+    height: 280px;
+}
+
 /* Latest Trending Product */
 .latest-trending-product {
     padding-bottom: 120px;
@@ -62,6 +66,10 @@
     @media screen and (min-width:992px) {
         width: 50%;
     }
+}
+
+.home-latest-product-cards .card-image {
+    height: 300px;
 }
 
 /* Trending products */
@@ -115,6 +123,6 @@
     }
 }
 
-.home-blog-cards .col{
+.home-blog-cards .col {
     width: 370px;
 }
