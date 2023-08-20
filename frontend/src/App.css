@@ -256,8 +256,8 @@ button:focus {
 
 /* Search Icon Cancel Button */
 input[type="search"]::-webkit-search-decoration:hover,
-input[type="search"]::-webkit-search-cancel-button:hover { 
-    cursor:pointer; 
+input[type="search"]::-webkit-search-cancel-button:hover {
+    cursor: pointer;
 }
 
 /* Scrollbar */

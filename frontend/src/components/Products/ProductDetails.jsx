@@ -157,7 +157,7 @@ const ProductDetails = () => {
                                             </Dropdown>
                                         </Stack>
                                         <Stack className="flex-column flex-md-row">
-                                            <Button disabled={product.stock < 1 ? true : false} className="my-2 me-md-2 bg-secondary-color border-0 rounded-0" onClick={addProductToCart}>Add to Cart</Button>
+                                            <Button disabled={(product.stock < 1 || product.price === 0) ? true : false} className="my-2 me-md-2 bg-secondary-color border-0 rounded-0" onClick={addProductToCart}>Add to Cart</Button>
                                             <Button className="my-2 bg-secondary-color border-0 rounded-0" onClick={submitReviewToggle}>Write a review</Button>
                                         </Stack>
                                     </>

@@ -219,7 +219,7 @@ const NewProduct = () => {
                                 }
                             </Stack>
                             <Stack className="flex-column flex-md-row" gap={2}>
-                                <Button className="bg-secondary-color border-0 py-2 px-3 rounded-0" type="submit">Add</Button>
+                                <Button disabled={Object.keys(errors).length !== 0 ? true : false} className="bg-secondary-color border-0 py-2 px-3 rounded-0" type="submit">Add</Button>
                                 <Button as={Link} to={"/admin/products"} className="bg-secondary-color border-0 py-2 px-3 rounded-0 w-auto d-flex justify-content-center align-items-center" type="submit">Cancel</Button>
                             </Stack>
                         </Form>

@@ -49,7 +49,7 @@ export const productSchema = Yup.object({
     price: Yup.number().typeError("Price must be a number").required("Please enter product price"),
     description: Yup.string().min(25, "Description must be at least 25 characters").max(2000, "Description should not be more than 2000 characters").required("Please enter product description"),
     category: Yup.string().required("Please select product category"),
-    stock: Yup.number().typeError("Stock must be a number").required("Please enter product stock"),
+    stock: Yup.number().min(1, "Please add atleast 1 product").positive("Stock must be a positive number").typeError("Stock must be a number").required("Please enter product stock"),
     images: Yup.mixed().required("Please choose product image"),
     imagesPreview: Yup.mixed(),
 });
