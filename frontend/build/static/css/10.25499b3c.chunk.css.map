@@ -1,0 +1,1 @@
+{"version":3,"file":"static/css/10.25499b3c.chunk.css","mappings":"AAAA,2BACI,gBACJ","sources":["components/Products/ProductsCard.css"],"sourcesContent":[".product-cards .card-image {\r\n    min-height: 368px;\r\n}"],"names":[],"sourceRoot":""}
