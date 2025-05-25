@@ -1,0 +1,35 @@
+services:
+  frontend:
+    build: ./frontend
+    ports:
+      - "3000:3000"
+    networks:
+      - hekto
+    depends_on:
+      - backend
+  backend:
+    build: ./
+    ports:
+      - "3500:3500"
+    networks:
+      - hekto
+    env_file:
+      - ./backend/config/config.env
+    depends_on:
+      - mongo
+  mongo:
+    image: mongo:latest
+    ports:
+      - "27011:27017"
+    networks:
+      - hekto
+    volumes:
+      - mongo-data:/data/db
+
+networks:
+  hekto:
+    driver: bridge
+
+volumes:
+  mongo-data:
+    driver: local
